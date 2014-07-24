@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		73CD534D19810DCD00A824BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD534C19810DCD00A824BE /* Foundation.framework */; };
+		73CD534F19810DCD00A824BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD534E19810DCD00A824BE /* CoreGraphics.framework */; };
+		73CD535119810DCD00A824BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD535019810DCD00A824BE /* UIKit.framework */; };
+		73CD535719810DCD00A824BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73CD535519810DCD00A824BE /* InfoPlist.strings */; };
+		73CD535919810DCD00A824BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD535819810DCD00A824BE /* main.m */; };
+		73CD535D19810DCD00A824BE /* ARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD535C19810DCD00A824BE /* ARAppDelegate.m */; };
+		73CD536019810DCD00A824BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73CD535E19810DCD00A824BE /* Main.storyboard */; };
+		73CD536319810DCD00A824BE /* ARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD536219810DCD00A824BE /* ARViewController.m */; };
+		73CD536519810DCD00A824BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73CD536419810DCD00A824BE /* Images.xcassets */; };
+		73CD536C19810DCD00A824BE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD536B19810DCD00A824BE /* XCTest.framework */; };
+		73CD536D19810DCD00A824BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD534C19810DCD00A824BE /* Foundation.framework */; };
+		73CD536E19810DCD00A824BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD535019810DCD00A824BE /* UIKit.framework */; };
+		73CD537619810DCD00A824BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73CD537419810DCD00A824BE /* InfoPlist.strings */; };
+		73CD537819810DCD00A824BE /* GradientVIewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD537719810DCD00A824BE /* GradientVIewTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		73CD536F19810DCD00A824BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73CD534119810DCD00A824BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73CD534819810DCD00A824BE;
+			remoteInfo = GradientVIew;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		73CD534919810DCD00A824BE /* GradientVIew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GradientVIew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73CD534C19810DCD00A824BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		73CD534E19810DCD00A824BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		73CD535019810DCD00A824BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		73CD535419810DCD00A824BE /* GradientVIew-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GradientVIew-Info.plist"; sourceTree = "<group>"; };
+		73CD535619810DCD00A824BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73CD535819810DCD00A824BE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73CD535A19810DCD00A824BE /* GradientVIew-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GradientVIew-Prefix.pch"; sourceTree = "<group>"; };
+		73CD535B19810DCD00A824BE /* ARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARAppDelegate.h; sourceTree = "<group>"; };
+		73CD535C19810DCD00A824BE /* ARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARAppDelegate.m; sourceTree = "<group>"; };
+		73CD535F19810DCD00A824BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		73CD536119810DCD00A824BE /* ARViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARViewController.h; sourceTree = "<group>"; };
+		73CD536219810DCD00A824BE /* ARViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewController.m; sourceTree = "<group>"; };
+		73CD536419810DCD00A824BE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		73CD536A19810DCD00A824BE /* GradientVIewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GradientVIewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73CD536B19810DCD00A824BE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		73CD537319810DCD00A824BE /* GradientVIewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GradientVIewTests-Info.plist"; sourceTree = "<group>"; };
+		73CD537519810DCD00A824BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73CD537719810DCD00A824BE /* GradientVIewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientVIewTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73CD534619810DCD00A824BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD534F19810DCD00A824BE /* CoreGraphics.framework in Frameworks */,
+				73CD535119810DCD00A824BE /* UIKit.framework in Frameworks */,
+				73CD534D19810DCD00A824BE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73CD536719810DCD00A824BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD536C19810DCD00A824BE /* XCTest.framework in Frameworks */,
+				73CD536E19810DCD00A824BE /* UIKit.framework in Frameworks */,
+				73CD536D19810DCD00A824BE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		73CD534019810DCD00A824BE = {
+			isa = PBXGroup;
+			children = (
+				73CD535219810DCD00A824BE /* GradientVIew */,
+				73CD537119810DCD00A824BE /* GradientVIewTests */,
+				73CD534B19810DCD00A824BE /* Frameworks */,
+				73CD534A19810DCD00A824BE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		73CD534A19810DCD00A824BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73CD534919810DCD00A824BE /* GradientVIew.app */,
+				73CD536A19810DCD00A824BE /* GradientVIewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73CD534B19810DCD00A824BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73CD534C19810DCD00A824BE /* Foundation.framework */,
+				73CD534E19810DCD00A824BE /* CoreGraphics.framework */,
+				73CD535019810DCD00A824BE /* UIKit.framework */,
+				73CD536B19810DCD00A824BE /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73CD535219810DCD00A824BE /* GradientVIew */ = {
+			isa = PBXGroup;
+			children = (
+				73CD535B19810DCD00A824BE /* ARAppDelegate.h */,
+				73CD535C19810DCD00A824BE /* ARAppDelegate.m */,
+				73CD535E19810DCD00A824BE /* Main.storyboard */,
+				73CD536119810DCD00A824BE /* ARViewController.h */,
+				73CD536219810DCD00A824BE /* ARViewController.m */,
+				73CD536419810DCD00A824BE /* Images.xcassets */,
+				73CD535319810DCD00A824BE /* Supporting Files */,
+			);
+			path = GradientVIew;
+			sourceTree = "<group>";
+		};
+		73CD535319810DCD00A824BE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73CD535419810DCD00A824BE /* GradientVIew-Info.plist */,
+				73CD535519810DCD00A824BE /* InfoPlist.strings */,
+				73CD535819810DCD00A824BE /* main.m */,
+				73CD535A19810DCD00A824BE /* GradientVIew-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73CD537119810DCD00A824BE /* GradientVIewTests */ = {
+			isa = PBXGroup;
+			children = (
+				73CD537719810DCD00A824BE /* GradientVIewTests.m */,
+				73CD537219810DCD00A824BE /* Supporting Files */,
+			);
+			path = GradientVIewTests;
+			sourceTree = "<group>";
+		};
+		73CD537219810DCD00A824BE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73CD537319810DCD00A824BE /* GradientVIewTests-Info.plist */,
+				73CD537419810DCD00A824BE /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73CD534819810DCD00A824BE /* GradientVIew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73CD537B19810DCD00A824BE /* Build configuration list for PBXNativeTarget "GradientVIew" */;
+			buildPhases = (
+				73CD534519810DCD00A824BE /* Sources */,
+				73CD534619810DCD00A824BE /* Frameworks */,
+				73CD534719810DCD00A824BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GradientVIew;
+			productName = GradientVIew;
+			productReference = 73CD534919810DCD00A824BE /* GradientVIew.app */;
+			productType = "com.apple.product-type.application";
+		};
+		73CD536919810DCD00A824BE /* GradientVIewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73CD537E19810DCD00A824BE /* Build configuration list for PBXNativeTarget "GradientVIewTests" */;
+			buildPhases = (
+				73CD536619810DCD00A824BE /* Sources */,
+				73CD536719810DCD00A824BE /* Frameworks */,
+				73CD536819810DCD00A824BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73CD537019810DCD00A824BE /* PBXTargetDependency */,
+			);
+			name = GradientVIewTests;
+			productName = GradientVIewTests;
+			productReference = 73CD536A19810DCD00A824BE /* GradientVIewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73CD534119810DCD00A824BE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AR;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				TargetAttributes = {
+					73CD536919810DCD00A824BE = {
+						TestTargetID = 73CD534819810DCD00A824BE;
+					};
+				};
+			};
+			buildConfigurationList = 73CD534419810DCD00A824BE /* Build configuration list for PBXProject "GradientVIew" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 73CD534019810DCD00A824BE;
+			productRefGroup = 73CD534A19810DCD00A824BE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73CD534819810DCD00A824BE /* GradientVIew */,
+				73CD536919810DCD00A824BE /* GradientVIewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73CD534719810DCD00A824BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD536519810DCD00A824BE /* Images.xcassets in Resources */,
+				73CD535719810DCD00A824BE /* InfoPlist.strings in Resources */,
+				73CD536019810DCD00A824BE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73CD536819810DCD00A824BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD537619810DCD00A824BE /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73CD534519810DCD00A824BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD535919810DCD00A824BE /* main.m in Sources */,
+				73CD536319810DCD00A824BE /* ARViewController.m in Sources */,
+				73CD535D19810DCD00A824BE /* ARAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73CD536619810DCD00A824BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CD537819810DCD00A824BE /* GradientVIewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		73CD537019810DCD00A824BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73CD534819810DCD00A824BE /* GradientVIew */;
+			targetProxy = 73CD536F19810DCD00A824BE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		73CD535519810DCD00A824BE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73CD535619810DCD00A824BE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		73CD535E19810DCD00A824BE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73CD535F19810DCD00A824BE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		73CD537419810DCD00A824BE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73CD537519810DCD00A824BE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		73CD537919810DCD00A824BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		73CD537A19810DCD00A824BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73CD537C19810DCD00A824BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GradientVIew/GradientVIew-Prefix.pch";
+				INFOPLIST_FILE = "GradientVIew/GradientVIew-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		73CD537D19810DCD00A824BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GradientVIew/GradientVIew-Prefix.pch";
+				INFOPLIST_FILE = "GradientVIew/GradientVIew-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		73CD537F19810DCD00A824BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GradientVIew.app/GradientVIew";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GradientVIew/GradientVIew-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GradientVIewTests/GradientVIewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		73CD538019810DCD00A824BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GradientVIew.app/GradientVIew";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GradientVIew/GradientVIew-Prefix.pch";
+				INFOPLIST_FILE = "GradientVIewTests/GradientVIewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73CD534419810DCD00A824BE /* Build configuration list for PBXProject "GradientVIew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73CD537919810DCD00A824BE /* Debug */,
+				73CD537A19810DCD00A824BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73CD537B19810DCD00A824BE /* Build configuration list for PBXNativeTarget "GradientVIew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73CD537C19810DCD00A824BE /* Debug */,
+				73CD537D19810DCD00A824BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		73CD537E19810DCD00A824BE /* Build configuration list for PBXNativeTarget "GradientVIewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73CD537F19810DCD00A824BE /* Debug */,
+				73CD538019810DCD00A824BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 73CD534119810DCD00A824BE /* Project object */;
+}
