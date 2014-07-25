@@ -34,7 +34,7 @@
     self.backgroundColor = [UIColor redColor];
     self.userInteractionEnabled = NO;
     self.clipsToBounds = NO;
-    self.layer.cornerRadius = 3;
+//    self.layer.cornerRadius = 3;
     CAShapeLayer *shape = (CAShapeLayer *)self.layer;
     shape.fillColor = [UIColor whiteColor].CGColor;
     
