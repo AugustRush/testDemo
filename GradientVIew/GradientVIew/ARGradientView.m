@@ -40,7 +40,7 @@
     
     MLayer = [CAShapeLayer layer];
     MLayer.frame = self.bounds;
-    MLayer.strokeColor = [UIColor purpleColor].CGColor;
+    MLayer.strokeColor = nil;
     MLayer.fillColor = [UIColor whiteColor].CGColor;
     MLayer.lineCap = kCALineCapRound;
     GLayer.mask = MLayer;

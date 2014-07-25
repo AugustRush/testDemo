@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARGradientViewMacros.h"
 
 typedef NS_ENUM(NSInteger, ARGradientAnimateType) {
     ARGradientAnimateTypeLiner = 0,

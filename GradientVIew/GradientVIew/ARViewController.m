@@ -40,7 +40,7 @@
             break;
         case 1:
         {
-            [self.gradientView setColors:@[[UIColor purpleColor],[UIColor greenColor],[UIColor whiteColor]] withAnimationDescription:ARGradientAnimateDescriptionMake(1,                                                                                            ARGradientAnimateTypeNone,                                                                                       ARGradientAnimateDirectionBottomToTop,                                                                                                                            CGPointMake(0, 0))];
+            [self.gradientView setColors:@[PurpleColor,GreenColor,LightGrayColor] withAnimationDescription:ARGradientAnimateDescriptionMake(1,                                                                                            ARGradientAnimateTypeNone,                                                                                       ARGradientAnimateDirectionBottomToTop,                                                                                                                            CGPointMake(0, 0))];
         }
             break;
         case 2:

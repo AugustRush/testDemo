@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73A86A39198239CF0028BAE5 /* ARGradientViewMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARGradientViewMacros.h; sourceTree = "<group>"; };
 		73CD534919810DCD00A824BE /* GradientVIew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GradientVIew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73CD534C19810DCD00A824BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		73CD534E19810DCD00A824BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,6 +160,7 @@
 		73CD538119810E7800A824BE /* ARGradientView */ = {
 			isa = PBXGroup;
 			children = (
+				73A86A39198239CF0028BAE5 /* ARGradientViewMacros.h */,
 				73CD538219810E9900A824BE /* ARGradientView.h */,
 				73CD538319810E9900A824BE /* ARGradientView.m */,
 			);
@@ -471,6 +473,7 @@
 				73CD537D19810DCD00A824BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73CD537E19810DCD00A824BE /* Build configuration list for PBXNativeTarget "GradientVIewTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +482,7 @@
 				73CD538019810DCD00A824BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
