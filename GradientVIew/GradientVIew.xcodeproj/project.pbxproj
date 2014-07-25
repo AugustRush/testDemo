@@ -21,6 +21,7 @@
 		73CD536E19810DCD00A824BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CD535019810DCD00A824BE /* UIKit.framework */; };
 		73CD537619810DCD00A824BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73CD537419810DCD00A824BE /* InfoPlist.strings */; };
 		73CD537819810DCD00A824BE /* GradientVIewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD537719810DCD00A824BE /* GradientVIewTests.m */; };
+		73CD538419810E9900A824BE /* ARGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD538319810E9900A824BE /* ARGradientView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		73CD537319810DCD00A824BE /* GradientVIewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GradientVIewTests-Info.plist"; sourceTree = "<group>"; };
 		73CD537519810DCD00A824BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		73CD537719810DCD00A824BE /* GradientVIewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientVIewTests.m; sourceTree = "<group>"; };
+		73CD538219810E9900A824BE /* ARGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGradientView.h; sourceTree = "<group>"; };
+		73CD538319810E9900A824BE /* ARGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGradientView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,7 @@
 				73CD535E19810DCD00A824BE /* Main.storyboard */,
 				73CD536119810DCD00A824BE /* ARViewController.h */,
 				73CD536219810DCD00A824BE /* ARViewController.m */,
+				73CD538119810E7800A824BE /* ARGradientView */,
 				73CD536419810DCD00A824BE /* Images.xcassets */,
 				73CD535319810DCD00A824BE /* Supporting Files */,
 			);
@@ -150,6 +154,15 @@
 				73CD537419810DCD00A824BE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73CD538119810E7800A824BE /* ARGradientView */ = {
+			isa = PBXGroup;
+			children = (
+				73CD538219810E9900A824BE /* ARGradientView.h */,
+				73CD538319810E9900A824BE /* ARGradientView.m */,
+			);
+			name = ARGradientView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +266,7 @@
 				73CD535919810DCD00A824BE /* main.m in Sources */,
 				73CD536319810DCD00A824BE /* ARViewController.m in Sources */,
 				73CD535D19810DCD00A824BE /* ARAppDelegate.m in Sources */,
+				73CD538419810E9900A824BE /* ARGradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
