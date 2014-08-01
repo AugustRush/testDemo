@@ -8,6 +8,8 @@
 
 #import "ARSearchBar.h"
 
+#define _SYSTERVERSION_  [[[UIDevice currentDevice] systemVersion] floatValue]
+
 @implementation ARSearchBar
 {
     UITextField *_searchTextField;
@@ -36,33 +38,29 @@
 
 -(void)inintConfig
 {
-    float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-    
-//#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
-//    UIView *filterView = [self.subviews objectAtIndex:0];
-//#else
-//    UIView *filterView = self;
-//#endif
+    self.tintColor = [UIColor whiteColor];
+    //    self.backgroundColor = [UIColor colorWithRed:5/255.0 green:196/255.0 blue:245/255.0 alpha:1];
     
     UIView *filterView = self;
-    if (systemVersion > 7.0) {
+    if (_SYSTERVERSION_ > 7.0) {
         filterView = self.subviews[0];
     }
     
-    self.backgroundColor = [UIColor colorWithRed:5/255.0 green:196/255.0 blue:245/255.0 alpha:1];;
     for (UIView *view in [filterView subviews]) {
         if ([NSStringFromClass([view class]) isEqualToString:@"UISearchBarBackground"]) {
-            [view removeFromSuperview];
+            _SYSTERVERSION_ > 7.0 ?[view removeFromSuperview]:NULL;
         }else if ([NSStringFromClass([view class]) isEqualToString:@"UISearchBarTextField"]){
             UITextField *TF = (UITextField *)view;
+            TF.layer.cornerRadius = 6;
             _searchTextField = TF;
             UIButton *clearButton = [_searchTextField valueForKey:@"_clearButton"];
-            [clearButton setImageEdgeInsets:UIEdgeInsetsMake(100, 100, 0, 0)];
+            clearButton.imageEdgeInsets = UIEdgeInsetsMake(100, 100, 0, 0);
             [clearButton setBackgroundImage:nil forState:UIControlStateNormal];
             [clearButton setBackgroundImage:nil forState:UIControlStateHighlighted];
             _clearButtonImageView = [[UIImageView alloc] initWithFrame:clearButton.bounds];
             _clearButtonImageView.backgroundColor = [UIColor clearColor];
             [clearButton addSubview:_clearButtonImageView];
+            
         }
         
     }
@@ -73,7 +71,7 @@
 -(void)setLeftImage:(UIImage *)leftImage
 {
     _leftImage = leftImage;
-
+    
     UIImageView *leftImgView = (UIImageView *)_searchTextField.leftView;
     leftImgView.image = _leftImage;
 }
@@ -89,7 +87,11 @@
 -(void)setSearchTextFieldBackgoudColor:(UIColor *)searchTextFieldBackgoudColor
 {
     _searchTextFieldBackgoudColor = searchTextFieldBackgoudColor;
-    [self setSearchFieldBackgroundImage:[self sepImageFromColor:searchTextFieldBackgoudColor withRect:self.bounds] forState:UIControlStateNormal];
+    if (_SYSTERVERSION_ < 7.0) {
+        [self setSearchFieldBackgroundImage:[self sepImageFromColor:searchTextFieldBackgoudColor withRect:CGRectMake(0, 0, 100, 30)] forState:UIControlStateNormal];
+    }else{
+        _searchTextField.backgroundColor = _searchTextFieldBackgoudColor;
+    }
 }
 
 -(void)setClearButtonImage:(UIImage *)clearButtonImage
@@ -112,6 +114,7 @@
     }else{
         
     }
+    
 }
 
 -(UIImage *)sepImageFromColor:(UIColor*)color withRect:(CGRect)rect
@@ -126,6 +129,5 @@
     UIGraphicsEndImageContext();
     return img;
 }
-
 
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C19B2043-B737-4DF2-AAA8-25AC65BF9B67</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ARVeryCD</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>47D2DFEE-89C1-4200-A004-C1947529DB5A</key>
+		<string>https://github.com/AugustRush/testDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ARVeryCD/ARVeryCD.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>47D2DFEE-89C1-4200-A004-C1947529DB5A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AugustRush/testDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>47D2DFEE-89C1-4200-A004-C1947529DB5A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>47D2DFEE-89C1-4200-A004-C1947529DB5A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>testDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
