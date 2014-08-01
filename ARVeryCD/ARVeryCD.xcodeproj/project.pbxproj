@@ -427,6 +427,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = LPW;
 				TargetAttributes = {
+					7321E6681987A366006E4951 = {
+						DevelopmentTeam = C8U29Y8XS5;
+					};
 					7321E6831987A366006E4951 = {
 						TestTargetID = 7321E6681987A366006E4951;
 					};
@@ -665,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ARVeryCD/ARVeryCD-Prefix.pch";
 				INFOPLIST_FILE = "ARVeryCD/ARVeryCD-Info.plist";
@@ -680,6 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tianci Huang (YF4UL6SHQK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ARVeryCD/ARVeryCD-Prefix.pch";
 				INFOPLIST_FILE = "ARVeryCD/ARVeryCD-Info.plist";

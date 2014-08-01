@@ -19,5 +19,9 @@
     return self;
 }
 
+-(void)awakeFromNib
+{
+    [self.toolbar setTintColor:FlatGray];
+}
 
 @end

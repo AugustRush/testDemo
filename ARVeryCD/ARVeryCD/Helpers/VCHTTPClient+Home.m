@@ -13,13 +13,6 @@
 +(void)fetchHomeListWithFinishedBlock:(void (^)(NSArray *))finishedBlock
                           failedBlock:(void (^)(NSError *))failedBlock
 {
-//    [[VCHTTPClient GET_requestWithPath:urlHomeZongyiList paramaters:nil] subscribeNext:^(NSDictionary *x) {
-//        NSLog(@"x is %@",[[x allValues] objectAtIndex:0]);
-//        NSArray *entrys = [[x allValues] objectAtIndex:0];
-//        finishedBlock([MTLJSONAdapter modelsOfClass:NSClassFromString(@"VCHomeEntry") fromJSONArray:entrys error:nil]);
-//        NSLog(@"23423423 is %@",[MTLJSONAdapter modelsOfClass:NSClassFromString(@"VCHomeEntry") fromJSONArray:entrys error:nil]);
-//    }];
-    
     NSMutableArray *entryList = [NSMutableArray arrayWithCapacity:6];
     
     RACSignal *recomand = [VCHTTPClient GET_requestWithPath:urlHomeRecommandList paramaters:nil];
@@ -29,17 +22,22 @@
     RACSignal *zongYi = [VCHTTPClient GET_requestWithPath:urlHomeZongyiList paramaters:nil];
     RACSignal *Edu = [VCHTTPClient GET_requestWithPath:urlHomeEduList paramaters:nil];
     
-    RACSignal *total = @[recomand,tv,Movie,Cartoon,zongYi,Edu].rac_sequence.signal;
+    NSArray *requestArr = @[recomand,tv,Movie,Cartoon,zongYi,Edu];
+    RACSignal *total = requestArr.rac_sequence.signal;
     [total subscribeNext:^(RACSignal *signal) {
         [signal subscribeNext:^(NSDictionary *response) {
+            NSNumber *catagoryNum = [response allKeys][0];
+            NSLog(@"response allkeys is %@",catagoryNum);
+            NSString *classString = catagoryNum.integerValue != 1?@"VCHomeEntry":@"VCRecommandEntry";
             NSArray *entrys = [[response allValues] objectAtIndex:0];
-           [entryList addObject:[MTLJSONAdapter
-                                 modelsOfClass:NSClassFromString(@"VCHomeEntry")
+            
+            [entryList addObject:@{catagoryNum:[MTLJSONAdapter
+                                 modelsOfClass:NSClassFromString(classString)
                                  fromJSONArray:entrys
-                                 error:nil]];
+                                                error:nil]}];
         } completed:^{
-            if (entryList.count == 6) {
-                NSLog(@"entry list is %@",entryList);
+            if (entryList.count == requestArr.count) {
+//                NSLog(@"entry list is %@",entryList);
                 finishedBlock(entryList);
             }
         }];

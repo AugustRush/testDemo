@@ -52,7 +52,9 @@
 {
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
     [[UITabBar appearance] setTintColor:FlatRed];
-    [[UITabBar appearance] setBarTintColor:FlatWhite];
+    [[UITabBar appearance] setBarTintColor:FlatLime];
+    [[UINavigationBar appearance] setBarTintColor:FlatLime];
+    [[UINavigationBar appearance] setTintColor:FlatWhite];
 }
 
 -(void)buildMainTabbarController

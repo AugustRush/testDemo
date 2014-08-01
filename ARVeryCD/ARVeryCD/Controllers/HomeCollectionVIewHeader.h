@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeCollectionVIewHeader : UICollectionReusableView
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

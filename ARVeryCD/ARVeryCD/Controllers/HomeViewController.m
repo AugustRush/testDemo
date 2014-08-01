@@ -11,6 +11,7 @@
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSMutableArray *entrys;
+@property (nonatomic, strong) NSArray *catagoryArray;
 @property (weak, nonatomic) IBOutlet HomeCollectionView *collectionView;
 
 @end
@@ -69,10 +70,24 @@
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     if (kind == UICollectionElementKindSectionHeader) {
-    
-        return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"homeSectionHeader" forIndexPath:indexPath];
+        NSDictionary *catagorys = @{@"1":@"热门推荐",
+                                    @"15":@"电视剧",
+                                    @"14":@"电影",
+                                    @"12":@"卡通",
+                                    @"20":@"综艺",
+                                    @"22":@"公开课"};
+        HomeCollectionVIewHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"homeSectionHeader"
+                   forIndexPath:indexPath];
+        
+        header.titleLabel.text = catagorys[[self.entrys[indexPath.section] allKeys][0]];
+        return header;
     }
     return nil;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(40, CGRectGetWidth(collectionView.bounds));
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -84,13 +99,14 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.entrys[section] count];
+    return [[[self.entrys[section] allValues] objectAtIndex:0] count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCell" forIndexPath:indexPath];
-    [cell buildCellWithEntry:self.entrys[indexPath.section][indexPath.row]];
+    NSArray *channelentrys = [self.entrys[indexPath.section] allValues][0];
+    [cell buildCellWithEntry:channelentrys[indexPath.row]];
     return cell;
 }
 

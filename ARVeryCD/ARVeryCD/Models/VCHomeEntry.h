@@ -12,7 +12,10 @@
 @interface VCHomeEntry : MTLModel<MTLJSONSerializing>
 
 @property (nonatomic, copy) NSString *thumbImageUrl;
-@property (nonatomic, copy) NSString *recommandThumbnailUrl;
 @property (nonatomic, copy) NSString *videoName;
+
+@end
+
+@interface VCRecommandEntry : VCHomeEntry
 
 @end

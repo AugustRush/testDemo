@@ -11,6 +11,7 @@
 #import "RACAFNetworking.h"
 #import <TSMessage.h>
 #import "VCHTTPClient+Home.h"
+#import "HomeCollectionVIewHeader.h"
 
 @interface HomeViewController : BaseViewController
 

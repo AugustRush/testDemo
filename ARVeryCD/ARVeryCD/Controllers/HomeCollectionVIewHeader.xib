@@ -7,9 +7,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aVC-Rd-lAh" customClass="HomeCollectionVIewHeader">
-            <rect key="frame" x="0.0" y="0.0" width="185" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <color key="backgroundColor" red="0.77628023349999997" green="0.28765778409999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXq-tt-vOl">
+                    <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items/>
+                </toolbar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="频道" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRb-Ui-ig9">
+                    <rect key="frame" x="0.0" y="9" width="129" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <connections>
+                <outlet property="titleLabel" destination="mRb-Ui-ig9" id="wVH-ZV-GPl"/>
+                <outlet property="toolbar" destination="DXq-tt-vOl" id="5JJ-7V-0z5"/>
+            </connections>
         </collectionReusableView>
     </objects>
 </document>

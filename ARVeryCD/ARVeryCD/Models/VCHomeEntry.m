@@ -13,8 +13,8 @@
 +(NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{@"thumbImageUrl":@"thumbnail",
-             @"videoName":@"entry.cname",
-             @"recommandThumbnailUrl":@"entry.thumbnail"};
+             @"videoName":@"cname",
+            };
 }
 
 +(NSValueTransformer *)thumbImageUrlJSONTransformer
@@ -29,6 +29,17 @@
 +(NSValueTransformer *)recommandThumbnailUrlJSONTransformer
 {
     return [self thumbImageUrlJSONTransformer];
+}
+
+@end
+
+@implementation VCRecommandEntry : VCHomeEntry
+
++(NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return @{@"thumbImageUrl":@"entry.thumbnail",
+             @"videoName":@"entry.cname",
+             };
 }
 
 @end
