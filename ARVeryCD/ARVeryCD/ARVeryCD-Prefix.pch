@@ -16,4 +16,5 @@
     #import "GlobalMacros.h"
     #import "VCHTTPRequestURLs.h"
     #import "ChameleonMacros.h"
+    #import <ReactiveCocoa/ReactiveCocoa.h>
 #endif

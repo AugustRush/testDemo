@@ -14,7 +14,7 @@
 {
     return @{@"thumbImageUrl":@"thumbnail",
              @"videoName":@"cname",
-            };
+             @"entryId":@"id"};
 }
 
 +(NSValueTransformer *)thumbImageUrlJSONTransformer
@@ -39,7 +39,7 @@
 {
     return @{@"thumbImageUrl":@"entry.thumbnail",
              @"videoName":@"entry.cname",
-             };
+             @"entryId":@"entry.id"};
 }
 
 @end

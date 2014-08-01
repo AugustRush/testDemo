@@ -37,7 +37,6 @@
 		7321E6D21987A9A1006E4951 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7321E6D01987A9A1006E4951 /* HistoryViewController.xib */; };
 		7321E6D61987A9B1006E4951 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7321E6D41987A9B1006E4951 /* SettingViewController.m */; };
 		7321E6D71987A9B1006E4951 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7321E6D51987A9B1006E4951 /* SettingViewController.xib */; };
-		73348294198884A400A4A460 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73348296198884A400A4A460 /* Localizable.strings */; };
 		7334829D19888AA800A4A460 /* HomeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7334829C19888AA800A4A460 /* HomeCollectionView.m */; };
 		733482A019888F0B00A4A460 /* HomeCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7334829F19888F0B00A4A460 /* HomeCollectionViewLayout.m */; };
 		733482A31988907100A4A460 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 733482A21988907100A4A460 /* HomeCollectionViewCell.m */; };
@@ -45,6 +44,17 @@
 		739AF966198A2DAD009DCB1B /* VCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 739AF965198A2DAD009DCB1B /* VCHTTPClient.m */; };
 		73A2FCA6198A3413007A74F3 /* VCHTTPClient+Home.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A2FCA5198A3413007A74F3 /* VCHTTPClient+Home.m */; };
 		73A2FCAD198A3749007A74F3 /* VCHomeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A2FCAC198A3749007A74F3 /* VCHomeEntry.m */; };
+		73A46066198B4BBC00F684DF /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A46064198B4BBC00F684DF /* EntryViewController.m */; };
+		73A46067198B4BBC00F684DF /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A46065198B4BBC00F684DF /* EntryViewController.xib */; };
+		73A46071198B62B400F684DF /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A46070198B62B400F684DF /* RTSpinKitView.m */; };
+		73A46074198B6E4100F684DF /* VCHTTPClient+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A46073198B6E4100F684DF /* VCHTTPClient+Channel.m */; };
+		73A46078198B724400F684DF /* VCChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A46077198B724400F684DF /* VCChannel.m */; };
+		73A4607B198B76EF00F684DF /* ChannelCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A4607A198B76EF00F684DF /* ChannelCollectionView.m */; };
+		73A4607E198B771B00F684DF /* ChannelCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A4607D198B771B00F684DF /* ChannelCollectionViewLayout.m */; };
+		73A46081198B773B00F684DF /* ChannelCollcetionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A46080198B773B00F684DF /* ChannelCollcetionViewCell.m */; };
+		73E8626D198B7A3B000921B6 /* ChannelCollcetionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E8626C198B7A3B000921B6 /* ChannelCollcetionViewCell.xib */; };
+		73E86276198B8048000921B6 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E86271198B8048000921B6 /* UIImage+ImageEffects.m */; };
+		73E86277198B8048000921B6 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E86273198B8048000921B6 /* UIImageView+LBBlurredImage.m */; };
 		F84E60A9BC9C49D5A89198B1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFC1AFE9B6F49188D9409A2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -106,9 +116,7 @@
 		7321E6D41987A9B1006E4951 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7321E6D51987A9B1006E4951 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		7321E6D91987AD2E006E4951 /* GlobalMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalMacros.h; sourceTree = "<group>"; };
-		73348295198884A400A4A460 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		73348297198884D800A4A460 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		73348298198884D800A4A460 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		73348299198884D800A4A460 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		7334829B19888AA800A4A460 /* HomeCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionView.h; sourceTree = "<group>"; };
 		7334829C19888AA800A4A460 /* HomeCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionView.m; sourceTree = "<group>"; };
@@ -125,6 +133,26 @@
 		73A2FCAB198A3749007A74F3 /* VCHomeEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCHomeEntry.h; sourceTree = "<group>"; };
 		73A2FCAC198A3749007A74F3 /* VCHomeEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCHomeEntry.m; sourceTree = "<group>"; };
 		73A4605E198B2A1000F684DF /* ChameleonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChameleonMacros.h; sourceTree = "<group>"; };
+		73A46063198B4BBC00F684DF /* EntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryViewController.h; sourceTree = "<group>"; };
+		73A46064198B4BBC00F684DF /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
+		73A46065198B4BBC00F684DF /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
+		73A4606F198B62B400F684DF /* RTSpinKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpinKitView.h; sourceTree = "<group>"; };
+		73A46070198B62B400F684DF /* RTSpinKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpinKitView.m; sourceTree = "<group>"; };
+		73A46072198B6E4100F684DF /* VCHTTPClient+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VCHTTPClient+Channel.h"; sourceTree = "<group>"; };
+		73A46073198B6E4100F684DF /* VCHTTPClient+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VCHTTPClient+Channel.m"; sourceTree = "<group>"; };
+		73A46076198B724400F684DF /* VCChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCChannel.h; sourceTree = "<group>"; };
+		73A46077198B724400F684DF /* VCChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCChannel.m; sourceTree = "<group>"; };
+		73A46079198B76EF00F684DF /* ChannelCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCollectionView.h; sourceTree = "<group>"; };
+		73A4607A198B76EF00F684DF /* ChannelCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCollectionView.m; sourceTree = "<group>"; };
+		73A4607C198B771B00F684DF /* ChannelCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCollectionViewLayout.h; sourceTree = "<group>"; };
+		73A4607D198B771B00F684DF /* ChannelCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCollectionViewLayout.m; sourceTree = "<group>"; };
+		73A4607F198B773B00F684DF /* ChannelCollcetionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCollcetionViewCell.h; sourceTree = "<group>"; };
+		73A46080198B773B00F684DF /* ChannelCollcetionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCollcetionViewCell.m; sourceTree = "<group>"; };
+		73E8626C198B7A3B000921B6 /* ChannelCollcetionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelCollcetionViewCell.xib; sourceTree = "<group>"; };
+		73E86270198B8048000921B6 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		73E86271198B8048000921B6 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		73E86272198B8048000921B6 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		73E86273198B8048000921B6 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 		A3851C1EF5BA40E69B128DE0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		EDFC1AFE9B6F49188D9409A2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -192,6 +220,7 @@
 				73A2FCAA198A3749007A74F3 /* Models */,
 				736CC4F91988B86500C6ED37 /* Helpers */,
 				7321E69B1987A6DC006E4951 /* Controllers */,
+				73A4606D198B62B400F684DF /* Views */,
 				7321E69E1987A6DC006E4951 /* Vendors */,
 				7321E6D81987ACFA006E4951 /* Globals */,
 				7321E67E1987A366006E4951 /* Images.xcassets */,
@@ -207,7 +236,6 @@
 				7321E6751987A366006E4951 /* InfoPlist.strings */,
 				7321E6781987A366006E4951 /* main.m */,
 				7321E67A1987A366006E4951 /* ARVeryCD-Prefix.pch */,
-				73348296198884A400A4A460 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -239,6 +267,7 @@
 				7321E6BF1987A8FC006E4951 /* History */,
 				7321E6BE1987A8F5006E4951 /* Channel */,
 				7321E6BD1987A8C8006E4951 /* Home */,
+				73A4605F198B480200F684DF /* Entry */,
 				7321E6B71987A789006E4951 /* Main */,
 				7321E6B01987A743006E4951 /* Base */,
 			);
@@ -248,6 +277,7 @@
 		7321E69E1987A6DC006E4951 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				73E8626E198B8048000921B6 /* LBBlurredImage */,
 				7321E69F1987A6DC006E4951 /* RACAFNetworking */,
 			);
 			path = Vendors;
@@ -303,6 +333,7 @@
 		7321E6BE1987A8F5006E4951 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				73A46075198B70B400F684DF /* views */,
 				7321E6C91987A98A006E4951 /* ChannelViewController.h */,
 				7321E6CA1987A98A006E4951 /* ChannelViewController.m */,
 				7321E6CB1987A98A006E4951 /* ChannelViewController.xib */,
@@ -364,6 +395,8 @@
 				739AF965198A2DAD009DCB1B /* VCHTTPClient.m */,
 				73A2FCA4198A3413007A74F3 /* VCHTTPClient+Home.h */,
 				73A2FCA5198A3413007A74F3 /* VCHTTPClient+Home.m */,
+				73A46072198B6E4100F684DF /* VCHTTPClient+Channel.h */,
+				73A46073198B6E4100F684DF /* VCHTTPClient+Channel.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -373,8 +406,70 @@
 			children = (
 				73A2FCAB198A3749007A74F3 /* VCHomeEntry.h */,
 				73A2FCAC198A3749007A74F3 /* VCHomeEntry.m */,
+				73A46076198B724400F684DF /* VCChannel.h */,
+				73A46077198B724400F684DF /* VCChannel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		73A4605F198B480200F684DF /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+				73A46063198B4BBC00F684DF /* EntryViewController.h */,
+				73A46064198B4BBC00F684DF /* EntryViewController.m */,
+				73A46065198B4BBC00F684DF /* EntryViewController.xib */,
+			);
+			name = Entry;
+			sourceTree = "<group>";
+		};
+		73A4606D198B62B400F684DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73A4606E198B62B400F684DF /* SpinKit */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73A4606E198B62B400F684DF /* SpinKit */ = {
+			isa = PBXGroup;
+			children = (
+				73A4606F198B62B400F684DF /* RTSpinKitView.h */,
+				73A46070198B62B400F684DF /* RTSpinKitView.m */,
+			);
+			path = SpinKit;
+			sourceTree = "<group>";
+		};
+		73A46075198B70B400F684DF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				73A46079198B76EF00F684DF /* ChannelCollectionView.h */,
+				73A4607A198B76EF00F684DF /* ChannelCollectionView.m */,
+				73A4607C198B771B00F684DF /* ChannelCollectionViewLayout.h */,
+				73A4607D198B771B00F684DF /* ChannelCollectionViewLayout.m */,
+				73A4607F198B773B00F684DF /* ChannelCollcetionViewCell.h */,
+				73A46080198B773B00F684DF /* ChannelCollcetionViewCell.m */,
+				73E8626C198B7A3B000921B6 /* ChannelCollcetionViewCell.xib */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		73E8626E198B8048000921B6 /* LBBlurredImage */ = {
+			isa = PBXGroup;
+			children = (
+				73E8626F198B8048000921B6 /* LBBlurredImage */,
+			);
+			path = LBBlurredImage;
+			sourceTree = "<group>";
+		};
+		73E8626F198B8048000921B6 /* LBBlurredImage */ = {
+			isa = PBXGroup;
+			children = (
+				73E86270198B8048000921B6 /* UIImage+ImageEffects.h */,
+				73E86271198B8048000921B6 /* UIImage+ImageEffects.m */,
+				73E86272198B8048000921B6 /* UIImageView+LBBlurredImage.h */,
+				73E86273198B8048000921B6 /* UIImageView+LBBlurredImage.m */,
+			);
+			path = LBBlurredImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,8 +558,9 @@
 				7321E6BC1987A80C006E4951 /* MainTabbarViewController.xib in Resources */,
 				7321E6CD1987A98A006E4951 /* ChannelViewController.xib in Resources */,
 				7321E6C51987A95E006E4951 /* HomeViewController.xib in Resources */,
-				73348294198884A400A4A460 /* Localizable.strings in Resources */,
+				73A46067198B4BBC00F684DF /* EntryViewController.xib in Resources */,
 				730B0263198A595300443FDA /* HomeCollectionVIewHeader.xib in Resources */,
+				73E8626D198B7A3B000921B6 /* ChannelCollcetionViewCell.xib in Resources */,
 				736CC5051988DB8800C6ED37 /* HomeCollectionVIewCell.xib in Resources */,
 				7321E6771987A366006E4951 /* InfoPlist.strings in Resources */,
 				7321E6D21987A9A1006E4951 /* HistoryViewController.xib in Resources */,
@@ -526,18 +622,27 @@
 				73A2FCAD198A3749007A74F3 /* VCHomeEntry.m in Sources */,
 				73A2FCA6198A3413007A74F3 /* VCHTTPClient+Home.m in Sources */,
 				7321E6791987A366006E4951 /* main.m in Sources */,
+				73E86276198B8048000921B6 /* UIImage+ImageEffects.m in Sources */,
 				7321E6AD1987A6DC006E4951 /* RACSubscriber+AFProgressCallbacks.m in Sources */,
 				7321E6D11987A9A1006E4951 /* HistoryViewController.m in Sources */,
 				733482A019888F0B00A4A460 /* HomeCollectionViewLayout.m in Sources */,
 				739AF966198A2DAD009DCB1B /* VCHTTPClient.m in Sources */,
 				7321E6A91987A6DC006E4951 /* ARAppDelegate.m in Sources */,
+				73E86277198B8048000921B6 /* UIImageView+LBBlurredImage.m in Sources */,
 				7334829D19888AA800A4A460 /* HomeCollectionView.m in Sources */,
+				73A46074198B6E4100F684DF /* VCHTTPClient+Channel.m in Sources */,
+				73A4607E198B771B00F684DF /* ChannelCollectionViewLayout.m in Sources */,
+				73A46078198B724400F684DF /* VCChannel.m in Sources */,
 				7321E6C41987A95E006E4951 /* HomeViewController.m in Sources */,
+				73A46071198B62B400F684DF /* RTSpinKitView.m in Sources */,
+				73A46081198B773B00F684DF /* ChannelCollcetionViewCell.m in Sources */,
 				7321E6CC1987A98A006E4951 /* ChannelViewController.m in Sources */,
 				730B0261198A592100443FDA /* HomeCollectionVIewHeader.m in Sources */,
 				7321E6BB1987A80C006E4951 /* MainTabbarViewController.m in Sources */,
+				73A4607B198B76EF00F684DF /* ChannelCollectionView.m in Sources */,
 				7321E6B41987A777006E4951 /* BaseViewController.m in Sources */,
 				7321E6AA1987A6DC006E4951 /* AFHTTPRequestOperationManager+RACSupport.m in Sources */,
+				73A46066198B4BBC00F684DF /* EntryViewController.m in Sources */,
 				7321E6D61987A9B1006E4951 /* SettingViewController.m in Sources */,
 				733482A31988907100A4A460 /* HomeCollectionViewCell.m in Sources */,
 			);
@@ -578,15 +683,6 @@
 				73348299198884D800A4A460 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		73348296198884A400A4A460 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				73348295198884A400A4A460 /* en */,
-				73348298198884D800A4A460 /* zh-Hans */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

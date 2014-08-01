@@ -50,10 +50,10 @@
 
 -(void)configApperence
 {
-    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setTintColor:FlatRed];
-    [[UITabBar appearance] setBarTintColor:FlatLime];
-    [[UINavigationBar appearance] setBarTintColor:FlatLime];
+    [[UITabBar appearance] setBackgroundColor:FlatRed];
+    [[UITabBar appearance] setTintColor:FlatWhite];
+    [[UITabBar appearance] setBarTintColor:FlatTeal];
+    [[UINavigationBar appearance] setBarTintColor:FlatTeal];
     [[UINavigationBar appearance] setTintColor:FlatWhite];
 }
 

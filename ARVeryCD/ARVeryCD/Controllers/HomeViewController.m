@@ -48,6 +48,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"HomeCollectionVIewHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"homeSectionHeader"];
     self.collectionView.dataSource = self;
     self.collectionView.delegate= self;
+    
 }
 
 -(void)fetchListData
@@ -114,7 +115,10 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    EntryViewController *entryViewController = [[EntryViewController alloc] initWithNibName:@"EntryViewController" bundle:nil];
+    NSArray *channelentrys = [self.entrys[indexPath.section] allValues][0];
+    entryViewController.entryId = [channelentrys[indexPath.row] entryId];
+    [self.navigationController pushViewController:entryViewController animated:YES];
 }
 
 #pragma mark - manage memory methods

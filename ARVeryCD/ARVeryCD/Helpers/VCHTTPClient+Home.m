@@ -27,7 +27,6 @@
     [total subscribeNext:^(RACSignal *signal) {
         [signal subscribeNext:^(NSDictionary *response) {
             NSNumber *catagoryNum = [response allKeys][0];
-            NSLog(@"response allkeys is %@",catagoryNum);
             NSString *classString = catagoryNum.integerValue != 1?@"VCHomeEntry":@"VCRecommandEntry";
             NSArray *entrys = [[response allValues] objectAtIndex:0];
             
@@ -36,6 +35,7 @@
                                  fromJSONArray:entrys
                                                 error:nil]}];
         } completed:^{
+            NSLog(@"response allkeys");
             if (entryList.count == requestArr.count) {
 //                NSLog(@"entry list is %@",entryList);
                 finishedBlock(entryList);

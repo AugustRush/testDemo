@@ -21,7 +21,6 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - HexColors (2.2.1)
-  - LBBlurredImage (0.2.0)
   - Mantle (1.5):
     - Mantle/extobjc
   - Mantle/extobjc (1.5)
@@ -41,7 +40,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - LBBlurredImage
   - Mantle
   - ReactiveCocoa
   - Realm
@@ -51,7 +49,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
-  LBBlurredImage: 30cc42be977bbcece286d26d2d9c08b8be7f05e8
   Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
   ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
   Realm: 18d96d4c565c5fd7d12d17ef45ee78551e8ee365

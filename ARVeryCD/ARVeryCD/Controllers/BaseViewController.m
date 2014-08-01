@@ -9,7 +9,6 @@
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
-
 @end
 
 @implementation BaseViewController
@@ -28,9 +27,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self Configs];
 }
 
 #pragma mark - Private methods
+
+-(void)Configs
+{
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 #pragma mark - manage memory methods
 

@@ -26,14 +26,15 @@
 
 -(void)initConfigs
 {
-    
+    self.titleLabel.textColor = FlatBlack;
 }
 
 #pragma mark - private methods
 
 -(void)prepareForReuse
 {
-
+    self.thumbImageView.image = nil;
+    self.titleLabel.text = nil;
 }
 
 -(void)buildCellWithEntry:(VCHomeEntry *)entry

@@ -26,8 +26,10 @@
 #define urlHomeEduList       @"http://www.verycd.com/api/v1/base/index?limit=12&catalog_id=22&limit=12"
 
 /**
- *  Home
+ *  Channel
  */
+
+#define urlChannelList      @"http://www.verycd.com/api/v2/base/list/index"
 
 
 #endif

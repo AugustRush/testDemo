@@ -2,7 +2,6 @@ platform :ios, '6.0'
 
 pod 'ReactiveCocoa'
 pod 'Realm'
-pod 'LBBlurredImage'
 pod 'AFNetworking'
 pod 'TSMessages'
 pod 'Mantle'

@@ -22,6 +22,7 @@
 -(void)awakeFromNib
 {
     [self.toolbar setTintColor:FlatGray];
+    self.titleLabel.textColor = FlatRed;
 }
 
 @end

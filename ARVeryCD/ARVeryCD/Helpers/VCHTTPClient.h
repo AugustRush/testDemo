@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "RACAFNetworking.h"
 
+//typedef void(^finishedBlock) (NSArray *array);
+//typedef void(^failedBlock) (NSError *error);
+
 @interface VCHTTPClient : NSObject
 
 +(RACSignal *)GET_requestWithPath:(NSString *)path paramaters:(NSDictionary *)paramaters;

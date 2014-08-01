@@ -12,6 +12,7 @@
 #import <TSMessage.h>
 #import "VCHTTPClient+Home.h"
 #import "HomeCollectionVIewHeader.h"
+#import "EntryViewController.h"
 
 @interface HomeViewController : BaseViewController
 
