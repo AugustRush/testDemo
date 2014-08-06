@@ -7,6 +7,7 @@
 //
 
 #import "ChannelCollectionViewLayout.h"
+#import "ChannelCollcetionViewCell.h"
 
 @implementation ChannelCollectionViewLayout
 
@@ -14,26 +15,29 @@
 {
     self = [super init];
     if (self) {
-        self.minimumLineSpacing = 10;
-        self.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
+        self.minimumLineSpacing = 5;
+        self.sectionInset = UIEdgeInsetsMake(5, 0, 5, 0);
     }
     return self;
 }
-
-//-(CGSize)collectionViewContentSize
-//{
-//    return self.collectionView.bounds.size;
-//}
 
 -(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSArray *attributesArr = [super layoutAttributesForElementsInRect:rect];
     for (UICollectionViewLayoutAttributes *attr in attributesArr) {
         
-        CGRect relativeRect = [self.collectionView convertRect:attr.frame toView:self.collectionView.superview];
+        CGRect visibleRect = self.collectionView.bounds;
+        visibleRect.origin = self.collectionView.contentOffset;
         
-        CGFloat distance = fabs(CGRectGetMidY(relativeRect)-CGRectGetMidY(self.collectionView.bounds));
-        attr.transform = CGAffineTransformMakeScale(0.6+0.4*distance/CGRectGetMidY(self.collectionView.bounds), distance/CGRectGetMidY(self.collectionView.bounds));
+        CGFloat distance = fabsf(attr.center.y - CGRectGetMidY(visibleRect))/CGRectGetHeight(self.collectionView.bounds);
+        attr.transform = CGAffineTransformMakeScale(1-distance/3, 1-distance/3);
+    
+        ChannelCollcetionViewCell *cell = (ChannelCollcetionViewCell *)[self.collectionView cellForItemAtIndexPath:attr.indexPath];
+        CGRect imageFrame = cell.imageView.frame;
+        CGFloat offset = 40*((attr.center.y - CGRectGetMidY(visibleRect))/CGRectGetHeight(self.collectionView.bounds));
+        imageFrame.origin.y = offset;
+        cell.imageView.frame = imageFrame;
+        
     }
     return attributesArr;
 }

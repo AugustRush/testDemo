@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "ChannelListViewController.h"
 
 @interface ChannelViewController : BaseViewController
 

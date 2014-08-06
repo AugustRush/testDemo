@@ -26,11 +26,6 @@
     }];
 }
 
-+(NSValueTransformer *)recommandThumbnailUrlJSONTransformer
-{
-    return [self thumbImageUrlJSONTransformer];
-}
-
 @end
 
 @implementation VCRecommandEntry : VCHomeEntry

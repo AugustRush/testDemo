@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "ChannelListViewController.h"
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -81,6 +82,11 @@
                    forIndexPath:indexPath];
         
         header.titleLabel.text = catagorys[[self.entrys[indexPath.section] allKeys][0]];
+        
+        [header setTouchFinishedBlock:^(id sender) {
+            ChannelListViewController *channelListViewController = [[ChannelListViewController alloc] initWithNibName:@"ChannelListViewController" bundle:nil catalogId:[self.entrys[indexPath.section] allKeys][0]];
+            [self.navigationController pushViewController:channelListViewController animated:YES];
+        }];
         return header;
     }
     return nil;

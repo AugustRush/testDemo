@@ -31,5 +31,10 @@
 
 #define urlChannelList      @"http://www.verycd.com/api/v2/base/list/index"
 
+/**
+ *  ChannelList
+ */
+
+#define urlChanenlEntryList @"http://www.verycd.com/api/v2/search/entries?"
 
 #endif

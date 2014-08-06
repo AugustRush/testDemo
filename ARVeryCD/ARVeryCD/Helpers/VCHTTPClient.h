@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RACAFNetworking.h"
+#import <Mantle.h>
 
 //typedef void(^finishedBlock) (NSArray *array);
 //typedef void(^failedBlock) (NSError *error);

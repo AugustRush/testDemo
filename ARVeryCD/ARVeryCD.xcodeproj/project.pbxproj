@@ -40,6 +40,14 @@
 		7334829D19888AA800A4A460 /* HomeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7334829C19888AA800A4A460 /* HomeCollectionView.m */; };
 		733482A019888F0B00A4A460 /* HomeCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7334829F19888F0B00A4A460 /* HomeCollectionViewLayout.m */; };
 		733482A31988907100A4A460 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 733482A21988907100A4A460 /* HomeCollectionViewCell.m */; };
+		733FFED31990D40A00300516 /* VCChanelListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 733FFED21990D40A00300516 /* VCChanelListEntry.m */; };
+		734B9B1E1990B7B400CD70E1 /* ChannelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B1C1990B7B400CD70E1 /* ChannelListViewController.m */; };
+		734B9B1F1990B7B400CD70E1 /* ChannelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734B9B1D1990B7B400CD70E1 /* ChannelListViewController.xib */; };
+		734B9B231990C48200CD70E1 /* ChannelListCollctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B221990C48200CD70E1 /* ChannelListCollctionView.m */; };
+		734B9B261990C4CA00CD70E1 /* ChannelListCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B251990C4CA00CD70E1 /* ChannelListCollectionViewLayout.m */; };
+		734B9B291990C4EA00CD70E1 /* ChannelListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B281990C4EA00CD70E1 /* ChannelListCollectionViewCell.m */; };
+		734B9B2B1990C77600CD70E1 /* ChannelListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734B9B2A1990C77600CD70E1 /* ChannelListCollectionViewCell.xib */; };
+		734B9B2E1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.m in Sources */ = {isa = PBXBuildFile; fileRef = 734B9B2D1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.m */; };
 		736CC5051988DB8800C6ED37 /* HomeCollectionVIewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 736CC5041988DB8800C6ED37 /* HomeCollectionVIewCell.xib */; };
 		739AF966198A2DAD009DCB1B /* VCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 739AF965198A2DAD009DCB1B /* VCHTTPClient.m */; };
 		73A2FCA6198A3413007A74F3 /* VCHTTPClient+Home.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A2FCA5198A3413007A74F3 /* VCHTTPClient+Home.m */; };
@@ -124,6 +132,20 @@
 		7334829F19888F0B00A4A460 /* HomeCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewLayout.m; sourceTree = "<group>"; };
 		733482A11988907100A4A460 /* HomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewCell.h; sourceTree = "<group>"; };
 		733482A21988907100A4A460 /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
+		733FFED11990D40A00300516 /* VCChanelListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCChanelListEntry.h; sourceTree = "<group>"; };
+		733FFED21990D40A00300516 /* VCChanelListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCChanelListEntry.m; sourceTree = "<group>"; };
+		734B9B1B1990B7B400CD70E1 /* ChannelListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelListViewController.h; sourceTree = "<group>"; };
+		734B9B1C1990B7B400CD70E1 /* ChannelListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelListViewController.m; sourceTree = "<group>"; };
+		734B9B1D1990B7B400CD70E1 /* ChannelListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelListViewController.xib; sourceTree = "<group>"; };
+		734B9B211990C48200CD70E1 /* ChannelListCollctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelListCollctionView.h; sourceTree = "<group>"; };
+		734B9B221990C48200CD70E1 /* ChannelListCollctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelListCollctionView.m; sourceTree = "<group>"; };
+		734B9B241990C4CA00CD70E1 /* ChannelListCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelListCollectionViewLayout.h; sourceTree = "<group>"; };
+		734B9B251990C4CA00CD70E1 /* ChannelListCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelListCollectionViewLayout.m; sourceTree = "<group>"; };
+		734B9B271990C4EA00CD70E1 /* ChannelListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelListCollectionViewCell.h; sourceTree = "<group>"; };
+		734B9B281990C4EA00CD70E1 /* ChannelListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelListCollectionViewCell.m; sourceTree = "<group>"; };
+		734B9B2A1990C77600CD70E1 /* ChannelListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelListCollectionViewCell.xib; sourceTree = "<group>"; };
+		734B9B2C1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VCHTTPClient+ChannelList.h"; sourceTree = "<group>"; };
+		734B9B2D1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VCHTTPClient+ChannelList.m"; sourceTree = "<group>"; };
 		736CC4FD1988C18500C6ED37 /* VCHTTPRequestURLs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCHTTPRequestURLs.h; sourceTree = "<group>"; };
 		736CC5041988DB8800C6ED37 /* HomeCollectionVIewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCollectionVIewCell.xib; sourceTree = "<group>"; };
 		739AF964198A2DAD009DCB1B /* VCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCHTTPClient.h; sourceTree = "<group>"; };
@@ -263,6 +285,7 @@
 			children = (
 				7321E69C1987A6DC006E4951 /* ARAppDelegate.h */,
 				7321E69D1987A6DC006E4951 /* ARAppDelegate.m */,
+				734B9B1A1990B78E00CD70E1 /* Channel list */,
 				7321E6C01987A908006E4951 /* Setting */,
 				7321E6BF1987A8FC006E4951 /* History */,
 				7321E6BE1987A8F5006E4951 /* Channel */,
@@ -387,6 +410,31 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		734B9B1A1990B78E00CD70E1 /* Channel list */ = {
+			isa = PBXGroup;
+			children = (
+				734B9B201990BD4D00CD70E1 /* views */,
+				734B9B1B1990B7B400CD70E1 /* ChannelListViewController.h */,
+				734B9B1C1990B7B400CD70E1 /* ChannelListViewController.m */,
+				734B9B1D1990B7B400CD70E1 /* ChannelListViewController.xib */,
+			);
+			name = "Channel list";
+			sourceTree = "<group>";
+		};
+		734B9B201990BD4D00CD70E1 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				734B9B211990C48200CD70E1 /* ChannelListCollctionView.h */,
+				734B9B221990C48200CD70E1 /* ChannelListCollctionView.m */,
+				734B9B241990C4CA00CD70E1 /* ChannelListCollectionViewLayout.h */,
+				734B9B251990C4CA00CD70E1 /* ChannelListCollectionViewLayout.m */,
+				734B9B271990C4EA00CD70E1 /* ChannelListCollectionViewCell.h */,
+				734B9B281990C4EA00CD70E1 /* ChannelListCollectionViewCell.m */,
+				734B9B2A1990C77600CD70E1 /* ChannelListCollectionViewCell.xib */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
 		736CC4F91988B86500C6ED37 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +445,8 @@
 				73A2FCA5198A3413007A74F3 /* VCHTTPClient+Home.m */,
 				73A46072198B6E4100F684DF /* VCHTTPClient+Channel.h */,
 				73A46073198B6E4100F684DF /* VCHTTPClient+Channel.m */,
+				734B9B2C1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.h */,
+				734B9B2D1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -408,6 +458,8 @@
 				73A2FCAC198A3749007A74F3 /* VCHomeEntry.m */,
 				73A46076198B724400F684DF /* VCChannel.h */,
 				73A46077198B724400F684DF /* VCChannel.m */,
+				733FFED11990D40A00300516 /* VCChanelListEntry.h */,
+				733FFED21990D40A00300516 /* VCChanelListEntry.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,11 +608,13 @@
 			files = (
 				7321E6B51987A777006E4951 /* BaseViewController.xib in Resources */,
 				7321E6BC1987A80C006E4951 /* MainTabbarViewController.xib in Resources */,
+				734B9B1F1990B7B400CD70E1 /* ChannelListViewController.xib in Resources */,
 				7321E6CD1987A98A006E4951 /* ChannelViewController.xib in Resources */,
 				7321E6C51987A95E006E4951 /* HomeViewController.xib in Resources */,
 				73A46067198B4BBC00F684DF /* EntryViewController.xib in Resources */,
 				730B0263198A595300443FDA /* HomeCollectionVIewHeader.xib in Resources */,
 				73E8626D198B7A3B000921B6 /* ChannelCollcetionViewCell.xib in Resources */,
+				734B9B2B1990C77600CD70E1 /* ChannelListCollectionViewCell.xib in Resources */,
 				736CC5051988DB8800C6ED37 /* HomeCollectionVIewCell.xib in Resources */,
 				7321E6771987A366006E4951 /* InfoPlist.strings in Resources */,
 				7321E6D21987A9A1006E4951 /* HistoryViewController.xib in Resources */,
@@ -619,6 +673,7 @@
 			files = (
 				7321E6AB1987A6DC006E4951 /* AFHTTPSessionManager+RACSupport.m in Sources */,
 				7321E6AC1987A6DC006E4951 /* AFURLConnectionOperation+RACSupport.m in Sources */,
+				733FFED31990D40A00300516 /* VCChanelListEntry.m in Sources */,
 				73A2FCAD198A3749007A74F3 /* VCHomeEntry.m in Sources */,
 				73A2FCA6198A3413007A74F3 /* VCHTTPClient+Home.m in Sources */,
 				7321E6791987A366006E4951 /* main.m in Sources */,
@@ -626,6 +681,7 @@
 				7321E6AD1987A6DC006E4951 /* RACSubscriber+AFProgressCallbacks.m in Sources */,
 				7321E6D11987A9A1006E4951 /* HistoryViewController.m in Sources */,
 				733482A019888F0B00A4A460 /* HomeCollectionViewLayout.m in Sources */,
+				734B9B2E1990C9CA00CD70E1 /* VCHTTPClient+ChannelList.m in Sources */,
 				739AF966198A2DAD009DCB1B /* VCHTTPClient.m in Sources */,
 				7321E6A91987A6DC006E4951 /* ARAppDelegate.m in Sources */,
 				73E86277198B8048000921B6 /* UIImageView+LBBlurredImage.m in Sources */,
@@ -638,11 +694,15 @@
 				73A46081198B773B00F684DF /* ChannelCollcetionViewCell.m in Sources */,
 				7321E6CC1987A98A006E4951 /* ChannelViewController.m in Sources */,
 				730B0261198A592100443FDA /* HomeCollectionVIewHeader.m in Sources */,
+				734B9B1E1990B7B400CD70E1 /* ChannelListViewController.m in Sources */,
+				734B9B291990C4EA00CD70E1 /* ChannelListCollectionViewCell.m in Sources */,
 				7321E6BB1987A80C006E4951 /* MainTabbarViewController.m in Sources */,
 				73A4607B198B76EF00F684DF /* ChannelCollectionView.m in Sources */,
+				734B9B231990C48200CD70E1 /* ChannelListCollctionView.m in Sources */,
 				7321E6B41987A777006E4951 /* BaseViewController.m in Sources */,
 				7321E6AA1987A6DC006E4951 /* AFHTTPRequestOperationManager+RACSupport.m in Sources */,
 				73A46066198B4BBC00F684DF /* EntryViewController.m in Sources */,
+				734B9B261990C4CA00CD70E1 /* ChannelListCollectionViewLayout.m in Sources */,
 				7321E6D61987A9B1006E4951 /* SettingViewController.m in Sources */,
 				733482A31988907100A4A460 /* HomeCollectionViewCell.m in Sources */,
 			);

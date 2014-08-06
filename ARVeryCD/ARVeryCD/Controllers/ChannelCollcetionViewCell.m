@@ -26,7 +26,11 @@
 
 -(void)awakeFromNib
 {
-    self.imageView.center = CGPointMake(0, CGRectGetHeight(self.imageView.bounds));
+    self.imageView.contentMode = UIViewContentModeCenter;
+    self.channelLabel.backgroundColor = FlatRed;
+    self.channelLabel.textColor = FlatWhite;
+    self.descriptionlabel.backgroundColor = FlatTeal;
+    self.descriptionlabel.textColor = FlatWhite;
 }
 
 #pragma mark - public methods
@@ -34,6 +38,9 @@
 -(void)buildCellWithChannel:(VCChannel *)channel
 {
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:channel.channelThumbnail]];
+    self.descriptionlabel.text = channel.channelDescription;
+    self.channelLabel.text = channel.channelName;
+    NSLog(@"channel is %@",channel);
 }
 
 @end

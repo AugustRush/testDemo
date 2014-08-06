@@ -17,7 +17,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    
     [self configApperence];
     [self buildMainTabbarController];
     
@@ -55,6 +54,15 @@
     [[UITabBar appearance] setBarTintColor:FlatTeal];
     [[UINavigationBar appearance] setBarTintColor:FlatTeal];
     [[UINavigationBar appearance] setTintColor:FlatWhite];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               FlatWhite,NSForegroundColorAttributeName,
+                                               FlatTeal, [[NSShadow alloc] init],
+                                               [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], [[NSShadow alloc] init], nil];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+
 }
 
 -(void)buildMainTabbarController

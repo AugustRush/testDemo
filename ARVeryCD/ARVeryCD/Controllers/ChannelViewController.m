@@ -84,7 +84,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    ChannelListViewController *channelListViewController = [[ChannelListViewController alloc] initWithNibName:@"ChannelListViewController" bundle:nil catalogId:[self.channels[indexPath.row] chanelId]];
+    [self.navigationController pushViewController:channelListViewController animated:YES];
 }
 
 #pragma mark - manage memory methods

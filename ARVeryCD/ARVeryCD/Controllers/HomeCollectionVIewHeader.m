@@ -8,7 +8,16 @@
 
 #import "HomeCollectionVIewHeader.h"
 
+typedef void(^FBlock) (id sender);
+
+@interface HomeCollectionVIewHeader ()
+
+@property (nonatomic, copy) FBlock finishedBLock;
+
+@end
+
 @implementation HomeCollectionVIewHeader
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,8 +30,20 @@
 
 -(void)awakeFromNib
 {
-    [self.toolbar setTintColor:FlatGray];
-    self.titleLabel.textColor = FlatRed;
+    self.titleLabel.textColor = FlatTeal;
+}
+
+-(void)setTouchFinishedBlock:(void (^)(id))block
+{
+    self.finishedBLock = block;
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    if (self.finishedBLock) {
+        self.finishedBLock(self);
+    }
 }
 
 @end

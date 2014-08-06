@@ -13,6 +13,8 @@
 @interface ChannelCollcetionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionlabel;
+@property (weak, nonatomic) IBOutlet UILabel *channelLabel;
 
 -(void)buildCellWithChannel:(VCChannel *)channel;
 

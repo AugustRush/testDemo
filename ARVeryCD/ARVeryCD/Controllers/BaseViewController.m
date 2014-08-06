@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
+
 @end
 
 @implementation BaseViewController
@@ -34,6 +35,7 @@
 
 -(void)Configs
 {
+    self.view.backgroundColor = FlatWhite;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

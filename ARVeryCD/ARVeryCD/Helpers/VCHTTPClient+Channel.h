@@ -7,7 +7,6 @@
 //
 
 #import "VCHTTPClient.h"
-#import <Mantle.h>
 
 @interface VCHTTPClient (Channel)
 
