@@ -8,6 +8,10 @@
 
 #import "HomeCollectionViewLayout.h"
 
+@interface HomeCollectionViewLayout ()
+
+@end
+
 @implementation HomeCollectionViewLayout
 
 -(id)init
@@ -22,5 +26,6 @@
     }
     return self;
 }
+
 
 @end

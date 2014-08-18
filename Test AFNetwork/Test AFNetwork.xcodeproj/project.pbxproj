@@ -31,6 +31,7 @@
 		73D55BCE1912980A00C56F17 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D55BC31912980A00C56F17 /* AFURLRequestSerialization.m */; };
 		73D55BCF1912980A00C56F17 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D55BC51912980A00C56F17 /* AFURLResponseSerialization.m */; };
 		73D55BD01912980A00C56F17 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D55BC71912980A00C56F17 /* AFURLSessionManager.m */; };
+		EBF8B265E3054DAAAA98B874 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE34A7A247504532A789F374 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2FC55B0A2A8A4FCB8E1ABD04 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7356B1621991D9E300903F12 /* QWHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWHTTPClient.h; sourceTree = "<group>"; };
 		7356B1631991D9E300903F12 /* QWHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWHTTPClient.m; sourceTree = "<group>"; };
+		739F0A0019A212320003025D /* QWHTTPErrorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QWHTTPErrorDefine.h; sourceTree = "<group>"; };
 		73D55B7C191297EE00C56F17 /* Test AFNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test AFNetwork.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D55B7F191297EE00C56F17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		73D55B81191297EE00C56F17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,6 +87,7 @@
 		73D55BC51912980A00C56F17 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		73D55BC61912980A00C56F17 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		73D55BC71912980A00C56F17 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		DE34A7A247504532A789F374 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 				73D55B82191297EE00C56F17 /* CoreGraphics.framework in Frameworks */,
 				73D55B84191297EE00C56F17 /* UIKit.framework in Frameworks */,
 				73D55B80191297EE00C56F17 /* Foundation.framework in Frameworks */,
+				EBF8B265E3054DAAAA98B874 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +120,7 @@
 			children = (
 				7356B1621991D9E300903F12 /* QWHTTPClient.h */,
 				7356B1631991D9E300903F12 /* QWHTTPClient.m */,
+				739F0A0019A212320003025D /* QWHTTPErrorDefine.h */,
 			);
 			name = QWHTTPClient;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 				73D55BA4191297EE00C56F17 /* Test AFNetworkTests */,
 				73D55B7E191297EE00C56F17 /* Frameworks */,
 				73D55B7D191297EE00C56F17 /* Products */,
+				2FC55B0A2A8A4FCB8E1ABD04 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +152,7 @@
 				73D55B81191297EE00C56F17 /* CoreGraphics.framework */,
 				73D55B83191297EE00C56F17 /* UIKit.framework */,
 				73D55B9E191297EE00C56F17 /* XCTest.framework */,
+				DE34A7A247504532A789F374 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,9 +235,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73D55BAE191297EE00C56F17 /* Build configuration list for PBXNativeTarget "Test AFNetwork" */;
 			buildPhases = (
+				F7767BF0E68A42C98E286471 /* Check Pods Manifest.lock */,
 				73D55B78191297EE00C56F17 /* Sources */,
 				73D55B79191297EE00C56F17 /* Frameworks */,
 				73D55B7A191297EE00C56F17 /* Resources */,
+				211BDD7ABB924079854E177E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,6 +278,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "刘平伟";
 				TargetAttributes = {
+					73D55B7B191297EE00C56F17 = {
+						DevelopmentTeam = C8U29Y8XS5;
+					};
 					73D55B9C191297EE00C56F17 = {
 						TestTargetID = 73D55B7B191297EE00C56F17;
 					};
@@ -312,6 +325,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		211BDD7ABB924079854E177E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7767BF0E68A42C98E286471 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		73D55B78191297EE00C56F17 /* Sources */ = {
@@ -452,9 +498,11 @@
 		};
 		73D55BAF191297EE00C56F17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FC55B0A2A8A4FCB8E1ABD04 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test AFNetwork/Test AFNetwork-Prefix.pch";
 				INFOPLIST_FILE = "Test AFNetwork/Test AFNetwork-Info.plist";
@@ -466,9 +514,11 @@
 		};
 		73D55BB0191297EE00C56F17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FC55B0A2A8A4FCB8E1ABD04 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tianci Huang (YF4UL6SHQK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Test AFNetwork/Test AFNetwork-Prefix.pch";
 				INFOPLIST_FILE = "Test AFNetwork/Test AFNetwork-Info.plist";

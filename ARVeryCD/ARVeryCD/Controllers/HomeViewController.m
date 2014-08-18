@@ -122,9 +122,10 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EntryViewController *entryViewController = [[EntryViewController alloc] initWithNibName:@"EntryViewController" bundle:nil];
+    [self.navigationController pushViewController:entryViewController animated:YES];
+    
     NSArray *channelentrys = [self.entrys[indexPath.section] allValues][0];
     entryViewController.entryId = [channelentrys[indexPath.row] entryId];
-    [self.navigationController pushViewController:entryViewController animated:YES];
 }
 
 #pragma mark - manage memory methods

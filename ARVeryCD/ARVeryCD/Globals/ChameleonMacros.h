@@ -43,8 +43,6 @@
 //NSArray Methods Shorthand
 #define ColorScheme(colorSchemeType,color,isFlatScheme) [NSArray arrayOfColorsWithColorScheme:colorSchemeType for:color flatScheme:isFlatScheme]
 
-//Special Colors Shorthand
-#define RandomFlatColor [UIColor randomFlatColor]
 
 //Chameleon Flat Colors - Light Shades Shorthand
 #define FlatBlack rgb(43, 43, 43)

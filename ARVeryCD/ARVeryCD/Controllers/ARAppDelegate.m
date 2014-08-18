@@ -51,14 +51,14 @@
 {
     [[UITabBar appearance] setBackgroundColor:FlatRed];
     [[UITabBar appearance] setTintColor:FlatWhite];
-    [[UITabBar appearance] setBarTintColor:FlatTeal];
-    [[UINavigationBar appearance] setBarTintColor:FlatTeal];
+    [[UITabBar appearance] setBarTintColor:FlatRed];
+    [[UINavigationBar appearance] setBarTintColor:FlatRed];
     [[UINavigationBar appearance] setTintColor:FlatWhite];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                FlatWhite,NSForegroundColorAttributeName,
-                                               FlatTeal, [[NSShadow alloc] init],
+                                               FlatRed, [[NSShadow alloc] init],
                                                [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], [[NSShadow alloc] init], nil];
     
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];

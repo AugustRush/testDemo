@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "UIImage+ImageEffects.h"
 
 @interface BaseViewController ()
 
@@ -35,7 +36,7 @@
 
 -(void)Configs
 {
-    self.view.backgroundColor = FlatWhite;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"basebackground.png"]];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

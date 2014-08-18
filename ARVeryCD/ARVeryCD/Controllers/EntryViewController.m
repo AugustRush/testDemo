@@ -11,6 +11,7 @@
 #define kVeryCDBaseWebURL @"http://m.verycd.com/entries/%@/?source=iphone"
 
 @interface EntryViewController ()
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -22,7 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -34,6 +35,14 @@
 }
 
 #pragma mark - Private methods
+
+-(void)setEntryId:(NSString *)entryId
+{
+    _entryId = entryId;
+    NSString *entryWebUrl = [NSString stringWithFormat:kVeryCDBaseWebURL,_entryId];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:entryWebUrl]]];
+    NSLog(@"entry wed url is %@, web is %@",entryWebUrl,self.webView);
+}
 
 #pragma mark - manage memory methods
 

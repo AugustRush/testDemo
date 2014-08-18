@@ -30,7 +30,7 @@ typedef void(^FBlock) (id sender);
 
 -(void)awakeFromNib
 {
-    self.titleLabel.textColor = FlatTeal;
+    self.titleLabel.textColor = FlatWhite;
 }
 
 -(void)setTouchFinishedBlock:(void (^)(id))block

@@ -29,13 +29,15 @@
         CGRect visibleRect = self.collectionView.bounds;
         visibleRect.origin = self.collectionView.contentOffset;
         
-        CGFloat distance = fabsf(attr.center.y - CGRectGetMidY(visibleRect))/CGRectGetHeight(self.collectionView.bounds);
-        attr.transform = CGAffineTransformMakeScale(1-distance/3, 1-distance/3);
+        CGFloat offset = (attr.center.y - CGRectGetMidY(visibleRect))/CGRectGetHeight(self.collectionView.bounds);
+        CGFloat distance = fabsf(offset);
+//        attr.transform = CGAffineTransformMakeScale(1-distance/3, 1-distance/3);
+        attr.transform3D = CATransform3DScale(CATransform3DIdentity, 1-distance/3, 1-distance/3, 1-offset);
     
         ChannelCollcetionViewCell *cell = (ChannelCollcetionViewCell *)[self.collectionView cellForItemAtIndexPath:attr.indexPath];
         CGRect imageFrame = cell.imageView.frame;
-        CGFloat offset = 40*((attr.center.y - CGRectGetMidY(visibleRect))/CGRectGetHeight(self.collectionView.bounds));
-        imageFrame.origin.y = offset;
+        
+        imageFrame.origin.y = 45*offset;
         cell.imageView.frame = imageFrame;
         
     }
