@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7356B1641991D9E300903F12 /* QWHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7356B1631991D9E300903F12 /* QWHTTPClient.m */; };
+		7361CE8A19A3223100612FE4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7361CE8919A3223100612FE4 /* ImageIO.framework */; };
+		7361CE8C19A324A000612FE4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7361CE8B19A324A000612FE4 /* CoreText.framework */; };
+		738241F619A35E0D00E2F08E /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 738241F319A35E0D00E2F08E /* FTCoreTextStyle.m */; };
+		738241F719A35E0D00E2F08E /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738241F519A35E0D00E2F08E /* FTCoreTextView.m */; };
 		73D55B80191297EE00C56F17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D55B7F191297EE00C56F17 /* Foundation.framework */; };
 		73D55B82191297EE00C56F17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D55B81191297EE00C56F17 /* CoreGraphics.framework */; };
 		73D55B84191297EE00C56F17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D55B83191297EE00C56F17 /* UIKit.framework */; };
@@ -48,6 +52,12 @@
 		2FC55B0A2A8A4FCB8E1ABD04 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		7356B1621991D9E300903F12 /* QWHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWHTTPClient.h; sourceTree = "<group>"; };
 		7356B1631991D9E300903F12 /* QWHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWHTTPClient.m; sourceTree = "<group>"; };
+		7361CE8919A3223100612FE4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		7361CE8B19A324A000612FE4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		738241F219A35E0D00E2F08E /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
+		738241F319A35E0D00E2F08E /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		738241F419A35E0D00E2F08E /* FTCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextView.h; sourceTree = "<group>"; };
+		738241F519A35E0D00E2F08E /* FTCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextView.m; sourceTree = "<group>"; };
 		739F0A0019A212320003025D /* QWHTTPErrorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QWHTTPErrorDefine.h; sourceTree = "<group>"; };
 		73D55B7C191297EE00C56F17 /* Test AFNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test AFNetwork.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D55B7F191297EE00C56F17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7361CE8C19A324A000612FE4 /* CoreText.framework in Frameworks */,
+				7361CE8A19A3223100612FE4 /* ImageIO.framework in Frameworks */,
 				73D55B82191297EE00C56F17 /* CoreGraphics.framework in Frameworks */,
 				73D55B84191297EE00C56F17 /* UIKit.framework in Frameworks */,
 				73D55B80191297EE00C56F17 /* Foundation.framework in Frameworks */,
@@ -125,6 +137,17 @@
 			name = QWHTTPClient;
 			sourceTree = "<group>";
 		};
+		738241F119A35E0D00E2F08E /* FTCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				738241F219A35E0D00E2F08E /* FTCoreTextStyle.h */,
+				738241F319A35E0D00E2F08E /* FTCoreTextStyle.m */,
+				738241F419A35E0D00E2F08E /* FTCoreTextView.h */,
+				738241F519A35E0D00E2F08E /* FTCoreTextView.m */,
+			);
+			path = FTCoreText;
+			sourceTree = "<group>";
+		};
 		73D55B73191297EE00C56F17 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +171,8 @@
 		73D55B7E191297EE00C56F17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7361CE8B19A324A000612FE4 /* CoreText.framework */,
+				7361CE8919A3223100612FE4 /* ImageIO.framework */,
 				73D55B7F191297EE00C56F17 /* Foundation.framework */,
 				73D55B81191297EE00C56F17 /* CoreGraphics.framework */,
 				73D55B83191297EE00C56F17 /* UIKit.framework */,
@@ -160,6 +185,7 @@
 		73D55B85191297EE00C56F17 /* Test AFNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				738241F119A35E0D00E2F08E /* FTCoreText */,
 				73D55BB41912980A00C56F17 /* AFNetworking */,
 				73D55B8E191297EE00C56F17 /* ICAppDelegate.h */,
 				73D55B8F191297EE00C56F17 /* ICAppDelegate.m */,
@@ -369,8 +395,10 @@
 				73D55B90191297EE00C56F17 /* ICAppDelegate.m in Sources */,
 				73D55BC91912980A00C56F17 /* AFHTTPRequestOperationManager.m in Sources */,
 				73D55BCB1912980A00C56F17 /* AFNetworkReachabilityManager.m in Sources */,
+				738241F719A35E0D00E2F08E /* FTCoreTextView.m in Sources */,
 				73D55BCF1912980A00C56F17 /* AFURLResponseSerialization.m in Sources */,
 				73D55BCD1912980A00C56F17 /* AFURLConnectionOperation.m in Sources */,
+				738241F619A35E0D00E2F08E /* FTCoreTextStyle.m in Sources */,
 				73D55BCC1912980A00C56F17 /* AFSecurityPolicy.m in Sources */,
 				73D55BCA1912980A00C56F17 /* AFHTTPSessionManager.m in Sources */,
 				73D55BCE1912980A00C56F17 /* AFURLRequestSerialization.m in Sources */,

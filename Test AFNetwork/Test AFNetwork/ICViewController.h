@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "QWHTTPClient.h"
+#import <ImageIO/ImageIO.h>
 
 @interface ICViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

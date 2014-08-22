@@ -9,6 +9,7 @@
 #import "ICViewController.h"
 #import "AFNetworking/AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "FTCoreTextView.h"
 
 
 //约定串
@@ -22,11 +23,14 @@ __LINE__, __func__);                                                        \
 fprintf(stderr, "-------\n");                                               \
 } while (0)
 
-@interface ICViewController ()
+static const CGFloat kBasicTextSize = 12.0f;
+@interface ICViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, retain) RACSignal *requestSignal;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
+@property (nonatomic, strong) NSMutableArray *dataArr;
+@property (nonatomic, strong) FTCoreTextView *coreTextView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @end
 
 @implementation ICViewController
@@ -34,118 +38,224 @@ fprintf(stderr, "-------\n");                                               \
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    NSString *urlString = @"http://xingmawang.com/nozzle/index/tiezixiangqing";
+    NSDictionary *parameter = @{@"topicid":@"258"};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];//设置请求格式
+    manager.responseSerializer = [AFJSONResponseSerializer serializer]; //设置返回格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
 
-//    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        NSLog(@"status is %d",status);
-//    }];
-//    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+        
+        NSDictionary *dataDic = [NSDictionary dictionaryWithDictionary:[responseObject objectForKey:@"topic"][0]];
+        
+        NSString *htmlstring = [NSString stringWithString:[dataDic objectForKey:@"content"]];
+        
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-//    [manager GET:@"http://www.verycd.com/api/v1/base/index?limit=12&catalog_id=1" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-////    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-////    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-////    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
-//    NSDictionary *parameters = @{@"lat": @"37.785834",
-//                                 @"lon":@"-122.406417",
-//                                 @"units":@"imperial"};
-//    AFHTTPRequestOperation *op = [manager POST:@"http://api.openweathermap.org/data/2.5/weather?lat=37.785834&lon=-122.406417&units=imperial" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"response dict is %@",responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"error is %@",error);
-//    }];
-//    [op pause];
-//    NSLog(@"op is %@\n queue is %@",op,manager.operationQueue.operations);
-//    [op cancel];
-//    NSLog(@"op is %@\n quwuw is %@",op,manager.operationQueue.operations);
-//    [op start];
-//        NSLog(@"op is %@ \n queue is %@",op,manager.operationQueue.operations);
-    
-//    AFHTTPRequestOperation *op1 = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://api.openweathermap.org/data/2.5/weather?lat=37.785834&lon=-122.406417&units=imperial"]]];
-//    [op1 setResponseSerializer:[AFJSONResponseSerializer serializer]];
-//    [op1 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"respose dict is %@",responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"error is %@",error);
-//    }];
-//    [op1 start];
-//    [op1 cancel];
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[htmlstring dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        
+        CGRect bounds = self.view.bounds;
+        
+        //  Create scroll view containing allowing to scroll the FTCoreText view
+        self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+        self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        //  Create FTCoreTextView. Everything will be rendered within this view
+        self.coreTextView = [[FTCoreTextView alloc] initWithFrame:CGRectInset(bounds, 20.0f, 0) andAttributedString:attributedString];
+        self.coreTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-//    [QWHTTPClient get_RequestWithPath:@"http://www.verycd.com/api/v1/base/index?limit=12&catalog_id=1"
-//                           paramaters:nil
-//                              success:^(id task, id response) {
-//                                  NSLog(@"response is %@",response);
-//                              } failed:^(id task, id error) {
-//                                  NSLog(@"error is %@",error);
-//                              }];
+        [self.scrollView addSubview:self.coreTextView];
+        [self.view addSubview:self.scrollView];
+
+        
+        
+//        self.coreTextView.text = attributedString;
+        
+        //  Define styles
+        FTCoreTextStyle *defaultStyle = [[FTCoreTextStyle alloc] init];
+        defaultStyle.name = FTCoreTextTagDefault;
+        defaultStyle.textAlignment = FTCoreTextAlignementJustified;
+        defaultStyle.font = [UIFont systemFontOfSize:kBasicTextSize];
+        
+        FTCoreTextStyle *h1Style = [defaultStyle copy];
+        h1Style.name = @"h1";
+        h1Style.font = [UIFont boldSystemFontOfSize:kBasicTextSize*2.0f];
+        h1Style.textAlignment = FTCoreTextAlignementCenter;
+        
+        FTCoreTextStyle *h2Style = [h1Style copy];
+        h2Style.name = @"h2";
+        h2Style.font = [UIFont boldSystemFontOfSize:kBasicTextSize*1.25];
+        
+        FTCoreTextStyle *pStyle = [defaultStyle copy];
+        pStyle.name = @"p";
+        
+        //  HTML list "li" style
+        //  We first get default style for "_bullet" tag, rename it to "li"
+        //  and then replace the default with new tag
+        FTCoreTextStyle *liStyle = [FTCoreTextStyle styleWithName:FTCoreTextTagBullet];
+        liStyle.name = @"li";
+        liStyle.paragraphInset = UIEdgeInsetsMake(0, 14.0f, 0, 0);
+        
+        [self.coreTextView changeDefaultTag:FTCoreTextTagBullet toTag:@"li"];
+        
+        
+        //  HTML image "img" style
+        //  We first get default style for "_image" tag, rename it to "img"
+        //  and then replace the default with new tag
+        FTCoreTextStyle *imgStyle = [FTCoreTextStyle styleWithName:FTCoreTextTagImage];
+        imgStyle.name = @"img";
+        imgStyle.textAlignment = FTCoreTextAlignementJustified;
+        
+        [self.coreTextView changeDefaultTag:FTCoreTextTagImage toTag:@"img"];
+        
+        
+        //  HTML link anchor "a"
+        //  We first get default style for "_link" tag, rename it to "a"
+        //  and then replace the default with new tag
+        //  Mind you still need to use "_link"-like format
+        //  <a>http://url.com|Dislayed text</a> format, not the html "<a href..." format
+        FTCoreTextStyle *aStyle = [FTCoreTextStyle styleWithName:FTCoreTextTagLink];
+        aStyle.name = @"a";
+        aStyle.underlined = YES;
+        aStyle.color = [UIColor blueColor];
+        
+        [self.coreTextView changeDefaultTag:FTCoreTextTagLink toTag:@"a"];
+        
+        //  Apply styles
+        [self.coreTextView addStyles:@[defaultStyle, imgStyle, h1Style, h2Style, pStyle, liStyle, aStyle]];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+-(NSString *)filterHTML:(NSString *)html
+{
+    NSScanner * scanner = [NSScanner scannerWithString:html];
+    NSString * text = nil;
     
-//    NSString *sign = [[@"18701828057" stringByAppendingString:validType] stringByAppendingString:APPOINT_KEY];
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    [param setObject:@"18701828057" forKey:@"loginName"];
-//    [param setObject:@"2" forKey:@"validType"];
-//    [param setObject:@"8alskdlanksdlskfdklf" forKey:@"sign"];
-//
-//
-//    [QWHTTPClient post_requestWithPath:@"http://api.ichronocloud.com/sendValidCode.htm" paramaters:param success:^(id task, id response) {
-//        NSLog(@"response is %@",response[@"msg"]);
-//    } failed:^(id task, NSError *error) {
-//        NSLog(@"error is %@",error);
-//    }];
+    NSMutableDictionary *arr = [NSMutableDictionary dictionary]; 
+    while([scanner isAtEnd]==NO)
+    {
+        //找到标签的起始位置
+        [scanner scanUpToString:@"width=" intoString:nil];
+        //找到标签的结束位置
+        [scanner scanUpToString:@" " intoString:&text];
+        //替换字符
+        NSLog(@"text is %@",text);
+        
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@",text] withString:@"wdfwef"];
+        
+        //找到标签的起始位置
+//        [scanner scanUpToString:@"width=100" intoString:nil];
+//        //找到标签的结束位置
+//        [scanner scanUpToString:@" " intoString:&text];
+//        //替换字符
+//        NSLog(@"text is %@",text);
+//        
+//        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@",text] withString:@""];
+    }
     
-    [self.webView loadHTMLString:@"<img src=\"http://www.xingmawang.com/Addons/kindeditor/plugins/emoticons/images/52.gif\" border=\"0\" alt=\"\" />" baseURL:nil];
     
-    NSLog(@"web view content size is %@",NSStringFromCGSize(self.webView.scrollView.contentSize));
+    return html;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
     
-    self.requestSignal = [QWHTTPClient get_RuquestWithPath:@"http://www.xingmawang.com/nozzle/index/rijixiangqing" paramaters:@{@"userid":@"38"}];
+    //  We need to recalculate fit height on every layout because
+    //  when the device orientation changes, the FTCoreText's width changes
     
-    [QWHTTPClient post_requestWithPath:@"http://www.xingmawang.com/nozzle/index/rijixiangqing"
-                                                 paramaters:@{@"userid":@"38"} constructingBodyWithBlock:nil
-                                                    success:^(id task, id response) {
-                                                        NSLog(@"response is %@",response);
-                                                    } failed:^(id task, NSError *error) {
-                                                        NSLog(@"error is %@",error);
-                                                    }];
+    //  Make the FTCoreTextView to automatically adjust it's height
+    //  so it fits all its rendered text using the actual width
+	[self.coreTextView fitToSuggestedHeight];
+    
+    //  Adjust the scroll view's content size so it can scroll all
+    //  the FTCoreTextView's content
+    [self.scrollView setContentSize:CGSizeMake(CGRectGetWidth(self.scrollView.bounds), CGRectGetMaxY(self.coreTextView.frame)+20.0f)];
+}
+
++ (NSString *)textFromTextFileNamed:(NSString *)filename
+{
+    NSString *name = [filename stringByDeletingPathExtension];
+    NSString *extension = [filename pathExtension];
+    
+    return [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:extension] encoding:NSUTF8StringEncoding error:nil];
+}
+
+
+#pragma mark - UITableViewDataSource methods
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArr.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *reuseIdentifier = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    
+//    NSString *
+    
+    cell.textLabel.text = self.dataArr[indexPath.row];
+    cell.textLabel.numberOfLines = 1;
+    cell.textLabel.font = [UIFont systemFontOfSize:8];
+    [cell.textLabel sizeToFit];
+
+    return cell;
 }
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    [QWHTTPClient get_RequestWithPath:@"http://www.verycd.com/api/v1/base/index?limit=12&catalog_id=1"
-//                           paramaters:nil
-//                              success:^(id task, id response) {
-//                                  NSLog(@"response is %@",response);
-//                              } failed:^(id task, id error) {
-//                                  NSLog(@"error is %@",error);
-//                              }];
     
-//    RACDisposable *disposble =  [[QWHTTPClient get_RuquestWithPath:@"http://www.verycd.com/api/v1/base/index?limit=12&catalog_id=1" paramaters:nil] subscribeNext:^(NSDictionary *response) {
-//        NSLog(@"response is %@",response);
-//    } error:^(NSError *error) {
-//        NSLog(@"error is %@",error);
+    
+//    NSURLSessionDownloadTask *downLoadTask = [[NSURLSession sharedSession] downloadTaskWithURL:[NSURL URLWithString:@"http://www.xingmawang.com/Addons/kindeditor/plugins/emoticons/images/52.gif"] completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+//        NSLog(@"%@\n %@\n %@",error,response,location);
+//        
+//        NSData *data = [[NSData alloc] initWithContentsOfURL:location];
+//        
+//        CGImageSourceRef sourceRef = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+//        
+//        CGImageRef img = CGImageSourceCreateImageAtIndex(sourceRef, 0, NULL);
+//        UIImage *image = [[UIImage alloc] initWithCGImage:img];
+//        NSLog(@"image size is %@",NSStringFromCGSize(image.size));
+//        self.imageView.image = image;
+//        
+//        
 //    }];
+//    
+//    [downLoadTask resume];
     
-//    [[QWHTTPClient post_RequestWithPath:@"http://api.openweathermap.org/data/2.5/weather?lat=37.785834&lon=-122.406417&units=imperial" paramaters:nil] subscribeNext:^(id x) {
-//        NSLog(@"x is %@",x);
-//    } error:^(NSError *error) {
-//        NSLog(@"error is %@",error);
-//    }];
-    
-    [self.requestSignal subscribeNext:^(id x) {
-        NSLog(@"x is %@",x[@"msg"]);
-    }];
-    
-    [self.requestSignal subscribeNext:^(id x) {
-        NSLog(@"\n\n\n\n\\n\n secon time x is %@",[x class]);
-    } error:^(NSError *error) {
-        NSLog(@"error is %@",error);
-    }];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
