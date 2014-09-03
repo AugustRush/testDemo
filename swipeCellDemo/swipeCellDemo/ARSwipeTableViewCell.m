@@ -17,43 +17,13 @@
 @property (nonatomic, strong) NSMutableArray *leftItems;
 @property (nonatomic, strong) NSMutableArray *rightItems;
 
+@property (nonatomic, weak) UIPanGestureRecognizer *swipePangesture;
 
 @end
 
 @implementation ARSwipeTableViewCell
 
 #pragma mark - init/config methods
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier leftItems:(NSArray *)leftItems rightItems:(NSArray *)rightItems
-{
-    self = [self initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.leftItems = [NSMutableArray arrayWithCapacity:leftItems.count];
-        for (int i = 0 ; i < leftItems.count; i++) {
-            UIButton *item = [UIButton buttonWithType:UIButtonTypeCustom];
-            item.backgroundColor = [UIColor orangeColor];
-            [item setTitle:leftItems[i] forState:UIControlStateNormal];
-//            [item addTarget:self action:@selector(menuItemClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [item setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self.menuView addSubview:item];
-            [self.leftItems addObject:item];
-        }
-        
-        self.rightItems = [NSMutableArray arrayWithCapacity:rightItems.count];
-        for (int i = 0; i < rightItems.count; i++) {
-            UIButton *item = [UIButton buttonWithType:UIButtonTypeCustom];
-            item.backgroundColor = [UIColor orangeColor];
-            [item setTitle:rightItems[i] forState:UIControlStateNormal];
-//            [item addTarget:self action:@selector(menuItemClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [item setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self.menuView addSubview:item];
-            [self.rightItems addObject:item];
-
-        }
-    }
-    return self;
-}
-
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -69,6 +39,35 @@
     [self initConfigs];
 }
 
+#pragma mark - private methods
+
+-(void)setDataSource:(id<ARSwipeTableViewCellDataSource>)dataSource
+{
+    _dataSource = dataSource;
+    if (_dataSource
+        && [_dataSource respondsToSelector:@selector(leftItemsWithSwipeCell:)]
+        && _leftItems == nil) {
+        NSLog(@"menu items is %@",_menuView.subviews);
+        NSArray *leftItems = [dataSource leftItemsWithSwipeCell:self];
+        self.leftItems = [NSMutableArray arrayWithArray:leftItems];
+        for (UIView *item in self.leftItems) {
+            [self.menuView addSubview:item];
+        }
+    }
+    
+    if (_dataSource
+        && [_dataSource respondsToSelector:@selector(rightItemsWithSwipeCell:)]
+        && _rightItems == nil) {
+        
+        NSArray *rightItems = [dataSource rightItemsWithSwipeCell:self];
+        self.rightItems = [NSMutableArray arrayWithArray:rightItems];
+        for (UIView *item in self.rightItems) {
+            [self.menuView addSubview:item];
+        }
+    }
+
+}
+
 -(void)initConfigs
 {
     self.contentView.backgroundColor = [UIColor whiteColor];
@@ -77,7 +76,10 @@
     self.menuView = ({
         UIView *view = [[UIView alloc] init];
         view.backgroundColor = [UIColor clearColor];
-        [self insertSubview:view atIndex:0];
+        view.hidden = YES;
+        UIView *contentSuperView = [self.contentView superview];
+        NSAssert(contentSuperView != nil, @"cell contentView's superView should not be nil.");
+        [contentSuperView insertSubview:view atIndex:0];
         view;
     });
     
@@ -86,87 +88,109 @@
     panGesture.delaysTouchesEnded = YES;
     panGesture.delegate = self;
     [self.contentView addGestureRecognizer:panGesture];
+    self.swipePangesture = panGesture;
 }
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     self.menuView.frame = self.contentView.frame;
+    self.menuView.hidden = YES;
     for (int i = 0; i < self.leftItems.count; i++) {
-        UIButton *item = self.leftItems[i];
+        UIView *item = self.leftItems[i];
         item.frame = CGRectMake(kMenuItemWidth*i, 0, kMenuItemWidth, CGRectGetHeight(self.menuView.bounds));
     }
     for (int i = 0; i < self.rightItems.count; i++) {
-        UIButton *item = self.rightItems[i];
+        UIView *item = self.rightItems[i];
         item.frame = CGRectMake(CGRectGetWidth(self.menuView.bounds)-kMenuItemWidth*(i+1), 0, kMenuItemWidth, CGRectGetHeight(self.menuView.bounds));
+    }
+}
+
+-(void)setSelected:(BOOL)selected
+{
+    [self setSelected:selected animated:NO];
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    if (selected) {
+        [self.swipePangesture removeTarget:self action:@selector(handlePanGesture:)];
+    }else{
+        [self.swipePangesture addTarget:self action:@selector(handlePanGesture:)];
     }
 }
 
 #pragma mark - private methods
 
-//-(void)menuItemClicked:(id)sender
-//{
-//}
-
 -(void)handlePanGesture:(UIPanGestureRecognizer *)pan
 {
     CGPoint movePoint = [pan translationInView:self];
+    CGRect frame = self.contentView.frame;
+    
+    //scroll tableView
     if (fabsf(movePoint.x) < fabsf(movePoint.y)) {
+        if (frame.origin.x != 0) {
+            frame.origin.x = 0;
+            self.contentView.frame = frame;
+        }
         return;
     }
     
-    CGRect frame = self.contentView.frame;
-    
+    //swipe cell
     switch (pan.state) {
         case UIGestureRecognizerStateChanged:
         {
             frame.origin.x = movePoint.x;
             NSInteger itemCount = movePoint.x > 0 ? _leftItems.count:_rightItems.count;
            if(fabsf(movePoint.x)-itemCount*kMenuItemWidth < 30 ){
-               
                self.contentView.frame = frame;
-               self.menuView.alpha = 1- fabsf(kMenuItemWidth*itemCount - fabsf(movePoint.x))/(kMenuItemWidth*itemCount);
            }
         }
             break;
         case UIGestureRecognizerStateEnded:
         {
+            
             frame.origin.x = 0;
-            [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
+            [UIView animateWithDuration:.2
+                                  delay:0.1
+                                options:UIViewAnimationOptionCurveEaseOut
+                             animations:^{
+                                 
                 self.contentView.frame = frame;
-                self.menuView.alpha = 1;
+
             } completion:^(BOOL finished) {
-                if (self.delegate && [self.delegate respondsToSelector:@selector(cell:swipeCompletedWithType:)]) {
-                    [self.delegate cell:self swipeCompletedWithType:movePoint.x > 0 ? ARSwipeTableViewCellSwipeTypeRight:ARSwipeTableViewCellSwipeTypeLeft];
+                
+                self.menuView.hidden = YES;
+                NSInteger itemCount = movePoint.x > 0 ? _leftItems.count:_rightItems.count;
+                if (self.delegate &&
+                    [self.delegate respondsToSelector:@selector(swipeCell:swipeCompletedWithType:)] &&
+                    fabsf(movePoint.x) > itemCount*kMenuItemWidth) {
+                    
+                    [self.delegate swipeCell:self swipeCompletedWithType:movePoint.x > 0 ? ARSwipeTableViewCellSwipeTypeRight:ARSwipeTableViewCellSwipeTypeLeft];
+                    
                 }
+
             }];
         }
             break;
         case UIGestureRecognizerStateBegan:
         {
+            self.menuView.hidden = NO;
         }
             break;
         case UIGestureRecognizerStateFailed:
-        {
-        }
-            break;
         case UIGestureRecognizerStateCancelled:
-        {
-        }
-            break;
         case UIGestureRecognizerStatePossible:
         {
+            self.menuView.hidden = YES;
         }
             break;
             
         default:
+            self.menuView.hidden  = YES;
             break;
     }
-}
-
--(void)setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
-{
-    [super setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 #pragma mark - UIGestureRecognizerDelegate methods

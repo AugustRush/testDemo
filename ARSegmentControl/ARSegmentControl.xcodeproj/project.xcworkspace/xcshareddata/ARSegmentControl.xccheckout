@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F9CDC098-EAB2-47E4-8536-F00CA08EE3E8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ARSegmentControl</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4439EF36-70E0-4E4D-9062-44B72A7AA126</key>
+		<string>https://github.com/AugustRush/testDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ARSegmentControl/ARSegmentControl.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4439EF36-70E0-4E4D-9062-44B72A7AA126</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AugustRush/testDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4439EF36-70E0-4E4D-9062-44B72A7AA126</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4439EF36-70E0-4E4D-9062-44B72A7AA126</string>
+			<key>IDESourceControlWCCName</key>
+			<string>testDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -9,7 +9,7 @@
 #import "TableViewController.h"
 #import "ARSwipeTableViewCell.h"
 
-@interface TableViewController ()<ARSwipeTableViewCellDelegate>
+@interface TableViewController ()<ARSwipeTableViewCellDelegate,ARSwipeTableViewCellDataSource>
 @property (nonatomic, strong) NSMutableArray *dataArr;
 
 @end
@@ -50,10 +50,13 @@
     
     ARSwipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[ARSwipeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier leftItems:@[@"love",@"delete"] rightItems:@[@"ignore"]];
+        cell = [[ARSwipeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
 
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.delegate = self;
+    cell.dataSource = self;
+    
     cell.textLabel.text = [NSString stringWithFormat:@"[%ld    %ld]",(long)indexPath.section,(long)indexPath.row];
     
     return cell;
@@ -67,14 +70,48 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//    [self.dataArr removeObjectAtIndex:indexPath.row];
+//    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
--(void)cell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type
+#pragma cell delegate
+
+-(void)swipeCell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type
 {
     NSInteger integer = [self.tableView.visibleCells indexOfObject:cell];
     [self.dataArr removeObjectAtIndex:integer];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:integer inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+    [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:cell]] withRowAnimation:UITableViewRowAnimationLeft];
+}
+
+#pragma cell datasource
+
+-(NSArray *)leftItemsWithSwipeCell:(ARSwipeTableViewCell *)cell
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"delete" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor redColor];
+    return @[button];
+}
+
+-(NSArray *)rightItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:swipeCell];
+    if (indexPath.row % 2 == 0) {
+        NSLog(@"1111111");
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"add" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor redColor];
+        return @[button];
+    }else{
+        NSLog(@"2222222");
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"bbbbbbb" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor redColor];
+        return @[button];
+    }
 }
 
 /*

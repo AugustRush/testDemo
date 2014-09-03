@@ -13,23 +13,33 @@ typedef NS_ENUM(NSUInteger, ARSwipeTableViewCellSwipeType) {
     ARSwipeTableViewCellSwipeTypeRight
 };
 
+/**
+ *  delegate triger action
+ */
 @class ARSwipeTableViewCell;
+
 @protocol ARSwipeTableViewCellDelegate <NSObject>
 
--(void)cell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type;
+@optional
+-(void)swipeCell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type;
+
+@end
+
+/**
+ *  swipeCell dataSouce methods to get left and right items, item should be UIImageView.
+ */
+@protocol ARSwipeTableViewCellDataSource <NSObject>
+
+@optional
+-(NSArray *)leftItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell;
+-(NSArray *)rightItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell;
 
 @end
 
 @interface ARSwipeTableViewCell : UITableViewCell
 
-@property (nonatomic, assign) id<ARSwipeTableViewCellDelegate>delegate;
-//在UITableCell的基础上添加了左边,右边的菜单按钮
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style
-             reuseIdentifier:(NSString *)reuseIdentifier
-                   leftItems:(NSArray *)leftItems
-                  rightItems:(NSArray *)rightItems;
-
+@property (nonatomic, assign) id<ARSwipeTableViewCellDelegate> delegate;
+@property (nonatomic, assign) id<ARSwipeTableViewCellDataSource> dataSource;
 
 
 @end
