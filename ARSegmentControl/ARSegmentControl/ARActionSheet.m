@@ -22,6 +22,15 @@
 
 #pragma mark - init methods
 
+-(instancetype)initWithTitles:(NSArray *)titles itemType:(ARActionSheetItemType)itemType
+{
+    self = [self initWithTitles:titles];
+    if (self) {
+        _itemType = itemType;
+    }
+    return self;
+}
+
 -(instancetype)initWithTitles:(NSArray *)titles
 {
     self = [self init];
@@ -75,7 +84,7 @@
                             self.frame = [self startFrame];
                         }
                      completion:^(BOOL finished) {
-                         self.isShowing = YES;
+                         _isShowing = YES;
                      }];
 }
 
@@ -92,7 +101,7 @@
                          self.frame = [self endFrame];
                      }
                      completion:^(BOOL finished) {
-                         self.isShowing = NO;
+                         _isShowing = NO;
                      }];
 }
 
@@ -158,6 +167,10 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ARActionSheetItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReuseIdentifier forIndexPath:indexPath];
+    
+    
+    
+    cell.type = self.itemType;
     cell.titleLabel.text = self.titles[indexPath.row];
     [cell.titleLabel setTextColor:self.titleColor];
     [cell.titleLabel setHighlightedTextColor:self.titleTintColor];
@@ -178,7 +191,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"index path is %@",indexPath);
+    if (self.selectedBlock) {
+        self.selectedBlock(self,indexPath.row);
+    }
 }
 
 #pragma mark - manage memory methods
@@ -205,7 +220,7 @@
 -(void)initConfigs
 {
     self.contentView.layer.borderWidth = .5;
-    self.contentView.layer.borderColor = [UIColor colorWithWhite:.5 alpha:.3].CGColor;
+    self.contentView.layer.borderColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1].CGColor;
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -220,15 +235,12 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat width = CGRectGetWidth(self.bounds);
-    CGFloat height= CGRectGetHeight(self.bounds);
-    self.imageView.frame = CGRectMake(0, 0, height, height);
-    self.titleLabel.frame = CGRectMake(height, 0, width-height, height);
-}
-
--(void)setSelected:(BOOL)selected
-{
-    [super setSelected:selected];
+    if (self.type == ARActionSheetItemTypeDefault) {
+        CGFloat width = CGRectGetWidth(self.bounds);
+        CGFloat height= CGRectGetHeight(self.bounds);
+        self.imageView.frame = CGRectMake(5, 0, height, height);
+        self.titleLabel.frame = CGRectMake(height+5, 0, width-height-10, height);
+    }else{}
 }
 
 @end

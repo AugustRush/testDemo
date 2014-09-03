@@ -21,12 +21,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.actionSheet = [[ARActionSheet alloc] initWithTitles:@[@"sina",@"tencent",@"item"]];
+    
+    self.actionSheet = [[ARActionSheet alloc] initWithTitles:@[@"微信朋友圈",@"tencent",@"item",@"facebook"]];
     self.actionSheet.height = 300;
+    self.actionSheet.minimumInteritemSpacing = -1;
+    self.actionSheet.minimumLineSpacing = -1;
     self.actionSheet.backgroundColor = [UIColor colorWithRed:252/255.0 green:252/255.0 blue:252/255.0 alpha:1];
     self.actionSheet.itemSize = CGSizeMake(160, 40);
     [self.actionSheet setItemImages:@[[UIImage imageNamed:@"copy"],[UIImage imageNamed:@"facebook"],[UIImage imageNamed:@"mail"],[UIImage imageNamed:@"copy"],[UIImage imageNamed:@"copy"]] highlightImages:@[[UIImage imageNamed:@"copy_actived"],[UIImage imageNamed:@"facebook_actived"],[UIImage imageNamed:@"mail_actived"],[UIImage imageNamed:@"copy_actived"]]];
     self.actionSheet.allowsMultipleSelection = YES;
+    [self.actionSheet setSelectedBlock:^(id sender,NSInteger selectIndex){
+        NSLog(@"select index is %d",selectIndex);
+    }];
 }
 
 
