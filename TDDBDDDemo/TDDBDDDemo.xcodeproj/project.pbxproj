@@ -1,0 +1,678 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DA5FD815A6D46E1812D2D83 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2F3C5078534A339508A9DE /* libPods-KiwiUnitTest.a */; };
+		73D5196619B853F600EF7E17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196519B853F600EF7E17 /* Foundation.framework */; };
+		73D5196819B853F600EF7E17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196719B853F600EF7E17 /* CoreGraphics.framework */; };
+		73D5196A19B853F600EF7E17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196919B853F600EF7E17 /* UIKit.framework */; };
+		73D5197019B853F600EF7E17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73D5196E19B853F600EF7E17 /* InfoPlist.strings */; };
+		73D5197219B853F600EF7E17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D5197119B853F600EF7E17 /* main.m */; };
+		73D5197619B853F600EF7E17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D5197519B853F600EF7E17 /* AppDelegate.m */; };
+		73D5197919B853F600EF7E17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D5197719B853F600EF7E17 /* Main.storyboard */; };
+		73D5197C19B853F600EF7E17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D5197B19B853F600EF7E17 /* ViewController.m */; };
+		73D5197E19B853F600EF7E17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D5197D19B853F600EF7E17 /* Images.xcassets */; };
+		73D5198519B853F600EF7E17 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5198419B853F600EF7E17 /* XCTest.framework */; };
+		73D5198619B853F600EF7E17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196519B853F600EF7E17 /* Foundation.framework */; };
+		73D5198719B853F600EF7E17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196919B853F600EF7E17 /* UIKit.framework */; };
+		73D5198F19B853F600EF7E17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73D5198D19B853F600EF7E17 /* InfoPlist.strings */; };
+		73D5199119B853F600EF7E17 /* TDDBDDDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D5199019B853F600EF7E17 /* TDDBDDDemoTests.m */; };
+		73D5199C19B854A400EF7E17 /* ExampleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D5199B19B854A400EF7E17 /* ExampleClass.m */; };
+		73D519A219B8590600EF7E17 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5198419B853F600EF7E17 /* XCTest.framework */; };
+		73D519A319B8590600EF7E17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196519B853F600EF7E17 /* Foundation.framework */; };
+		73D519A419B8590600EF7E17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D5196919B853F600EF7E17 /* UIKit.framework */; };
+		73D519AA19B8590600EF7E17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73D519A819B8590600EF7E17 /* InfoPlist.strings */; };
+		73D519AC19B8590600EF7E17 /* KiwiUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D519AB19B8590600EF7E17 /* KiwiUnitTest.m */; };
+		73D519B819B85D0700EF7E17 /* ExampleClassSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D519B719B85D0700EF7E17 /* ExampleClassSpec.m */; };
+		73D519BA19B85FAB00EF7E17 /* ViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D519B919B85FAB00EF7E17 /* ViewControllerSpec.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		73D5198819B853F600EF7E17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73D5195A19B853F600EF7E17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73D5196119B853F600EF7E17;
+			remoteInfo = TDDBDDDemo;
+		};
+		73D519AE19B8590600EF7E17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73D5195A19B853F600EF7E17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73D5196119B853F600EF7E17;
+			remoteInfo = TDDBDDDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		42CC278533314BCABF6CE26D /* Pods-KiwiUnitTest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.xcconfig"; path = "Pods/Pods-KiwiUnitTest.xcconfig"; sourceTree = "<group>"; };
+		73D5196219B853F600EF7E17 /* TDDBDDDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDDBDDDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73D5196519B853F600EF7E17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		73D5196719B853F600EF7E17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		73D5196919B853F600EF7E17 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		73D5196D19B853F600EF7E17 /* TDDBDDDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TDDBDDDemo-Info.plist"; sourceTree = "<group>"; };
+		73D5196F19B853F600EF7E17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73D5197119B853F600EF7E17 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73D5197319B853F600EF7E17 /* TDDBDDDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TDDBDDDemo-Prefix.pch"; sourceTree = "<group>"; };
+		73D5197419B853F600EF7E17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		73D5197519B853F600EF7E17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		73D5197819B853F600EF7E17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		73D5197A19B853F600EF7E17 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		73D5197B19B853F600EF7E17 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		73D5197D19B853F600EF7E17 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		73D5198319B853F600EF7E17 /* TDDBDDDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDDBDDDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73D5198419B853F600EF7E17 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		73D5198C19B853F600EF7E17 /* TDDBDDDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TDDBDDDemoTests-Info.plist"; sourceTree = "<group>"; };
+		73D5198E19B853F600EF7E17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73D5199019B853F600EF7E17 /* TDDBDDDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDDBDDDemoTests.m; sourceTree = "<group>"; };
+		73D5199A19B854A400EF7E17 /* ExampleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleClass.h; sourceTree = "<group>"; };
+		73D5199B19B854A400EF7E17 /* ExampleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleClass.m; sourceTree = "<group>"; };
+		73D519A119B8590600EF7E17 /* KiwiUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73D519A719B8590600EF7E17 /* KiwiUnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KiwiUnitTest-Info.plist"; sourceTree = "<group>"; };
+		73D519A919B8590600EF7E17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		73D519AB19B8590600EF7E17 /* KiwiUnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiwiUnitTest.m; sourceTree = "<group>"; };
+		73D519AD19B8590600EF7E17 /* KiwiUnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KiwiUnitTest-Prefix.pch"; sourceTree = "<group>"; };
+		73D519B719B85D0700EF7E17 /* ExampleClassSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleClassSpec.m; sourceTree = "<group>"; };
+		73D519B919B85FAB00EF7E17 /* ViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSpec.m; sourceTree = "<group>"; };
+		CF2F3C5078534A339508A9DE /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73D5195F19B853F600EF7E17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5196819B853F600EF7E17 /* CoreGraphics.framework in Frameworks */,
+				73D5196A19B853F600EF7E17 /* UIKit.framework in Frameworks */,
+				73D5196619B853F600EF7E17 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5198019B853F600EF7E17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5198519B853F600EF7E17 /* XCTest.framework in Frameworks */,
+				73D5198719B853F600EF7E17 /* UIKit.framework in Frameworks */,
+				73D5198619B853F600EF7E17 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5199E19B8590600EF7E17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D519A219B8590600EF7E17 /* XCTest.framework in Frameworks */,
+				73D519A419B8590600EF7E17 /* UIKit.framework in Frameworks */,
+				73D519A319B8590600EF7E17 /* Foundation.framework in Frameworks */,
+				0DA5FD815A6D46E1812D2D83 /* libPods-KiwiUnitTest.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		73D5195919B853F600EF7E17 = {
+			isa = PBXGroup;
+			children = (
+				73D5196B19B853F600EF7E17 /* TDDBDDDemo */,
+				73D5198A19B853F600EF7E17 /* TDDBDDDemoTests */,
+				73D519A519B8590600EF7E17 /* KiwiUnitTest */,
+				73D5196419B853F600EF7E17 /* Frameworks */,
+				73D5196319B853F600EF7E17 /* Products */,
+				42CC278533314BCABF6CE26D /* Pods-KiwiUnitTest.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		73D5196319B853F600EF7E17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73D5196219B853F600EF7E17 /* TDDBDDDemo.app */,
+				73D5198319B853F600EF7E17 /* TDDBDDDemoTests.xctest */,
+				73D519A119B8590600EF7E17 /* KiwiUnitTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73D5196419B853F600EF7E17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73D5196519B853F600EF7E17 /* Foundation.framework */,
+				73D5196719B853F600EF7E17 /* CoreGraphics.framework */,
+				73D5196919B853F600EF7E17 /* UIKit.framework */,
+				73D5198419B853F600EF7E17 /* XCTest.framework */,
+				CF2F3C5078534A339508A9DE /* libPods-KiwiUnitTest.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73D5196B19B853F600EF7E17 /* TDDBDDDemo */ = {
+			isa = PBXGroup;
+			children = (
+				73D5197419B853F600EF7E17 /* AppDelegate.h */,
+				73D5197519B853F600EF7E17 /* AppDelegate.m */,
+				73D5197719B853F600EF7E17 /* Main.storyboard */,
+				73D5197A19B853F600EF7E17 /* ViewController.h */,
+				73D5197B19B853F600EF7E17 /* ViewController.m */,
+				73D5199A19B854A400EF7E17 /* ExampleClass.h */,
+				73D5199B19B854A400EF7E17 /* ExampleClass.m */,
+				73D5197D19B853F600EF7E17 /* Images.xcassets */,
+				73D5196C19B853F600EF7E17 /* Supporting Files */,
+			);
+			path = TDDBDDDemo;
+			sourceTree = "<group>";
+		};
+		73D5196C19B853F600EF7E17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73D5196D19B853F600EF7E17 /* TDDBDDDemo-Info.plist */,
+				73D5196E19B853F600EF7E17 /* InfoPlist.strings */,
+				73D5197119B853F600EF7E17 /* main.m */,
+				73D5197319B853F600EF7E17 /* TDDBDDDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73D5198A19B853F600EF7E17 /* TDDBDDDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				73D5199019B853F600EF7E17 /* TDDBDDDemoTests.m */,
+				73D5198B19B853F600EF7E17 /* Supporting Files */,
+			);
+			path = TDDBDDDemoTests;
+			sourceTree = "<group>";
+		};
+		73D5198B19B853F600EF7E17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73D5198C19B853F600EF7E17 /* TDDBDDDemoTests-Info.plist */,
+				73D5198D19B853F600EF7E17 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73D519A519B8590600EF7E17 /* KiwiUnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				73D519AB19B8590600EF7E17 /* KiwiUnitTest.m */,
+				73D519B719B85D0700EF7E17 /* ExampleClassSpec.m */,
+				73D519B919B85FAB00EF7E17 /* ViewControllerSpec.m */,
+				73D519A619B8590600EF7E17 /* Supporting Files */,
+			);
+			path = KiwiUnitTest;
+			sourceTree = "<group>";
+		};
+		73D519A619B8590600EF7E17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73D519A719B8590600EF7E17 /* KiwiUnitTest-Info.plist */,
+				73D519A819B8590600EF7E17 /* InfoPlist.strings */,
+				73D519AD19B8590600EF7E17 /* KiwiUnitTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73D5196119B853F600EF7E17 /* TDDBDDDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73D5199419B853F600EF7E17 /* Build configuration list for PBXNativeTarget "TDDBDDDemo" */;
+			buildPhases = (
+				73D5195E19B853F600EF7E17 /* Sources */,
+				73D5195F19B853F600EF7E17 /* Frameworks */,
+				73D5196019B853F600EF7E17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TDDBDDDemo;
+			productName = TDDBDDDemo;
+			productReference = 73D5196219B853F600EF7E17 /* TDDBDDDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		73D5198219B853F600EF7E17 /* TDDBDDDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73D5199719B853F600EF7E17 /* Build configuration list for PBXNativeTarget "TDDBDDDemoTests" */;
+			buildPhases = (
+				73D5197F19B853F600EF7E17 /* Sources */,
+				73D5198019B853F600EF7E17 /* Frameworks */,
+				73D5198119B853F600EF7E17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73D5198919B853F600EF7E17 /* PBXTargetDependency */,
+			);
+			name = TDDBDDDemoTests;
+			productName = TDDBDDDemoTests;
+			productReference = 73D5198319B853F600EF7E17 /* TDDBDDDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		73D519A019B8590600EF7E17 /* KiwiUnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73D519B019B8590600EF7E17 /* Build configuration list for PBXNativeTarget "KiwiUnitTest" */;
+			buildPhases = (
+				3F5D552955794FFAB456A3DF /* Check Pods Manifest.lock */,
+				73D5199D19B8590600EF7E17 /* Sources */,
+				73D5199E19B8590600EF7E17 /* Frameworks */,
+				73D5199F19B8590600EF7E17 /* Resources */,
+				8CCB0552DC7349AB95DCCECE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73D519AF19B8590600EF7E17 /* PBXTargetDependency */,
+			);
+			name = KiwiUnitTest;
+			productName = KiwiUnitTest;
+			productReference = 73D519A119B8590600EF7E17 /* KiwiUnitTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73D5195A19B853F600EF7E17 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				TargetAttributes = {
+					73D5198219B853F600EF7E17 = {
+						TestTargetID = 73D5196119B853F600EF7E17;
+					};
+					73D519A019B8590600EF7E17 = {
+						TestTargetID = 73D5196119B853F600EF7E17;
+					};
+				};
+			};
+			buildConfigurationList = 73D5195D19B853F600EF7E17 /* Build configuration list for PBXProject "TDDBDDDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 73D5195919B853F600EF7E17;
+			productRefGroup = 73D5196319B853F600EF7E17 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73D5196119B853F600EF7E17 /* TDDBDDDemo */,
+				73D5198219B853F600EF7E17 /* TDDBDDDemoTests */,
+				73D519A019B8590600EF7E17 /* KiwiUnitTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73D5196019B853F600EF7E17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5197E19B853F600EF7E17 /* Images.xcassets in Resources */,
+				73D5197019B853F600EF7E17 /* InfoPlist.strings in Resources */,
+				73D5197919B853F600EF7E17 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5198119B853F600EF7E17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5198F19B853F600EF7E17 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5199F19B8590600EF7E17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D519AA19B8590600EF7E17 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3F5D552955794FFAB456A3DF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8CCB0552DC7349AB95DCCECE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-KiwiUnitTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73D5195E19B853F600EF7E17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5197C19B853F600EF7E17 /* ViewController.m in Sources */,
+				73D5197619B853F600EF7E17 /* AppDelegate.m in Sources */,
+				73D5197219B853F600EF7E17 /* main.m in Sources */,
+				73D5199C19B854A400EF7E17 /* ExampleClass.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5197F19B853F600EF7E17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D5199119B853F600EF7E17 /* TDDBDDDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73D5199D19B8590600EF7E17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73D519B819B85D0700EF7E17 /* ExampleClassSpec.m in Sources */,
+				73D519AC19B8590600EF7E17 /* KiwiUnitTest.m in Sources */,
+				73D519BA19B85FAB00EF7E17 /* ViewControllerSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		73D5198919B853F600EF7E17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73D5196119B853F600EF7E17 /* TDDBDDDemo */;
+			targetProxy = 73D5198819B853F600EF7E17 /* PBXContainerItemProxy */;
+		};
+		73D519AF19B8590600EF7E17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73D5196119B853F600EF7E17 /* TDDBDDDemo */;
+			targetProxy = 73D519AE19B8590600EF7E17 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		73D5196E19B853F600EF7E17 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73D5196F19B853F600EF7E17 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		73D5197719B853F600EF7E17 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73D5197819B853F600EF7E17 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		73D5198D19B853F600EF7E17 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73D5198E19B853F600EF7E17 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		73D519A819B8590600EF7E17 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73D519A919B8590600EF7E17 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		73D5199219B853F600EF7E17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		73D5199319B853F600EF7E17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73D5199519B853F600EF7E17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TDDBDDDemo/TDDBDDDemo-Prefix.pch";
+				INFOPLIST_FILE = "TDDBDDDemo/TDDBDDDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		73D5199619B853F600EF7E17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TDDBDDDemo/TDDBDDDemo-Prefix.pch";
+				INFOPLIST_FILE = "TDDBDDDemo/TDDBDDDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		73D5199819B853F600EF7E17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TDDBDDDemo.app/TDDBDDDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TDDBDDDemo/TDDBDDDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TDDBDDDemoTests/TDDBDDDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		73D5199919B853F600EF7E17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TDDBDDDemo.app/TDDBDDDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TDDBDDDemo/TDDBDDDemo-Prefix.pch";
+				INFOPLIST_FILE = "TDDBDDDemoTests/TDDBDDDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		73D519B119B8590600EF7E17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42CC278533314BCABF6CE26D /* Pods-KiwiUnitTest.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TDDBDDDemo.app/TDDBDDDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KiwiUnitTest/KiwiUnitTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "KiwiUnitTest/KiwiUnitTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		73D519B219B8590600EF7E17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42CC278533314BCABF6CE26D /* Pods-KiwiUnitTest.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TDDBDDDemo.app/TDDBDDDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KiwiUnitTest/KiwiUnitTest-Prefix.pch";
+				INFOPLIST_FILE = "KiwiUnitTest/KiwiUnitTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73D5195D19B853F600EF7E17 /* Build configuration list for PBXProject "TDDBDDDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D5199219B853F600EF7E17 /* Debug */,
+				73D5199319B853F600EF7E17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73D5199419B853F600EF7E17 /* Build configuration list for PBXNativeTarget "TDDBDDDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D5199519B853F600EF7E17 /* Debug */,
+				73D5199619B853F600EF7E17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73D5199719B853F600EF7E17 /* Build configuration list for PBXNativeTarget "TDDBDDDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D5199819B853F600EF7E17 /* Debug */,
+				73D5199919B853F600EF7E17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73D519B019B8590600EF7E17 /* Build configuration list for PBXNativeTarget "KiwiUnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D519B119B8590600EF7E17 /* Debug */,
+				73D519B219B8590600EF7E17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 73D5195A19B853F600EF7E17 /* Project object */;
+}

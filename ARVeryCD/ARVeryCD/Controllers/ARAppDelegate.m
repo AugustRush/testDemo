@@ -7,6 +7,9 @@
 //
 
 #import "ARAppDelegate.h"
+#if DEBUG
+#import "FLEXManager.h"
+#endif
 
 @implementation ARAppDelegate
 
@@ -15,6 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [[FLEXManager sharedManager] showExplorer];
     // Override point for customization after application launch.
     
     [self configApperence];

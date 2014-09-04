@@ -22,6 +22,7 @@
 		733DC5BE19B5C5DE00F61D4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 733DC5BC19B5C5DE00F61D4B /* InfoPlist.strings */; };
 		733DC5C019B5C5DE00F61D4B /* ARSegmentControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 733DC5BF19B5C5DE00F61D4B /* ARSegmentControlTests.m */; };
 		7344C1A919B6E3DF00C8D39B /* ARActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */; };
+		73F4D40019B71FCF0047E95A /* ARSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		733DC5BF19B5C5DE00F61D4B /* ARSegmentControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARSegmentControlTests.m; sourceTree = "<group>"; };
 		7344C1A719B6E3DF00C8D39B /* ARActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARActionSheet.h; sourceTree = "<group>"; };
 		7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARActionSheet.m; sourceTree = "<group>"; };
+		73F4D3FE19B71FCF0047E95A /* ARSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentControl.h; sourceTree = "<group>"; };
+		73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				733DC5AA19B5C5DE00F61D4B /* ViewController.m */,
 				7344C1A719B6E3DF00C8D39B /* ARActionSheet.h */,
 				7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */,
+				73F4D3FE19B71FCF0047E95A /* ARSegmentControl.h */,
+				73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */,
 				733DC5AC19B5C5DE00F61D4B /* Images.xcassets */,
 				733DC59B19B5C5DE00F61D4B /* Supporting Files */,
 			);
@@ -254,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73F4D40019B71FCF0047E95A /* ARSegmentControl.m in Sources */,
 				7344C1A919B6E3DF00C8D39B /* ARActionSheet.m in Sources */,
 				733DC5AB19B5C5DE00F61D4B /* ViewController.m in Sources */,
 				733DC5A519B5C5DE00F61D4B /* AppDelegate.m in Sources */,
