@@ -53,7 +53,6 @@
         cell = [[ARSwipeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
 
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.delegate = self;
     cell.dataSource = self;
     
@@ -76,16 +75,19 @@
 
 #pragma cell delegate
 
--(void)swipeCell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type
+-(void)swipeCell:(ARSwipeTableViewCell *)cell didTriggerLeftItemWithIndex:(NSInteger)index
 {
-    NSInteger integer = [self.tableView.visibleCells indexOfObject:cell];
-    [self.dataArr removeObjectAtIndex:integer];
-    [self.tableView deleteRowsAtIndexPaths:@[[self.tableView indexPathForCell:cell]] withRowAnimation:UITableViewRowAnimationLeft];
+
+}
+
+-(void)swipeCell:(ARSwipeTableViewCell *)cell didTriggerRightItemWithIndex:(NSInteger)index
+{
+
 }
 
 #pragma cell datasource
 
--(NSArray *)leftItemsWithSwipeCell:(ARSwipeTableViewCell *)cell
+-(NSArray *)leftItemsForSwipeCell:(ARSwipeTableViewCell *)cell
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"delete" forState:UIControlStateNormal];
@@ -94,7 +96,7 @@
     return @[button];
 }
 
--(NSArray *)rightItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell
+-(NSArray *)rightItemsForSwipeCell:(ARSwipeTableViewCell *)swipeCell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:swipeCell];
     if (indexPath.row % 2 == 0) {

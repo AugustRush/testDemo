@@ -8,35 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, ARSwipeTableViewCellSwipeType) {
-    ARSwipeTableViewCellSwipeTypeLeft,
-    ARSwipeTableViewCellSwipeTypeRight
-};
-
-/**
- *  delegate triger action
- */
 @class ARSwipeTableViewCell;
 
+/**
+ *  触发左右按钮时的回调代理
+ */
 @protocol ARSwipeTableViewCellDelegate <NSObject>
 
 @optional
--(void)swipeCell:(ARSwipeTableViewCell *)cell swipeCompletedWithType:(ARSwipeTableViewCellSwipeType)type;
+
+-(void)swipeCell:(ARSwipeTableViewCell *)cell didTriggerLeftItemWithIndex:(NSInteger)index;
+-(void)swipeCell:(ARSwipeTableViewCell *)cell didTriggerRightItemWithIndex:(NSInteger)index;
 
 @end
 
 /**
- *  swipeCell dataSouce methods to get left and right items, item should be UIImageView.
+ *  cell 的左右item数组，所有item应为UIView的子类
  */
 @protocol ARSwipeTableViewCellDataSource <NSObject>
 
 @optional
--(NSArray *)leftItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell;
--(NSArray *)rightItemsWithSwipeCell:(ARSwipeTableViewCell *)swipeCell;
+-(NSArray *)leftItemsForSwipeCell:(ARSwipeTableViewCell *)swipeCell;
+-(NSArray *)rightItemsForSwipeCell:(ARSwipeTableViewCell *)swipeCell;
 
 @end
 
+/**
+ *  swipe cell
+ */
+
 @interface ARSwipeTableViewCell : UITableViewCell
+
+@property (nonatomic, assign) CGFloat menuItemWidth;
+@property (nonatomic, assign) NSTimeInterval animationDuration;
 
 @property (nonatomic, assign) id<ARSwipeTableViewCellDelegate> delegate;
 @property (nonatomic, assign) id<ARSwipeTableViewCellDataSource> dataSource;

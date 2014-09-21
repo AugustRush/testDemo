@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F9CDC098-EAB2-47E4-8536-F00CA08EE3E8</string>
+	<string>2666D2E3-E287-4B2C-8693-8B3AD28C08A6</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ARSegmentControl</string>
+	<string>AutoLayoutProgrammingDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
 		<string>https://github.com/AugustRush/testDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ARSegmentControl/ARSegmentControl.xcodeproj/project.xcworkspace</string>
+	<string>AutoLayoutProgrammingDemo/AutoLayoutProgrammingDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>

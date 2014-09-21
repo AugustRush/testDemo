@@ -23,6 +23,8 @@
 		733DC5C019B5C5DE00F61D4B /* ARSegmentControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 733DC5BF19B5C5DE00F61D4B /* ARSegmentControlTests.m */; };
 		7344C1A919B6E3DF00C8D39B /* ARActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */; };
 		73F4D40019B71FCF0047E95A /* ARSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */; };
+		97847D6419CB1F8A0024425F /* testSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97847D6219CB1F8A0024425F /* testSwiftViewController.swift */; };
+		97847D6519CB1F8A0024425F /* testSwiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97847D6319CB1F8A0024425F /* testSwiftViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,9 @@
 		7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARActionSheet.m; sourceTree = "<group>"; };
 		73F4D3FE19B71FCF0047E95A /* ARSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentControl.h; sourceTree = "<group>"; };
 		73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentControl.m; sourceTree = "<group>"; };
+		97847D6119CB1F8A0024425F /* ARSegmentControl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARSegmentControl-Bridging-Header.h"; sourceTree = "<group>"; };
+		97847D6219CB1F8A0024425F /* testSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSwiftViewController.swift; sourceTree = "<group>"; };
+		97847D6319CB1F8A0024425F /* testSwiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testSwiftViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +132,11 @@
 				7344C1A819B6E3DF00C8D39B /* ARActionSheet.m */,
 				73F4D3FE19B71FCF0047E95A /* ARSegmentControl.h */,
 				73F4D3FF19B71FCF0047E95A /* ARSegmentControl.m */,
+				97847D6219CB1F8A0024425F /* testSwiftViewController.swift */,
+				97847D6319CB1F8A0024425F /* testSwiftViewController.xib */,
 				733DC5AC19B5C5DE00F61D4B /* Images.xcassets */,
 				733DC59B19B5C5DE00F61D4B /* Supporting Files */,
+				97847D6119CB1F8A0024425F /* ARSegmentControl-Bridging-Header.h */,
 			);
 			path = ARSegmentControl;
 			sourceTree = "<group>";
@@ -238,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97847D6519CB1F8A0024425F /* testSwiftViewController.xib in Resources */,
 				733DC5AD19B5C5DE00F61D4B /* Images.xcassets in Resources */,
 				733DC59F19B5C5DE00F61D4B /* InfoPlist.strings in Resources */,
 				733DC5A819B5C5DE00F61D4B /* Main.storyboard in Resources */,
@@ -259,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97847D6419CB1F8A0024425F /* testSwiftViewController.swift in Sources */,
 				73F4D40019B71FCF0047E95A /* ARSegmentControl.m in Sources */,
 				7344C1A919B6E3DF00C8D39B /* ARActionSheet.m in Sources */,
 				733DC5AB19B5C5DE00F61D4B /* ViewController.m in Sources */,
@@ -388,11 +398,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ARSegmentControl/ARSegmentControl-Prefix.pch";
 				INFOPLIST_FILE = "ARSegmentControl/ARSegmentControl-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARSegmentControl/ARSegmentControl-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -402,11 +417,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ARSegmentControl/ARSegmentControl-Prefix.pch";
 				INFOPLIST_FILE = "ARSegmentControl/ARSegmentControl-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ARSegmentControl/ARSegmentControl-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
