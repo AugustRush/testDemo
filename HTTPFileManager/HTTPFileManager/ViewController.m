@@ -20,8 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshImage:) name:@"testImage" object:nil];
-    // Do any additional setup after loading the view, typically from a nib.
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,5 +35,6 @@
 - (IBAction)downImage:(id)sender {
     
     HTTPFileDownLoader *downloader = [[HTTPFileDownLoader alloc] init];
+    [downloader loadImage];
 }
 @end

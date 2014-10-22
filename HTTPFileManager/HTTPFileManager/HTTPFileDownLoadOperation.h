@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface HTTPFileDownLoadOperation : NSObject
+@interface HTTPFileDownLoadOperation : NSOperation<NSURLConnectionDataDelegate>
+{
+@private
+    NSURLConnection *_URLConnection;
+    NSMutableData *_recieveData;
+    NSURLResponse *_URLResponse;
+}
 
-@property (nonatomic, strong, readonly) NSMutableData *recieveData;
+-(NSURLConnection *)creatNewDownloadTask;
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "HTTPFileDownLoadOperation.h"
 
 @interface HTTPFileDownLoader : NSObject<NSURLConnectionDataDelegate>
-{
-@private
-    NSMutableData *_recieveData;
-}
+//{
+//@private
+//    NSMutableData *_recieveData;
+//}
+
+-(void)loadImage;
 
 @end
