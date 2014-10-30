@@ -389,6 +389,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DynamicCellHeightWithAutoLayout/DynamicCellHeightWithAutoLayout-Prefix.pch";
 				INFOPLIST_FILE = "DynamicCellHeightWithAutoLayout/DynamicCellHeightWithAutoLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -402,6 +403,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DynamicCellHeightWithAutoLayout/DynamicCellHeightWithAutoLayout-Prefix.pch";
 				INFOPLIST_FILE = "DynamicCellHeightWithAutoLayout/DynamicCellHeightWithAutoLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -466,6 +468,7 @@
 				73E873ED19B9BDCE00D5179C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73E873EE19B9BDCE00D5179C /* Build configuration list for PBXNativeTarget "DynamicCellHeightWithAutoLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +477,7 @@
 				73E873F019B9BDCE00D5179C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
