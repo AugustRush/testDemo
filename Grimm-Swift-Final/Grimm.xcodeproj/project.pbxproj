@@ -1,0 +1,739 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		293EB64219833B5D008975BB /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293EB64119833B5D008975BB /* StoryCell.swift */; };
+		293EB6441983445C008975BB /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293EB6431983445C008975BB /* StoryView.swift */; };
+		29B64327198D873B00B96D95 /* OptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29B64326198D873B00B96D95 /* OptionsView.xib */; };
+		29CE8BD9198348D60087FAA5 /* OptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE8BD8198348D60087FAA5 /* OptionsController.swift */; };
+		29CE8BDB198348DF0087FAA5 /* StoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE8BDA198348DF0087FAA5 /* StoryListController.swift */; };
+		29CE8BDD198348E70087FAA5 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE8BDC198348E70087FAA5 /* StoryViewController.swift */; };
+		29CE8BDF198348F40087FAA5 /* ThemedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE8BDE198348F40087FAA5 /* ThemedNavigationController.swift */; };
+		29D254AE1983257000A294B8 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D254AD1983257000A294B8 /* Story.swift */; };
+		29D254B019832F0B00A294B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D254AF19832F0B00A294B8 /* Theme.swift */; };
+		29D75B7719857E9B00AB1CB8 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D75B7619857E9B00AB1CB8 /* UIImage+ImageEffects.m */; };
+		29FA642A1980A3B700F1BFB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA64291980A3B700F1BFB5 /* AppDelegate.swift */; };
+		29FA642F1980A3B700F1BFB5 /* Grimm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29FA642D1980A3B700F1BFB5 /* Grimm.storyboard */; };
+		29FA64311980A3B700F1BFB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64301980A3B700F1BFB5 /* Images.xcassets */; };
+		29FA646A1980A51600F1BFB5 /* FiraSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64571980A51600F1BFB5 /* FiraSans-Regular.otf */; };
+		29FA646B1980A51600F1BFB5 /* FiraSans-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64581980A51600F1BFB5 /* FiraSans-SemiBold.otf */; };
+		29FA646E1980A51600F1BFB5 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA645C1980A51600F1BFB5 /* NotoSans-Bold.ttf */; };
+		29FA646F1980A51600F1BFB5 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA645D1980A51600F1BFB5 /* NotoSans-Regular.ttf */; };
+		29FA64711980A51600F1BFB5 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64601980A51600F1BFB5 /* OpenSans-Regular.ttf */; };
+		29FA64721980A51600F1BFB5 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64611980A51600F1BFB5 /* OpenSans-Semibold.ttf */; };
+		29FA64741980A51600F1BFB5 /* PTS55F.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64641980A51600F1BFB5 /* PTS55F.ttf */; };
+		29FA64751980A51600F1BFB5 /* PTS75F.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64651980A51600F1BFB5 /* PTS75F.ttf */; };
+		29FA64771980A51600F1BFB5 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64681980A51600F1BFB5 /* SourceSansPro-Regular.otf */; };
+		29FA64781980A51600F1BFB5 /* SourceSansPro-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64691980A51600F1BFB5 /* SourceSansPro-Semibold.otf */; };
+		29FA64B71980A53000F1BFB5 /* Ashputtel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647A1980A53000F1BFB5 /* Ashputtel.grm */; };
+		29FA64B81980A53000F1BFB5 /* Briar Rose.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647B1980A53000F1BFB5 /* Briar Rose.grm */; };
+		29FA64B91980A53000F1BFB5 /* Cat and Mouse In Partnership.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647C1980A53000F1BFB5 /* Cat and Mouse In Partnership.grm */; };
+		29FA64BA1980A53000F1BFB5 /* Cat Skin.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647D1980A53000F1BFB5 /* Cat Skin.grm */; };
+		29FA64BB1980A53000F1BFB5 /* Clever Elsie.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647E1980A53000F1BFB5 /* Clever Elsie.grm */; };
+		29FA64BC1980A53000F1BFB5 /* Clever Gretel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA647F1980A53000F1BFB5 /* Clever Gretel.grm */; };
+		29FA64BD1980A53000F1BFB5 /* Clever Hans.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64801980A53000F1BFB5 /* Clever Hans.grm */; };
+		29FA64BE1980A53000F1BFB5 /* Doctor Knowall.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64811980A53000F1BFB5 /* Doctor Knowall.grm */; };
+		29FA64BF1980A53000F1BFB5 /* Frederick and Catherine.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64821980A53000F1BFB5 /* Frederick and Catherine.grm */; };
+		29FA64C01980A53000F1BFB5 /* Fundevogel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64831980A53000F1BFB5 /* Fundevogel.grm */; };
+		29FA64C11980A53000F1BFB5 /* Hans In Luck.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64841980A53000F1BFB5 /* Hans In Luck.grm */; };
+		29FA64C21980A53000F1BFB5 /* Hansel and Gretel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64851980A53000F1BFB5 /* Hansel and Gretel.grm */; };
+		29FA64C31980A53000F1BFB5 /* Iron Hans.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64861980A53000F1BFB5 /* Iron Hans.grm */; };
+		29FA64C41980A53000F1BFB5 /* Jorinda And Jorindel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64871980A53000F1BFB5 /* Jorinda And Jorindel.grm */; };
+		29FA64C51980A53000F1BFB5 /* King Grisly-Beard.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64881980A53000F1BFB5 /* King Grisly-Beard.grm */; };
+		29FA64C61980A53000F1BFB5 /* Lily and The Lion.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64891980A53000F1BFB5 /* Lily and The Lion.grm */; };
+		29FA64C71980A53000F1BFB5 /* Little Red Cap.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648A1980A53000F1BFB5 /* Little Red Cap.grm */; };
+		29FA64C81980A53000F1BFB5 /* Mother Holle.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648B1980A53000F1BFB5 /* Mother Holle.grm */; };
+		29FA64C91980A53000F1BFB5 /* Old Sultan.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648C1980A53000F1BFB5 /* Old Sultan.grm */; };
+		29FA64CA1980A53000F1BFB5 /* Rapunzel.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648D1980A53000F1BFB5 /* Rapunzel.grm */; };
+		29FA64CB1980A53000F1BFB5 /* Rumpelstiltskin.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648E1980A53000F1BFB5 /* Rumpelstiltskin.grm */; };
+		29FA64CC1980A53000F1BFB5 /* Snow White and Rose Red.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA648F1980A53000F1BFB5 /* Snow White and Rose Red.grm */; };
+		29FA64CD1980A53000F1BFB5 /* Snowdrop.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64901980A53000F1BFB5 /* Snowdrop.grm */; };
+		29FA64CE1980A53000F1BFB5 /* Sweetheart Roland.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64911980A53000F1BFB5 /* Sweetheart Roland.grm */; };
+		29FA64CF1980A53000F1BFB5 /* The Adventures of Chanticleer and Partlet.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64921980A53000F1BFB5 /* The Adventures of Chanticleer and Partlet.grm */; };
+		29FA64D01980A53000F1BFB5 /* The Blue Light.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64931980A53000F1BFB5 /* The Blue Light.grm */; };
+		29FA64D11980A53000F1BFB5 /* The Dog and The Sparrow.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64941980A53000F1BFB5 /* The Dog and The Sparrow.grm */; };
+		29FA64D21980A53000F1BFB5 /* The Elves and The Shoemaker.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64951980A53000F1BFB5 /* The Elves and The Shoemaker.grm */; };
+		29FA64D31980A53000F1BFB5 /* The Fisherman and His Wife.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64961980A53000F1BFB5 /* The Fisherman and His Wife.grm */; };
+		29FA64D41980A53000F1BFB5 /* The Four Clever Brothers.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64971980A53000F1BFB5 /* The Four Clever Brothers.grm */; };
+		29FA64D51980A53000F1BFB5 /* The Fox and The Cat.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64981980A53000F1BFB5 /* The Fox and The Cat.grm */; };
+		29FA64D61980A53000F1BFB5 /* The Fox and The Horse.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64991980A53000F1BFB5 /* The Fox and The Horse.grm */; };
+		29FA64D71980A53000F1BFB5 /* The Frog Prince.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649A1980A53000F1BFB5 /* The Frog Prince.grm */; };
+		29FA64D81980A53000F1BFB5 /* The Golden Bird.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649B1980A53000F1BFB5 /* The Golden Bird.grm */; };
+		29FA64D91980A53000F1BFB5 /* The Golden Goose.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649C1980A53000F1BFB5 /* The Golden Goose.grm */; };
+		29FA64DA1980A53000F1BFB5 /* The Goose Girl.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649D1980A53000F1BFB5 /* The Goose Girl.grm */; };
+		29FA64DB1980A53000F1BFB5 /* The Juniper Tree.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649E1980A53000F1BFB5 /* The Juniper Tree.grm */; };
+		29FA64DC1980A53000F1BFB5 /* The King of The Golden Mountain.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA649F1980A53000F1BFB5 /* The King of The Golden Mountain.grm */; };
+		29FA64DD1980A53000F1BFB5 /* The Little Peasant.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A01980A53000F1BFB5 /* The Little Peasant.grm */; };
+		29FA64DE1980A53000F1BFB5 /* The Miser In The Bush.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A11980A53000F1BFB5 /* The Miser In The Bush.grm */; };
+		29FA64DF1980A53000F1BFB5 /* The Mouse, The Bird, and The Sausage.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A21980A53000F1BFB5 /* The Mouse, The Bird, and The Sausage.grm */; };
+		29FA64E01980A53000F1BFB5 /* The Old Man and His Grandson.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A31980A53000F1BFB5 /* The Old Man and His Grandson.grm */; };
+		29FA64E11980A53000F1BFB5 /* The Pink.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A41980A53000F1BFB5 /* The Pink.grm */; };
+		29FA64E21980A53000F1BFB5 /* The Queen Bee.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A51980A53000F1BFB5 /* The Queen Bee.grm */; };
+		29FA64E31980A53000F1BFB5 /* The Raven.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A61980A53000F1BFB5 /* The Raven.grm */; };
+		29FA64E41980A53000F1BFB5 /* The Robber Bridegroom.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A71980A53000F1BFB5 /* The Robber Bridegroom.grm */; };
+		29FA64E51980A53000F1BFB5 /* The Salad.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A81980A53000F1BFB5 /* The Salad.grm */; };
+		29FA64E61980A53000F1BFB5 /* The Seven Ravens.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64A91980A53000F1BFB5 /* The Seven Ravens.grm */; };
+		29FA64E71980A53000F1BFB5 /* The Straw, The Coal, And The Bean.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AA1980A53000F1BFB5 /* The Straw, The Coal, And The Bean.grm */; };
+		29FA64E81980A53000F1BFB5 /* The Three Languages.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AB1980A53000F1BFB5 /* The Three Languages.grm */; };
+		29FA64E91980A53000F1BFB5 /* The Travelling Musicians.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AC1980A53000F1BFB5 /* The Travelling Musicians.grm */; };
+		29FA64EA1980A53000F1BFB5 /* The Turnip.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AD1980A53000F1BFB5 /* The Turnip.grm */; };
+		29FA64EB1980A53000F1BFB5 /* The Twelve Dancing Princesses.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AE1980A53000F1BFB5 /* The Twelve Dancing Princesses.grm */; };
+		29FA64EC1980A53000F1BFB5 /* The Twelve Huntsmen.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64AF1980A53000F1BFB5 /* The Twelve Huntsmen.grm */; };
+		29FA64ED1980A53000F1BFB5 /* The Valiant Little Tailor.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B01980A53000F1BFB5 /* The Valiant Little Tailor.grm */; };
+		29FA64EE1980A53000F1BFB5 /* The Water of Life.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B11980A53000F1BFB5 /* The Water of Life.grm */; };
+		29FA64EF1980A53000F1BFB5 /* The Wedding of Mrs Fox.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B21980A53000F1BFB5 /* The Wedding of Mrs Fox.grm */; };
+		29FA64F01980A53000F1BFB5 /* The White Snake.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B31980A53000F1BFB5 /* The White Snake.grm */; };
+		29FA64F11980A53000F1BFB5 /* The Willow Wren and The Bear.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B41980A53000F1BFB5 /* The Willow Wren and The Bear.grm */; };
+		29FA64F21980A53000F1BFB5 /* The Wolf and The Seven Little Kids.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B51980A53000F1BFB5 /* The Wolf and The Seven Little Kids.grm */; };
+		29FA64F31980A53000F1BFB5 /* Tom Thumb.grm in Resources */ = {isa = PBXBuildFile; fileRef = 29FA64B61980A53000F1BFB5 /* Tom Thumb.grm */; };
+		29FA64F51980A64000F1BFB5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FA64F41980A64000F1BFB5 /* Colors.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		293EB64119833B5D008975BB /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
+		293EB6431983445C008975BB /* StoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		29B64326198D873B00B96D95 /* OptionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionsView.xib; sourceTree = "<group>"; };
+		29CE8BD8198348D60087FAA5 /* OptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsController.swift; sourceTree = "<group>"; };
+		29CE8BDA198348DF0087FAA5 /* StoryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryListController.swift; sourceTree = "<group>"; };
+		29CE8BDC198348E70087FAA5 /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
+		29CE8BDE198348F40087FAA5 /* ThemedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemedNavigationController.swift; sourceTree = "<group>"; };
+		29D254AD1983257000A294B8 /* Story.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		29D254AF19832F0B00A294B8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		29D75B7519857E9B00AB1CB8 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		29D75B7619857E9B00AB1CB8 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		29D75B7B198580AF00AB1CB8 /* Grimm-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Grimm-Bridging-Header.h"; sourceTree = "<group>"; };
+		29FA64241980A3B700F1BFB5 /* Grimm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grimm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29FA64281980A3B700F1BFB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29FA64291980A3B700F1BFB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		29FA642E1980A3B700F1BFB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Grimm.storyboard; sourceTree = "<group>"; };
+		29FA64301980A3B700F1BFB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29FA64571980A51600F1BFB5 /* FiraSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Regular.otf"; sourceTree = "<group>"; };
+		29FA64581980A51600F1BFB5 /* FiraSans-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-SemiBold.otf"; sourceTree = "<group>"; };
+		29FA64591980A51600F1BFB5 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		29FA645B1980A51600F1BFB5 /* Apache License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache License.txt"; sourceTree = "<group>"; };
+		29FA645C1980A51600F1BFB5 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		29FA645D1980A51600F1BFB5 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		29FA645F1980A51600F1BFB5 /* Apache License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache License.txt"; sourceTree = "<group>"; };
+		29FA64601980A51600F1BFB5 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		29FA64611980A51600F1BFB5 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		29FA64631980A51600F1BFB5 /* Paratype PT Sans Free Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Paratype PT Sans Free Font License.txt"; sourceTree = "<group>"; };
+		29FA64641980A51600F1BFB5 /* PTS55F.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTS55F.ttf; sourceTree = "<group>"; };
+		29FA64651980A51600F1BFB5 /* PTS75F.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTS75F.ttf; sourceTree = "<group>"; };
+		29FA64671980A51600F1BFB5 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		29FA64681980A51600F1BFB5 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
+		29FA64691980A51600F1BFB5 /* SourceSansPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.otf"; sourceTree = "<group>"; };
+		29FA647A1980A53000F1BFB5 /* Ashputtel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ashputtel.grm; sourceTree = "<group>"; };
+		29FA647B1980A53000F1BFB5 /* Briar Rose.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Briar Rose.grm"; sourceTree = "<group>"; };
+		29FA647C1980A53000F1BFB5 /* Cat and Mouse In Partnership.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Cat and Mouse In Partnership.grm"; sourceTree = "<group>"; };
+		29FA647D1980A53000F1BFB5 /* Cat Skin.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Cat Skin.grm"; sourceTree = "<group>"; };
+		29FA647E1980A53000F1BFB5 /* Clever Elsie.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Clever Elsie.grm"; sourceTree = "<group>"; };
+		29FA647F1980A53000F1BFB5 /* Clever Gretel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Clever Gretel.grm"; sourceTree = "<group>"; };
+		29FA64801980A53000F1BFB5 /* Clever Hans.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Clever Hans.grm"; sourceTree = "<group>"; };
+		29FA64811980A53000F1BFB5 /* Doctor Knowall.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Doctor Knowall.grm"; sourceTree = "<group>"; };
+		29FA64821980A53000F1BFB5 /* Frederick and Catherine.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Frederick and Catherine.grm"; sourceTree = "<group>"; };
+		29FA64831980A53000F1BFB5 /* Fundevogel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fundevogel.grm; sourceTree = "<group>"; };
+		29FA64841980A53000F1BFB5 /* Hans In Luck.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Hans In Luck.grm"; sourceTree = "<group>"; };
+		29FA64851980A53000F1BFB5 /* Hansel and Gretel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Hansel and Gretel.grm"; sourceTree = "<group>"; };
+		29FA64861980A53000F1BFB5 /* Iron Hans.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Iron Hans.grm"; sourceTree = "<group>"; };
+		29FA64871980A53000F1BFB5 /* Jorinda And Jorindel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Jorinda And Jorindel.grm"; sourceTree = "<group>"; };
+		29FA64881980A53000F1BFB5 /* King Grisly-Beard.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "King Grisly-Beard.grm"; sourceTree = "<group>"; };
+		29FA64891980A53000F1BFB5 /* Lily and The Lion.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lily and The Lion.grm"; sourceTree = "<group>"; };
+		29FA648A1980A53000F1BFB5 /* Little Red Cap.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Little Red Cap.grm"; sourceTree = "<group>"; };
+		29FA648B1980A53000F1BFB5 /* Mother Holle.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Mother Holle.grm"; sourceTree = "<group>"; };
+		29FA648C1980A53000F1BFB5 /* Old Sultan.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Old Sultan.grm"; sourceTree = "<group>"; };
+		29FA648D1980A53000F1BFB5 /* Rapunzel.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rapunzel.grm; sourceTree = "<group>"; };
+		29FA648E1980A53000F1BFB5 /* Rumpelstiltskin.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Rumpelstiltskin.grm; sourceTree = "<group>"; };
+		29FA648F1980A53000F1BFB5 /* Snow White and Rose Red.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Snow White and Rose Red.grm"; sourceTree = "<group>"; };
+		29FA64901980A53000F1BFB5 /* Snowdrop.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Snowdrop.grm; sourceTree = "<group>"; };
+		29FA64911980A53000F1BFB5 /* Sweetheart Roland.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Sweetheart Roland.grm"; sourceTree = "<group>"; };
+		29FA64921980A53000F1BFB5 /* The Adventures of Chanticleer and Partlet.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Adventures of Chanticleer and Partlet.grm"; sourceTree = "<group>"; };
+		29FA64931980A53000F1BFB5 /* The Blue Light.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Blue Light.grm"; sourceTree = "<group>"; };
+		29FA64941980A53000F1BFB5 /* The Dog and The Sparrow.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Dog and The Sparrow.grm"; sourceTree = "<group>"; };
+		29FA64951980A53000F1BFB5 /* The Elves and The Shoemaker.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Elves and The Shoemaker.grm"; sourceTree = "<group>"; };
+		29FA64961980A53000F1BFB5 /* The Fisherman and His Wife.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Fisherman and His Wife.grm"; sourceTree = "<group>"; };
+		29FA64971980A53000F1BFB5 /* The Four Clever Brothers.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Four Clever Brothers.grm"; sourceTree = "<group>"; };
+		29FA64981980A53000F1BFB5 /* The Fox and The Cat.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Fox and The Cat.grm"; sourceTree = "<group>"; };
+		29FA64991980A53000F1BFB5 /* The Fox and The Horse.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Fox and The Horse.grm"; sourceTree = "<group>"; };
+		29FA649A1980A53000F1BFB5 /* The Frog Prince.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Frog Prince.grm"; sourceTree = "<group>"; };
+		29FA649B1980A53000F1BFB5 /* The Golden Bird.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Golden Bird.grm"; sourceTree = "<group>"; };
+		29FA649C1980A53000F1BFB5 /* The Golden Goose.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Golden Goose.grm"; sourceTree = "<group>"; };
+		29FA649D1980A53000F1BFB5 /* The Goose Girl.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Goose Girl.grm"; sourceTree = "<group>"; };
+		29FA649E1980A53000F1BFB5 /* The Juniper Tree.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Juniper Tree.grm"; sourceTree = "<group>"; };
+		29FA649F1980A53000F1BFB5 /* The King of The Golden Mountain.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The King of The Golden Mountain.grm"; sourceTree = "<group>"; };
+		29FA64A01980A53000F1BFB5 /* The Little Peasant.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Little Peasant.grm"; sourceTree = "<group>"; };
+		29FA64A11980A53000F1BFB5 /* The Miser In The Bush.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Miser In The Bush.grm"; sourceTree = "<group>"; };
+		29FA64A21980A53000F1BFB5 /* The Mouse, The Bird, and The Sausage.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Mouse, The Bird, and The Sausage.grm"; sourceTree = "<group>"; };
+		29FA64A31980A53000F1BFB5 /* The Old Man and His Grandson.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Old Man and His Grandson.grm"; sourceTree = "<group>"; };
+		29FA64A41980A53000F1BFB5 /* The Pink.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Pink.grm"; sourceTree = "<group>"; };
+		29FA64A51980A53000F1BFB5 /* The Queen Bee.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Queen Bee.grm"; sourceTree = "<group>"; };
+		29FA64A61980A53000F1BFB5 /* The Raven.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Raven.grm"; sourceTree = "<group>"; };
+		29FA64A71980A53000F1BFB5 /* The Robber Bridegroom.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Robber Bridegroom.grm"; sourceTree = "<group>"; };
+		29FA64A81980A53000F1BFB5 /* The Salad.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Salad.grm"; sourceTree = "<group>"; };
+		29FA64A91980A53000F1BFB5 /* The Seven Ravens.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Seven Ravens.grm"; sourceTree = "<group>"; };
+		29FA64AA1980A53000F1BFB5 /* The Straw, The Coal, And The Bean.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Straw, The Coal, And The Bean.grm"; sourceTree = "<group>"; };
+		29FA64AB1980A53000F1BFB5 /* The Three Languages.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Three Languages.grm"; sourceTree = "<group>"; };
+		29FA64AC1980A53000F1BFB5 /* The Travelling Musicians.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Travelling Musicians.grm"; sourceTree = "<group>"; };
+		29FA64AD1980A53000F1BFB5 /* The Turnip.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Turnip.grm"; sourceTree = "<group>"; };
+		29FA64AE1980A53000F1BFB5 /* The Twelve Dancing Princesses.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Twelve Dancing Princesses.grm"; sourceTree = "<group>"; };
+		29FA64AF1980A53000F1BFB5 /* The Twelve Huntsmen.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Twelve Huntsmen.grm"; sourceTree = "<group>"; };
+		29FA64B01980A53000F1BFB5 /* The Valiant Little Tailor.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Valiant Little Tailor.grm"; sourceTree = "<group>"; };
+		29FA64B11980A53000F1BFB5 /* The Water of Life.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Water of Life.grm"; sourceTree = "<group>"; };
+		29FA64B21980A53000F1BFB5 /* The Wedding of Mrs Fox.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Wedding of Mrs Fox.grm"; sourceTree = "<group>"; };
+		29FA64B31980A53000F1BFB5 /* The White Snake.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The White Snake.grm"; sourceTree = "<group>"; };
+		29FA64B41980A53000F1BFB5 /* The Willow Wren and The Bear.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Willow Wren and The Bear.grm"; sourceTree = "<group>"; };
+		29FA64B51980A53000F1BFB5 /* The Wolf and The Seven Little Kids.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Wolf and The Seven Little Kids.grm"; sourceTree = "<group>"; };
+		29FA64B61980A53000F1BFB5 /* Tom Thumb.grm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tom Thumb.grm"; sourceTree = "<group>"; };
+		29FA64F41980A64000F1BFB5 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		29FA64211980A3B700F1BFB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29FA641B1980A3B700F1BFB5 = {
+			isa = PBXGroup;
+			children = (
+				29FA64261980A3B700F1BFB5 /* Grimm */,
+				29FA64251980A3B700F1BFB5 /* Products */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+		};
+		29FA64251980A3B700F1BFB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64241980A3B700F1BFB5 /* Grimm.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29FA64261980A3B700F1BFB5 /* Grimm */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64461980A43500F1BFB5 /* Categories */,
+				29FA64471980A43C00F1BFB5 /* Controllers */,
+				29FA64481980A44200F1BFB5 /* Models */,
+				29FA64491980A44A00F1BFB5 /* Other */,
+				29FA644A1980A45000F1BFB5 /* Resources */,
+				29FA64521980A48C00F1BFB5 /* Storyboards */,
+				29FA64271980A3B700F1BFB5 /* Supporting Files */,
+				29FA64541980A49900F1BFB5 /* Views */,
+			);
+			path = Grimm;
+			sourceTree = "<group>";
+		};
+		29FA64271980A3B700F1BFB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64281980A3B700F1BFB5 /* Info.plist */,
+				29D75B7B198580AF00AB1CB8 /* Grimm-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29FA64461980A43500F1BFB5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				29D75B7519857E9B00AB1CB8 /* UIImage+ImageEffects.h */,
+				29D75B7619857E9B00AB1CB8 /* UIImage+ImageEffects.m */,
+				29FA64F41980A64000F1BFB5 /* Colors.swift */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		29FA64471980A43C00F1BFB5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29CE8BD8198348D60087FAA5 /* OptionsController.swift */,
+				29CE8BDA198348DF0087FAA5 /* StoryListController.swift */,
+				29CE8BDC198348E70087FAA5 /* StoryViewController.swift */,
+				29CE8BDE198348F40087FAA5 /* ThemedNavigationController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		29FA64481980A44200F1BFB5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				29D254AD1983257000A294B8 /* Story.swift */,
+				29D254AF19832F0B00A294B8 /* Theme.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		29FA64491980A44A00F1BFB5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64291980A3B700F1BFB5 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		29FA644A1980A45000F1BFB5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64551980A51600F1BFB5 /* Fonts */,
+				29FA64301980A3B700F1BFB5 /* Images.xcassets */,
+				29FA64791980A53000F1BFB5 /* Stories */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29FA64521980A48C00F1BFB5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				29FA642D1980A3B700F1BFB5 /* Grimm.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		29FA64541980A49900F1BFB5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29B64326198D873B00B96D95 /* OptionsView.xib */,
+				293EB64119833B5D008975BB /* StoryCell.swift */,
+				293EB6431983445C008975BB /* StoryView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		29FA64551980A51600F1BFB5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64561980A51600F1BFB5 /* Fira Sans */,
+				29FA645A1980A51600F1BFB5 /* Noto Sans */,
+				29FA645E1980A51600F1BFB5 /* Open Sans */,
+				29FA64621980A51600F1BFB5 /* PT Sans */,
+				29FA64661980A51600F1BFB5 /* Source Sans Pro */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		29FA64561980A51600F1BFB5 /* Fira Sans */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64571980A51600F1BFB5 /* FiraSans-Regular.otf */,
+				29FA64581980A51600F1BFB5 /* FiraSans-SemiBold.otf */,
+				29FA64591980A51600F1BFB5 /* SIL Open Font License.txt */,
+			);
+			path = "Fira Sans";
+			sourceTree = "<group>";
+		};
+		29FA645A1980A51600F1BFB5 /* Noto Sans */ = {
+			isa = PBXGroup;
+			children = (
+				29FA645B1980A51600F1BFB5 /* Apache License.txt */,
+				29FA645C1980A51600F1BFB5 /* NotoSans-Bold.ttf */,
+				29FA645D1980A51600F1BFB5 /* NotoSans-Regular.ttf */,
+			);
+			path = "Noto Sans";
+			sourceTree = "<group>";
+		};
+		29FA645E1980A51600F1BFB5 /* Open Sans */ = {
+			isa = PBXGroup;
+			children = (
+				29FA645F1980A51600F1BFB5 /* Apache License.txt */,
+				29FA64601980A51600F1BFB5 /* OpenSans-Regular.ttf */,
+				29FA64611980A51600F1BFB5 /* OpenSans-Semibold.ttf */,
+			);
+			path = "Open Sans";
+			sourceTree = "<group>";
+		};
+		29FA64621980A51600F1BFB5 /* PT Sans */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64631980A51600F1BFB5 /* Paratype PT Sans Free Font License.txt */,
+				29FA64641980A51600F1BFB5 /* PTS55F.ttf */,
+				29FA64651980A51600F1BFB5 /* PTS75F.ttf */,
+			);
+			path = "PT Sans";
+			sourceTree = "<group>";
+		};
+		29FA64661980A51600F1BFB5 /* Source Sans Pro */ = {
+			isa = PBXGroup;
+			children = (
+				29FA64671980A51600F1BFB5 /* SIL Open Font License.txt */,
+				29FA64681980A51600F1BFB5 /* SourceSansPro-Regular.otf */,
+				29FA64691980A51600F1BFB5 /* SourceSansPro-Semibold.otf */,
+			);
+			path = "Source Sans Pro";
+			sourceTree = "<group>";
+		};
+		29FA64791980A53000F1BFB5 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				29FA647A1980A53000F1BFB5 /* Ashputtel.grm */,
+				29FA647B1980A53000F1BFB5 /* Briar Rose.grm */,
+				29FA647C1980A53000F1BFB5 /* Cat and Mouse In Partnership.grm */,
+				29FA647D1980A53000F1BFB5 /* Cat Skin.grm */,
+				29FA647E1980A53000F1BFB5 /* Clever Elsie.grm */,
+				29FA647F1980A53000F1BFB5 /* Clever Gretel.grm */,
+				29FA64801980A53000F1BFB5 /* Clever Hans.grm */,
+				29FA64811980A53000F1BFB5 /* Doctor Knowall.grm */,
+				29FA64821980A53000F1BFB5 /* Frederick and Catherine.grm */,
+				29FA64831980A53000F1BFB5 /* Fundevogel.grm */,
+				29FA64841980A53000F1BFB5 /* Hans In Luck.grm */,
+				29FA64851980A53000F1BFB5 /* Hansel and Gretel.grm */,
+				29FA64861980A53000F1BFB5 /* Iron Hans.grm */,
+				29FA64871980A53000F1BFB5 /* Jorinda And Jorindel.grm */,
+				29FA64881980A53000F1BFB5 /* King Grisly-Beard.grm */,
+				29FA64891980A53000F1BFB5 /* Lily and The Lion.grm */,
+				29FA648A1980A53000F1BFB5 /* Little Red Cap.grm */,
+				29FA648B1980A53000F1BFB5 /* Mother Holle.grm */,
+				29FA648C1980A53000F1BFB5 /* Old Sultan.grm */,
+				29FA648D1980A53000F1BFB5 /* Rapunzel.grm */,
+				29FA648E1980A53000F1BFB5 /* Rumpelstiltskin.grm */,
+				29FA648F1980A53000F1BFB5 /* Snow White and Rose Red.grm */,
+				29FA64901980A53000F1BFB5 /* Snowdrop.grm */,
+				29FA64911980A53000F1BFB5 /* Sweetheart Roland.grm */,
+				29FA64921980A53000F1BFB5 /* The Adventures of Chanticleer and Partlet.grm */,
+				29FA64931980A53000F1BFB5 /* The Blue Light.grm */,
+				29FA64941980A53000F1BFB5 /* The Dog and The Sparrow.grm */,
+				29FA64951980A53000F1BFB5 /* The Elves and The Shoemaker.grm */,
+				29FA64961980A53000F1BFB5 /* The Fisherman and His Wife.grm */,
+				29FA64971980A53000F1BFB5 /* The Four Clever Brothers.grm */,
+				29FA64981980A53000F1BFB5 /* The Fox and The Cat.grm */,
+				29FA64991980A53000F1BFB5 /* The Fox and The Horse.grm */,
+				29FA649A1980A53000F1BFB5 /* The Frog Prince.grm */,
+				29FA649B1980A53000F1BFB5 /* The Golden Bird.grm */,
+				29FA649C1980A53000F1BFB5 /* The Golden Goose.grm */,
+				29FA649D1980A53000F1BFB5 /* The Goose Girl.grm */,
+				29FA649E1980A53000F1BFB5 /* The Juniper Tree.grm */,
+				29FA649F1980A53000F1BFB5 /* The King of The Golden Mountain.grm */,
+				29FA64A01980A53000F1BFB5 /* The Little Peasant.grm */,
+				29FA64A11980A53000F1BFB5 /* The Miser In The Bush.grm */,
+				29FA64A21980A53000F1BFB5 /* The Mouse, The Bird, and The Sausage.grm */,
+				29FA64A31980A53000F1BFB5 /* The Old Man and His Grandson.grm */,
+				29FA64A41980A53000F1BFB5 /* The Pink.grm */,
+				29FA64A51980A53000F1BFB5 /* The Queen Bee.grm */,
+				29FA64A61980A53000F1BFB5 /* The Raven.grm */,
+				29FA64A71980A53000F1BFB5 /* The Robber Bridegroom.grm */,
+				29FA64A81980A53000F1BFB5 /* The Salad.grm */,
+				29FA64A91980A53000F1BFB5 /* The Seven Ravens.grm */,
+				29FA64AA1980A53000F1BFB5 /* The Straw, The Coal, And The Bean.grm */,
+				29FA64AB1980A53000F1BFB5 /* The Three Languages.grm */,
+				29FA64AC1980A53000F1BFB5 /* The Travelling Musicians.grm */,
+				29FA64AD1980A53000F1BFB5 /* The Turnip.grm */,
+				29FA64AE1980A53000F1BFB5 /* The Twelve Dancing Princesses.grm */,
+				29FA64AF1980A53000F1BFB5 /* The Twelve Huntsmen.grm */,
+				29FA64B01980A53000F1BFB5 /* The Valiant Little Tailor.grm */,
+				29FA64B11980A53000F1BFB5 /* The Water of Life.grm */,
+				29FA64B21980A53000F1BFB5 /* The Wedding of Mrs Fox.grm */,
+				29FA64B31980A53000F1BFB5 /* The White Snake.grm */,
+				29FA64B41980A53000F1BFB5 /* The Willow Wren and The Bear.grm */,
+				29FA64B51980A53000F1BFB5 /* The Wolf and The Seven Little Kids.grm */,
+				29FA64B61980A53000F1BFB5 /* Tom Thumb.grm */,
+			);
+			path = Stories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29FA64231980A3B700F1BFB5 /* Grimm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29FA64401980A3B700F1BFB5 /* Build configuration list for PBXNativeTarget "Grimm" */;
+			buildPhases = (
+				29FA64201980A3B700F1BFB5 /* Sources */,
+				29FA64211980A3B700F1BFB5 /* Frameworks */,
+				29FA64221980A3B700F1BFB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Grimm;
+			productName = Grimm;
+			productReference = 29FA64241980A3B700F1BFB5 /* Grimm.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29FA641C1980A3B700F1BFB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Ryan Nystrom";
+				TargetAttributes = {
+					29FA64231980A3B700F1BFB5 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+				};
+			};
+			buildConfigurationList = 29FA641F1980A3B700F1BFB5 /* Build configuration list for PBXProject "Grimm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 29FA641B1980A3B700F1BFB5;
+			productRefGroup = 29FA64251980A3B700F1BFB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29FA64231980A3B700F1BFB5 /* Grimm */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29FA64221980A3B700F1BFB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29FA64711980A51600F1BFB5 /* OpenSans-Regular.ttf in Resources */,
+				29FA64B71980A53000F1BFB5 /* Ashputtel.grm in Resources */,
+				29FA64F11980A53000F1BFB5 /* The Willow Wren and The Bear.grm in Resources */,
+				29FA64751980A51600F1BFB5 /* PTS75F.ttf in Resources */,
+				29FA64C21980A53000F1BFB5 /* Hansel and Gretel.grm in Resources */,
+				29FA64DE1980A53000F1BFB5 /* The Miser In The Bush.grm in Resources */,
+				29FA64D01980A53000F1BFB5 /* The Blue Light.grm in Resources */,
+				29FA64D51980A53000F1BFB5 /* The Fox and The Cat.grm in Resources */,
+				29FA64721980A51600F1BFB5 /* OpenSans-Semibold.ttf in Resources */,
+				29FA642F1980A3B700F1BFB5 /* Grimm.storyboard in Resources */,
+				29FA64C81980A53000F1BFB5 /* Mother Holle.grm in Resources */,
+				29FA64ED1980A53000F1BFB5 /* The Valiant Little Tailor.grm in Resources */,
+				29FA64BE1980A53000F1BFB5 /* Doctor Knowall.grm in Resources */,
+				29FA64BB1980A53000F1BFB5 /* Clever Elsie.grm in Resources */,
+				29FA64C41980A53000F1BFB5 /* Jorinda And Jorindel.grm in Resources */,
+				29FA64CD1980A53000F1BFB5 /* Snowdrop.grm in Resources */,
+				29FA64DC1980A53000F1BFB5 /* The King of The Golden Mountain.grm in Resources */,
+				29FA64CE1980A53000F1BFB5 /* Sweetheart Roland.grm in Resources */,
+				29FA64C91980A53000F1BFB5 /* Old Sultan.grm in Resources */,
+				29FA64771980A51600F1BFB5 /* SourceSansPro-Regular.otf in Resources */,
+				29FA64C31980A53000F1BFB5 /* Iron Hans.grm in Resources */,
+				29FA64EF1980A53000F1BFB5 /* The Wedding of Mrs Fox.grm in Resources */,
+				29FA64B81980A53000F1BFB5 /* Briar Rose.grm in Resources */,
+				29FA64781980A51600F1BFB5 /* SourceSansPro-Semibold.otf in Resources */,
+				29FA64E21980A53000F1BFB5 /* The Queen Bee.grm in Resources */,
+				29FA64E41980A53000F1BFB5 /* The Robber Bridegroom.grm in Resources */,
+				29FA64BF1980A53000F1BFB5 /* Frederick and Catherine.grm in Resources */,
+				29FA64EC1980A53000F1BFB5 /* The Twelve Huntsmen.grm in Resources */,
+				29FA646E1980A51600F1BFB5 /* NotoSans-Bold.ttf in Resources */,
+				29FA64E61980A53000F1BFB5 /* The Seven Ravens.grm in Resources */,
+				29FA64E11980A53000F1BFB5 /* The Pink.grm in Resources */,
+				29FA64C11980A53000F1BFB5 /* Hans In Luck.grm in Resources */,
+				29FA64C61980A53000F1BFB5 /* Lily and The Lion.grm in Resources */,
+				29FA64F31980A53000F1BFB5 /* Tom Thumb.grm in Resources */,
+				29FA64F01980A53000F1BFB5 /* The White Snake.grm in Resources */,
+				29FA64C71980A53000F1BFB5 /* Little Red Cap.grm in Resources */,
+				29FA64E81980A53000F1BFB5 /* The Three Languages.grm in Resources */,
+				29FA646F1980A51600F1BFB5 /* NotoSans-Regular.ttf in Resources */,
+				29FA646A1980A51600F1BFB5 /* FiraSans-Regular.otf in Resources */,
+				29FA64EA1980A53000F1BFB5 /* The Turnip.grm in Resources */,
+				29FA64311980A3B700F1BFB5 /* Images.xcassets in Resources */,
+				29FA64C51980A53000F1BFB5 /* King Grisly-Beard.grm in Resources */,
+				29FA64DB1980A53000F1BFB5 /* The Juniper Tree.grm in Resources */,
+				29FA64DA1980A53000F1BFB5 /* The Goose Girl.grm in Resources */,
+				29FA64EB1980A53000F1BFB5 /* The Twelve Dancing Princesses.grm in Resources */,
+				29FA64F21980A53000F1BFB5 /* The Wolf and The Seven Little Kids.grm in Resources */,
+				29FA64E51980A53000F1BFB5 /* The Salad.grm in Resources */,
+				29FA64BC1980A53000F1BFB5 /* Clever Gretel.grm in Resources */,
+				29FA64CC1980A53000F1BFB5 /* Snow White and Rose Red.grm in Resources */,
+				29FA64D61980A53000F1BFB5 /* The Fox and The Horse.grm in Resources */,
+				29FA64D91980A53000F1BFB5 /* The Golden Goose.grm in Resources */,
+				29FA64D71980A53000F1BFB5 /* The Frog Prince.grm in Resources */,
+				29FA64DF1980A53000F1BFB5 /* The Mouse, The Bird, and The Sausage.grm in Resources */,
+				29FA64BA1980A53000F1BFB5 /* Cat Skin.grm in Resources */,
+				29FA64D21980A53000F1BFB5 /* The Elves and The Shoemaker.grm in Resources */,
+				29FA64C01980A53000F1BFB5 /* Fundevogel.grm in Resources */,
+				29FA64741980A51600F1BFB5 /* PTS55F.ttf in Resources */,
+				29B64327198D873B00B96D95 /* OptionsView.xib in Resources */,
+				29FA64CA1980A53000F1BFB5 /* Rapunzel.grm in Resources */,
+				29FA64E91980A53000F1BFB5 /* The Travelling Musicians.grm in Resources */,
+				29FA64EE1980A53000F1BFB5 /* The Water of Life.grm in Resources */,
+				29FA64DD1980A53000F1BFB5 /* The Little Peasant.grm in Resources */,
+				29FA64E71980A53000F1BFB5 /* The Straw, The Coal, And The Bean.grm in Resources */,
+				29FA64CB1980A53000F1BFB5 /* Rumpelstiltskin.grm in Resources */,
+				29FA64D81980A53000F1BFB5 /* The Golden Bird.grm in Resources */,
+				29FA646B1980A51600F1BFB5 /* FiraSans-SemiBold.otf in Resources */,
+				29FA64B91980A53000F1BFB5 /* Cat and Mouse In Partnership.grm in Resources */,
+				29FA64D11980A53000F1BFB5 /* The Dog and The Sparrow.grm in Resources */,
+				29FA64E01980A53000F1BFB5 /* The Old Man and His Grandson.grm in Resources */,
+				29FA64D31980A53000F1BFB5 /* The Fisherman and His Wife.grm in Resources */,
+				29FA64BD1980A53000F1BFB5 /* Clever Hans.grm in Resources */,
+				29FA64E31980A53000F1BFB5 /* The Raven.grm in Resources */,
+				29FA64D41980A53000F1BFB5 /* The Four Clever Brothers.grm in Resources */,
+				29FA64CF1980A53000F1BFB5 /* The Adventures of Chanticleer and Partlet.grm in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29FA64201980A3B700F1BFB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29CE8BDF198348F40087FAA5 /* ThemedNavigationController.swift in Sources */,
+				29FA64F51980A64000F1BFB5 /* Colors.swift in Sources */,
+				29D254B019832F0B00A294B8 /* Theme.swift in Sources */,
+				293EB6441983445C008975BB /* StoryView.swift in Sources */,
+				29D75B7719857E9B00AB1CB8 /* UIImage+ImageEffects.m in Sources */,
+				29CE8BDD198348E70087FAA5 /* StoryViewController.swift in Sources */,
+				29FA642A1980A3B700F1BFB5 /* AppDelegate.swift in Sources */,
+				29CE8BD9198348D60087FAA5 /* OptionsController.swift in Sources */,
+				29CE8BDB198348DF0087FAA5 /* StoryListController.swift in Sources */,
+				29D254AE1983257000A294B8 /* Story.swift in Sources */,
+				293EB64219833B5D008975BB /* StoryCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		29FA642D1980A3B700F1BFB5 /* Grimm.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29FA642E1980A3B700F1BFB5 /* Base */,
+			);
+			name = Grimm.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		29FA643E1980A3B700F1BFB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29FA643F1980A3B700F1BFB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		29FA64411980A3B700F1BFB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Grimm/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Grimm-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		29FA64421980A3B700F1BFB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Grimm/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Grimm-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29FA641F1980A3B700F1BFB5 /* Build configuration list for PBXProject "Grimm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29FA643E1980A3B700F1BFB5 /* Debug */,
+				29FA643F1980A3B700F1BFB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29FA64401980A3B700F1BFB5 /* Build configuration list for PBXNativeTarget "Grimm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29FA64411980A3B700F1BFB5 /* Debug */,
+				29FA64421980A3B700F1BFB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29FA641C1980A3B700F1BFB5 /* Project object */;
+}
