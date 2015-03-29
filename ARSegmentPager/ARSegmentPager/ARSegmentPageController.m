@@ -189,8 +189,6 @@ const void* _ARSEGMENTPAGE_CURRNTPAGE_SCROLLVIEWOFFSET = &_ARSEGMENTPAGE_CURRNTP
         }else{
             self.headerHeightConstraint.constant = 0;
         }
-        
-//        self.headerHeightConstraint.constant = self.headerHeight - offsetY;
     }
 }
 
@@ -228,8 +226,13 @@ const void* _ARSEGMENTPAGE_CURRNTPAGE_SCROLLVIEWOFFSET = &_ARSEGMENTPAGE_CURRNTP
     
     //trigger to fixed header constraint
     UIScrollView *scrollView = [self scrollViewInPageController:controller];
-    [scrollView setContentOffset:scrollView.contentOffset];
-    
+    if (self.headerHeightConstraint.constant < 1 &&
+        scrollView.contentOffset.y >= 1) {//zero
+        [scrollView setContentOffset:scrollView.contentOffset];
+    }else{
+        [scrollView setContentOffset:CGPointMake(0, -self.headerHeightConstraint.constant-self.segmentHeight)];
+    }
+
 }
 
 #pragma mark - manage memory methods
