@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		971CD7891AC7E2BE00963626 /* listdownload.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 971CD7881AC7E2BE00963626 /* listdownload.jpg */; };
+		973EC05A1AC93F59000544BA /* ARSegmentPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 973EC0551AC93F59000544BA /* ARSegmentPageController.m */; };
+		973EC05B1AC93F59000544BA /* ARSegmentPageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 973EC0571AC93F59000544BA /* ARSegmentPageHeader.m */; };
+		973EC05C1AC93F59000544BA /* ARSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 973EC0591AC93F59000544BA /* ARSegmentView.m */; };
 		97C9BCA71AC6B9DA00C23EE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCA61AC6B9DA00C23EE5 /* main.m */; };
 		97C9BCAA1AC6B9DA00C23EE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCA91AC6B9DA00C23EE5 /* AppDelegate.m */; };
 		97C9BCAD1AC6B9DA00C23EE5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCAC1AC6B9DA00C23EE5 /* ViewController.m */; };
@@ -15,9 +18,6 @@
 		97C9BCB21AC6B9DA00C23EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C9BCB11AC6B9DA00C23EE5 /* Images.xcassets */; };
 		97C9BCB51AC6B9DA00C23EE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C9BCB31AC6B9DA00C23EE5 /* LaunchScreen.xib */; };
 		97C9BCC11AC6B9DA00C23EE5 /* ARSegmentPagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCC01AC6B9DA00C23EE5 /* ARSegmentPagerTests.m */; };
-		97C9BCCC1AC6BA3200C23EE5 /* ARSegmentPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCCB1AC6BA3200C23EE5 /* ARSegmentPageController.m */; };
-		97C9BCCF1AC6CDC000C23EE5 /* ARSegmentPageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCCE1AC6CDC000C23EE5 /* ARSegmentPageHeader.m */; };
-		97C9BCD21AC6DB9F00C23EE5 /* ARSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCD11AC6DB9F00C23EE5 /* ARSegmentView.m */; };
 		97C9BCDB1AC6E44E00C23EE5 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCD91AC6E44E00C23EE5 /* TableViewController.m */; };
 		97C9BCDC1AC6E44E00C23EE5 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C9BCDA1AC6E44E00C23EE5 /* TableViewController.xib */; };
 		97C9BCE01AC6E47200C23EE5 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C9BCDE1AC6E47200C23EE5 /* CollectionViewController.m */; };
@@ -35,8 +35,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		971CD7871AC7E19800963626 /* ARSegmentControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentControllerDelegate.h; sourceTree = "<group>"; };
 		971CD7881AC7E2BE00963626 /* listdownload.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = listdownload.jpg; sourceTree = "<group>"; };
+		973EC0531AC93F59000544BA /* ARSegmentControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentControllerDelegate.h; sourceTree = "<group>"; };
+		973EC0541AC93F59000544BA /* ARSegmentPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageController.h; sourceTree = "<group>"; };
+		973EC0551AC93F59000544BA /* ARSegmentPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageController.m; sourceTree = "<group>"; };
+		973EC0561AC93F59000544BA /* ARSegmentPageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageHeader.h; sourceTree = "<group>"; };
+		973EC0571AC93F59000544BA /* ARSegmentPageHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageHeader.m; sourceTree = "<group>"; };
+		973EC0581AC93F59000544BA /* ARSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentView.h; sourceTree = "<group>"; };
+		973EC0591AC93F59000544BA /* ARSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentView.m; sourceTree = "<group>"; };
 		97C9BCA11AC6B9DA00C23EE5 /* ARSegmentPager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARSegmentPager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C9BCA51AC6B9DA00C23EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97C9BCA61AC6B9DA00C23EE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -50,12 +56,6 @@
 		97C9BCBA1AC6B9DA00C23EE5 /* ARSegmentPagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARSegmentPagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C9BCBF1AC6B9DA00C23EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97C9BCC01AC6B9DA00C23EE5 /* ARSegmentPagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPagerTests.m; sourceTree = "<group>"; };
-		97C9BCCA1AC6BA3200C23EE5 /* ARSegmentPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageController.h; sourceTree = "<group>"; };
-		97C9BCCB1AC6BA3200C23EE5 /* ARSegmentPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageController.m; sourceTree = "<group>"; };
-		97C9BCCD1AC6CDC000C23EE5 /* ARSegmentPageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageHeader.h; sourceTree = "<group>"; };
-		97C9BCCE1AC6CDC000C23EE5 /* ARSegmentPageHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageHeader.m; sourceTree = "<group>"; };
-		97C9BCD01AC6DB9F00C23EE5 /* ARSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentView.h; sourceTree = "<group>"; };
-		97C9BCD11AC6DB9F00C23EE5 /* ARSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentView.m; sourceTree = "<group>"; };
 		97C9BCD81AC6E44E00C23EE5 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		97C9BCD91AC6E44E00C23EE5 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		97C9BCDA1AC6E44E00C23EE5 /* TableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
@@ -82,6 +82,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		973EC0521AC93F59000544BA /* ARSegmentPageController */ = {
+			isa = PBXGroup;
+			children = (
+				973EC0531AC93F59000544BA /* ARSegmentControllerDelegate.h */,
+				973EC0541AC93F59000544BA /* ARSegmentPageController.h */,
+				973EC0551AC93F59000544BA /* ARSegmentPageController.m */,
+				973EC0561AC93F59000544BA /* ARSegmentPageHeader.h */,
+				973EC0571AC93F59000544BA /* ARSegmentPageHeader.m */,
+				973EC0581AC93F59000544BA /* ARSegmentView.h */,
+				973EC0591AC93F59000544BA /* ARSegmentView.m */,
+			);
+			path = ARSegmentPageController;
+			sourceTree = "<group>";
+		};
 		97C9BC981AC6B9DA00C23EE5 = {
 			isa = PBXGroup;
 			children = (
@@ -103,18 +117,12 @@
 		97C9BCA31AC6B9DA00C23EE5 /* ARSegmentPager */ = {
 			isa = PBXGroup;
 			children = (
+				973EC0521AC93F59000544BA /* ARSegmentPageController */,
 				97C9BCA81AC6B9DA00C23EE5 /* AppDelegate.h */,
 				97C9BCA91AC6B9DA00C23EE5 /* AppDelegate.m */,
 				97C9BCAB1AC6B9DA00C23EE5 /* ViewController.h */,
 				97C9BCAC1AC6B9DA00C23EE5 /* ViewController.m */,
 				97C9BCAE1AC6B9DA00C23EE5 /* Main.storyboard */,
-				97C9BCCA1AC6BA3200C23EE5 /* ARSegmentPageController.h */,
-				97C9BCCB1AC6BA3200C23EE5 /* ARSegmentPageController.m */,
-				971CD7871AC7E19800963626 /* ARSegmentControllerDelegate.h */,
-				97C9BCD01AC6DB9F00C23EE5 /* ARSegmentView.h */,
-				97C9BCD11AC6DB9F00C23EE5 /* ARSegmentView.m */,
-				97C9BCCD1AC6CDC000C23EE5 /* ARSegmentPageHeader.h */,
-				97C9BCCE1AC6CDC000C23EE5 /* ARSegmentPageHeader.m */,
 				97C9BCD81AC6E44E00C23EE5 /* TableViewController.h */,
 				97C9BCD91AC6E44E00C23EE5 /* TableViewController.m */,
 				97C9BCDA1AC6E44E00C23EE5 /* TableViewController.xib */,
@@ -259,13 +267,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C9BCE01AC6E47200C23EE5 /* CollectionViewController.m in Sources */,
+				973EC05B1AC93F59000544BA /* ARSegmentPageHeader.m in Sources */,
 				97C9BCAD1AC6B9DA00C23EE5 /* ViewController.m in Sources */,
-				97C9BCD21AC6DB9F00C23EE5 /* ARSegmentView.m in Sources */,
+				973EC05C1AC93F59000544BA /* ARSegmentView.m in Sources */,
 				97C9BCAA1AC6B9DA00C23EE5 /* AppDelegate.m in Sources */,
 				97C9BCA71AC6B9DA00C23EE5 /* main.m in Sources */,
-				97C9BCCC1AC6BA3200C23EE5 /* ARSegmentPageController.m in Sources */,
 				97C9BCDB1AC6E44E00C23EE5 /* TableViewController.m in Sources */,
-				97C9BCCF1AC6CDC000C23EE5 /* ARSegmentPageHeader.m in Sources */,
+				973EC05A1AC93F59000544BA /* ARSegmentPageController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

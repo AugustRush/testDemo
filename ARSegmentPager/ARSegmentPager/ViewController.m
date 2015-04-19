@@ -11,7 +11,7 @@
 #import "TableViewController.h"
 #import "CollectionViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<ARSegmentControllerDelegate>
 - (IBAction)presentPageController:(id)sender;
 
 @end
@@ -30,12 +30,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString *)segmentTitle
+{
+    return @"common";
+}
+
 - (IBAction)presentPageController:(id)sender {
     
     TableViewController *table = [[TableViewController alloc] initWithNibName:@"TableViewController" bundle:nil];
     CollectionViewController *collectionView = [[CollectionViewController alloc] initWithNibName:@"CollectionViewController" bundle:nil];
     
-    ARSegmentPageController *pageer = [[ARSegmentPageController alloc] initWithControllers:collectionView,table,nil];
+    ViewController *common = [[ViewController alloc] init];
+    common.view.backgroundColor = [UIColor redColor];
+    
+    ARSegmentPageController *pageer = [[ARSegmentPageController alloc] initWithControllers:collectionView,table,common,nil];
     
     [self.navigationController pushViewController:pageer animated:YES];
 }
