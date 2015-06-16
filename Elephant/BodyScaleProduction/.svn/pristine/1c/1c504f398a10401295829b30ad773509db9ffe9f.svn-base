@@ -1,0 +1,819 @@
+//
+//  BuyRyfitMainController.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-6-7.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "BuyRyfitMainController.h"
+#import "BuyRyFitInfo.h"
+#import "BR_BuyerInfoCell.h"
+#import "BR_ProductInfoCell.h"
+#import "BR_PayInfoCell.h"
+#import "SHXMLParser.h"
+#import "BRCityAreaController.h"
+#import "BaseNavigationController.h"
+#import "BR_payResultController.h"
+
+#import "AliPayPlusModel.h"
+
+
+
+
+@interface BuyRyfitMainController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+{
+    NSMutableArray      *_productList;
+    UITableView         *_table;
+    NSString            *_cmdName;
+    
+    
+    NSMutableArray      *_cityList;
+    NSMutableDictionary *_areaList;
+    
+    
+    int _isXmlOk;
+    CGPoint     _tableCenter;
+    NSString *_orderNo;
+    
+    BR_Area *_currentCity;
+    BR_Area *_currentArea;
+    
+    
+    BR_BuyerEntity *_buyerInfo;
+    
+    
+    CGPoint _tempPoint;
+    int _tempTag;
+    NSDictionary *_tempDic;
+
+}
+
+@end
+
+@implementation BuyRyfitMainController
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    [self initParam];
+    [self initUI];
+
+}
+
+
+- (void)initParam{
+    _isXmlOk                = 0;
+    _tempTag                = -1;
+    _cmdName                = @"BRMain";
+    _buyerInfo              = [[BR_BuyerEntity alloc]init];
+    _buyerInfo.b_member     = [GloubleProperty sharedInstance].currentUserEntity.UI_loginName;
+    _buyerInfo.b_password   = [GloubleProperty sharedInstance].currentUserEntity.UI_loginPwd;
+    _buyerInfo.b_system     = @"ios";
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(brMainCallback:)
+                                                name:_cmdName
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(aliPayCallback:)
+                                                name:kGetAlipayNotificationName
+                                              object:nil];
+    
+    
+}
+- (void)initUI {
+    self.navigationItem.title = @"购买RyFit";
+    CGRect _rect = [UIScreen mainScreen].bounds;
+    _rect.size.height -= (44 + 20);
+    
+    _table              = [[UITableView alloc]initWithFrame:_rect
+                                                      style:UITableViewStylePlain];
+    _table.delegate         = self;
+    _table.dataSource       = self;
+    _table.backgroundView   = nil;
+    _table.backgroundColor  = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+    _table.separatorStyle   = UITableViewCellSeparatorStyleNone;
+    _table.allowsSelection  = NO;
+    _table.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:_table];
+    _tableCenter = _table.center;
+    
+    
+    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                          action:@selector(tap:)];
+    [self.view addGestureRecognizer:_tap];
+    
+    UIPanGestureRecognizer *_pan = [[UIPanGestureRecognizer alloc]initWithTarget:self
+                                                                          action:@selector(pan:)];
+    [self.view addGestureRecognizer:_pan];
+    /*
+    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                          action:@selector(tap:)];
+    [self.view addGestureRecognizer:_tap];
+     */
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    if (!_productList || _productList.count == 0) {
+
+        [self getProductInfo];
+
+    }
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (!_cityList) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                       ^{
+
+            SHXMLParser		*parser			= [[SHXMLParser alloc] init];
+            NSString *_xmlPath              = [[NSBundle mainBundle] pathForResource:@"city_area"
+                                                                              ofType:@"xml"];
+            NSData *_dataXML                = [NSData dataWithContentsOfFile:_xmlPath];
+            NSDictionary	*_xmlDic        = [parser parseData:_dataXML];
+            NSArray         *_xmlArray      = _xmlDic[@"RECORDS"][@"RECORD"];
+            
+            _cityList = [[NSMutableArray alloc]init];
+            _areaList = [[NSMutableDictionary alloc]init];
+            
+            for (int i = 0; i < _xmlArray.count ; i++) {
+                NSDictionary *_dic  = _xmlArray[i];
+                BR_Area *_area      = [[BR_Area alloc]init];
+                _area.a_id          = _dic[@"id"];
+                _area.a_pid         = [_dic[@"parent_id"] isKindOfClass:[NSDictionary class]]?@"":_dic[@"parent_id"];
+                _area.a_name        = _dic[@"name"];
+                if ([_area.a_pid isEqualToString:@""]) {
+                    [_cityList addObject:_area];
+                }
+                else{
+                    NSMutableArray *_tempList = nil;
+                    if ([_areaList.allKeys containsObject:_area.a_pid]) {
+                        _tempList = _areaList[_area.a_pid];
+                    }
+                    else{
+                        _tempList = [[NSMutableArray alloc]init];
+                        [_areaList setObject:_tempList forKey:_area.a_pid];
+                    }
+                    [_tempList addObject:_area];
+                }
+            }
+        
+            _isXmlOk = 1;
+
+        });
+        
+    }
+}
+
+
+
+-(void)pan:(UIPanGestureRecognizer *)panG
+{
+    [self.view endEditing:YES];
+}
+-(void)tap:(UITapGestureRecognizer *)tapG
+{
+    [self.view endEditing:YES];
+}
+
+
+-(void)dealloc
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:_cmdName
+                                                 object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:kAlipayNotificationName
+                                                 object:nil];
+}
+
+#pragma mark - logic
+-(void)getProductInfo
+{
+    _productList    = [[NSMutableArray alloc]init];
+    
+    [self showHUDInWindowWithText:@"正在加载..."];
+    [[InterfaceModel sharedInstance]getProductInfoWithCallback:
+     ^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+         
+         [self disMissHUDWithText:@"" afterDelay:0];
+         
+         if (result) {
+             //NSLog(@"successParam:%@",successParam);
+             _productList = successParam;
+             [_table reloadSections:
+              [[NSIndexSet alloc]initWithIndex:BuyRyFitMainSectionTypeProduct]
+                   withRowAnimation:UITableViewRowAnimationFade];
+         }
+         else{
+             NSLog(@"errorMsg:%@",errorMsg);
+             [self showHUDInWindowJustWithText:@"加载失败" disMissAfterDelay:0.8];
+         }
+         
+     }];
+}
+
+-(void)updateTotalPrice
+{
+    float _price = 0;
+    for (int i = 0; i < _productList.count ; i++) {
+        BR_ProductEntity *_p = _productList[i];
+        _price += ([_p.pt_price floatValue] * _p.pt_countOfBuy);
+    }
+    
+    BR_PayInfoCell *_cell = (BR_PayInfoCell *)[_table cellForRowAtIndexPath:
+                                                   [NSIndexPath indexPathForRow:0
+                                                                      inSection:2]];
+    [_cell setPriceTxt:[NSString stringWithFormat:@"%.2f",_price]];
+    
+}
+
+-(void)subMitOrder:(NSDictionary *)info
+{
+    AliPayPlusModel *_aliM = [AliPayPlusModel sharedInstance];
+    [_aliM pay:info];
+}
+
+#pragma mark - sheet
+- (void)actionSheet:(UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"buttonIndex:%d",buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+        {
+            [self subMitOrder:_tempDic];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - table
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return kBR_sectionCount;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case BuyRyFitMainSectionTypeProduct:
+        {
+            return _productList.count;
+        }
+            break;
+        case BuyRyFitMainSectionTypeInfo:
+        {
+            return kBR_buyerInfoCellCount;
+        }
+            break;
+        case BuyRyFitMainSectionTypePaybox:
+        {
+            return kBR_payCellCount;
+        }
+            break;
+        default:
+        {
+            return 0;
+        }
+            break;
+    }
+    
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    switch (indexPath.section) {
+        case BuyRyFitMainSectionTypeProduct:
+        {
+            
+            static NSString *identifier01   = @"BR_ProductInfoCell";
+            BR_ProductInfoCell *_cellT      = [tableView
+                                               dequeueReusableCellWithIdentifier:
+                                               identifier01];
+            
+            if (!_cellT) {
+                _cellT = [[[NSBundle mainBundle] loadNibNamed:@"BR_ProductInfoCell"
+                                                        owner:self
+                                                      options:nil] lastObject];
+                
+                [_cellT initCell];
+            }
+            
+            [_cellT updateCell:_productList[indexPath.row] index:indexPath];
+            return _cellT;
+
+        }
+            break;
+        case BuyRyFitMainSectionTypeInfo:
+        {
+            static NSString *identifier02 = @"BR_BuyerInfoCell";
+            BR_BuyerInfoCell *_cellT    = [tableView dequeueReusableCellWithIdentifier:identifier02];
+            if (!_cellT) {
+                _cellT = [[[NSBundle mainBundle] loadNibNamed:@"BR_BuyerInfoCell"
+                                                        owner:self
+                                                      options:nil] firstObject];
+                [_cellT initCell];
+            }
+            [_cellT updateCell:_buyerInfo index:indexPath];
+            return _cellT;
+        }
+            break;
+        case BuyRyFitMainSectionTypePaybox:
+        {
+            static NSString *identifier03 = @"BR_PayInfoCell";
+            BR_PayInfoCell *_cellT    = [tableView dequeueReusableCellWithIdentifier:identifier03];
+            if (!_cellT) {
+                _cellT = [[[NSBundle mainBundle] loadNibNamed:@"BR_PayInfoCell"
+                                                        owner:self
+                                                      options:nil] firstObject];
+                [_cellT initCell];
+            }
+            [_cellT updateCell:nil index:indexPath];
+            return _cellT;
+        }
+            break;
+        default:
+        {
+            return nil;
+        }
+            break;
+    }
+
+}
+
+
+
+-       (float)tableView:(UITableView *)tableView
+ heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case BuyRyFitMainSectionTypeProduct:
+        {
+            return kBR_main_productCellHeight;
+        }
+            break;
+        case BuyRyFitMainSectionTypeInfo:
+        {
+            return kBR_main_buyerInfoCellHeight;
+        }
+            break;
+        case BuyRyFitMainSectionTypePaybox:
+        {
+            return kBR_main_payCellHeight;
+        }
+            break;
+        default:
+        {
+            return 0;
+        }
+            break;
+    }
+}
+
+
+#pragma mark - cellActon
+
+-(void)showErrorMsg:(NSString *)eMsg
+{
+    UIAlertView *_alert = [[UIAlertView alloc]initWithTitle:@"提 示"
+                                                    message:eMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:@"确 定"
+                                          otherButtonTitles: nil];
+    [_alert show];
+}
+
+
+-(void)brMainCallback:(NSNotification *)aNotif
+{
+    NSDictionary *_info = [aNotif userInfo];
+    NSString *_cmdFrom  = _info[@"cell"];
+    NSIndexPath *_ip    = _info[@"ip"];
+    NSString *_tp       = _info[@"tp"];
+    
+    if ([@"pt" isEqualToString:_cmdFrom]) {
+        if ([@"add" isEqualToString:_tp]) {
+            [self productAddClick:_ip];
+        }
+        else if([@"minus" isEqualToString:_tp])
+        {
+            [self productMinusClick:_ip];
+        }
+        
+    }
+    else if ([@"bi" isEqualToString:_cmdFrom]){
+        if ([@"province" isEqualToString:_tp])
+        {
+            [self toProvince:_ip];
+        }
+        else if([@"city" isEqualToString:_tp])
+        {
+            [self toCity:_ip];
+        }
+        else if([@"txf" isEqualToString:_tp])
+        {
+            NSString *_txfTp = _info[@"txfTp"];
+            if ([@"begin" isEqualToString:_txfTp]) {
+                int _tagId = [_info[@"tag"]?_info[@"tag"]:@"" intValue];
+                if (_tempTag == -1) {
+                    _tempPoint              = _table.contentOffset;
+                    _table.scrollEnabled    = NO;
+                }
+                _tempTag    = _tagId;
+                float _h    = _productList.count * kBR_main_productCellHeight;
+                
+                
+                CGPoint _p  = _table.contentOffset;
+                _p.y        = _h;
+                
+                
+                
+                
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationBeginsFromCurrentState:YES];
+                [UIView setAnimationDuration:0.2];
+                
+                _table.contentOffset = _p;
+                /*
+                CGPoint _p      = _tableCenter;
+                _p.y            -= 80;
+                _table.center   = _p;
+                */
+                [UIView commitAnimations];
+                
+            }
+            else if ([@"endEdit" isEqualToString:_txfTp]) {
+                int _tagId = [_info[@"tag"]?_info[@"tag"]:@"" intValue];
+                switch (_tagId) {
+                    case 1:
+                    {
+                        _buyerInfo.b_shipName = _info[@"text"];
+                    }
+                        break;
+                    case 2:
+                    {
+                        _buyerInfo.b_shipMobile = _info[@"text"];
+                    }
+                        break;
+                    case 3:
+                    {
+                        _buyerInfo.b_shipAddress = _info[@"text"];
+                        /*
+                        [UIView beginAnimations:nil context:NULL];
+                        [UIView setAnimationBeginsFromCurrentState:YES];
+                        [UIView setAnimationDuration:0.2];
+                        
+                        
+                        CGPoint _p      = _tableCenter;
+                        _table.center   = _p;
+                        
+                        [UIView commitAnimations];
+                         */
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
+                if (_tempTag == _tagId) {
+                    [UIView beginAnimations:nil context:NULL];
+                    [UIView setAnimationBeginsFromCurrentState:YES];
+                    [UIView setAnimationDuration:0.2];
+                    
+                    _table.contentOffset = _tempPoint;
+                    [UIView commitAnimations];
+                    _table.scrollEnabled = YES;
+                    _tempTag = -1;
+                }
+                
+                
+            }
+        }
+    }
+    else if ([@"pay" isEqualToString:_cmdFrom]){
+        if ([@"ali" isEqualToString:_tp]) {
+            [self toAliPay:_ip];
+        }
+        else if([@"wx" isEqualToString:_tp])
+        {
+            [self toWXPay:_ip];
+        }
+    }
+    else if ([@"city" isEqualToString:_cmdFrom]){
+        BR_Area *_city = _info[@"ip"];
+        BR_BuyerInfoCell *_cell = (BR_BuyerInfoCell *)[_table cellForRowAtIndexPath:
+                                                       [NSIndexPath indexPathForRow:0 inSection:1]];
+        if ([_cityList containsObject:_city]) {
+            
+
+            [_cell.provinceBtn setTitle:_city.a_name forState:UIControlStateNormal];
+            [_cell.provinceBtn setTitle:_city.a_name forState:UIControlStateHighlighted];
+            
+            if (![_currentCity isEqual:_city]) {
+                [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateNormal];
+                [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateHighlighted];
+                _currentArea = nil;
+            }
+            _currentCity = _city;
+        }
+        else{
+            _currentCity = nil;
+
+            [_cell.provinceBtn setTitle:@"请选择" forState:UIControlStateNormal];
+            [_cell.provinceBtn setTitle:@"请选择" forState:UIControlStateHighlighted];
+            [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateNormal];
+            [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateHighlighted];
+            _currentArea = nil;
+        }
+        
+    }
+    else if ([@"area" isEqualToString:_cmdFrom]){
+        BR_Area *_area = _info[@"ip"];
+        BR_BuyerInfoCell *_cell = (BR_BuyerInfoCell *)[_table cellForRowAtIndexPath:
+                                                       [NSIndexPath indexPathForRow:0 inSection:1]];
+        if ([_areaList[_area.a_pid] containsObject:_area]) {
+            _currentArea = _area;
+            
+            [_cell.cityBtn setTitle:_area.a_name forState:UIControlStateNormal];
+            [_cell.cityBtn setTitle:_area.a_name forState:UIControlStateHighlighted];
+            
+            
+        }
+        else{
+            _currentCity = nil;
+            [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateNormal];
+            [_cell.cityBtn setTitle:@"请选择" forState:UIControlStateHighlighted];
+        }
+        
+    }
+}
+
+-(void)aliPayCallback:(NSNotification *)aNotif
+{
+    NSDictionary *_info = [aNotif userInfo];
+    int _tp = _info[@"r"]?[(NSString *)_info[@"r"] intValue]:0;
+    switch (_tp) {
+        case 0:
+        {
+            BR_payResultController *_prVc = [[BR_payResultController alloc] initWithNibName:@"BR_payResultController" bundle:nil];
+            _prVc.tp = 0;
+            [self.navigationController pushViewController:_prVc animated:YES];
+            /*
+             BaseNavigationController *prNav = [[BaseNavigationController alloc] initWithRootViewController:_prVc];
+             [self presentViewController:prNav animated:YES completion:NULL];
+             */
+        }
+            break;
+        case 1:
+        {
+            BR_payResultController *_prVc = [[BR_payResultController alloc] initWithNibName:@"BR_payResultController" bundle:nil];
+            _prVc.tp        = 1;
+            _prVc.tradeNo   = _orderNo;
+            [self.navigationController pushViewController:_prVc animated:YES];
+            /*
+             BaseNavigationController *prNav = [[BaseNavigationController alloc] initWithRootViewController:_prVc];
+             [self presentViewController:prNav animated:YES completion:NULL];
+             */
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+-(void)productAddClick:(NSIndexPath *)ip
+{
+    BR_ProductEntity *_product = _productList[ip.row];
+    _product.pt_countOfBuy++;
+    [self updateTotalPrice];
+}
+
+-(void)productMinusClick:(NSIndexPath *)ip
+{
+    BR_ProductEntity *_product = _productList[ip.row];
+    _product.pt_countOfBuy--;
+    [self updateTotalPrice];
+}
+
+-(void)toProvince:(NSIndexPath *)ip
+{
+    NSLog(@"toProvince");
+    if (_isXmlOk) {
+        BRCityAreaController *_BRMainVC = [[BRCityAreaController alloc] init];
+        [_BRMainVC setTP:0 dataList:_cityList];
+        BaseNavigationController *BRMainManagerNav =
+        [[BaseNavigationController alloc] initWithRootViewController:_BRMainVC];
+        
+        
+        [self presentViewController:BRMainManagerNav animated:YES completion:NULL];
+    }
+    
+
+}
+
+-(void)toCity:(NSIndexPath *)ip
+{
+    NSLog(@"toCity");
+    if (_isXmlOk && _currentCity) {
+        BRCityAreaController *_BRMainVC = [[BRCityAreaController alloc] init];
+        [_BRMainVC setTP:1 dataList:_areaList[_currentCity.a_id]];
+        BaseNavigationController *BRMainManagerNav =
+        [[BaseNavigationController alloc] initWithRootViewController:_BRMainVC];
+        
+        
+        [self presentViewController:BRMainManagerNav animated:YES completion:NULL];
+    }
+}
+
+-(void)toAliPay:(NSIndexPath *)ip
+{
+    NSLog(@"tap");
+    [self.view endEditing:YES];
+    if (!_buyerInfo.b_shipName ||
+        [@"" isEqualToString:_buyerInfo.b_shipName])
+    {
+        [self showErrorMsg:@"请填写收件人姓名"];
+        return;
+    }
+    
+    if (!_buyerInfo.b_shipMobile ||
+        [@"" isEqualToString:_buyerInfo.b_shipMobile])
+    {
+        [self showErrorMsg:@"请填写收件人电话号码"];
+        return;
+    }
+    else{
+        //匹配6-15个由字母/数字组成的字符串的正则表达式：
+        
+        NSString *_phoneNumRegex = @"1[0-9]{10}";
+        NSPredicate *_pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", _phoneNumRegex];
+        
+        if (![_pred evaluateWithObject:_buyerInfo.b_shipMobile]) {
+            _phoneNumRegex = @"^\\d{7}$|^\\d{8}$";
+            _pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", _phoneNumRegex];
+            
+            if (![_pred evaluateWithObject:_buyerInfo.b_shipMobile]) {
+                [self showErrorMsg:@"收件人电话号码须为手机号码或者固话号码"];
+                return;
+            }
+            
+        }
+    }
+    
+    if (!_currentCity) {
+        [self showErrorMsg:@"请选择收件人省市"];
+        return;
+    }
+    
+    if (!_currentArea) {
+        [self showErrorMsg:@"请选择收件人区县"];
+        return;
+    }
+    
+    if (!_buyerInfo.b_shipAddress ||
+        [@"" isEqualToString:_buyerInfo.b_shipAddress])
+    {
+        [self showErrorMsg:@"请填写收件人详细地址"];
+        return;
+    }
+    
+    NSMutableArray *_goodsList = [[NSMutableArray alloc]init];
+    for (int i =0 ; i < _productList.count; i++) {
+        BR_ProductEntity *_proudct = _productList[i];
+        if (_proudct.pt_countOfBuy > 0) {
+            [_goodsList addObject:_proudct];
+        }
+    }
+    
+    if (_goodsList.count == 0) {
+        [self showErrorMsg:@"请选择您要购买的商品"];
+        return;
+    }
+    
+    
+
+    
+    _buyerInfo.b_dataList       = _goodsList;
+    _buyerInfo.b_shipAreaPath   = [NSString stringWithFormat:@"%@,%@",_currentCity.a_name,_currentArea.a_name];
+
+    
+    
+    [self showHUDInView:self.view justWithText:@"正在提交订单..."];
+    
+    
+    [[InterfaceModel sharedInstance] getOrderWithCallback:
+     ^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+
+         if (result == WebCallBackResultSuccess) {
+             [self showHUDInWindowJustWithText:@"" disMissAfterDelay:0];
+             
+             
+             NSDictionary *_dic = successParam[@"parameter"];
+             _orderNo           = _dic[@"out_trade_no"];
+             _tempDic           = @{ @"orderNo":_dic[@"out_trade_no"],
+                                        @"body":_dic[@"body"],
+                                       @"total":_dic[@"total_fee"] };
+
+             NSString *_tStr = [NSString stringWithFormat:@"请确认订单信息\n\n收件人:%@\n电话:%@\n地址:%@\n商品金额:%@",
+                                _buyerInfo.b_shipName,
+                                _buyerInfo.b_shipMobile,
+                                [_buyerInfo.b_shipAreaPath stringByAppendingString:_buyerInfo.b_shipAddress],
+                                _dic[@"total_fee"]];
+             UIActionSheet *_sheet = [[UIActionSheet alloc]initWithTitle:_tStr
+                                                                delegate:self
+                                                       cancelButtonTitle:@"返 回"
+                                                  destructiveButtonTitle:@"确 认"
+                                                       otherButtonTitles:nil];
+             [_sheet showInView:self.view];
+             
+             /*
+             AliPayPlusModel *_aliM = [AliPayPlusModel sharedInstance];
+             
+             NSDictionary *_dic = successParam[@"parameter"];
+             _orderNo           = _dic[@"out_trade_no"];
+             NSDictionary *_payDic =@{
+                                      @"orderNo":_dic[@"out_trade_no"],
+                                      @"body":_dic[@"body"],
+                                      @"total":_dic[@"total_fee"]
+                                      };
+             [_aliM pay:_payDic];
+              */
+         }else{
+             [self showHUDInWindowJustWithText:@"获取订单失败" disMissAfterDelay:0.8];
+         }
+         
+         
+         
+    }
+                                                   buyer:_buyerInfo];
+    
+}
+
+
+
+
+-(void)toWXPay:(NSIndexPath *)ip
+{
+    NSLog(@"toWXPay");
+}
+
+
+#pragma mark - sys
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+
+    }
+    return self;
+}
+
+
+
+- (void)didReceiveMemoryWarning
+{
+
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    [super didReceiveMemoryWarning];
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

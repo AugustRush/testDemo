@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ARGradientViewMacros.h"
 
 typedef NS_ENUM(NSInteger, ARGradientAnimateType) {
     ARGradientAnimateTypeLiner = 0,
@@ -25,7 +24,7 @@ typedef NS_ENUM(NSInteger, ARGradientAnimateDirection) {
 
 typedef struct{
     NSTimeInterval duration;
-    ARGradientAnimateType Type;//if type is ARGradientAnimateTypeNone ,the bellow two paramaters invalidate
+    ARGradientAnimateType Type;//if type is ARGradientAnimateTypeNone ,the bellow two paramaters is invalidate
     ARGradientAnimateDirection direction;//just apply to ARGradientAnimateTypeLiner type animation
     CGPoint startPoint;//just apply to ARGradientAnimateTypeRadial type, the point should inner this view 's bouds
     

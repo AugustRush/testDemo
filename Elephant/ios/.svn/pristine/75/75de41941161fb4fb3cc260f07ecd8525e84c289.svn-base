@@ -1,0 +1,458 @@
+//
+//  DataManageViewController.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-15.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "DataManageViewController.h"
+#import "ShareViewController.h"
+#define _tag_bt 100
+#define _tag_change_bt 200
+@interface DataManageViewController ()
+{
+    UIButton *_weekBt;
+    UIButton *_mounthBt;
+    UIButton *_yearBt;
+    UIView   *_topView;
+    UILabel  *_timeLB;
+    UIView   *_secondView;
+    UIView   *_bottomView;
+    UILabel  *_numLB;
+    
+    BOOL    _isLine;
+    
+    UIView *_greenLineView;
+
+}
+@property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *labels;
+@property (nonatomic, assign) BOOL green;
+@end
+
+@implementation DataManageViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"趋势图";
+      self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self baseConfigs];
+    [self createBottomView];
+    [self createSecondView];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)baseConfigs
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0.0, 0.0, 20, 20);
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    temporaryBarButtonItem.style = UIBarButtonItemStylePlain;
+    self.navigationItem.leftBarButtonItem = temporaryBarButtonItem;
+    
+    _topView = [[UIView alloc] init];
+    [_topView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:_topView];
+    [_topView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.mas_equalTo(@0);
+        maker.right.mas_equalTo(@0);
+        maker.top.mas_equalTo(@0);
+        maker.height.mas_equalTo(@80);
+    }];
+    
+    _mounthBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_mounthBt setBackgroundColor:[UIColor clearColor]];
+    [_mounthBt setTitle:@"月" forState:UIControlStateNormal];
+    [_mounthBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_mounthBt setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [_mounthBt setBackgroundImage:[UIImage imageNamed:@"seledBt"] forState:UIControlStateSelected];
+    [_mounthBt addTarget:self action:@selector(selectTimeBt:) forControlEvents:UIControlEventTouchUpInside];
+    [_topView addSubview:_mounthBt];
+    [_mounthBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@((Screen_Width-71)/2));
+        maker.width.equalTo(@71);
+        maker.height.equalTo(@35);
+        maker.top.equalTo(@14);
+    }];
+    
+    
+    _weekBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_weekBt setTitle:@"周" forState:UIControlStateNormal];
+    [_weekBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_weekBt setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [_weekBt setBackgroundImage:[UIImage imageNamed:@"seledBt"] forState:UIControlStateSelected];
+    [_weekBt addTarget:self action:@selector(selectTimeBt:) forControlEvents:UIControlEventTouchUpInside];
+    [_topView addSubview:_weekBt];
+    [_weekBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(_mounthBt.mas_left).with.offset(-15);
+        maker.width.equalTo(@71);
+        maker.height.equalTo(@35);
+        maker.top.equalTo(@14);
+    }];
+    
+    _yearBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_yearBt setBackgroundColor:[UIColor clearColor]];
+    [_yearBt setTitle:@"年" forState:UIControlStateNormal];
+    [_yearBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_yearBt setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [_yearBt setBackgroundImage:[UIImage imageNamed:@"seledBt"] forState:UIControlStateSelected];
+    [_yearBt addTarget:self action:@selector(selectTimeBt:) forControlEvents:UIControlEventTouchUpInside];
+    [_topView addSubview:_yearBt];
+    [_yearBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(_mounthBt.mas_right).with.offset(15);
+        maker.width.equalTo(_mounthBt);
+        maker.height.equalTo(_mounthBt);
+        maker.top.equalTo(_mounthBt);
+    }];
+    
+    
+    UIButton *preStepBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [preStepBt setBackgroundImage:[UIImage imageNamed:@"prestep"] forState:UIControlStateNormal];
+    [preStepBt addTarget:self action:@selector(selectBt:) forControlEvents:UIControlEventTouchUpInside];
+    preStepBt.tag = _tag_bt;
+    [_topView addSubview:preStepBt];
+    [preStepBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(_weekBt);
+        maker.top.equalTo(_weekBt.mas_bottom).with.offset(5);
+        maker.width.equalTo(@11);
+        maker.height.equalTo(@22);
+    }];
+    
+    UIButton *nextStepBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextStepBt setBackgroundImage:[UIImage imageNamed:@"nextstep"] forState:UIControlStateNormal];
+    [nextStepBt addTarget:self action:@selector(selectBt:) forControlEvents:UIControlEventTouchUpInside];
+    nextStepBt.tag = _tag_bt+1;
+    [_topView addSubview:nextStepBt];
+    [nextStepBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(_yearBt);
+        maker.top.equalTo(_weekBt.mas_bottom).with.offset(5);
+        maker.width.equalTo(@11);
+        maker.height.equalTo(@22);
+    }];
+    NSString *tstring = @"10月12日-10月18日";
+    _timeLB = [[UILabel alloc] init];
+    [_timeLB setText:tstring];
+    [_timeLB setBackgroundColor:[UIColor clearColor]];
+    [_topView addSubview:_timeLB];
+    [_timeLB mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.centerX.equalTo(_mounthBt.mas_centerX);
+        maker.top.equalTo(preStepBt);
+    }];
+    [_weekBt setSelected:YES];
+}
+- (void)createBottomView
+{
+
+    _bottomView = [[UIView alloc] init];
+    [_bottomView setBackgroundColor:UIColorRef(232, 232, 232)];
+    [self.view addSubview:_bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@0);
+        maker.right.equalTo(@0);
+        maker.bottom.equalTo(@0);
+        maker.height.equalTo(@115);
+    }];
+    
+    UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"share_bg"]];
+    [self.view addSubview:bgView];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@0);
+        maker.right.equalTo(@0);
+        maker.bottom.equalTo(_bottomView.mas_bottom).offset(-5);
+        maker.height.equalTo(@99);
+    }];
+    bgView.userInteractionEnabled = YES;
+    
+    UILabel *textLb = [[UILabel alloc] init];
+    [textLb setText:@"综合健康指数:"];
+    textLb.textColor = BGColor;
+    [self.view addSubview:textLb];
+    [textLb mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(bgView.mas_left).offset(20);
+        maker.top.equalTo(bgView.mas_top).offset((99-14)/2);
+    }];
+    
+    _numLB = [[UILabel alloc] init];
+    [_numLB setText:@"86"];
+    _numLB.textColor = BGColor;
+    [self.view addSubview:_numLB];
+    [_numLB setFont:[UIFont systemFontOfSize:34]];
+    [_numLB mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(textLb.mas_right).offset(10);
+        maker.top.equalTo(bgView.mas_top).offset((99-34)/2);
+    }];
+    
+    UIButton *shareBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareBt setBackgroundImage:[UIImage imageNamed:@"shareBtBg"] forState:UIControlStateNormal];
+    [shareBt addTarget:self action:@selector(selectedShareBt) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:shareBt];
+    [shareBt mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(bgView.mas_right).with.offset(-4);
+        maker.top.equalTo(bgView.mas_top).with.offset((99-110/2)/2);
+        maker.width.equalTo(@(55/2));
+        maker.height.equalTo(@(110/2));
+    }];
+
+
+}
+- (void)createSecondView
+{
+    _secondView = [[UIView alloc] init];
+    [_secondView setBackgroundColor:[UIColor yellowColor]];
+    [self.view addSubview:_secondView];
+    [_secondView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@0);
+        maker.right.equalTo(@0);
+        maker.top.equalTo(_topView.mas_bottom);
+        maker.bottom.equalTo(_bottomView.mas_top);
+    }];
+    
+    UIButton *askBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [askBt setBackgroundImage:[UIImage imageNamed:@"askBt"] forState:UIControlStateNormal];
+    [askBt setTag:_tag_bt+2];
+    [askBt addTarget:self action:@selector(selectBt:) forControlEvents:UIControlEventTouchUpInside];
+    [_secondView addSubview:askBt];
+    [askBt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@25);
+        make.top.equalTo(@13);
+        make.width.equalTo(@20);
+        make.height.equalTo(@20);
+    }];
+    
+    UIButton *changeBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [changeBt setBackgroundImage:[UIImage imageNamed:@"askBt"] forState:UIControlStateNormal];
+    [changeBt setTag:_tag_bt+3];
+    [changeBt addTarget:self action:@selector(selectBt:) forControlEvents:UIControlEventTouchUpInside];
+    [_secondView addSubview:changeBt];
+    [changeBt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@(-25));
+        make.top.equalTo(askBt);
+        make.width.equalTo(@20);
+        make.height.equalTo(@20);
+    }];
+    
+    
+    UIScrollView *scrollview = [[UIScrollView alloc] init];
+    [scrollview setBackgroundColor:[UIColor clearColor] ];
+    [scrollview setScrollEnabled:YES];
+    [_secondView addSubview:scrollview];
+    [scrollview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.bottom.equalTo(_secondView.mas_bottom).with.offset(5);
+        make.height.equalTo(@58);
+    }];
+    [scrollview setContentSize:CGSizeMake(320*2, 58)];
+    
+    UIView *grayView = [[UIView alloc] init];
+    [grayView setBackgroundColor:UIColorRef(166, 166, 166)];
+    [scrollview addSubview:grayView];
+    [grayView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.top.equalTo(@0);
+        make.width.equalTo(@(scrollview.contentSize.width));
+        make.height.equalTo(@0.5);
+    }];
+
+    for (int i =0; i<4; i++) {
+        ButtonExten *bt = [ButtonExten buttonWithType:UIButtonTypeCustom];
+        [bt setBackgroundColor:[UIColor clearColor]];
+        [bt setImage:[UIImage imageNamed:@"health"] WithText:@"健康指数" WithState:UIControlStateNormal];
+        [bt setTag:_tag_change_bt+i];
+        [bt addTarget:self action:@selector(changeBt:) forControlEvents:UIControlEventTouchUpInside];
+        [bt setTitleColor:UIColorRef(166, 166, 166) forState:UIControlStateNormal];
+        [bt setTitleColor:BGColor   forState:UIControlStateSelected];
+        [bt setImage:[UIImage imageNamed:@"health"]  forState:UIControlStateNormal];
+        [bt setImage:[UIImage imageNamed:@"health-select"]  forState:UIControlStateSelected];
+
+        [scrollview addSubview:bt];
+        [bt setFrame:CGRectMake(62*i, 0, 62, 55)];
+        if (i==0) {
+            [bt setSelected:YES];
+            _greenLineView = [[UIView alloc] init];
+            [_greenLineView setBackgroundColor:BGColor];
+            [scrollview addSubview:_greenLineView];
+            [_greenLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(@0);
+                make.top.equalTo(@0);
+                make.width.equalTo(@62);
+                make.height.equalTo(@2);
+            }];
+        }
+    }
+    self.data = @[@100, @10, @40, @90, @50, @85, @10];
+
+    self.labels = @[@"周日",@"周一", @"周二", @"周三", @"周四", @"周五", @"周六"];
+    self.graphView = [[GKBarGraph alloc]initWithFrame:CGRectMake(0, 125, Screen_Width, (Screen_Height-345-10))];
+    [self.graphView setBackgroundColor:[UIColor clearColor]];
+    self.graphView.dataSource = self;
+    [self.graphView setBarColor:UIColorRef(253, 132, 46)];
+    [self.view addSubview:self.graphView];
+    _graphView.barHeight = Screen_Height-345-20;
+    _graphView.marginBar = 12;
+    _graphView.barWidth = 20;
+     [self.graphView draw];
+    _isLine = NO;
+    
+    UIImageView *line1= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line"]];
+    [_secondView addSubview:line1];
+    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(askBt.mas_right);
+        make.top.equalTo(askBt.mas_bottom).with.offset(30);
+    }];
+    
+    UIImageView *line2= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line"]];
+    [_secondView addSubview:line2];
+    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(askBt.mas_right);
+        make.top.equalTo(scrollview.mas_top).with.offset(-50);
+    }];
+    
+    
+}
+
+- (void)selectedShareBt
+{
+    [self.navigationController pushViewController:[[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil] animated:YES];
+}
+//按钮切换
+- (void)changeBt:(id)sender
+{
+    UIButton *bt = (UIButton*)sender;
+    [bt setSelected:YES];
+    int tag = (int)(bt.tag-_tag_change_bt);
+    [_greenLineView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@(62*(tag)));
+    }];
+    for (int i =0; i<4; i++) {
+        if (i != tag) {
+            UIButton *mBt = (UIButton*)[self.view viewWithTag:_tag_change_bt+i];
+            [mBt setSelected:NO];
+        }
+    }
+}
+
+-(void)selectBt:(id)sender{
+    UIButton *bt = (UIButton *)sender;
+    switch (bt.tag) {
+        case 100:
+            
+            break;
+        case 101:
+            
+            break;
+        case 102:
+            
+            break;
+        case 103:
+        {
+            if (_isLine) {
+                [self.lineView removeFromSuperview];
+                [self.view addSubview:self.graphView];
+                _isLine = NO;
+
+            }
+            else
+            {
+                [self.graphView removeFromSuperview];
+                if (!_isLine) {
+                    if (!self.lineView) {
+                        self.lineView = [[GKLineGraph alloc] initWithFrame:CGRectMake(0, 125, Screen_Width, (Screen_Height-345-10))];
+                        [self.lineView setBackgroundColor:[UIColor clearColor]];
+                        self.lineView.dataSource = self;
+                        self.lineView.lineWidth = 3.0;
+                        self.lineView.valueLabelCount = 10;
+                        [self.view addSubview:self.lineView];
+                        [self.lineView draw];
+                    }
+                    else
+                    {
+                        [self.view addSubview:self.lineView];
+                    }
+                    _isLine = YES;
+                }
+
+            }
+
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)selectTimeBt:(id)sender
+{
+    UIButton *bt = (UIButton *)sender;
+    [bt setSelected:YES];
+    if(bt == _weekBt )
+    {
+        [_mounthBt setSelected:NO];
+        [_yearBt setSelected:NO];
+    }
+    else if (bt == _mounthBt)
+    {
+        [_weekBt setSelected:NO];
+        [_yearBt setSelected:NO];
+    }
+    else if (bt == _yearBt)
+    {
+        [_weekBt setSelected:NO];
+        [_mounthBt setSelected:NO];
+    
+    }
+    
+}
+- (void)backAction
+{
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+#pragma mark - GKBarGraphDataSource
+
+- (NSInteger)numberOfBars {
+    return [self.data count];
+}
+
+- (NSNumber *)valueForBarAtIndex:(NSInteger)index {
+    return [self.data objectAtIndex:index];
+}
+- (NSString *)titleForBarAtIndex:(NSInteger)index {
+    return [self.labels objectAtIndex:index];
+}
+- (CFTimeInterval)animationDurationForBarAtIndex:(NSInteger)index {
+    CGFloat percentage = [[self valueForBarAtIndex:index] doubleValue];
+    percentage = (percentage / 100);
+    return (_graphView.animationDuration * percentage);
+}
+
+#pragma mark - GKLineGraphDataSource
+
+- (NSInteger)numberOfLines {
+    return [self.data count];
+}
+
+
+- (NSArray *)valuesForLineAtIndex:(NSInteger)index {
+    return self.data;
+}
+
+- (CFTimeInterval)animationDurationForLineAtIndex:(NSInteger)index {
+    return [[@[@1, @1.6, @2.2, @1.4] objectAtIndex:index] doubleValue];
+}
+
+- (NSString *)titleForLineAtIndex:(NSInteger)index {
+    return [self.labels objectAtIndex:index];
+}
+
+@end

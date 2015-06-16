@@ -1,0 +1,15 @@
+//
+//  getWordColor.h
+//  miliao
+//
+//  Created by cheng tao on 12-7-20.
+//  Copyright (c) 2012年 CoverMe. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface getWordColor : NSObject
+
++(UIColor*)colorWithHexString:(NSString *)stringToConvert;
+
+@end

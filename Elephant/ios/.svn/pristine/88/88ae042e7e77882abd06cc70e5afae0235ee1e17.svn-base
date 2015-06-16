@@ -1,0 +1,205 @@
+//
+//  FeedbackViewController.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-24.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "FeedbackViewController.h"
+#define _key_height 216
+#define _key_china  24
+@interface FeedbackViewController ()
+{
+    CGFloat height;
+}
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *sendBt;
+- (IBAction)sendAction:(id)sender;
+@end
+
+@implementation FeedbackViewController
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+        
+    }
+    
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"用户反馈";
+    
+    [self.view setBackgroundColor:UIColorRef(233, 233, 233)];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0.0, 0.0, 20, 20);
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    temporaryBarButtonItem.style = UIBarButtonItemStylePlain;
+    self.navigationItem.leftBarButtonItem = temporaryBarButtonItem;
+
+    [self.bgView setUserInteractionEnabled:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardwasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardwasHidden:) name:UIKeyboardDidHideNotification object:nil];
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)sendAction:(id)sender
+{
+    [self.textField resignFirstResponder];
+}
+#pragma mark-TextField delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    return YES;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+   
+    
+    return YES;
+}
+
+-(void)keyboardwasShown:(NSNotification *) notify{
+    
+    if (height == 0) {
+        NSTimeInterval animationDuration = 0.15f;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        
+        
+        CGRect frame = self.bgView.frame;
+        
+        
+        frame.origin.y -=_key_height;//216是iphone键盘高，ipad是352，也可以自定义上移的高度
+        
+        frame.size.height +=_key_height;
+        
+        self.bgView.frame = frame;
+        height = _key_height;
+        [UIView commitAnimations];
+    }
+    else if (height == _key_height)
+    {
+        NSTimeInterval animationDuration = 0.15f;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        
+        
+        CGRect frame = self.bgView.frame;
+        
+        
+        frame.origin.y -=_key_china;//216是iphone键盘高，ipad是352，也可以自定义上移的高度
+        
+        frame.size.height +=_key_china;
+        
+        self.bgView.frame = frame;
+        height += _key_china;
+        [UIView commitAnimations];
+    }
+    else
+        return;
+    
+}
+-(void) keyboardwasHidden:(NSNotification *) notify{
+    if (height == 0) {
+        return ;
+    }else{
+        if (height>= (_key_height+_key_china)) {
+            NSTimeInterval animationDuration = 0.15f;
+            
+            [UIView beginAnimations:nil context:nil];
+            
+            [UIView setAnimationDuration:animationDuration];
+            
+            [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+            CGRect frame = self.bgView.frame;
+            
+            frame.origin.y +=(_key_height+_key_china);
+            
+            frame.size.height -=(_key_height+_key_china);
+            
+            self.bgView.frame = frame;
+            
+            
+            [UIView commitAnimations];
+            height = 0;
+        }
+        else
+        {
+            NSTimeInterval animationDuration = 0.15f;
+            
+            [UIView beginAnimations:nil context:nil];
+            
+            [UIView setAnimationDuration:animationDuration];
+            
+            [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+            CGRect frame = self.bgView.frame;
+            
+            frame.origin.y +=_key_height;
+            
+            frame.size.height -=_key_height;
+            
+            self.bgView.frame = frame;
+            
+            
+            [UIView commitAnimations];
+            height = 0;
+        }
+   
+    }
+}
+
+
+@end

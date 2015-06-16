@@ -1,0 +1,118 @@
+//
+//  BodyScaleBTInterface.m
+//  BlueToothDemo
+//
+//  Created by August on 14/12/4.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "BodyScaleBTInterface.h"
+
+#define intToString(a) [NSString stringWithFormat:@"%d",a]
+
+static BodyScaleBTInterface *_interface = nil;
+
+@implementation BodyScaleBTInterface
+{
+    BlueToothHelper *_BTHelper;
+    NSMutableDictionary *_responseBlocks;
+}
+
+//
++(void)initialize
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _interface = [[BodyScaleBTInterface alloc] init];
+    });
+}
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        [self initConfigs];
+    }
+    return self;
+}
+
+-(void)initConfigs
+{
+    _BTHelper = [BlueToothHelper shareInstance];
+    _responseBlocks = [NSMutableDictionary dictionary];
+    [_BTHelper centralManagerDidRecieveDataWithBlock:^(MeasureActionType type, id value, CBPeripheral *peripheral, NSError *error) {
+        
+        switch (type) {
+            case selectUserMesureComplpeteExtra:
+            {
+                VarargsBlock block = _responseBlocks[intToString(selectUserMesureComplpeteExtra)];
+                if (block) {
+                    block(error,value);
+                }
+            }
+                break;
+            case selectUserMesureAck:
+            {
+                VarargsBlock block = _responseBlocks[intToString(selectUserMesureAck)];
+                if (block) {
+                    block(error);
+                }
+
+            }
+                break;
+            case selectUserMesureComplpete:
+            {
+                VarargsBlock block = _responseBlocks[intToString(selectUserMesureComplpete)];
+                if (block) {
+                    block(error, value);
+                }
+
+            }
+                break;
+            case InstanceWeight:
+            {
+                VarargsBlock block = _responseBlocks[intToString(InstanceWeight)];
+                if (block) {
+                    block(error, value);
+                }
+            }
+                break;
+                break;
+                
+            default:
+                break;
+        }
+        
+    }];
+}
+
++(void)instanceWeightDataWithHandler:(void (^)(NSError *, NSNumber *))handler
+{
+    [_interface->_responseBlocks setObject:handler forKey:intToString(InstanceWeight)];
+}
+
++(void)selectUserMeasureWithLocation:(NSInteger)location
+                              height:(NSInteger)height
+                                 age:(NSInteger)age
+                                 sex:(NSInteger)sex
+                          ackHandler:(void (^)(NSError *))ackHandler
+                   completionHandler:(void (^)(NSError *, NSDictionary *))handler
+                    extraDataHandler:(void (^)(NSError *, NSDictionary *))extraHandler
+{
+    [_interface->_responseBlocks setObject:ackHandler forKey:intToString(selectUserMesureAck)];
+    [_interface->_responseBlocks setObject:handler forKey:intToString(selectUserMesureComplpete)];
+    [_interface->_responseBlocks setObject:extraHandler forKey:intToString(selectUserMesureComplpeteExtra)];
+    
+    NSMutableString *string = [NSMutableString stringWithFormat:@"090f01a541cdc77239d0"];
+    [string appendString:hexStringWithInteger(location)];
+    [string appendString:hexStringWithInteger(height)];
+    [string appendString:hexStringWithInteger(age)];
+    [string appendString:hexStringWithInteger(sex)];
+    [string appendString:hexStringWithInteger(1)];
+    
+    
+    NSData *data = hexToBytes(string);
+    NSLog(@"data is %@ data is %@ ",string,data);
+    [_interface->_BTHelper centralManagerSendData:data ToPeripheral:_interface->_BTHelper.connectedPeripheral];
+}
+
+@end

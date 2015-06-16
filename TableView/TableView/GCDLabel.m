@@ -7,6 +7,8 @@
 //
 
 #import "GCDLabel.h"
+#import <CoreText/CoreText.h>
+#import "AdditionsMacro.h"
 
 CTTextAlignment CTTextAlignmentFromUITextAlignment(NSTextAlignment alignment) {
 	switch (alignment) {
@@ -16,6 +18,12 @@ CTTextAlignment CTTextAlignmentFromUITextAlignment(NSTextAlignment alignment) {
 		default: return kCTNaturalTextAlignment;
 	}
 }
+
+@interface GCDLabel ()
+
+@property (nonatomic, assign) CGSize testSize;
+
+@end
 
 @implementation GCDLabel {
 	UIImageView *labelImageView;
@@ -35,32 +43,97 @@ CTTextAlignment CTTextAlignmentFromUITextAlignment(NSTextAlignment alignment) {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        rangeArr = [[NSMutableArray alloc] init];
-        highlightColor = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                          COLOR_URL,kRegexHighlightViewTypeAccount,
-                          COLOR_URL,kRegexHighlightViewTypeURL,
-                          COLOR_URL,kRegexHighlightViewTypeTopic,nil];
-		labelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		labelImageView.contentMode = UIViewContentModeScaleAspectFill;
-		labelImageView.tag = NSIntegerMin;
-		labelImageView.clipsToBounds = YES;
-		[self addSubview:labelImageView];
-
-		highlightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		highlightImageView.contentMode = UIViewContentModeScaleAspectFill;
-		highlightImageView.tag = NSIntegerMin;
-		highlightImageView.clipsToBounds = YES;
-		[self addSubview:highlightImageView];
-
-		self.userInteractionEnabled = YES;
-		self.backgroundColor = [UIColor whiteColor];
-		_textAlignment = NSTextAlignmentLeft;
-		_textColor = [UIColor blackColor];
-		_font = [UIFont systemFontOfSize:16];
-		_lineSpace = 5;
-	}
+        [self setUp];
+    }
     return self;
 }
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setUp];
+    }
+    return self;
+}
+
+-(void)setUp
+{
+    rangeArr = [[NSMutableArray alloc] init];
+    highlightColor = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                      COLOR_URL,kRegexHighlightViewTypeAccount,
+                      COLOR_URL,kRegexHighlightViewTypeURL,
+                      COLOR_URL,kRegexHighlightViewTypeTopic,nil];
+    labelImageView = [[UIImageView alloc] init];
+    labelImageView.contentMode = UIViewContentModeScaleAspectFit;
+    labelImageView.tag = NSIntegerMin;
+    labelImageView.clipsToBounds = YES;
+    [self addSubview:labelImageView];
+    
+    labelImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:labelImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:labelImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:labelImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:1]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:labelImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:1]];
+    
+//    highlightImageView = [[UIImageView alloc] init];
+//    highlightImageView.contentMode = UIViewContentModeScaleAspectFit;
+//    highlightImageView.tag = NSIntegerMin;
+//    highlightImageView.clipsToBounds = YES;
+//    [self addSubview:highlightImageView];
+//    
+//    highlightImageView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self addConstraint:[NSLayoutConstraint constraintWithItem:highlightImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+//    [self addConstraint:[NSLayoutConstraint constraintWithItem:highlightImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
+//    [self addConstraint:[NSLayoutConstraint constraintWithItem:highlightImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:1]];
+//    [self addConstraint:[NSLayoutConstraint constraintWithItem:highlightImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:1]];
+
+    
+    self.userInteractionEnabled = YES;
+    self.backgroundColor = [UIColor whiteColor];
+    _textAlignment = NSTextAlignmentLeft;
+    _textColor = [UIColor blackColor];
+    _font = [UIFont systemFontOfSize:16];
+    _lineSpace = 5;
+
+    
+    
+    
+    //
+    /**
+     *
+     *
+     *
+     */
+    //
+    self.testSize =  CGSizeMake(300, 50);
+}
+
+
+- (CGSize)sizeWithConstrainedToSize:(CGSize)size fromFont:(UIFont *)font1 lineSpace:(float)lineSpace fromString:(NSString *)str{
+    CGFloat minimumLineHeight = font1.pointSize,maximumLineHeight = minimumLineHeight+10, linespace = lineSpace;
+    CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)font1.fontName,font1.pointSize,NULL);
+    CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
+    
+    //Apply paragraph settings
+    CTParagraphStyleRef style = CTParagraphStyleCreate((CTParagraphStyleSetting[4]){
+        {kCTParagraphStyleSpecifierMinimumLineHeight,sizeof(minimumLineHeight),&minimumLineHeight},
+        {kCTParagraphStyleSpecifierMaximumLineHeight,sizeof(maximumLineHeight),&maximumLineHeight},
+        {kCTParagraphStyleSpecifierLineSpacing, sizeof(linespace), &linespace},
+        {kCTParagraphStyleSpecifierLineBreakMode,sizeof(CTLineBreakMode),&lineBreakMode}
+    },4);
+    NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)font,(NSString*)kCTFontAttributeName,(__bridge id)style,(NSString*)kCTParagraphStyleAttributeName,nil];
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:str attributes:attributes];
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef) string);
+    CGSize result = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,0), NULL, size, NULL);
+    CFRelease(framesetter);
+    CFRelease(font);
+    CFRelease(style);
+    string = nil;
+    attributes = nil;
+    return result;
+}
+
 
 - (void)setFrame:(CGRect)frame{
 	if (!CGSizeEqualToSize(labelImageView.image.size, frame.size)) {
@@ -113,13 +186,26 @@ CTTextAlignment CTTextAlignmentFromUITextAlignment(NSTextAlignment alignment) {
 	if (!highlighting && [text isEqualToString:_text]&&labelImageView.image!=nil) {
 		return;
 	}
+    
+    
+    //
+    /**
+     *
+     *
+     *
+     */
+    //
+    self.testSize = [self sizeWithConstrainedToSize:CGSizeMake(320, 1000) fromFont:[UIFont systemFontOfSize:15] lineSpace:2 fromString:text];
+    
+    [self invalidateIntrinsicContentSize];
+    
 	dispatch_async(dispatch_queue_create(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		NSString *temp = text;
 		_text = text;
-		UIGraphicsBeginImageContextWithOptions(self.frame.size, YES, 0);
+		UIGraphicsBeginImageContextWithOptions(self.testSize, YES, 0);
 		CGContextRef context = UIGraphicsGetCurrentContext();
 		[self.backgroundColor set];
-		CGContextFillRect(context, CGRectMake(0, 0, self.frame.size.width, self.frame.size.height));
+		CGContextFillRect(context, CGRectMake(0, 0,self.testSize.width, self.testSize.height));
 		CGContextSetTextMatrix(context,CGAffineTransformIdentity);
 		CGContextTranslateCTM(context,0,([self bounds]).size.height);
 		CGContextScaleCTM(context,1.0,-1.0);
@@ -258,6 +344,11 @@ CTTextAlignment CTTextAlignmentFromUITextAlignment(NSTextAlignment alignment) {
 	[rangeArr removeAllObjects];
 	rangeArr = nil;
 	[super removeFromSuperview];
+}
+
+-(CGSize)intrinsicContentSize
+{
+    return self.testSize;
 }
 
 @end

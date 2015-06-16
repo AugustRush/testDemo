@@ -1,0 +1,80 @@
+
+//
+//  UserInfoListDao.m
+//  DZB
+//
+//  Created by 两元鱼 on 15/2/5.
+//  Copyright (c) 2015年 FFLtd. All rights reserved.
+//
+
+#import "UserInfoListDao.h"
+
+@implementation UserInfoListDao
+
+- (void)insertUserInfoListToDB:(NSDictionary *)tDict
+{
+    [self.databaseQueue inDatabase:^(FMDatabase *db){
+        NSString *sql = nil;
+        sql = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES('%@','%@','%@','%@','%@','%@','%@', '%@', '%@', '%@', '%@', '%@')",TableName(kUserInfoList_Table), kUserInfoType, kUserInfoSuperId, kUserInfoId, kUserInfoNickName, kUserInfoSex, kUserInfoPhone, kUserInfoEmail, kUserInfoRealName, kUserInfoHeader, kUserInfoAge, kUserInfoHeight, kUserInfoLastTime, tDict[@"userInfoType"], tDict[@"userInfoSuperId"], tDict[@"userInfoId"], tDict[@"userInfoNickName"], tDict[@"userInfoSex"], tDict[@"userInfoPhone"], tDict[@"userInfoEmail"], tDict[@"userRealName"], tDict[@"userInfoHeader"], tDict[@"userInfoAge"], tDict[@"userInfoHeight"], tDict[@"userRealLastTime"]];
+        [db executeUpdate:sql];
+        DLog(@"msg_lyywhg:private insert error %@", [db lastError]);
+    }];
+}
+- (void)deleteAllUserInfoFromDB
+{
+    [self.databaseQueue inDatabase:^(FMDatabase *db){
+        NSString *sql = nil;
+        sql = [NSString stringWithFormat:@"truncate table %@",TableName(kUserInfoList_Table)];
+        [db executeUpdate:sql];
+        DLog(@"msg_lyywhg:private insert error %@", [db lastError]);
+    }];
+
+    
+}
+- (void)updateUserInfoListToDB:(NSDictionary *)tDict
+{
+    [self.databaseQueue inDatabase:^(FMDatabase *db){
+        NSString *sql = nil;
+        sql = [NSString stringWithFormat:@"UPDATE %@ SET %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@', %@='%@',  where %@ = '%@' and %@ = '%@'",TableName(kUserInfoList_Table), kUserInfoType, tDict[@"userInfoType"], kUserInfoSuperId,  tDict[@"userInfoSuperId"], kUserInfoId, tDict[@"userInfoId"], kUserInfoNickName, tDict[@"userInfoNickName"],  kUserInfoSex, tDict[@"userInfoSex"], kUserInfoPhone, tDict[@"userInfoPhone"], kUserInfoEmail, tDict[@"userInfoEmail"],  kUserInfoRealName,  tDict[@"userRealName"], kUserInfoHeader, tDict[@"userInfoHeader"], kUserInfoAge,  tDict[@"userInfoAge"], kUserInfoHeight, tDict[@"userInfoHeight"], kUserInfoLastTime, tDict[@"userRealLastTime"], kUserInfoId, tDict[@"userInfoId"], kUserInfoSuperId, tDict[@"userInfoSuperId"]];
+        [db executeUpdate:sql];
+        DLog(@"msg_lyywhg:private update error %@", [db lastError]);
+    }];
+}
+- (NSMutableArray *)getUserInfoListFromDBById:(NSDictionary *)tDict
+{
+    __block NSMutableArray *tList = [[NSMutableArray alloc] init];
+    [self.databaseQueue inDatabase:^(FMDatabase *db){
+        NSString *sql = [NSString stringWithFormat: @"SELECT * FROM %@ where %@ = '%@' order by %@ asc", TableName(kUserInfoList_Table), kUserInfoSuperId, tDict[@"userInfoSuperId"], kUserInfoId];
+        FMResultSet * results;
+        results = [db executeQuery:sql];
+        while ([results next])
+        {
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:[results stringForColumn:kUserInfoType] forKey:@"userInfoType"];
+            [dict setObject:[results stringForColumn:kUserInfoId] forKey:@"userInfoId"];
+            [dict setObject:[results stringForColumn:kUserInfoNickName] forKey:@"userInfoNickName"];
+            [dict setObject:[results stringForColumn:kUserInfoSex] forKey:@"userInfoSex"];
+            [dict setObject:[results stringForColumn:kUserInfoPhone] forKey:@"userInfoPhone"];
+            [dict setObject:[results stringForColumn:kUserInfoEmail] forKey:@"userInfoEmail"];
+            [dict setObject:[results stringForColumn:kUserInfoRealName] forKey:@"userRealName"];
+            [dict setObject:[results stringForColumn:kUserInfoHeader] forKey:@"userInfoHeader"];
+            [dict setObject:[results stringForColumn:kUserInfoAge] forKey:@"userInfoAge"];
+            [dict setObject:[results stringForColumn:kUserInfoHeight] forKey:@"userInfoHeight"];
+            [dict setObject:[results stringForColumn:kUserInfoLastTime] forKey:@"userRealLastTime"];
+            [tList addObject:dict];
+        }
+        [results close];
+        DLog(@"msg_lyywhg:private get error %@", [db lastError]);
+    }];
+    return tList;
+}
+- (void)deleteUserInfoListById:(NSDictionary *)tDict
+{
+    [self.databaseQueue inDatabase:^(FMDatabase *db){
+        
+        NSString *sqlstr = [NSString stringWithFormat:@"DELETE FROM %@ where %@ = %@ and %@ = '%@'", TableName(kUserInfoList_Table), kUserInfoId, tDict[@"userInfoId"], kUserInfoSuperId, tDict[@"userInfoSuperId"]];
+        [db executeUpdate:sqlstr];
+    }];
+}
+
+@end

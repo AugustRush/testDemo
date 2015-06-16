@@ -1,0 +1,131 @@
+//
+//  RegistFirstViewController.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-26.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "RegistFirstViewController.h"
+#import "RegistSecondViewController.h"
+#import "NSObject+CommanHelp.h"
+@interface RegistFirstViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
+@property (weak, nonatomic) IBOutlet UILabel *countryLb;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UIButton *nextBt;
+
+@end
+
+@implementation RegistFirstViewController
+#pragma mark - life cycle methods
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"填写手机号";
+    self.navigationController.navigationBarHidden = NO;
+    [self.view setBackgroundColor:UIColorRef(233, 233, 233)];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0.0, 0.0, 20, 20);
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    temporaryBarButtonItem.style = UIBarButtonItemStylePlain;
+    self.navigationItem.leftBarButtonItem = temporaryBarButtonItem;
+
+    [self.countryLb  mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@65);
+        make.height.equalTo(@43);
+    }];
+    [self.countryLb.layer setBorderWidth:1];
+    [self.countryLb.layer setBorderColor:UIColorRef(212, 212, 212).CGColor];
+    [self.countryLb.layer setCornerRadius:2];
+    [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@43);
+    }];
+    
+    [self.bgImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@43);
+    }];
+    
+    self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
+    [self.phoneTextField becomeFirstResponder];
+    self.phoneTextField.delegate = self;
+    [self.phoneTextField addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+#pragma mark UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+
+-(void)textEditingChanged:(UITextField *)textField
+{
+    if ([textField.text length] > 11)
+    {
+        textField.text = [textField.text substringToIndex:11];
+    }
+}
+
+
+
+
+#pragma mark self action
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(IBAction)nextAction:(id)sender
+{
+    
+    if ([CommanHelp isStringNULL:self.phoneTextField.text])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"警告" message:@"手机号不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    else if (![CommanHelp isMobileNumber:self.phoneTextField.text])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"账号错误" message:@"请输入正确的手机号" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:self.phoneTextField.text forKey:USERPHONENUMBER];
+    RegistSecondViewController * registSecondVC = [[RegistSecondViewController alloc] initWithNibName:@"RegistSecondViewController" bundle:nil];
+    registSecondVC.phoneNumStr = [NSString stringWithFormat:@"+86%@",self.phoneTextField.text];
+
+    [self.navigationController pushViewController:registSecondVC animated:YES];
+}
+
+@end

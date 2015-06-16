@@ -1,0 +1,385 @@
+//
+//  DatabaseService.h
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-3-18.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Helpers.h"
+#import "FriendInfoEntity.h"
+#import "NoticeEntity.h"
+
+
+
+
+
+
+#pragma mark -
+#pragma mark 数据库业务服务操作状态
+typedef enum {
+    OperationFinish,
+    OperationProcess,
+    OperationException
+}DatabaseServiceOperationState;
+
+
+#pragma mark -
+#pragma mark 数据库业务服务操作协议
+@protocol DatabaseServiceDelegate <NSObject>
+
+@optional
+-(id)databaseServiceOperation:(NSDictionary *)userInfo
+                        state:(DatabaseServiceOperationState)state;
+
+
+@end
+
+
+@class UserInfoEntity;
+@class UserDataEntity;
+@class UserPraiseEntity;
+@class JDUserInfoEntity;
+
+
+
+
+
+#pragma mark -
+#pragma mark 数据库业务服务
+@interface DatabaseService : NSObject
+
+@property(nonatomic,weak)id<DatabaseServiceDelegate> target;
+
++ (instancetype)defaultDatabaseService;
+
+
+
+-(void)save200DataInfo:(NSString *)uid;
+
+#pragma mark -
+#pragma mark jd用户
+- (int)saveJDUser:(JDUserInfoEntity *)user;
+
+- (JDUserInfoEntity *)getJDUserByUid:(NSString *)uid;
+
+#pragma mark    用户数据 userData
+/**
+ *  根据用户id，分页号码，分页数获取用户数据
+ *
+ *  @param uid    用户id
+ *  @param pageId 分页号码
+ *  @param cPP    分页数
+ *
+ *  @return dataList
+ */
+-(NSArray *)getUserDataByUid:(NSString *)uid
+                      pageId:(int)pageId
+                countPerPage:(int)cPP;
+/**
+ *  根据用户id 获取 数据总量
+ *
+ *  @param uid 用户id
+ *
+ *  @return 数据总量
+ */
+-(int)getDataCountByUid:(NSString *)uid;
+
+/**
+ * @brief   保存用户数据
+ *
+ * @param   dataList 当前用户id
+ * @return  0保存失败，1保存成功
+ */
+-(int)saveUserData:(NSArray *)dataList;
+
+
+
+/**
+ * @brief   保存单条用户数据
+ *
+ * @param   userData 用户数据对象
+ * @return  0保存失败，1保存成功
+ */
+-(int)saveSingleUserData:(UserDataEntity *)userData;
+
+
+/**
+ * @brief   保存注册时用户数据
+ *
+ * @param   userData 用户数据对象
+ * @return  0保存失败，1保存成功
+ */
+-(int)saveRegUserData:(UserDataEntity *)userData;
+
+
+
+
+
+
+
+
+-(NSDictionary *)getDayDatasByDate:(NSDate *)targetDate
+                     userDataByUid:(NSString *)uid;
+-(NSDictionary *)getWeek:(NSDate *)targetDate
+           userDataByUid:(NSString *)uid;
+-(NSDictionary *)getMonth:(NSDate *)targetDate
+            userDataByUid:(NSString *)uid;
+
+-(NSDictionary *)getYear:(NSDate *)targetDate
+           userDataByUid:(NSString *)uid;
+
+
+/**
+ * @brief   根据用户userId获取UserData数据
+ *
+ * @param   uid 目标用户userId
+ * @return  UserData 列表：元素类型UserDataEntity
+ */
+-(NSArray *)getUserDataByUid:(NSString *)uid;
+
+/**
+ * @brief   根据用户userId获取最后一条UserData数据
+ *
+ * @param   uid 目标用户userId num:最后第几条
+ * @return  UserData 对象
+ */
+-(UserDataEntity *)getUserDataByUid:(NSString *)uid
+                                num:(int)num;
+
+/**
+ * @brief   根据uid获得用户
+ *
+ * @param   uid 目标用户id
+ * @return  结果对象: 元素类型UserInfoEntity
+ */
+- (UserInfoEntity *)getUserByUid:(NSString *)uid;
+
+
+/**
+ * @brief   根据用户userId获取最后一条UserData数据
+ *
+ * @param   uid 目标用户userId date:日期
+ * @return  UserData 对象
+ */
+-(UserDataEntity *)getUserDataByUid:(NSString *)uid
+                               date:(NSString *)checkDate;
+
+
+/**
+ * @brief   根据用户userId获取最后一条UserData数据
+ *
+ * @param   uid 目标用户userId dataId:数据id
+ * @return  UserData 对象 列表
+ */
+-(NSArray *)getUserDataByUid:(NSString *)uid
+                      dataId:(NSString *)dataId;
+
+
+
+/**
+ * @brief   根据用户userId获取最后一条UserData数据
+ *
+ * @param   uid 目标用户userId num:最后几条
+ * @return  UserData 对象列表
+ */
+-(NSArray *)getLastUserDataListByUid:(NSString *)uid
+                                 num:(int)num;
+
+/**
+ * @brief   根据用户dataId获取UserData数据
+ *
+ * @param   dataId:数据id
+ * @return  UserData 对象 列表
+ */
+-(NSArray *)getUserDataByDataId:(NSString *)dataId;
+
+/**
+ *  根据数据id删除数据
+ *
+ *  @param dataId 数据id
+ *  @return  0失败，1成功
+ */
+-(int)deleteDataByDid:(NSString *)dataId;
+
+
+#pragma mark    用户信息 userInfo
+/**
+ * @brief   获取本机用户列表
+ *
+ * @param   uid 当前用户id
+ * @return  结果列表: 元素类型UserInfoEntity
+ */
+- (NSArray *)getLocalUserList:(NSString *)uid;
+
+
+/**
+ * @brief   保存登录用户
+ *
+ * @param   user 用户信息对象
+ * @return  0保存失败，1保存成功，2其他状况
+ */
+- (int)saveLoginUser:(UserInfoEntity *)user;
+
+/**
+ *  删除用用户
+ *
+ *  @param uid 用户id
+ *
+ *  @return 0失败，1成功
+ */
+- (int)deleteUser:(NSString *)uid;
+
+
+
+#pragma mark    赞／激励／提醒称重人
+/**
+ *  根据主userId查询 赞／激励／提醒称重人 列表
+ *
+ *  @param userId 主userId
+ *  @param type   1：赞 ，2：激励 3:提醒称重 4.全部
+ *
+ *  @return
+ */
+-(NSArray *)getPariseUserListbyUserId:(NSString *)userId
+                                 type:(NSString *)tp;
+
+/**
+ *  保存PariseUserList
+ *
+ *  @param pUserList PariseUser 对象列表
+ *  @param uid       主用户id
+ *
+ *  @return  0失败，1成功
+ */
+-(int)savePariseUserList:(NSArray *)pUserList uid:(NSString *)uid;
+
+
+
+#pragma mark    好友信息 friendInfo
+/**
+ * @brief   获取用户好友列表
+ *
+ * @param   uid 用户id
+ * @return  结果列表: 元素类型FriendInfoEntity
+ */
+- (NSArray *)getUserFriendList:(NSString *)uid;
+
+
+/**
+ *  根据用户id 和 好友id 查询好友
+ *
+ *  @param uid      用户id
+ *  @param memidatt 好友id
+ *
+ *  @return 结果列表: 元素类型FriendInfoEntity
+ */
+- (NSArray *)getUserFriendListByUid:(NSString *)uid
+                           memidatt:(NSString *)memidatt;
+
+
+
+/**
+ * @brief   获取用户非好友列表
+ *
+ * @param   uid 用户id
+ * @return  结果列表: 元素类型UserInfoEntity
+ */
+- (NSArray *)getUserARFriendList:(NSString *)uid;
+
+
+
+/**
+ * @brief  保存friendList
+ *
+ * @param  friendList 好友对象数组
+ * @return 0:失败，1:成功
+ */
+- (int)saveFriendList:(NSArray *)friendList userId:(NSString *)uid;
+
+/**
+ * @brief  删除friend
+ *
+ * @param  fEntity 好友对象
+ * @return 0:失败，1:成功
+ */
+- (int)deleteFriend:(FriendInfoEntity *)fEntity;
+
+/**
+ *  更新好有信息
+ *
+ *  @param fEntity 好有对象
+ * @return 0:失败，1:成功
+ */
+-(int)updateFriend:(FriendInfoEntity *)fEntity;
+
+
+#pragma mark    建议回复 Suggest
+/**
+ * @brief  保存Suggests
+ *
+ * @param  suggestList建议及回复信息对象数组  uid用户id
+ * @return 0:失败，1:成功
+ */
+- (int)saveSuggest:(NSArray *)suggestList uid:(NSString *)uid;
+
+/**
+ * @brief  根据uid 获取 Suggests
+ *
+ * @param  用户id
+ * @return Suggests列表
+ */
+- (NSArray *)getSuggestListByUiduid:(NSString *)uid;
+
+
+
+
+#pragma mark -
+#pragma mark Notice  时间提示信息
+
+/**
+ * @brief  保存Notice
+ *
+ * @param  noticeList建议及回复信息对象数组  uid用户id
+ * @return 0:失败，1:成功
+ */
+- (int)saveNotices:(NSArray *)noticeList uid:(NSString *)uid;
+
+/**
+ * @brief  根据uid 获取 Notices
+ *
+ * @param  用户id
+ * @return Notice列表
+ */
+- (NSArray *)getNoticeListByUid:(NSString *)uid;
+
+
+/**
+ * @brief  根据uid 获取 Notices
+ *
+ * @param  用户id
+ * @return Notice对象
+ */
+- (NoticeEntity *)getNowNoticeByUid:(NSString *)uid;;
+
+#pragma mark -
+#pragma mark UserDeviceInfo  用户与设备关系
+
+/**
+ * @brief  保存UserDeviceInfo
+ *
+ * @param  UserDeviceInfoList 用户与设备关系对象数组
+ * @return 0:失败，1:成功
+ */
+- (int)saveUserDeviceInfos:(NSArray *)userDeviceInfoList uid:(NSString *)uid;
+
+/**
+ * @brief  根据uid 获取 UserDeviceInfos
+ *
+ * @param  用户id
+ * @return Notice列表
+ */
+- (NSArray *)getUserDeviceInfoListByUid:(NSString *)uid;
+
+@end

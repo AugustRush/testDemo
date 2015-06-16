@@ -7,21 +7,25 @@
 //
 
 #import "TableViewController.h"
+#import "TableViewCell.h"
 
 @interface TableViewController ()
+
+@property (nonatomic, strong) NSArray *texts;
 
 @end
 
 @implementation TableViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.texts = @[@"qwertyuiopasdfghj\nklzxcvbnmwfkjasdfsd\nahfkjsahdfjskad\njfksjdfksdkf\nksdfksdf",@"test",@"q934587q9845kjasdhkfasjhdfkahsdkjhfaildfkasjdhfjkashdkfjaskdhfkasjdfkasjdfkasdfhkasjdfkdajsfhkasjdhfjksdajkfsdkahf"];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.estimatedRowHeight = 50;
+    self.tableView.rowHeight = -1;
+    [self.tableView registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"TableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +36,22 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return 100;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    cell.GCDlabel.text = self.texts[indexPath.row%3];
+    cell.GCDlabel.textColor = [UIColor blackColor];
+    cell.GCDlabel.font = [UIFont systemFontOfSize:15];
+    cell.GCDlabel.lineSpace = 2;
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

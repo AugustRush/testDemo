@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TableViewController.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+- (IBAction)pushToTable:(id)sender {
+    TableViewController *table = [[TableViewController alloc] initWithNibName:@"TableViewController" bundle:nil];
+    [self presentViewController:table animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

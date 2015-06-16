@@ -1,0 +1,15 @@
+//
+//  GuidView.h
+//  BodyScaleProduction
+//
+//  Created by Cloud_Ding on 14-4-3.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface GuidView : UIView <UIScrollViewDelegate>
+
+@property (nonatomic, strong)UIScrollView *scrollView;
+
+@end

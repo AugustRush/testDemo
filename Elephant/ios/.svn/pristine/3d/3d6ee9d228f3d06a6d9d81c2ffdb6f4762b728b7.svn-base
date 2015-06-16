@@ -1,0 +1,24 @@
+//
+//  BodyScaleBTInterface.h
+//  BlueToothDemo
+//
+//  Created by August on 14/12/4.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "BlueToothHelper.h"
+
+@interface BodyScaleBTInterface : NSObject
+
++(void)instanceWeightDataWithHandler:(void(^)(NSError *error, NSNumber *weight))handler;
+
++(void)selectUserMeasureWithLocation:(NSInteger)location
+                              height:(NSInteger)height
+                                 age:(NSInteger)age
+                                 sex:(NSInteger)sex
+                          ackHandler:(void(^)(NSError *error))ackHandler
+                   completionHandler:(void(^)(NSError *error, NSDictionary *response))handler
+                    extraDataHandler:(void(^)(NSError *error, NSDictionary *extraInfo))extraHandler;
+
+@end

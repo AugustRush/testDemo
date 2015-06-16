@@ -1,0 +1,29 @@
+//
+//  UserManagerCell.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-29.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "UserManagerCell.h"
+
+@implementation UserManagerCell
+
+- (void)awakeFromNib {
+    // Initialization code
+    NSString * imgPath = [NSString stringWithFormat:@"%@/%@.%@",[CommanHelp getDocmentsDirectory],HEADERIMAGE,@"png"];
+    [self.headBt setWithBigHeaderView:imgPath];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+- (void)updateInfo:(NSDictionary *)dic
+{
+   
+    self.headBt.userInteractionEnabled = NO;
+}
+@end

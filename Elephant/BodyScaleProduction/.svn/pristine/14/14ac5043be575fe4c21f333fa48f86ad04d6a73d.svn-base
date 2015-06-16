@@ -1,0 +1,648 @@
+//
+//  AQPickerView.m
+//  AQPickerView
+//
+//  Created by Zhanghao on 6/5/14.
+//  Copyright (c) 2014 Zhanghao. All rights reserved.
+//
+
+#import "AQPickerView.h"
+
+static CGFloat kPickerViewHeight = 180;
+static const CGFloat kTitleWidth = 100;
+static const CGFloat kAccessorryViewHeight = 44;
+static const CGFloat kRowHeight = 44;
+static const NSInteger kYearCount = 100;
+static const NSInteger kYearPadding = 10;
+static const NSInteger kDefaultAge = 25;
+static const NSInteger kminAge = 10;
+
+#define iOS7                    ([[[UIDevice currentDevice] systemVersion] integerValue] >= 7)
+#define Button_Normal_Color     [UIColor clearColor]
+#define Button_Highlight_Color  [UIColor clearColor]
+#define Accessory_View_Color    [UIColor colorWithWhite:1 alpha:0.5]
+#define iOS7_Text_Color         [UIColor colorWithWhite:90 / 255.0 alpha:0.5]
+#define iOS6_Text_Color         [UIColor blackColor]
+#define Animation_Duration      0.25
+
+// 获取当前年
+static inline NSInteger AQYearFromDate(NSDate *date)
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendarUnit calendarUnit = NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit | NSWeekOfYearCalendarUnit;
+    return [[calendar components:calendarUnit fromDate:date] year];
+}
+
+// 获取指定日期该月总天数
+static inline NSInteger AQDaysFromDate(NSDate *date)
+{
+    NSRange dayRange = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:date];
+    return dayRange.length;
+}
+
+static inline NSDate *AQMakeDate(NSInteger year, NSInteger month, NSInteger day)
+{
+    NSDateComponents *dc = [[NSDateComponents alloc] init];
+    dc.year = year;
+    dc.month = month;
+    dc.day = day;
+    return [[NSCalendar currentCalendar] dateFromComponents:dc];
+}
+
+@interface AQPickerViewButton : UIButton
+
+@end
+
+@implementation AQPickerViewButton
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    if (highlighted) {
+        self.backgroundColor = Button_Highlight_Color;
+    } else {
+        self.backgroundColor = Button_Normal_Color;
+    }
+}
+
+@end
+
+@interface AQLine : UIView
+
+@end
+
+@implementation AQLine
+
+- (instancetype)initWithFrame:(CGRect)frame colors:(NSArray *)colors{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
+    }
+    return self;
+}
+
+@end
+
+@interface AQPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (nonatomic, strong) UIPickerView *pickerView;
+
+// Accessory view
+@property (nonatomic, strong) UIView *accessoryView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) AQPickerViewButton *cancelButton;
+@property (nonatomic, strong) AQPickerViewButton *saveButton;
+
+// Indicator view
+@property (nonatomic, strong) UIView *indicatorView;
+@property (nonatomic, strong) UILabel *yearLabel;
+@property (nonatomic, strong) UILabel *monthLabel;
+@property (nonatomic, strong) UILabel *dayLabel;
+
+// Data source
+@property (nonatomic, strong) NSArray *years;
+@property (nonatomic, strong) NSArray *months;
+@property (nonatomic, strong) NSArray *days;
+
+@property (nonatomic, assign) AQPickerMode pickerMode;
+@property (nonatomic, assign, readwrite) BOOL didShow;
+@property (nonatomic, assign) BOOL isShowing;
+@property (nonatomic, assign) BOOL didRemoveSeperatorLine;
+@property (nonatomic, assign) NSInteger initialAge;
+
+@property (nonatomic, assign) NSInteger initialMonth;
+@property (nonatomic, assign) NSInteger initialDay;
+
+@end
+
+@implementation AQPickerView
+
+#pragma mark - Designated Initilizer Methods
+
+- (id)initWithFrame:(CGRect)frame initialAge:(NSInteger)initialAge initialMonth:(NSInteger)initialMonth initialDay:(NSInteger)initialDay {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _initialAge = initialAge;
+        _initialMonth = initialMonth;
+        _initialDay = initialDay;
+        [self initData];
+        [self initViews];
+        self.accessoryView.hidden = YES;
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame initialAge:kDefaultAge initialMonth:1 initialDay:1];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _initialAge = kDefaultAge;
+        [self initData];
+        [self initViews];
+    }
+    return self;
+}
+
+#pragma mark - View Lifecycle Methods
+
+- (void)didMoveToSuperview {
+    CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds);
+    CGFloat height = kAccessorryViewHeight + kPickerViewHeight;
+    CGFloat originY = CGRectGetHeight([UIScreen mainScreen].bounds);
+    CGRect frame = CGRectMake(0, originY, width, height);
+    self.frame = frame;
+}
+
+#pragma mark - Public Methods
+
+- (void)show {
+    if (self.isShowing) {
+        return;
+    }
+
+    if (!self.didShow) {
+
+        if (self.superview) {
+            self.isShowing = YES;
+
+            CGFloat originY = CGRectGetMaxY(self.superview.bounds);
+            self.frame = CGRectMake(0, originY, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+            CGRect frame = self.frame;
+            frame.origin.y -= CGRectGetHeight(self.bounds);
+            [UIView animateWithDuration:Animation_Duration animations:^{
+                self.frame = frame;
+            } completion:^(BOOL finished) {
+                self.didShow = YES;
+                self.isShowing = NO;
+            }];
+        }
+    }
+}
+
+- (void)dismiss {
+    if (self.isShowing) {
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(pickerViewWillDismiss:)]) {
+        [self.delegate pickerViewWillDismiss:self];
+    }
+    
+    if (self.didShow) {
+        self.isShowing = YES;
+        CGRect frame = self.frame;
+        frame.origin.y += CGRectGetHeight(self.bounds);
+        [UIView animateWithDuration:Animation_Duration animations:^{
+            self.frame = frame;
+        } completion:^(BOOL finished) {
+            self.didShow = NO;
+            self.isShowing = NO;
+            
+            if ([self.delegate respondsToSelector:@selector(pickerViewDidDismiss:)]) {
+                [self.delegate pickerViewDidDismiss:self];
+            }
+        }];
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)initData {
+    self.pickerMode = AQPickerModeYearMonthDay;
+    self.didShow = NO;
+    self.isShowing = NO;
+    self.didRemoveSeperatorLine = NO;
+    
+    if (!iOS7) {
+        kPickerViewHeight = 216;
+    }
+    
+    NSInteger year = AQYearFromDate([NSDate date]);
+    NSMutableArray *years = [NSMutableArray array];
+    
+    // 默认年龄区间为10-100岁，初始年龄设为25岁
+    NSInteger endYear = (year - kYearPadding) > 0 ? (year - kYearPadding) : 0;
+    NSInteger startYear = endYear - (kYearCount - kYearPadding);
+    startYear = (startYear > 0) ? startYear : 0;
+    
+    for (int i = (int)startYear; i <= endYear; i++) {
+        [years addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    self.years = years;
+    
+    NSMutableArray *months = [NSMutableArray array];
+    for (int i = 1; i <= 12; i++) {
+        [months addObject:[NSString stringWithFormat:@"%02d", i]];
+    }
+    self.months = months;
+    
+    NSInteger initialYear = self.years.count - self.initialAge;
+    NSDate *startDate = AQMakeDate(initialYear, _initialMonth, _initialDay);
+    
+    NSInteger maxDay = AQDaysFromDate(startDate);
+    NSMutableArray *days = [NSMutableArray array];
+    for (int i = 1; i <= maxDay; i++) {
+        [days addObject:[NSString stringWithFormat:@"%02d", i]];
+    }
+    self.days = days;
+}
+
+- (void)initViews {
+    self.backgroundColor = [UIColor clearColor];
+    
+    CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds);
+    CGFloat height = kAccessorryViewHeight + kPickerViewHeight;
+    CGFloat originY = CGRectGetHeight([UIScreen mainScreen].bounds);
+    CGRect frame = CGRectMake(0, originY, width, height);
+    self.frame = frame;
+    
+    [self addSubview:self.accessoryView];
+    [self.accessoryView addSubview:self.titleLabel];
+    [self.accessoryView addSubview:self.cancelButton];
+    [self.accessoryView addSubview:self.saveButton];
+    
+    [self addSubview:self.pickerView];
+    
+    CGFloat lineHeight = CGRectGetHeight(self.pickerView.bounds) / 2;
+    CGFloat lineWidth = CGRectGetWidth(self.bounds);
+    UIColor *startColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
+    UIColor *endColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    
+    for (int i = 0; i < 4; i++) {
+        CGFloat x = 0;
+        CGFloat y = 0;
+        NSArray *colors = nil;
+        
+        switch (i) {
+            case 0: {
+                x = lineWidth / 3;
+                y = 0;
+                colors = @[startColor, endColor];
+            }
+                break;
+            case 1: {
+                x = lineWidth / 3;
+                y = lineHeight;
+                colors = @[endColor, startColor];
+            }
+                break;
+            case 2: {
+                x = lineWidth / 3 * 2;
+                y = 0;
+                colors = @[startColor, endColor];
+            }
+                break;
+            case 3: {
+                x = lineWidth / 3 * 2;
+                y = lineHeight;
+                colors = @[endColor, startColor];
+            }
+                break;
+            default:
+                break;
+        }
+        
+        UIView *seperatorLine = [[AQLine alloc] initWithFrame:CGRectMake(x, y, 1, lineHeight) colors:colors];
+        [self.pickerView addSubview:seperatorLine];
+    }
+    
+    UIView *pickerViewBgView = [[UIView alloc] initWithFrame:self.pickerView.frame];
+    pickerViewBgView.backgroundColor = [UIColor whiteColor];
+    [self insertSubview:pickerViewBgView atIndex:0];
+    
+    if (iOS7) {
+        [self.pickerView addSubview:self.indicatorView];
+    } else {
+        
+    }
+    
+    [self.indicatorView addSubview:self.yearLabel];
+    [self.indicatorView addSubview:self.monthLabel];
+    [self.indicatorView addSubview:self.dayLabel];
+    
+    [self.pickerView selectRow:(self.years.count + kminAge) - self.initialAge inComponent:0 animated:NO];
+    
+    [self.pickerView selectRow:_initialMonth - 1 inComponent:1 animated:NO];
+    [self.pickerView selectRow:_initialDay - 1 inComponent:2 animated:NO];
+}
+
+#pragma mark - Getter
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        CGFloat originX = (CGRectGetWidth(self.bounds) - kTitleWidth) / 2;
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX, 0, kTitleWidth, kAccessorryViewHeight)];
+        _titleLabel.backgroundColor = [UIColor clearColor];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont systemFontOfSize:18];
+    }
+    return _titleLabel;
+}
+
+- (UILabel *)yearLabel {
+    if (!_yearLabel) {
+        _yearLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kRowHeight, kRowHeight)];
+        _yearLabel.center = CGPointMake(76, CGRectGetMidY(self.indicatorView.bounds));
+        CGPoint center = _yearLabel.center;
+        _yearLabel.backgroundColor = [UIColor clearColor];
+        _yearLabel.textAlignment = NSTextAlignmentCenter;
+        _yearLabel.textColor = iOS7 ? (iOS7_Text_Color) : (iOS6_Text_Color);
+        _yearLabel.font = [UIFont boldSystemFontOfSize:22];
+        _yearLabel.text = @"年";
+        [_yearLabel sizeToFit];
+        _yearLabel.center = center;
+    }
+    return _yearLabel;
+}
+
+- (UILabel *)monthLabel {
+    if (!_monthLabel) {
+        _monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kRowHeight, kRowHeight)];
+        _monthLabel.center = CGPointMake(176, CGRectGetMidY(self.indicatorView.bounds));
+        CGPoint center = _monthLabel.center;
+        _monthLabel.backgroundColor = [UIColor clearColor];
+        _monthLabel.textAlignment = NSTextAlignmentCenter;
+        _monthLabel.textColor = iOS7 ? (iOS7_Text_Color) : (iOS6_Text_Color);
+        _monthLabel.font = [UIFont boldSystemFontOfSize:22];
+        _monthLabel.text = @"月";
+        [_monthLabel sizeToFit];
+        _monthLabel.center = center;
+    }
+    return _monthLabel;
+}
+
+- (UILabel *)dayLabel {
+    if (!_dayLabel) {
+        _dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kRowHeight, kRowHeight)];
+        _dayLabel.center = CGPointMake(290, CGRectGetMidY(self.indicatorView.bounds));
+        CGPoint center = _dayLabel.center;
+        _dayLabel.backgroundColor = [UIColor clearColor];
+        _dayLabel.textAlignment = NSTextAlignmentCenter;
+        _dayLabel.textColor = iOS7 ? (iOS7_Text_Color) : (iOS6_Text_Color);
+        _dayLabel.font = [UIFont boldSystemFontOfSize:22];
+        _dayLabel.text = @"日";
+        [_dayLabel sizeToFit];
+        _dayLabel.center = center;
+    }
+    return _dayLabel;
+}
+
+- (AQPickerViewButton *)cancelButton {
+    if (!_cancelButton) {
+        _cancelButton = [AQPickerViewButton buttonWithType:UIButtonTypeCustom];
+        _cancelButton.frame = CGRectMake(20, 5, 60, 34);
+        _cancelButton.layer.cornerRadius = 14;
+        [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_cancelButton setBackgroundColor:Button_Normal_Color];
+        [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelButton;
+}
+
+- (AQPickerViewButton *)saveButton {
+    if (!_saveButton) {
+        _saveButton = [AQPickerViewButton buttonWithType:UIButtonTypeCustom];
+        _saveButton.frame = CGRectMake(CGRectGetWidth(self.accessoryView.bounds) - 60 - 20, 5, 60, 34);
+        _saveButton.layer.cornerRadius = 14;
+        [_saveButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_saveButton setBackgroundColor:Button_Normal_Color];
+        [_saveButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _saveButton;
+}
+
+- (UIView *)accessoryView {
+    if (!_accessoryView) {
+        _accessoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), kAccessorryViewHeight)];
+        _accessoryView.backgroundColor = Accessory_View_Color;
+    }
+    return _accessoryView;
+}
+
+- (UIView *)indicatorView {
+    if (!_indicatorView) {
+        _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), kRowHeight)];
+        _indicatorView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.pickerView.bounds) / 2);
+        _indicatorView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
+        _indicatorView.layer.cornerRadius = 14;
+    }
+    return _indicatorView;
+}
+
+- (UIPickerView *)pickerView {
+    if (!_pickerView) {
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kAccessorryViewHeight, CGRectGetWidth(self.bounds), kPickerViewHeight)];
+        _pickerView.dataSource = self;
+        _pickerView.delegate = self;
+        _pickerView.showsSelectionIndicator = NO;
+    }
+    return _pickerView;
+}
+
+- (NSInteger)cYear {
+    NSInteger yearRow = [self.pickerView selectedRowInComponent:0];
+    NSInteger year = [self.years[yearRow] integerValue];
+    return year;
+}
+
+- (NSInteger)cMonth {
+    NSInteger monthRow = [self.pickerView selectedRowInComponent:1];
+    NSInteger month = [self.months[monthRow] integerValue];
+    return month;
+}
+
+- (NSInteger)cDay {
+    NSInteger dayRow = [self.pickerView selectedRowInComponent:2];
+    NSInteger day = [self.days[dayRow] integerValue];
+    return day;
+}
+
+#pragma mark - Setter
+
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    
+    if (_title) {
+        self.titleLabel.text = _title;
+        CGPoint center = self.titleLabel.center;
+        [self.titleLabel sizeToFit];
+        self.titleLabel.center = center;
+    }
+}
+
+#pragma mark - Actions
+
+- (void)cancelAction:(AQPickerViewButton *)button {
+    if ([self.delegate respondsToSelector:@selector(cancelButtonTapped:)]) {
+        [self.delegate cancelButtonTapped:self];
+    }
+    
+    [self dismiss];
+}
+
+- (void)saveAction:(AQPickerViewButton *)button {
+    if ([self.delegate respondsToSelector:@selector(savedWithYear:month:day:)]) {
+        NSInteger yearRow = [self.pickerView selectedRowInComponent:0];
+        NSInteger monthRow = [self.pickerView selectedRowInComponent:1];
+        NSInteger dayRow = [self.pickerView selectedRowInComponent:2];
+        NSInteger year = [self.years[yearRow] integerValue];
+        NSInteger month = [self.months[monthRow] integerValue];
+        NSInteger day = [self.days[dayRow] integerValue];
+        
+        [self.delegate savedWithYear:year month:month day:day];
+    }
+    [self dismiss];
+}
+
+#pragma mark - UIPickerViewDataSource Methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    NSInteger components = 0;
+    switch (self.pickerMode) {
+        case AQPickerModeYearMonthDay:
+            components = 3;
+            break;
+            
+        default:
+            break;
+    }
+    return components;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    NSInteger rows = 0;
+    switch (self.pickerMode) {
+        case AQPickerModeYearMonthDay: {
+            switch (component) {
+                case 0:
+                    rows = self.years.count;
+                    break;
+                case 1:
+                    rows = self.months.count;
+                    break;
+                case 2:
+                    rows = self.days.count;
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return rows;
+}
+
+#pragma mark - UIPickerViewDelegate Methods
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    CGFloat width = 0;
+    switch (self.pickerMode) {
+        case AQPickerModeYearMonthDay:
+            width = CGRectGetWidth(self.bounds) / 3;
+            break;
+        default:
+            break;
+    }
+    return width;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    CGFloat height = 0;
+    switch (self.pickerMode) {
+        case AQPickerModeYearMonthDay:
+            height = kRowHeight;
+            break;
+        default:
+            break;
+    }
+    return height;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    if (!self.didRemoveSeperatorLine) {
+        // iOS 7中移除分割线
+        if (iOS7) {
+            [[pickerView.subviews lastObject] removeFromSuperview];
+            [[pickerView.subviews lastObject] removeFromSuperview];
+        }
+        self.didRemoveSeperatorLine = YES;
+    }
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.textAlignment = NSTextAlignmentLeft;
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textColor = iOS7 ? (iOS7_Text_Color) : (iOS6_Text_Color);
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    
+    NSString *text = nil;
+    CGFloat width = 0;
+    switch (component) {
+        case 0:
+            if (row < self.years.count) {
+                width = 80;
+                text = self.years[row];
+            }
+            break;
+        case 1:
+            if (row < self.months.count) {
+                width = 60;
+                text = self.months[row];
+            }
+            break;
+        case 2:
+            if (row < self.days.count) {
+                width = 60;
+                text = self.days[row];
+            }
+            break;
+        default:
+            break;
+    }
+    
+    titleLabel.frame = CGRectMake(0, 0, width, kRowHeight);
+    titleLabel.text = text;
+    
+    return titleLabel;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (self.pickerMode) {
+        case AQPickerModeYearMonthDay: {
+            NSInteger selectedYear = [pickerView selectedRowInComponent:0];
+            NSInteger selectedMonth = [pickerView selectedRowInComponent:1];
+            
+            if (component != 2) {
+                // 选择年月控件，刷新日控件
+                NSInteger year = [self.years[selectedYear] integerValue];
+                NSInteger month = [self.months[selectedMonth] integerValue];
+                NSDate *date = AQMakeDate(year, month, 1);
+                NSInteger maxDay = AQDaysFromDate(date);
+                
+                NSMutableArray *days = [NSMutableArray array];
+                for (int i = 1; i <= maxDay; i++) {
+                    [days addObject:[NSString stringWithFormat:@"%02d", i]];
+                }
+                self.days = days;
+                
+                [pickerView reloadComponent:2];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+@end

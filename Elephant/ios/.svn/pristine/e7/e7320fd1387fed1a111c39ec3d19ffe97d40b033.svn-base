@@ -1,0 +1,18 @@
+//
+//  WelcomeViewController.h
+//  BodyScale
+//
+//  Created by cxx on 14-11-25.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface VisitorViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIImageView *iconImg;
+@property (weak, nonatomic) IBOutlet UIButton *visitor;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *login;
+@property (weak, nonatomic) IBOutlet UIButton *Regist;
+@end

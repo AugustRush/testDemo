@@ -1,0 +1,486 @@
+//
+//  SettingViewController.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-25.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "SettingViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "SKSTableView.h"
+#import "MyInfoModifyGenderCell.h"
+#import "MyInfoTableViewCell.h"
+#import "ModifyUserBaseInfoViewController.h"
+#import "BTModel.h"
+#import "AboutUsViewController.h"
+#import "UserFeedbackViewViewController.h"
+#import "UserHelpViewController.h"
+#import "AQAlertView.h"
+#import "SwitchThemeViewController.h"
+#import "ThemeTableViewCell.h"
+#import "ConnectingView.h"
+#import "SelectDeviceViewController.h"
+
+@interface SettingViewController ()
+
+@property (weak, nonatomic) IBOutlet SKSTableView *tableView;
+
+@property (nonatomic, strong) UILocalNotification *localNoti;
+@property (nonatomic, strong) UILocalNotification *localNoti2;
+@property (nonatomic, strong) UILocalNotification *localNoti3;
+@property (nonatomic, strong) UILocalNotification *localNoti4;
+@property (nonatomic, strong) UILocalNotification *localNoti5;
+@property (nonatomic, strong) UILocalNotification *localNoti6;
+
+@property (nonatomic, strong) NSDate *morningDate;
+@property (nonatomic, strong) NSDate *nightDate;
+@property (nonatomic, strong) NSDate *now;
+@property (nonatomic, strong) NSDate *now2;
+@property (nonatomic, assign) BOOL isUpdating;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+
+@end
+
+@implementation SettingViewController {
+    NSArray *rowTitles;
+    
+    ConnectingView *_connectingView;
+}
+
+- (void)dealloc {
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    
+    [[InterfaceModel sharedInstance] updateUserSettingWithCallBack:nil];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        rowTitles = @[@[@"设置目标", @"提醒周期", @"重置", @"切换设备", @"主题"], @[@"版本更新", @"关于我们", @"用户反馈", @"帮助"]];
+        self.navigationItem.title = @"设置";
+        self.isUpdating = NO;
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)showConnectingAnimation {
+    _connectingView = [[[NSBundle mainBundle] loadNibNamed:@"ConnectingView" owner:self options:nil] firstObject];
+    [_connectingView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:_connectingView];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(dismissConnectingAnimation) userInfo:nil repeats:NO];
+}
+
+- (void)dismissConnectingAnimation {
+    [NSTimer scheduledTimerWithTimeInterval:1 target:_connectingView selector:@selector(removeFromSuperview) userInfo:nil repeats:NO];
+//    [_connectingView removeFromSuperview];
+    _connectingView = nil;
+}
+
+#pragma mark - UITableView Delegate and DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return rowTitles.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [rowTitles[section] count];
+}
+
+- (NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(SKSIndexPath *)indexPath {
+    if (indexPath.indexPath.row == 1) {
+        return 5;
+    } else
+        return 0;
+}
+
+- (UITableViewCell *)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(SKSIndexPath *)indexPath {
+    MyInfoModifyGenderCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"MyInfoModifyGenderCell" owner:self options:nil] lastObject];
+    if (indexPath.indexPath.section == 0 && indexPath.indexPath.row == 1) {
+        switch (indexPath.subRow) {
+            case 1:
+                [cell setContent:@"一天一次"];
+                break;
+            case 2:
+                [cell setContent:@"一天两次"];
+                break;
+            case 3:
+                [cell setContent:@"一周一次"];
+                break;
+            case 4:
+                [cell setContent:@"一周两次"];
+                break;
+            case 5:
+                [cell setContent:@"不提醒"];
+                break;
+            default:
+                break;
+        }
+    }
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // 主题cell
+    if (indexPath.section == 0 && indexPath.row == 4) {
+        ThemeTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"ThemeTableViewCell" owner:self options:nil] lastObject];
+        
+        cell.titleLabel.text = rowTitles[indexPath.section][indexPath.row];
+        
+        cell.arrowImageView.hidden = NO;
+        cell.arrowImageView.image = [UIImage imageNamed:@"jiantou"];
+        
+        CGRect frame = cell.themeImageView.frame;
+        frame.origin.x -= 24;
+        cell.themeImageView.frame = frame;
+        
+        ThemeStyle style = [ThemeManager sharedManager].style;
+        NSString *imageName = [NSString stringWithFormat:@"theme%d", style];
+        UIImage *image = [UIImage imageNamed:imageName];
+        cell.themeImageView.image = image;
+        
+        return cell;
+    }
+    else {
+        static NSString *identifier = @"MyInfoTableViewCellB";
+        MyInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MyInfoTableViewCell" owner:self options:nil] lastObject];
+        }
+        
+        NSString *content = nil;
+        
+        if (indexPath.section == 0) {
+            switch (indexPath.row) {
+                case 0:
+                    content = [NSString stringWithFormat:@"%@ kg", [GloubleProperty sharedInstance].currentUserEntity.UI_target];
+                    break;
+                case 1: {
+                    //  1 ：每天 2 ：3天 3：每周 4：每月
+                    int cycle = [[GloubleProperty sharedInstance].currentUserEntity.UI_remindcycle intValue];
+                    switch (cycle) {
+                        case 0:
+                            content = @"不提醒";
+                            break;
+                        case 1:
+                            content = @"一天一次";
+                            break;
+                        case 2:
+                            content = @"一天两次";
+                            break;
+                        case 3:
+                            content = @"一周一次";
+                            break;
+                        case 4:
+                            content = @"一周两次";
+                            break;
+                        default:
+                            break;
+                    }
+                    cell.isExpandable = YES;
+                    [cell setArrowImageViewhidden:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
+        } else if (indexPath.section == 1){
+            if (indexPath.row == 0) {
+                content = kRyFitCurrentVersion;
+            }
+        }
+        
+        [cell setContent:content];
+        [cell setTitle:rowTitles[indexPath.section][indexPath.row]];
+        
+        return cell;
+    }
+}
+
+- (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(SKSIndexPath *)indexPath {
+
+    if (indexPath.indexPath.row == 1) {
+        [[GloubleProperty sharedInstance] currentUserEntity].UI_remindcycle = indexPath.subRow == 5 ? @"0" : [NSString stringWithFormat:@"%d", (int)indexPath.subRow];
+        //一天一次
+        if (indexPath.subRow == 1) {
+            //触发通知的时间
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"HH:mm:ss"];
+            self.morningDate = [formatter dateFromString:@"10:00:00"];
+            //创建一个本地推送
+            self.localNoti = [[UILocalNotification alloc] init];
+
+            if (self.localNoti) {
+                //设置时区
+                self.localNoti.timeZone = [NSTimeZone defaultTimeZone];
+                //推送声音
+                self.localNoti.soundName = UILocalNotificationDefaultSoundName;
+                //内容
+                self.localNoti.alertBody = @"亲，该测量体重啦！";
+            }
+            //设置推送时间
+            self.localNoti.fireDate = self.morningDate;
+            //设置重复间隔
+            self.localNoti.repeatInterval =  kCFCalendarUnitDay;
+            //添加推送到uiapplication
+            UIApplication *application = [UIApplication sharedApplication];
+            [application scheduleLocalNotification:self.localNoti];
+        }//一天两次
+        else if (indexPath.subRow == 2){
+            //触发通知的时间
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"HH:mm:ss"];
+            self.morningDate = [formatter dateFromString:@"10:00:00"];
+            self.nightDate = [formatter dateFromString:@"22:00:00"];
+            //创建一个本地推送
+            self.localNoti2 = [[UILocalNotification alloc] init];
+            self.localNoti3 = [[UILocalNotification alloc] init];
+
+            if (self.localNoti2) {
+                //设置时区
+                self.localNoti.timeZone = [NSTimeZone defaultTimeZone];
+                //推送声音
+                self.localNoti.soundName = UILocalNotificationDefaultSoundName;
+                //内容
+                self.localNoti.alertBody = @"亲，该测量体重啦！";
+            }
+            if (self.localNoti3) {
+                self.localNoti3.timeZone = [NSTimeZone defaultTimeZone];
+                self.localNoti3.soundName = UILocalNotificationDefaultSoundName;
+                self.localNoti3.alertBody = @"亲，该测量体重啦！";
+            }
+            self.localNoti2.fireDate = self.morningDate;
+            self.localNoti3.fireDate = self.nightDate;
+            //设置重复间隔
+            self.localNoti2.repeatInterval = kCFCalendarUnitDay;
+            self.localNoti3.repeatInterval = kCFCalendarUnitDay;
+            //添加推送到uiapplication
+            UIApplication *application = [UIApplication sharedApplication];
+            [application scheduleLocalNotification:self.localNoti2];
+            [application scheduleLocalNotification:self.localNoti3];
+        }//一周一次
+        else if (indexPath.subRow == 3){
+            //触发通知的时间
+            self.now = [NSData data];
+            //创建一个本地推送
+            self.localNoti4 = [[UILocalNotification alloc] init];
+
+            if (self.localNoti4) {
+                //设置时区
+                self.localNoti4.timeZone = [NSTimeZone defaultTimeZone];
+                //推送声音
+                self.localNoti4.soundName = UILocalNotificationDefaultSoundName;
+                //内容
+                self.localNoti4.alertBody = @"亲，该测量体重啦！";
+            }
+            self.localNoti4.fireDate = self.now;
+            self.localNoti4.repeatInterval = kCFCalendarUnitWeekday; //一周一次
+            UIApplication *application = [UIApplication sharedApplication];
+            [application scheduleLocalNotification:self.localNoti4];
+        }//一周两次
+        else if (indexPath.subRow == 4){
+            //触发通知的时间
+            self.now = [NSData data];
+            self.now2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24*3];
+            //创建一个本地推送
+            self.localNoti5 = [[UILocalNotification alloc] init];
+            self.localNoti6 = [[UILocalNotification alloc] init];
+
+            if (self.localNoti5) {
+                //设置时区
+                self.localNoti5.timeZone = [NSTimeZone defaultTimeZone];
+                //推送声音
+                self.localNoti5.soundName = UILocalNotificationDefaultSoundName;
+                //内容
+                self.localNoti5.alertBody = @"亲，该测量体重啦！";
+            }
+            if (self.localNoti6) {
+                self.localNoti6.timeZone = [NSTimeZone defaultTimeZone];
+                self.localNoti6.soundName = UILocalNotificationDefaultSoundName;
+                self.localNoti6.alertBody = @"亲，该测量体重啦！";
+            }
+            self.localNoti5.fireDate = self.now;
+            self.localNoti6.fireDate = self.now2;
+            self.localNoti5.repeatInterval = kCFCalendarUnitWeekday;
+            self.localNoti6.repeatInterval = kCFCalendarUnitWeekday;
+            UIApplication *application = [UIApplication sharedApplication];
+            [application scheduleLocalNotification:self.localNoti5];
+            [application scheduleLocalNotification:self.localNoti6];
+        }//不提醒
+        else if (indexPath.subRow == 5){
+            [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        }
+    }
+    
+    [GloubleProperty sharedInstance].currentUserSettingWillUpDate = YES;
+    [tableView reloadData];
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[MyInfoTableViewCell class]]) {
+        MyInfoTableViewCell *kCell = cell;
+        NSString *title = [kCell title];
+        if ([title isEqualToString:rowTitles[0][0]]) {
+            ModifyUserBaseInfoViewController *modifyUserTargetVC = [[ModifyUserBaseInfoViewController alloc] initWithNibName:@"ModifyUserBaseInfoViewController" bundle:nil modifyType:ModifyTypeUserTarget];
+            [self.navigationController pushViewController:modifyUserTargetVC animated:YES];
+        } else if ([title isEqualToString:rowTitles[0][1]]) {
+
+        } else if ([title isEqualToString:rowTitles[0][2]]) {
+            AQAlertView *alertView = [[AQAlertView alloc] initWithTitle:@"" message:@"重置操作将删除秤中所有位置及数据，请问您需要继续吗？" confirmButtonTitle:@"确定" cancelTitle:@"取消" confirmHandler:^(AQAlertView *alertView) {
+                [self showConnectingAnimation];
+                [[BTModel sharedInstance] deleteAllUserCompletion:^(id responseData) {
+                    [self dismissConnectingAnimation];
+                    if (responseData) {
+                        [self showHUDInView:self.view justWithText:[NSString stringWithFormat:@"重置失败：%@", responseData] disMissAfterDelay:1];
+                    } else {
+                        [self showHUDInView:self.view justWithText:@"重置成功" disMissAfterDelay:1.5];
+                        [[BTModel sharedInstance] breakConnectPeripheral];
+                    }
+                }];
+            } cancelHandler:^(AQAlertView *alertView) {
+                
+            }];
+            [alertView show];
+        }
+        else if ([title isEqualToString:rowTitles[0][3]]) {
+            SelectDeviceViewController *selectDeviceVC = [[SelectDeviceViewController alloc] initWithNibName:@"SelectDeviceViewController" bundle:nil];
+            [self.navigationController pushViewController:selectDeviceVC animated:YES];
+        }
+//        else if ([title isEqualToString:rowTitles[1][0]]){
+//            if (![[[GloubleProperty sharedInstance] url] isEqual:[NSNull null]] &&
+//                [[[GloubleProperty sharedInstance] url] length] > 3) {
+//                NSLog(@"did open url is %@",[[GloubleProperty sharedInstance] url]);
+//                [[UIApplication sharedApplication]
+//                 openURL:[NSURL URLWithString:[[GloubleProperty sharedInstance] url]]];
+//            }
+//        }
+        else if ([title isEqualToString:rowTitles[1][0]]){
+            if (!self.isUpdating) {
+                MyInfoTableViewCell *infoCell = (MyInfoTableViewCell *)cell;
+                self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                [self.indicator startAnimating];
+                self.indicator.center = CGPointMake(288, CGRectGetMidY(infoCell.bounds));
+                [infoCell.contentView addSubview:self.indicator];
+                
+                [infoCell setContent:nil];
+                [infoCell setArrowImageViewhidden:YES];
+                
+                [self checkVersion];
+            }
+        }else if ([title isEqualToString:rowTitles[1][1]]){
+                AboutUsViewController *aboutUsVC = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController" bundle:nil];
+                [self.navigationController pushViewController:aboutUsVC animated:YES];
+        }else if ([title isEqualToString:rowTitles[1][2]]){
+                UserFeedbackViewViewController *userFeedVC = [[UserFeedbackViewViewController alloc] initWithNibName:@"UserFeedbackViewViewController" bundle:nil];
+                [self.navigationController pushViewController:userFeedVC animated:YES];
+        }else{
+                UserHelpViewController *helpVC = [[UserHelpViewController alloc] initWithNibName:@"UserHelpViewController" bundle:nil];
+                [self.navigationController pushViewController:helpVC animated:YES];
+        }
+    } else {
+        SwitchThemeViewController *switchThemeVC = [[SwitchThemeViewController alloc] initWithNibName:@"SwitchThemeViewController" bundle:nil];
+        [self.navigationController pushViewController:switchThemeVC animated:YES];
+    }
+}
+
+#pragma mark - check updata
+
+- (void)checkVersion
+{
+    self.isUpdating = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       
+        NSString *URL = APP_URL;
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:URL]];
+        [request setHTTPMethod:@"POST"];
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.indicator removeFromSuperview];
+            self.indicator = nil;
+            
+            MyInfoTableViewCell *infoCell = (MyInfoTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+            [infoCell setArrowImageViewhidden:NO];
+            [infoCell setContent:kRyFitCurrentVersion];
+            
+            self.isUpdating = NO;
+            
+            if ( [recervedData length] > 0 && !error ) { // Success
+                
+                NSDictionary *appData = [NSJSONSerialization JSONObjectWithData:recervedData options:NSJSONReadingAllowFragments error:nil];
+                
+                NSArray *versionsInAppStore = [[appData valueForKey:@"results"] valueForKey:@"version"];
+                
+                if (![versionsInAppStore count] ) { // No versions of app in AppStore
+                    
+                    return;
+                    
+                } else {
+                    
+                    NSString *currentAppStoreVersion = [versionsInAppStore objectAtIndex:0];
+                    //NSString *releaseNotesStr = [releaseNotes objectAtIndex:0];
+                    
+                    if ([kRyFitCurrentVersion compare:currentAppStoreVersion options:NSNumericSearch] == NSOrderedAscending) {
+                        
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"有新版本了哦！快去更新一下，体验新功能吧？" message:nil  delegate:self cancelButtonTitle:@"无情地拒绝"  otherButtonTitles:@"去更新", nil];
+                        [alertView show];
+                        
+                    }
+                    else {
+                        [self showHUDInView:self.view justWithText:@"您使用的已经是最新版本啦！" disMissAfterDelay:1];
+                        
+                    }
+                    
+                }
+                
+            }
+
+        });
+    });
+    
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch ( buttonIndex ) {
+        case 0:{
+
+
+        } break;
+
+        case 1:{
+            NSString *iTunesString = trackView_URL;
+            NSURL *iTunesURL = [NSURL URLWithString:iTunesString];
+            [[UIApplication sharedApplication] openURL:iTunesURL];
+
+        } break;
+
+        default:
+            break;
+    }
+}
+
+
+@end

@@ -1,0 +1,284 @@
+//
+//  HealthMeViewController.m
+//  BodyScaleProduction
+//
+//  Created by Zhanghao on 5/16/14.
+//  Copyright (c) 2014 Go Salo. All rights reserved.
+//
+
+#import "HealthMeViewController.h"
+#import "AddFriendViewController.h"
+#import "HealthMeTableViewCell.h"
+#import "AQAlertView.h"
+#import "FriendPermissionViewController.h"
+#import "LeftSideViewController.h"
+
+@interface HealthMeViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+
+@end
+
+@implementation HealthMeViewController {
+    NSMutableArray *allFriends;
+    BOOL firstAppear;
+}
+
+#pragma mark - View Lifecycle
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self initData];
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initViews];
+    [self buildTableViewData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!firstAppear) {
+        NSString *userId = [GloubleProperty sharedInstance].currentUserEntity.UI_userId;
+        
+        [[InterfaceModel sharedInstance] queryFriendListWithUserId:userId CallBack:^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+
+            if (result == WebCallBackResultSuccess) {
+                
+                if ([successParam isKindOfClass:[NSArray class]]) {
+                    
+                    NSArray *friends = (NSArray *)successParam;
+                    
+                    if (friends && friends.count > 0) {
+                        [allFriends removeAllObjects];
+                        [allFriends addObjectsFromArray:successParam];
+                        [self.tableView reloadData];
+                    }
+                }
+            }
+        }];
+    } else {
+        firstAppear = NO;
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    self.loadingView.frame = self.view.bounds;
+}
+
+#pragma mark - Private Methods
+
+- (void)initData {
+    allFriends = [NSMutableArray array];
+    firstAppear = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasNewMessageNotification:) name:AQHasNewMessageNotification object:nil];
+}
+
+- (void)initViews {
+    self.navigationItem.title = @"Health@Me";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addFriend)];
+    
+    [self.backgroundView removeFromSuperview];
+    
+    self.tableView.backgroundView = nil;
+    
+    self.loadingView = [AQLoadingView new];
+    [self.view addSubview:self.loadingView];
+}
+
+- (void)buildTableViewData {
+    NSString *userId = [GloubleProperty sharedInstance].currentUserEntity.UI_userId;
+
+    [[InterfaceModel sharedInstance] queryFriendListWithUserId:userId CallBack:^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+
+        [self.loadingView removeFromSuperview];
+
+        if (result == WebCallBackResultSuccess) {
+            
+            if ([successParam isKindOfClass:[NSArray class]]) {
+                
+                NSArray *friends = (NSArray *)successParam;
+                
+                if (friends && friends.count > 0) {
+                    self.hintLabel.hidden = YES;
+                    self.tableView.hidden = NO;
+
+                    [allFriends addObjectsFromArray:successParam];
+                    [self.tableView reloadData];
+                } else {
+                    self.hintLabel.hidden = NO;
+                    self.tableView.hidden = YES;
+                }
+            }
+        } else {
+            self.tableView.hidden = YES;
+            
+            if (errorMsg) {
+                self.hintLabel.hidden = NO;
+                self.hintLabel.text = errorMsg;
+            }
+        }
+    }];
+}
+
+- (void)likeFriendByIndexPath:(NSIndexPath *)indexPath {
+    [Flurry logEvent:LIKE_ME_EVENT];
+    
+    FriendInfoEntity *entity = allFriends[indexPath.row];
+    
+    [[InterfaceModel sharedInstance] submitPraiseWithTargetUid:entity.FI_memidatt type:PraiseType_praise callBack:^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+        
+        if (result == WebCallBackResultSuccess) {
+            NSInteger likeCount = [entity.FI_countpraise integerValue];
+            likeCount++;
+            entity.FI_countpraise = [NSString stringWithFormat:@"%d", (int)likeCount];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self showHUDInWindowJustWithText:@"点赞成功" disMissAfterDelay:1];
+        } else {
+            if (errorMsg) {
+                [self showHUDInWindowJustWithText:errorMsg disMissAfterDelay:1];
+            }
+        }
+    }];
+}
+
+- (void)notifyFriendWeightByIndexPath:(NSIndexPath *)indexPath {
+    [Flurry logEvent:NOTIFY_WEIGHT_EVENT];
+    
+    NSString *title = nil;
+    NSString *userId = nil;
+    
+    FriendInfoEntity *entity = allFriends[indexPath.row];
+    
+    title = [NSString stringWithFormat:@"确定提醒%@称重？", entity.FI_nickName];
+    userId = entity.FI_memidatt;
+    
+    AQAlertView *alertView = [[AQAlertView alloc] initWithTitle:nil message:title confirmButtonTitle:@"确定" cancelTitle:@"取消" confirmHandler:^(AQAlertView *alertView) {
+        
+        [[InterfaceModel sharedInstance] submitPraiseWithTargetUid:userId type:PraiseType_remind callBack:^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+            
+            if (errorMsg) {
+                [self showHUDInWindowJustWithText:errorMsg disMissAfterDelay:1];
+            } else {
+                [self showHUDInWindowJustWithText:@"提醒成功" disMissAfterDelay:1];
+            }
+        }];
+    } cancelHandler:nil];
+    
+    [alertView show];
+}
+
+- (void)removeFriendAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView beginUpdates];
+    
+    [allFriends removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView endUpdates];
+    
+    if (allFriends.count == 0) {
+        self.tableView.hidden = YES;
+        
+        self.hintLabel.hidden = NO;
+        self.hintLabel.text = @"你还没有好友，赶紧去添加吧！";
+    }
+}
+
+
+- (void)hasNewMessageNotification:(NSNotification *)notification {
+    NSString *userId = [GloubleProperty sharedInstance].currentUserEntity.UI_userId;
+    
+    [[InterfaceModel sharedInstance] queryFriendListWithUserId:userId CallBack:^(WebCallBackResult result, id successParam, NSString *errorMsg) {
+        
+        if (result == WebCallBackResultSuccess) {
+            
+            if ([successParam isKindOfClass:[NSArray class]]) {
+                
+                NSArray *friends = (NSArray *)successParam;
+                
+                if (friends && friends.count > 0) {
+                    [allFriends removeAllObjects];
+                    [allFriends addObjectsFromArray:successParam];
+                    [self.tableView reloadData];
+                }
+            }
+        }
+    }];
+}
+
+#pragma mark - Actions
+
+- (void)addFriend {
+    AddFriendViewController *addFriendVC = [[AddFriendViewController alloc] initWithNibName:@"AddFriendViewController" bundle:nil];
+    [self.navigationController pushViewController:addFriendVC animated:YES];
+}
+
+#pragma mark - UITableViewDataSource and Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return allFriends.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"healthMeCell";
+    HealthMeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"HealthMeTableViewCell" owner:self options:nil] lastObject];
+    }
+    
+    if (indexPath.row < allFriends.count) {
+        [cell fillCellWithFriendInfoEntity:allFriends[indexPath.row]];
+        
+        WEAK_SELF;
+        cell.userLikeBlock = ^{
+            STRONG_WEAK_SELF;
+            [sself likeFriendByIndexPath:indexPath];
+        };
+        
+        cell.notifyWeightBlock = ^{
+            STRONG_WEAK_SELF;
+            [sself notifyFriendWeightByIndexPath:indexPath];
+        };
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    FriendInfoEntity *entity = allFriends[indexPath.row];
+    BOOL hasPermission = entity.FI_mright.intValue;
+    return [HealthMeTableViewCell cellHeightByPermission:hasPermission];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    FriendPermissionViewController *freindPermissionVC = [[FriendPermissionViewController alloc] initWithEntity:allFriends[indexPath.row]];
+    
+    // 取消关注后删除该好友
+    WEAK_SELF;
+    freindPermissionVC.cancelFocusBlock = ^{
+        STRONG_WEAK_SELF;
+        [sself removeFriendAtIndexPath:indexPath];
+    };
+    
+    [self.navigationController pushViewController:freindPermissionVC animated:YES];
+}
+
+
+
+@end

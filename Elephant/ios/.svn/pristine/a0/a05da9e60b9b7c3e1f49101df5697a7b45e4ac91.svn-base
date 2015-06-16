@@ -1,0 +1,104 @@
+//
+//  CenterTableViewCell.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-11.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "CenterTableViewCell.h"
+
+@implementation CenterTableViewCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+       [self initResource];
+    }
+    return self;
+}
+
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state
+}
+- (void)initResource
+{
+    float Y_top = 20;
+    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"weight"]];
+    [self.contentView addSubview:imgView];
+    [imgView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@20);
+        maker.top.equalTo(@(Y_top));
+        maker.width.equalTo(@24);
+        maker.height.equalTo(@24);
+
+    }];
+    
+    textLabel = [[UILabel alloc] init];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
+    [textLabel setText:@"体重"];
+    [textLabel setFont:[UIFont systemFontOfSize:18]];
+    [self.contentView addSubview:textLabel];
+    UIEdgeInsets padding = UIEdgeInsetsMake(3, 24+15, 0, 0);
+    [textLabel mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(imgView.mas_left).with.offset(padding.left);
+        maker.top.equalTo(imgView.mas_top).with.offset(padding.top);
+    }];
+   
+    weightLabel = [[LabelExten alloc] init];
+    [weightLabel setbgColor:UIColorRef(242, 68, 70) WithText:@"超重"];
+    [self.contentView addSubview:weightLabel];
+    UIEdgeInsets padding1 = UIEdgeInsetsMake(0, 0, 0, -100);
+    [weightLabel mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(@100).with.offset(padding1.right);
+        maker.top.equalTo(imgView.mas_top).with.offset(padding1.top);
+        maker.width.equalTo(@(50));
+        maker.height.equalTo(@(21));
+
+    }];
+    
+    numLabel = [[LabelExten alloc] init];
+    [numLabel setTextStr:@"82"];
+    [self.contentView addSubview:numLabel];
+    UIEdgeInsets padding2 = UIEdgeInsetsMake(-10, 0, 0, 70);
+    [numLabel mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(weightLabel.mas_right).with.offset(padding2.right);
+        maker.top.equalTo(imgView.mas_top).with.offset(padding2.top);
+    }];
+    
+    kgLabel = [[UILabel alloc] init];
+    [kgLabel setText:@"kg"];
+    [self.contentView addSubview:kgLabel];
+    UIEdgeInsets padding3 = UIEdgeInsetsMake(3, 0, 0,25);
+    [kgLabel mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.right.equalTo(numLabel.mas_right).with.offset(padding3.right);
+        maker.top.equalTo(imgView.mas_top).with.offset(padding3.top);
+    }];
+}
+
+- (void)updateCell:(NSDictionary *)dic
+{
+    [imgView setImage:[UIImage imageNamed:[dic objectForKey:@"Img"]]];
+    textLabel.text = [dic objectForKey:@"textLabel"];
+    if ( [[dic objectForKey:@"weightLabel"] intValue]==0) {
+        weightLabel.text =@"超重";
+        [weightLabel setBackgroundColor:UIColorRef(242, 68, 70)];
+    }
+    else
+    {
+        weightLabel.text =@"标准";
+        [weightLabel setBackgroundColor:UIColorRef(60, 191, 71)];
+    }
+    
+     numLabel.text = [dic objectForKey:@"numLabel"];
+     kgLabel.text = [dic objectForKey:@"kgLabel"];
+}
+@end

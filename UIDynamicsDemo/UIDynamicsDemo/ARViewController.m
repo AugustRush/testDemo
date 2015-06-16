@@ -30,10 +30,10 @@
     [animator addBehavior:gravity];
     self.animator = animator;
     
-    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[dynamicView]];
-    collision.translatesReferenceBoundsIntoBoundary = YES;
-    [animator addBehavior:collision];
-    collision.collisionDelegate = self;
+//    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[dynamicView]];
+//    collision.translatesReferenceBoundsIntoBoundary = YES;
+//    [animator addBehavior:collision];
+//    collision.collisionDelegate = self;
     
     UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:dynamicView snapToPoint:CGPointMake(200, 300)];
     [self.animator addBehavior:snap];

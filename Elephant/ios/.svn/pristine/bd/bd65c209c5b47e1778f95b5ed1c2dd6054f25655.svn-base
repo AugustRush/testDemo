@@ -1,0 +1,88 @@
+//
+//  AppDelegate.m
+//  BodyScale
+//
+//  Created by August on 14-9-27.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "AppDelegate.h"
+#import "LeftMenuViewController.h"
+#import "CenterViewController.h"
+#import "VisitorViewController.h"
+
+@interface AppDelegate ()
+
+@end
+
+@implementation AppDelegate
+
+#pragma mark - life cycle methods
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:HASALREADYCONNECTED];
+    self.blueToothHelper = [BlueToothHelper shareInstance];
+    [_blueToothHelper centralManagerChangedStateBlock:^(CBCentralManagerState state) {
+       
+        [_blueToothHelper centralManagerScanPeripheralsWithBlock:^(NSArray *peripherals) {
+            NSLog(@"perilederals is %@",peripherals);
+        }];
+    }];
+    
+    [BodyScaleBTInterface instanceWeightDataWithHandler:^(NSError *error, NSNumber *weight) {
+        NSLog(@"error is %@ weight is %@",error, weight);
+    }];
+
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self buildRootViewController];
+   
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+}
+
+#pragma mark - private methods
+
+-(void)buildRootViewController
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:ISLOGINED])
+    {
+        LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] initWithNibName:@"LeftMenuViewController" bundle:nil];
+        CenterViewController *centerViewController = [[CenterViewController alloc] initWithNibName:nil bundle:nil];
+        UINavigationController *centerNavigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+        self.sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:centerNavigationController leftMenuViewController:leftMenuViewController rightMenuViewController:nil];
+        self.sideMenuViewController.panFromEdge = YES;
+        self.sideMenuViewController.panGestureEnabled = YES;
+        self.sideMenuViewController.scaleMenuView = NO;
+        self.sideMenuViewController.contentViewShadowEnabled = YES;
+        self.sideMenuViewController.delegate = self;
+        self.window.rootViewController = self.sideMenuViewController;
+    }
+    else
+    {
+        VisitorViewController *wVC = [[VisitorViewController alloc] initWithNibName:@"VisitorViewController" bundle:nil];
+        UINavigationController *mNav = [[UINavigationController alloc] initWithRootViewController:wVC];
+        self.window.rootViewController = mNav;
+    }
+    
+}
+
+
+@end

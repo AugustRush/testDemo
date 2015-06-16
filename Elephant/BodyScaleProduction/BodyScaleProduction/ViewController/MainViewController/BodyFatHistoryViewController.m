@@ -1,0 +1,287 @@
+//
+//  BodyFatHistoryViewController.m
+//  BodyScale
+//
+//  Created by Go Salo on 14-3-4.
+//  Copyright (c) 2014年 于菲. All rights reserved.
+//
+
+#import "BodyFatHistoryViewController.h"
+#import "BodyFatHistoryViewCell.h"
+#import "BodyFatHistoryViewSelectedCell.h"
+#import "NSDate+SLExtend.h"
+
+// 临时导入
+#import "DataDetailViewController.h"
+#import "MMDrawerController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "ARLabelView.h"
+
+#import "NoticeEntity.h"
+
+#define kDefaultCellNibName     @"BodyFatHistoryViewCell"
+#define kSelectedCellNibName    @"BodyFatHistoryViewSelectedCell"
+
+@interface BodyFatHistoryViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray *noticeArr;
+@property (nonatomic, strong) NSMutableArray *cellSelectFlags;
+@property (nonatomic, strong) NSIndexPath *curSelectIndexPath;
+
+@property (weak, nonatomic) IBOutlet ARLabelView *dateLabelView;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *timeSliderImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sliderHeaderImageView;
+
+@end
+
+@implementation BodyFatHistoryViewController {
+    BOOL _isFirstScale;
+    UIActivityIndicatorView *indicatorView;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isFirstScale:(BOOL)isFirstScale
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _isFirstScale = isFirstScale;
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.title = @"ChronoLine";
+    
+    self.noticeArr = [NSMutableArray array];
+    self.cellSelectFlags = [NSMutableArray array];
+    [self configView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kIMDataSubmitted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kIMLoginDataOk object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [self reloadData];
+}
+
+-(void)refreshTableView
+{
+//    [self showHUDInView:self.view WithText:@"正在刷新..."];
+    [indicatorView startAnimating];
+    
+    [[InterfaceModel sharedInstance] queryNoticeWithCallBack:^(int code, id param, id param02) {
+        [indicatorView stopAnimating];
+
+        if ([param isKindOfClass:[NSArray class]]) {
+            [self.noticeArr removeAllObjects];
+            for (NoticeEntity *entity in param) {
+                NSString *curDateStr = [NSDate getCurrentDateHHMM];
+                NSString *noticeTimeStr = entity.N_time;
+                
+                if ([curDateStr compare:noticeTimeStr] == NSOrderedAscending) {
+                    [self.noticeArr addObject:entity];
+                }
+            }
+            
+            [self.cellSelectFlags removeAllObjects];
+            for (int i = 0; i < self.noticeArr.count; i++) {
+                [self.cellSelectFlags addObject:[NSNumber numberWithBool:NO]];
+            }
+            self.tableView.hidden = NO;
+            [self.tableView reloadData];
+            
+//            [self disMissHUDWithText:@"刷新完成" afterDelay:.5];
+        }else{
+//            [self disMissHUDWithText:@"刷新失败" afterDelay:.5];
+        }
+    }];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Public Method
+- (void)reloadData {
+    NSString *dateStr = [[NSDate date] convertToStandardYYYYMMDDDateFormat];
+    ARLabelViewText *dateText = [ARLabelViewText
+                                 ViewTextWithText:[dateStr substringToIndex:4]
+                                 color:[UIColor whiteColor]
+                                 Font:[UIFont systemFontOfSize:20]];
+    ARLabelViewText *dateText1 = [ARLabelViewText
+                                  ViewTextWithText:@" 年 "
+                                  color:[UIColor whiteColor]
+                                  Font:[UIFont systemFontOfSize:14]];
+    ARLabelViewText *dateText2 = [ARLabelViewText
+                                  ViewTextWithText:[dateStr substringWithRange:NSMakeRange(5, 2)]
+                                  color:[UIColor whiteColor]
+                                  Font:[UIFont systemFontOfSize:20]];
+    ARLabelViewText *dateText3 = [ARLabelViewText
+                                  ViewTextWithText:@" 月 "
+                                  color:[UIColor whiteColor]
+                                  Font:[UIFont systemFontOfSize:14]];
+    ARLabelViewText *dateText4 = [ARLabelViewText
+                                  ViewTextWithText:[dateStr substringWithRange:NSMakeRange(8, 2)]
+                                  color:[UIColor whiteColor]
+                                  Font:[UIFont systemFontOfSize:20]];
+    ARLabelViewText *dateText5 = [ARLabelViewText
+                                  ViewTextWithText:@" 日 "
+                                  color:[UIColor whiteColor]
+                                  Font:[UIFont systemFontOfSize:14]];
+    
+    
+    self.dateLabelView.textValues = @[dateText,dateText1,dateText2,dateText3,dateText4,dateText5];
+
+    
+    [self refreshTableView];
+}
+
+#pragma mark - UITableView Delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.noticeArr.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL selected = [self.cellSelectFlags[indexPath.row] boolValue];
+    NoticeEntity *notice = self.noticeArr[indexPath.row];
+    UITableViewCell *cell = nil;
+    if (!selected) {
+    
+        static NSString *identifier = kDefaultCellNibName;
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:kDefaultCellNibName owner:self options:nil] lastObject];
+        }
+        
+        BodyFatHistoryViewCell *curCell = (BodyFatHistoryViewCell *)cell;
+        curCell.timeLabel.text = notice.N_time;
+
+        curCell.contentLabel.text = notice.N_actionName;
+        if (indexPath.row == 0) {
+            curCell.sliderImageView.image = ThemeImage(@"round_slider1");
+            NSString *rImageName = [NSString stringWithFormat:@"noticeType%@0",notice.N_noticetype];
+            curCell.rightNotyImageView.image = ThemeImage(rImageName);
+        }else{
+            curCell.sliderImageView.image = [UIImage imageNamed:@"round_slider"];
+            NSString *rImageName = [NSString stringWithFormat:@"noticeType%@1",notice.N_noticetype];
+            curCell.rightNotyImageView.image = [UIImage imageNamed:rImageName];
+        }
+    
+    }else{
+    
+        static NSString *identifier = kSelectedCellNibName;
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:kSelectedCellNibName owner:self options:nil] lastObject];
+        }
+        
+        BodyFatHistoryViewSelectedCell *curCell = (BodyFatHistoryViewSelectedCell *)cell;
+        
+        curCell.backgroudImageView.image = ThemeImage(@"bodyFatSelectCell_bg");
+        curCell.contentLabel.text = notice.N_content;
+        curCell.contentLabel.textColor = [[ThemeManager sharedManager] themeColor];
+        curCell.sliderImageView.image = ThemeImage(@"round_slider1");
+
+    }
+    return cell;
+}
+
+/*
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath isEqual:self.curSelectIndexPath]) {
+        return;
+    }
+    CGRect originalFrame = cell.frame;
+    CGRect curRect = originalFrame;
+    curRect.origin.x = -100;
+    cell.frame = curRect;
+    cell.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    
+    [UIView animateWithDuration:.3 animations:^{
+        cell.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        cell.frame = originalFrame;
+    }];
+}
+ */
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.curSelectIndexPath = indexPath;
+    
+    BodyFatHistoryViewCell *cell = (BodyFatHistoryViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    BOOL selected = [self.cellSelectFlags[indexPath.row] boolValue];
+    [self.cellSelectFlags replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:!selected]];
+    
+    self.tableView.userInteractionEnabled = NO;
+    [cell.layer removeAllAnimations];
+    CAKeyframeAnimation *rotateAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.x"]; //设置动画类型为绕x轴旋转（即图片的水平翻转）
+    rotateAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f],[NSNumber numberWithFloat:2*M_PI],nil]; //设置起始位置
+    rotateAnimation.duration = .3f; 
+    rotateAnimation.removedOnCompletion = YES;
+    rotateAnimation.keyTimes = [NSArray arrayWithObjects:
+                                [NSNumber numberWithFloat:.0], //动画关键帧设置，此处为动画开始时间
+                                [NSNumber numberWithFloat:1], //动画结束时间
+                                nil];
+    rotateAnimation.delegate = self;
+    [cell.layer addAnimation:rotateAnimation forKey:@""];
+    
+    [Flurry logEvent:@"时间线" withParameters:@{@"点击列表视图":@"查看时间线建议"} timed:YES];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
+{
+    self.tableView.userInteractionEnabled = YES;
+    if (_curSelectIndexPath.row < self.noticeArr.count) {
+        [self.tableView reloadRowsAtIndexPaths:@[_curSelectIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+
+    /*
+    self.tableView.userInteractionEnabled = YES;
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[_curSelectIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+    if (_curSelectIndexPath.row < self.noticeArr.count) {
+        [self.tableView reloadRowsAtIndexPaths:@[_curSelectIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+
+    [self.tableView endUpdates];
+     */
+
+//    [self.tableView endUpdates];
+}
+
+#pragma mark - Private Method
+
+- (void)configView {
+    // 初始化视图
+    UIImage *image = [UIImage imageNamed:@"shizhong.png"];
+    self.timeSliderImageView.image = [image stretchableImageWithLeftCapWidth:0 topCapHeight:image.size.height - 2];
+    
+    if (_isFirstScale) {
+
+    } else {
+
+    }
+    
+    indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.center = CGPointMake(self.tableView.center.x, self.tableView.center.y - 20);
+    [self.view addSubview:indicatorView];
+}
+
+-(void)configureThemeAppearance
+{
+    [super configureThemeAppearance];
+    
+}
+
+@end

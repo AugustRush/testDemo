@@ -1,0 +1,112 @@
+//
+//  SettingViewController.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-21.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "SettingViewController.h"
+
+@interface SettingViewController ()
+{
+    NSArray *_textArray;
+}
+@end
+
+@implementation SettingViewController
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:NO];
+    if (self)
+    {
+        
+    }
+    
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = UIColorRef(232, 233, 232);
+    _textArray = @[@"版本更新",@"关于我们",@"用户反馈",@"帮助",@"给应用评分"];
+    
+    self.navigationItem.title = @"设置";
+    
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(150, 0, 50, 0));
+//    }];
+    
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    [self.tableView setTableFooterView:view];
+    [self.tableView setTableHeaderView:view];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0.0, 0.0, 20, 20);
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    temporaryBarButtonItem.style = UIBarButtonItemStylePlain;
+    self.navigationItem.leftBarButtonItem = temporaryBarButtonItem;
+}
+
+- (void)backAction
+{
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+- (SettingCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+  
+    cell.separatorInset = UIEdgeInsetsZero;
+
+    [cell setText:[_textArray objectAtIndex:indexPath.row] WithIndexNum:indexPath.row];
+    return cell;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_textArray count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 2:
+        {
+            [self.navigationController pushViewController:[[FeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil] animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+@end

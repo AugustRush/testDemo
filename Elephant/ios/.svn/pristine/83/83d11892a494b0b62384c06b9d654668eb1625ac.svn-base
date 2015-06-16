@@ -1,0 +1,108 @@
+//
+//  ChangeNameViewController.m
+//  BodyScale
+//
+//  Created by zhangweiwei on 14/12/8.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "ChangeNameViewController.h"
+
+@interface ChangeNameViewController ()<UITextFieldDelegate>
+@property(strong,nonatomic) UITextField * changeNameTF;
+@end
+
+@implementation ChangeNameViewController
+#pragma mark setproperty
+- (UITextField *)changeNameTF
+{
+    if (!_changeNameTF)
+    {
+        _changeNameTF = [[UITextField alloc]init];
+        _changeNameTF.backgroundColor = [UIColor whiteColor];
+        _changeNameTF.textColor = [UIColor blackColor];
+        _changeNameTF.font = [UIFont systemFontOfSize:14];
+        _changeNameTF.delegate = self;
+    }
+    return _changeNameTF;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+        self.view.backgroundColor = [getWordColor colorWithHexString:@"#dedede"];
+        self.title = @"修改用户名";
+        
+    }
+    
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+     self.changeNameTF.text = self.userName;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+   
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    if (![CommanHelp isStringNULL:self.changeNameTF.text])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:self.changeNameTF.text forKey:USERNOTENAME];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+   
+}
+
+
+- (void)loadView
+{
+    [super loadView];
+    [self.view addSubview:self.changeNameTF];
+    [self.changeNameTF mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(@15);
+         maker.top.equalTo(@50);
+         maker.right.equalTo(@-15);
+         maker.height.equalTo(@45);
+     }];
+    
+    [self.changeNameTF becomeFirstResponder];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (![CommanHelp isStringNULL:textField.text])
+    {
+      [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:USERNOTENAME];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return YES;
+}
+
+@end

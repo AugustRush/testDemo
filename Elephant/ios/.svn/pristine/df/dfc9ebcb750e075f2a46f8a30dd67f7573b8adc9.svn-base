@@ -1,0 +1,41 @@
+//
+//  BodyScaleBTInterface.h
+//  BlueToothDemo
+//
+//  Created by August on 14/12/4.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "BlueToothHelper.h"
+
+@interface BodyScaleBTInterface : NSObject
+
+/**
+ *  实时体重回调方法
+ *
+ *  @param handler 回调block
+ */
+
++(void)instanceWeightDataWithHandler:(void(^)(NSError *error, NSNumber *weight))handler;
+
+/**
+ *  测量接口
+ *
+ *  @param location     测量的坑位，目前只有 p9 ，传入9即可
+ *  @param height       身高
+ *  @param age          年龄
+ *  @param sex          性别 （0 为男 1 为女）
+ *  @param ackHandler   发送测量指令成功 ack 回调
+ *  @param handler      测试完成回调
+ *  @param extraHandler 额外数据回调
+ */
++(void)selectUserMeasureWithLocation:(NSInteger)location
+                              height:(NSInteger)height
+                                 age:(NSInteger)age
+                                 sex:(NSInteger)sex
+                          ackHandler:(void(^)(NSError *error))ackHandler
+                   completionHandler:(void(^)(NSError *error, NSDictionary *response))handler
+                    extraDataHandler:(void(^)(NSError *error, NSDictionary *extraInfo))extraHandler;
+
+@end

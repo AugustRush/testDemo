@@ -1,0 +1,659 @@
+//
+//  BTModel.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-4-2.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "BTModel.h"
+#import "ScaleUserEntity.h"
+#import "ScaleUserDataEntity.h"
+#import "ScaleRealTimeWeightEntity.h"
+#import "Utility.h"
+#import "BTInterfaceService.h"
+#import "InterfaceModel.h"
+#import "UserInfoEntity.h"
+#import "BTUtils.h"
+
+#define kSCAN_LAST_DEVICE_TIMEOUT           3.0f
+#define kCONNECT_PERIPHERIAL_TIMEOUT        5.0f
+
+static BTInterfaceService   *_interfaceService = nil;
+static ScaleBllService      *_service = nil;
+
+@interface BTModel()
+
+@end
+
+@implementation BTModel {
+    // 私有回调
+    BTModelResponseCompletion               _deleteExistUserCompletion;         // 删除存在的一条
+    BTModelResponseCompletion               _getExistUserDataCompletion;        // 获取存在的用户的信息
+    BTModelResponseCompletion               _deleteExistUserDataCompletion;     // 删除存在的用户的信息
+    
+    BOOL                                    _smartModeEnable;
+    BOOL                                    _isScaling;
+    int                                     _userInScaleIndex;
+    
+    // 临时数据 全局变量
+    NSInteger                               hasDeletedUserData;                 // 已经删除的用户数据的条数
+    NSDate                                  *_lastScaleDate;                    // 上次测量时间
+    UserInfoEntity                          *_scaleUserInfo;                    // 临时用户 信息
+    UserDeviceInfoEntity                    *_userDeviceInfoEntity;             // 用户设备信息
+    NSMutableArray                          *_peripherals;
+    
+    NSTimer                                 *_reconnectTimer;
+    NSTimer                                 *_scanTimer;
+    NSTimer                                 *_dataPrepareTimer;
+}
+
+#pragma mark - ShareInstance and Initialized
++ (BTModel *)sharedInstance {
+    static BTModel *_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[BTModel alloc] init];
+    });
+    return _sharedInstance;
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveScaleData:) name:REALTIME_USERDATA_RESPONSE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(realTimeWeight:) name:REALTIME_WEIGHT_RESPONSE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnectedNotification:) name:BTSERVICE_NOTIFICATION_CONNECTED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didDisconnectedNotification:) name:BTSERVICE_NOTIFICATION_DISCONNECT object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemBluetoothStateUpdate:) name:BTSERVICE_NOTIFICATION_CENTRALMANAGERDIDUUPDATESTATE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTimeSuccess:) name:BT_SERVICE_UPDATETIME_NOTIFICATION object:nil];
+        _interfaceService = [[BTInterfaceService alloc] init];
+    }
+    return self;
+}
+
+#pragma mark - Setter and Getter
+- (CBPeripheral *)actPeripheral {
+    return _interfaceService.actPeripheral;
+}
+
+- (NSString *)deviceCode {
+    return _interfaceService.deviceCode;
+}
+
+#pragma mark - Public Method
+
+/* 装载 */
+- (void)setup {
+    [_interfaceService setup];
+    _peripherals = [NSMutableArray array];
+}
+
+/* 选择用户称重 */
+- (void)selectUserInScale:(UserInfoEntity *)userInfo isTesting:(BOOL)isTesting {
+    if (isTesting) {
+        [self setUserInfo:userInfo isTesting:isTesting];
+    } else {
+        [self setUserInfo:userInfo isTesting:isTesting];
+        [self queryUserBlindDeviceList:_interfaceService.deviceCode];
+    }
+}
+
+/* 删除所有用户 */
+- (void)deleteAllUserCompletion:(BTModelResponseCompletion)completion {
+    if (_interfaceService.actPeripheral) {
+        [[InterfaceModel sharedInstance] cancelBindWithDevCode:self.deviceCode
+                                                        bindId:nil
+                                                      callBack:^(int code, id param, id param02) {
+                                                          if (code == REQUEST_SUCCESS_CODE) {
+                                                              // 重置用户请求网络成功
+                                                              NSLog(@"重置用户请求网络成功");
+                                                              
+                                                              if (self.userInfoList.count > 0) { // 如果用户列表中有用户
+                                                                  [self deleteExistUserCompletion:^(id responseData) {
+                                                                      completion(nil);
+                                                                  }];
+                                                              } else {                          // 如果用户列表中没有用户
+                                                                  completion(@"设备已处于初始化状态");
+                                                              }
+                                                          } else {
+                                                              NSLog(@"重置用户请求网络失败");
+                                                              completion(@"请求网络失败");
+                                                          }
+                                                      }];
+    } else {
+        completion(@"没有连接到设备");
+    }
+}
+
+/* 断开连接 */
+- (void)breakConnectPeripheral {
+    _deleteExistUserCompletion = nil;
+    _getExistUserDataCompletion = nil;
+    _deleteExistUserDataCompletion = nil;
+    
+    _smartModeEnable = NO;
+    _isScaling = NO;
+    _userInScaleIndex = 0;
+    
+    // 临时数据 全局变量
+    hasDeletedUserData = 0;
+    _lastScaleDate = nil;
+    _scaleUserInfo = nil;
+    _userDeviceInfoEntity = nil;
+    
+    [_interfaceService disconnect];
+}
+
+#pragma mark - Timeout CallBack
+// ********************* 超时处理 ************************
+/* 连接设备超时 */
+- (void)connectPeripheralTimeout {
+    NSLog(@"连接超时，尝试与设备断开连接");
+    [_interfaceService disconnect];
+}
+
+/* 试图重新连接上次连接设备超时 */
+- (void)connectLastPeripheralTimeout:(NSTimer *)timer {
+    NSLog(@"尝试连接上次连接过的设备失败：未发现");
+    [self connectToMinimumRSSIPeripheral];
+}
+
+/* 数据初始化超时 */
+- (void)dataPrepareTimeout:(NSTimer *)timer {
+    NSLog(@"数据初始化超时");
+    [[NSNotificationCenter defaultCenter] postNotificationName:BT_DATA_INITAIL_FAILED object:nil];
+    _smartModeEnable = NO;
+}
+// ******************************************************
+
+#pragma mark - Private Method
+/* 搜索并连接设备 适用于指定上次连接UUID 如果连接失败则会尝试连接其他设备 */
+- (void)scanAndConnectToPeripheral {
+    [_peripherals removeAllObjects];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *UUID = [userDefaults objectForKey:kLAST_CONNECTED_DEVICE_UUID_KEY];
+
+    [_scanTimer invalidate], _scanTimer = nil;
+    _scanTimer = [NSTimer scheduledTimerWithTimeInterval:kSCAN_LAST_DEVICE_TIMEOUT
+                                                  target:self
+                                                selector:@selector(connectLastPeripheralTimeout:)
+                                                userInfo:nil
+                                                 repeats:NO];
+
+    NSLog(@"搜索并连接中...");
+    [_interfaceService scanPeripheralsDidDiscoverPeripheral:^(CBPeripheral *peripheral, NSNumber *RSSI) {
+        NSString *peripherialUUID = [BTUtils UUIDToString:peripheral.UUID];
+        if ([UUID isEqualToString:peripherialUUID]) { // 发现上次连接到的设备
+            NSLog(@"发现上次连接的设备");
+            [_scanTimer invalidate];
+            [userDefaults setObject:nil forKey:kLAST_CONNECTED_DEVICE_UUID_KEY];
+            [self connectToDevice:peripheral];
+        } else {
+            NSLog(@"发现非上次连接的设备");
+            RyFitPeripheral *ryfitPeripheral = [RyFitPeripheral new];
+            ryfitPeripheral.peripheral = peripheral;
+            ryfitPeripheral.RSSI = RSSI;
+            [_peripherals addObject:ryfitPeripheral];
+        }
+    }];
+}
+
+- (void)connectToDevice:(CBPeripheral *)peripheral {
+    [_reconnectTimer invalidate], _reconnectTimer = nil;
+    _reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:kCONNECT_PERIPHERIAL_TIMEOUT
+                                                       target:self
+                                                     selector:@selector(connectPeripheralTimeout)
+                                                     userInfo:nil
+                                                      repeats:NO];
+    [_interfaceService connectDevice:peripheral];
+}
+
+/* 连接到最近的设备 */
+- (void)connectToMinimumRSSIPeripheral {
+    RyFitPeripheral *nearlistPeripheral = nil;
+    for (RyFitPeripheral *p in _peripherals) {
+        if (!nearlistPeripheral) {
+            nearlistPeripheral = p;
+        }
+        
+        if ([p.RSSI intValue] > [nearlistPeripheral.RSSI intValue] && [p.RSSI intValue] != 127) {
+            nearlistPeripheral = p;
+        }
+        
+        NSLog(@"pname:%@ prssi:%@", p.peripheral.name, p.RSSI);
+    }
+    
+    if (nearlistPeripheral) {
+        NSLog(@"尝试连接到RSSI最大的设备 RSSI:%@", nearlistPeripheral.RSSI);
+        [self connectToDevice:nearlistPeripheral.peripheral];
+    } else {
+        NSLog(@"没有发现设备，尝试重新搜索");
+        [self scanAndConnectToPeripheral];
+    }
+}
+
+/* 设置测量数据 */
+- (BOOL)setUserInfo:(UserInfoEntity *)userInfo isTesting:(BOOL)isTesting {
+    if (isTesting) {
+        if (userInfo.UI_age.length && userInfo.UI_height.length && userInfo.UI_sex.length) {
+            _scaleUserInfo = userInfo;
+            _userInScaleIndex = 9;
+        }
+        return YES;
+    } else {
+        if (userInfo.UI_age.length && userInfo.UI_height.length && userInfo.UI_sex.length) {
+            _scaleUserInfo = userInfo;
+            if (_userInScaleIndex) {
+                [_interfaceService updateUser:_userInScaleIndex
+                                       height:[userInfo.UI_height intValue]
+                                          age:[userInfo.UI_age intValue]
+                                       gender:[userInfo.UI_sex intValue]
+                                   completion:^(int code, id info, id originalData) {
+                                       NSLog(@"更新用户信息成功：位置%d 身高：%d 年龄： %d 性别：%d", _userInScaleIndex, [userInfo.UI_height intValue], [userInfo.UI_age intValue], [userInfo.UI_sex intValue]);
+                                   }];
+            }
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+}
+
+// 新用户
+- (void)newUserHeight:(int)height age:(int)age gender:(int)gender
+        newCompletion:(BTModelResponseCompletion)newCompletion {
+    // 寻找空坑 如果没有空坑则返回0
+    int emptyId = 0;
+    if (self.userInfoList) {
+        emptyId = [self getEmptyLocationIdWithEntityList:self.userInfoList];
+    } else {
+        NSLog(@"userInfoList为空：异常");
+    }
+    NSLog(@"找到空的坑位Id:%d", emptyId);
+    
+    if (emptyId == 0) {
+        NSLog(@"没有空位置");
+    } else {
+        // 创建用户
+        [_interfaceService newUser:emptyId
+                            height:height
+                               age:age
+                            gender:gender completion:^(int code, id info, id originalData) {
+                                NSLog(@"创建用户成功，ID:%d", emptyId);
+                                newCompletion([NSNumber numberWithInt:emptyId]);
+                            }];
+    }
+}
+
+// 获取所有用户数据
+- (void)getAllUserData:(BTModelResponseCompletion)completion {
+    [self getExistUserData:^(id responseData) {
+        NSLog(@"已经获取到所有用户数据");
+        completion(responseData);
+    }];
+}
+
+// 删除所有用户数据
+- (void)deleteAllUserData:(BTModelResponseCompletion)completion {
+    [self deleteExistUserData:^(id responseData) {
+        _peripheralDataPrepareOK = YES;
+        completion(nil);
+    }];
+}
+
+/* 初始化蓝牙系统 */
+- (void)prepareDeviceForScale {
+    [_dataPrepareTimer invalidate], _dataPrepareTimer = nil;
+    _dataPrepareTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(dataPrepareTimeout:) userInfo:nil repeats:NO];
+    [_interfaceService readId:^(int code, id info, id originalData) {
+        NSLog(@"Device Code Is %@", info);
+        NSString *currentDeviceId = info;
+        if ([info isEqualToString:@"ffffff"] || [info isEqualToString:@"FFFFFF"]) {
+            [[InterfaceModel sharedInstance] getSoleDeviceCodeWithCallBack:^(int code, id param, id param02) {
+                if (code == REQUEST_SUCCESS_CODE) {
+                    NSLog(@"获取用户所有设备信息成功");
+                    [_interfaceService writeId:param writeCompletion:^(int code, id info, id originalData) {
+                        NSLog(@"成功写入硬件编码");
+                        _userInfoList = [NSMutableArray array];
+                        [self createNewUser:_scaleUserInfo currentDeviceId:_interfaceService.deviceCode];
+                    }];
+                } else {
+                    NSLog(@"获取用户所有设备信息失败");
+                    // 当 请求网络：获取新设备码 失败时禁用智能模式
+                    _smartModeEnable = NO;
+                }
+            }];
+        } else {        // 体质秤写入过编码
+            [_interfaceService getAllUserCompletion:^(int code, id info, id originalData) {
+                _userInfoList = [NSMutableArray arrayWithArray:info];
+                NSLog(@"获取用户信息成功，共%d个用户", (int)_userInfoList.count);
+                // ==================== 获取秤中得所有用户测量数据 ===========================
+                [self getAllUserData:^(id responseData) {
+                    [self sendAllUserData:responseData currentDeviceId:currentDeviceId];
+                }];
+            }];
+        }
+    }];
+}
+
+- (void)setUser {
+    if (_smartModeEnable) { // 智能模式
+        [_interfaceService selectUserScale:_userInScaleIndex
+                                    height:[_scaleUserInfo.UI_height intValue]
+                                       age:[_scaleUserInfo.UI_age intValue]
+                                    gender:[_scaleUserInfo.UI_sex intValue]
+                                completion:^(int code, id info, id originalData) {
+                                    NSLog(@"选择用户%d成功", _userInScaleIndex);
+                                }];
+    } else {                                    // 常规模式
+        if (_scaleUserInfo) {
+            [_interfaceService selectUserScale:9
+                                        height:[_scaleUserInfo.UI_height intValue]
+                                           age:[_scaleUserInfo.UI_age intValue]
+                                        gender:[_scaleUserInfo.UI_sex intValue]
+                                    completion:^(int code, id info, id originalData) {
+                                        NSLog(@"选择用户9成功");
+                                    }];
+        }
+    }
+}
+
+// 提交所有用户测量数据到网络
+- (void)sendAllUserData:(NSArray *)allUserDataList currentDeviceId:(NSString *)currentDeviceId {
+    [[InterfaceModel sharedInstance] submitBatchDataWithDataList:allUserDataList
+                                                         devCode:self.deviceCode
+                                                        callBack:nil];
+    [self deleteAllUserData:^(id responseData) {
+        [_dataPrepareTimer invalidate], _dataPrepareTimer = nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:BT_DATA_INITAIL_FINISHED object:nil];
+    }];
+}
+
+// 查询用户绑定设备列表
+- (void)queryUserBlindDeviceList:(NSString *)currentDeviceId {
+    UserInfoEntity *userInfoEntity = _scaleUserInfo;
+    NSArray *deviceList = userInfoEntity.UI_deviceList;
+    NSAssert(deviceList, @"设备列表为nil 非正常值，找张成亮");
+    for (UserDeviceInfoEntity *deviceEntity in deviceList) {
+        
+        if ([deviceEntity.UDI_devcode isEqualToString:currentDeviceId]) {
+            // 如果有 等待称重
+            NSLog(@"有绑定位置%@", deviceEntity.UDI_location);
+            // 更新用户信息
+            [_interfaceService updateUser:[deviceEntity.UDI_location intValue]
+                                   height:[userInfoEntity.UI_height intValue]
+                                      age:[userInfoEntity.UI_age intValue]
+                                   gender:[userInfoEntity.UI_sex intValue]
+                               completion:^(int code, id info, id originalData) {
+                                   _smartModeEnable = YES;
+                                   _userDeviceInfoEntity = deviceEntity;
+                                   _userInScaleIndex = [deviceEntity.UDI_location intValue];
+                                   NSLog(@"更新用户信息成功");
+                                   [self getDeviceColor];
+                               }];
+            return;
+        }
+    }
+    // 没有 创建新用户
+    NSLog(@"没有绑定位置");
+    [self createNewUser:userInfoEntity currentDeviceId:currentDeviceId];
+}
+
+- (void)getDeviceColor {
+    [_interfaceService getMACAddressCompletion:^(int code, id info, id originalData) {
+        NSLog(@"获取到MAC地址，地址为%@", info);
+        [[InterfaceModel sharedInstance] getDevColorWithMac:info callback:^(WebCallBackResult result, DevColor color, NSString *errorMsg) {
+            NSLog(@"获取到设备颜色:%d", color);
+            
+        }];
+    }];
+}
+
+// 创建新用户
+- (void)createNewUser:(UserInfoEntity *)userInfoEntity currentDeviceId:(NSString *)currentDeviceId {
+    
+    [self newUserHeight:[userInfoEntity.UI_height intValue]
+                    age:[userInfoEntity.UI_age intValue]
+                 gender:[userInfoEntity.UI_sex intValue]
+          newCompletion:^(id responseData) {
+              if ([responseData intValue] == 0) { // 如果返回0 则没有空坑
+                  NSLog(@"体质秤上没有空位置");
+                  // 当 体脂秤没有闲置位置时 禁用智能模式
+                  _smartModeEnable = NO;
+              } else {
+                  NSLog(@"在体质秤上创建了新的用户!");
+                  NSString *location = [responseData stringValue];
+                  _userInScaleIndex = [responseData intValue];
+                  
+                  ScaleUserEntity *scaleUserEntity = [ScaleUserEntity new];
+                  scaleUserEntity.userId = _userInScaleIndex;
+                  scaleUserEntity.userAge = [userInfoEntity.UI_age intValue];
+                  scaleUserEntity.userHeight = [userInfoEntity.UI_height intValue];
+                  scaleUserEntity.userGender = [userInfoEntity.UI_sex intValue];
+                  [_userInfoList addObject:scaleUserEntity];
+                  
+                  [self blindDeviceWithCurrentDeviceId:currentDeviceId location:location];
+              }
+          }];
+}
+
+// 绑定设备
+- (void)blindDeviceWithCurrentDeviceId:(NSString *)currentDeviceId location:(NSString *)location {
+    [[InterfaceModel sharedInstance] submitBindWithDevCode:currentDeviceId
+                                                  location:location
+                                                  callBack:^(int code, id param, id param02) {
+                                                      if (code == REQUEST_SUCCESS_CODE) {
+                                                          // 绑定成功 等待称重
+                                                          NSLog(@"网络请求：绑定设备成功");
+                                                          _smartModeEnable = YES;
+                                                          [self getDeviceColor];
+                                                      } else {
+                                                          NSLog(@"网络请求：绑定设备失败");
+                                                          // 当 绑定设备请求失败时 禁用智能模式
+                                                          _smartModeEnable = NO;
+                                                      }
+                                                  }];
+}
+
+- (int)getEmptyLocationIdWithEntityList:(NSArray *)entityList {
+    if (entityList.count >= 8) {
+        return 0;
+    }
+    
+    if (entityList.count == 0) {
+        return 1;
+    }
+    
+    int index, j;
+    for (index = 1; index < 9; index ++) {
+        for (j = 0; j < entityList.count; j++) {
+            ScaleUserEntity *userEntity = entityList[j];
+            if (userEntity.userId == index) {
+                break;
+            }
+        }
+        if (j == entityList.count) {
+            return index;
+        }
+    }
+    return 0;
+}
+
+// 删除所有存在的用户
+- (void)deleteExistUserCompletion:(BTModelResponseCompletion)completion {
+    if (completion) {
+        _deleteExistUserCompletion = completion;
+    }
+    
+    if (_userInfoList.count) {
+        ScaleUserEntity *userEntity = [_userInfoList firstObject];
+        
+        __weak BTModel *wself = self;
+        [_interfaceService deleteUser:userEntity.userId completion:^(int code, id info, id originalData) {
+            NSLog(@"删除用户%d成功", userEntity.userId);
+            [wself.userInfoList removeObject:userEntity];
+            [wself deleteExistUserCompletion:nil];
+        }];
+    } else {
+        if (_deleteExistUserCompletion) {
+            _deleteExistUserCompletion(nil);
+            _deleteExistUserCompletion = nil;
+        }
+    }
+}
+
+// 获取存在用户数据
+- (void)getExistUserData:(BTModelResponseCompletion)completion {
+    if (completion) {
+        _getExistUserDataCompletion = completion;
+        [_allUserDataList removeAllObjects];
+    }
+    
+    if (!_allUserDataList) {
+        _allUserDataList = [NSMutableArray array];
+    }
+    
+    if (_allUserDataList.count < _userInfoList.count) {
+        NSLog(@"获取存在用户数据:%d/%d", (int)_allUserDataList.count + 1, (int)_userInfoList.count);
+        ScaleUserEntity *userEntity = _userInfoList[_allUserDataList.count];
+        [_interfaceService readScaleData:userEntity.userId completion:^(int code, id info, id originalData) {
+            NSLog(@"获取用户%d数据，共%d条数据", userEntity.userId, ((NSDictionary *)info).count);
+            // 转换蓝牙数据为应用层数据
+            NSMutableArray *userDataList = [NSMutableArray array];
+            for (ScaleUserDataEntity *scaleUserEntity in info) {
+                UserDataEntity *userDataEntity = [scaleUserEntity convertToUserDataEntityWithHeight:[_scaleUserInfo.UI_height intValue]];
+                [userDataList addObject:userDataEntity];
+            }
+            NSDictionary *userDataEntityDic = @{
+                                                @"dataList": userDataList,
+                                                @"location": [NSString stringWithFormat:@"%d", userEntity.userId]
+                                                };
+            [_allUserDataList addObject:userDataEntityDic];
+            [self performSelector:@selector(getExistUserData:) withObject:nil afterDelay:0.1];
+        }];
+    } else {
+        if (_getExistUserDataCompletion) {
+            _getExistUserDataCompletion(_allUserDataList);
+            _getExistUserDataCompletion = nil;
+        }
+    }
+}
+
+// 删除存在用户数据
+- (void)deleteExistUserData:(BTModelResponseCompletion)completion {
+    if (completion) {
+        _deleteExistUserDataCompletion = completion;
+        hasDeletedUserData = 0;
+    }
+    
+    if (_userInfoList.count > hasDeletedUserData) {
+        ScaleUserEntity *userEntity = _userInfoList[hasDeletedUserData];
+        [_interfaceService deleteScaleData:userEntity.userId completion:^(int code, id info, id originalData) {
+            NSLog(@"删除用户%d的测量数据", userEntity.userId);
+            hasDeletedUserData ++;
+            [self performSelector:@selector(deleteExistUserData:) withObject:nil afterDelay:0.1];
+        }];
+    } else {
+        if (_deleteExistUserDataCompletion) {
+            _deleteExistUserDataCompletion(nil);
+            _deleteExistUserDataCompletion = nil;
+        }
+    }
+}
+
+#pragma mark - NSNotification
+- (void)didConnectedNotification:(NSNotification *)notif {
+    // 初始化状态
+    _smartModeEnable = NO;
+    _userInScaleIndex = 0;
+    _isConnecting = YES;
+    [_reconnectTimer invalidate];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    CBPeripheral *peripheral = notif.object;
+    
+    CFStringRef uuidStringRef = CFUUIDCreateString(kCFAllocatorDefault, peripheral.UUID);
+    NSString *uuidString = (__bridge_transfer NSString *)uuidStringRef;
+    [userDefaults setObject:uuidString forKey:kLAST_CONNECTED_DEVICE_UUID_KEY];
+    [userDefaults synchronize];
+}
+
+- (void)updateTimeSuccess:(NSNotification *)notif {
+    [self prepareDeviceForScale];
+}
+
+- (void)didDisconnectedNotification:(NSNotification *)notif {
+    NSLog(@"与设备断开连接！");
+    _peripheralDataPrepareOK = NO;
+    _isConnecting = NO;
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scanAndConnectToPeripheral) userInfo:nil repeats:NO];
+}
+
+- (void)receiveScaleData:(NSNotification *)notif {
+
+}
+
+- (void)realTimeWeight:(NSNotification *)notif {
+    NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:_lastScaleDate];
+    
+    if (time > 2) {
+        _isScaling = NO;
+    }
+    
+    if (!_isScaling) {      // 有实时重量信息返回的时候  设置用户
+        [self setUser];
+        _isScaling = YES;
+    }
+    _lastScaleDate = [NSDate date];
+}
+
+- (void)systemBluetoothStateUpdate:(NSNotification *)notif {
+    CBCentralManager *manager = notif.object;
+    _managerState = manager.state;
+    switch (manager.state) {
+        case CBCentralManagerStateUnknown:
+            
+            break;
+        case CBCentralManagerStateResetting: {
+            
+        }
+            break;
+        case CBCentralManagerStateUnsupported: {
+            
+        }
+            break;
+        case CBCentralManagerStateUnauthorized: {
+            
+        }
+            break;
+        case CBCentralManagerStatePoweredOff: {
+            _isConnecting = NO;
+            _deleteExistUserCompletion = nil;
+            _getExistUserDataCompletion = nil;
+            _deleteExistUserDataCompletion = nil;
+            
+            _smartModeEnable = NO;
+            _isScaling = NO;
+            _userInScaleIndex = 0;
+            _peripheralDataPrepareOK = NO;
+            
+            hasDeletedUserData = 0;
+            [_peripherals removeAllObjects];
+            
+            [_reconnectTimer invalidate];
+            [_scanTimer invalidate];
+            [_dataPrepareTimer invalidate];
+            [_interfaceService stopScanPeripherals];
+        }
+            break;
+        case CBCentralManagerStatePoweredOn: {
+            [self scanAndConnectToPeripheral];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+@end

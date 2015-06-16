@@ -1,0 +1,85 @@
+//
+//  BaseViewController.m
+//  BodyScale
+//
+//  Created by August on 14-9-27.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "BaseViewController.h"
+
+@interface BaseViewController ()
+@property(nonatomic,assign) BOOL isHasTextField;
+@end
+
+@implementation BaseViewController
+
+#pragma mark - life cycle methods
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ishasTextFeild:(BOOL)haseTextFeild
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        [self fitIOS7];
+        self.hidesBottomBarWhenPushed = YES;
+        self.isHasTextField = haseTextFeild;
+    }
+    return self;
+ 
+}
+
+#pragma mark - private methods
+
+#pragma mark - manage memory methods
+
+-(void)dealloc
+{
+
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+- (void)fitIOS7
+{
+    if (IS_IOS7)
+    {
+        
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:UIColorRef(255, 255, 255),NSFontAttributeName:[UIFont boldSystemFontOfSize:20.0f]};
+        self.navigationController.navigationBar.barTintColor = BGColor;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+        self.navigationController.navigationBar.translucent = NO;
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self fitIOS7];
+    if (self.isHasTextField)
+    {
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognized:)];
+        [self.view addGestureRecognizer:tapRecognizer];
+    }
+
+}
+
+- (void)tapGestureRecognized:(UITapGestureRecognizer *)recognizer
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView commitAnimations];
+    [self.view endEditing:YES];
+}
+
+
+-(void)backAction{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+@end

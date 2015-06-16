@@ -23,9 +23,9 @@
     [self.switchControl setBackgroundColor:[UIColor greenColor] forState:ICSwitchControlStateOn];
     [self.switchControl setBackgroundColor:[UIColor redColor] forState:ICSwitchControlStateHightlight];
     [self.switchControl setBackgroundColor:[UIColor blueColor] forState:ICSwitchControlStateOff];
-    [self.switchControl setCompleteSelectedBlock:^(ICSwitchControl *sender) {
-        sender.style = ICSwitchControlStyleDefault;
-    }];
+//    [self.switchControl setCompleteSelectedBlock:^(ICSwitchControl *sender) {
+//        sender.style = ICSwitchControlStyleDefault;
+//    }];
     
 }
 

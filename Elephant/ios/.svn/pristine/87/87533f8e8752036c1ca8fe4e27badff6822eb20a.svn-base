@@ -1,0 +1,16 @@
+//
+//  NSObject+CommanHelp.h
+//  BodyScale
+//
+//  Created by zhangweiwei on 14/11/29.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface CommanHelp : NSObject
++ (BOOL)isMobileNumber:(NSString*)mobileNum;
++ (BOOL)isStringNULL:(NSString*)paserStr;
++ (BOOL)isValidateEmail:(NSString *)email;
++ (NSString *) md5: (NSString *)encodeStr;
+@end

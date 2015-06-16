@@ -1,0 +1,79 @@
+//
+//  ModifyUserNameViewController.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-24.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "ModifyUserNameViewController.h"
+#import "LeftSideViewController.h"
+#import "DataDetailViewController.h"
+#import "MMDrawerController.h"
+#import "CalculateTool.h"
+
+NSString *NickNameDidChangeNotification = @"NickNameDidChangeNotification";
+
+#define LeftViewController  (LeftSideViewController *)[(MMDrawerController *)[[UIApplication sharedApplication].delegate window].rootViewController leftDrawerViewController]
+
+@interface ModifyUserNameViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
+
+@end
+
+@implementation ModifyUserNameViewController {
+    NSString *_lastNickName;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"修改昵称";
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    _lastNickName = [[GloubleProperty sharedInstance] currentUserEntity].UI_nickname;
+    self.nickNameTextField.text = _lastNickName;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Actions
+- (IBAction)sureButton:(id)sender {
+    NSString *nickName = self.nickNameTextField.text;
+    if (nickName.length == 0) {
+        [ViewUtilFactory presentAlertViewWithTitle:@"请输入名字" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        return;
+        
+    } else if ([CalculateTool convertToInt:nickName] > 6) {
+        
+        [ViewUtilFactory presentAlertViewWithTitle:@"名字长度应小于12个字符" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        return;
+    }
+    if (_lastNickName) {
+        if (![nickName isEqualToString:_lastNickName]) {
+            [[GloubleProperty sharedInstance] currentUserEntity].UI_nickname = self.nickNameTextField.text;
+            [GloubleProperty sharedInstance].currentUserInfoWillUpDate = YES;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NickNameDidChangeNotification object:nil];
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+@end

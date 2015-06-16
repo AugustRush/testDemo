@@ -1,0 +1,128 @@
+//
+//  HistoryDataTableViewCell.m
+//  ViewDraw
+//
+//  Created by Go Salo on 14-5-13.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "HistoryDataTableViewCell.h"
+
+@interface HDBackgroundView : UIView
+
+@end
+
+@implementation HDBackgroundView
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetRGBStrokeColor(ctx, 233 / 255.0f, 233 / 255.0f, 233 / 255.0f, 1);
+    
+    CGContextMoveToPoint(ctx, self.frame.size.width / 2, 0);
+    CGContextAddLineToPoint(ctx, self.frame.size.width / 2, self.frame.size.height);
+    
+    CGContextStrokePath(ctx);
+}
+
+@end
+
+@interface HistoryDataTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *roundView;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *errorImageView;
+
+@end
+
+@implementation HistoryDataTableViewCell {
+    NSArray *_colors;
+    
+    int _value;
+}
+
+- (void)awakeFromNib
+{
+    UIColor *deepGreenColor = [UIColor colorWithRed:67 / 255.0f green:157 / 255.0f blue:18 / 255.0f alpha:1];
+    UIColor *greenColor = [UIColor colorWithRed:127 / 255.0f green:192 / 255.0f blue:34 / 255.0f alpha:1];
+    UIColor *orangeColor = [UIColor colorWithRed:248 / 255.0f green:110 / 255.0f blue:9 / 255.0f alpha:1];
+    UIColor *redColor = [UIColor colorWithRed:252 / 255.0f green:70 / 255.0f blue:70 / 255.0f alpha:1];
+    UIColor *deepRedColor = [UIColor colorWithRed:220 / 255.0f green:10 / 255.0f blue:10 / 255.0f alpha:1];
+    
+    UIColor *blueColor = [UIColor colorWithRed:5 / 255.0f green:139 / 255.0f blue:232 / 255.0f alpha:1];
+    _colors = @[deepGreenColor, greenColor, orangeColor, redColor, deepRedColor, blueColor];
+    self.roundView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    
+    _value = -1;
+    
+    HDBackgroundView *backgroundView = [[HDBackgroundView alloc] initWithFrame:self.bounds];
+    self.backgroundView = backgroundView;
+}
+
+- (void)prepareForReuse {
+    self.roundView.backgroundColor = [UIColor lightGrayColor];
+    self.valueLabel.text = @"";
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    [self setRoundViewSelected:selected];
+}
+
+- (void)setRyfitValue:(float)value {
+    _value = roundf(value);
+    if (value == -1) {
+        self.errorImageView.hidden = NO;
+        self.valueLabel.hidden = YES;
+    } else {
+        self.errorImageView.hidden = YES;
+        self.valueLabel.hidden = NO;
+    }
+    
+    UIColor *color = [self calculateRoundViewColorWithValue:value];
+    self.valueLabel.text = [NSString stringWithFormat:@"%.1f", value];
+    self.roundView.backgroundColor = color;
+}
+
+- (void)setRoundViewSelected:(BOOL)selected {
+    [UIView animateWithDuration:0.3f animations:^{
+        if (selected) {
+            self.roundView.transform = CGAffineTransformMakeScale(1.5, 1.5);
+            self.roundView.backgroundColor = _colors[5];
+        } else {
+            self.roundView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            self.roundView.backgroundColor = [self calculateRoundViewColorWithValue:_value];
+        }
+    }];
+}
+
+- (UIColor *)calculateRoundViewColorWithValue:(int)value {
+    if (value >= 0) {
+        if (value < 60) {
+            return _colors[4];
+        } else if (value < 70) {
+            return _colors[3];
+        } else if (value < 80) {
+            return _colors[2];
+        } else if (value < 90) {
+            return _colors[1];
+        } else if (value <= 100) {
+            return _colors[0];
+        } else {
+            return [UIColor lightGrayColor];
+        }
+    } else {
+        return [UIColor lightGrayColor];
+    }
+}
+
+@end

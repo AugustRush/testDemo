@@ -1,0 +1,159 @@
+//
+//  UserDataModel.h
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-18.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "HTTPBaseModel.h"
+#import "JDDataEntity.h"
+#import "JDUserInfoEntity.h"
+#import "JDPlusModel.h"
+
+@interface UserDataModel : HTTPBaseModel
+
+//提交二维码数据
+- (void)requestSubmitDimensionalCodeWithdimensionalCode: (NSString *)dimensionalCode
+                                                   imei: (NSString *)imei;
+//查询二维码是否存在
+- (void)queryDimensionalCodeWithdimensionalCode:(NSString *)dimensionalCode;
+
+//提交体脂仪测量数据
+- (void)requestSubmitMeasurementDataWithsessionId:(NSString *)sessionId
+                                           userId:(NSString *)userId
+                                           weight:(double)weight
+                                              bmi:(double)bmi
+                                              fat:(double)fat
+                                          skinfat:(double)skinfat
+                                         offalfat:(double)offalfat
+                                           muscle:(double)muscle
+                                       metabolism:(double)metabolism
+                                            water:(double)water
+                                             bone:(double)bone
+                                          bodyage:(double)bodyage
+                                           longit:(NSString *)longit
+                                            latit:(NSString *)latit
+                                          devcode:(NSString *)devcode
+                                         location:(NSString *)location
+                                        checkdate:(NSString *)checkdate;
+//查询测量数据
+- (void)requestQueryMeasurementDataWithsessionId:(NSString *)sessionId
+                                          userId:(NSString *)userId
+                                        dateType:(NSString *)dateType
+                                       beginDate:(NSString *)beginDate
+                                         endDate:(NSString *)endDate;
+//查询测量数据—按索引
+- (void)requestQueryLatestMeasurementDataWithsessionId:(NSString *)sessionId
+                                           latestIndex:(NSString *)latestIndex;
+
+//用户设置
+- (void)requestSettingWithsessionId:(NSString *)sessionId
+                             userId:(NSString *)userId
+                               mode:(NSString *)mode
+                               plan:(NSString *)plan
+                             target:(NSString *)target
+                            privacy:(NSString *)privacy
+                        remindcycle:(NSString *)remindcycle
+                         remindmode:(NSString *)remindmode;
+//查询用户设置
+- (void)requestQuerySettingWithsessionId:(NSString *)sessionId userId:(NSString *)userId;
+//用户建议
+- (void)requestSubmitSuggestWithsessionId:(NSString *)sessionId content:(NSString *)content;
+//查询建议及回复
+- (void)requestQuerySuggestWithsessionId:(NSString *)sessionId
+                                  userId:(NSString *)userId
+                                userInfo:(id)userInfo;
+//用户赞/激励
+- (void)requestSubmitPraiseWithsessionId:(NSString *)sessionId
+                                  userId:(NSString *)userId
+                                    type:(NSString *)type;
+//查询用户赞/激励
+- (void)requestQueryPraiseWithsessionId:(NSString *)sessionId
+                                 userId:(NSString *)userId
+                                   type:(NSString *)type;
+//获取体脂仪设备编号
+- (void)requestQueryDevCodeWithsessionId:(NSString *)sessionId;
+//批量提交测量数据
+- (void)requestSubmitBatchDataWithsessionId:(NSString *)sessionId
+                                   jsonData:(NSString *)jsonData
+                                       list:(NSString *)list;
+//体脂仪用户绑定
+- (void)requestSubmitBindWithsessionId:(NSString *)sessionId
+                               devCode:(NSString *)devCode
+                              location:(NSString *)location;
+
+//体脂仪用户解除绑定
+- (void)requestCancelBindWithsessionId:(NSString *)sessionId
+                               devCode:(NSString *)devCode
+                                bindId:(NSString *)bindId;
+//修改密码
+- (void)requestModifyPasswordWithSessionId: (NSString *)uid
+                              userPassword: (NSString *)userPassword
+                               newPassword: (NSString *)newPassword;
+//查询好友信息
+- (void)requestQueryFocusDataWithsessionId:(NSString *)sessionId
+                                    userId:(NSString *)userId
+                                  userInfo:(id)userInfo;
+
+
+/**
+ *  删除单条数据
+ *
+ *  @param sessionId 会话id   sessionId+ dataId +约定串
+ *  @param dataId    UserDataEntity－>UD_ID
+ *  @param reason    删除原因：   
+                                1数据异常
+                                2数据不是我的
+                                3我不说，就是要删除
+                                默认是 3
+ *  @param userInfo  用户信息
+ */
+- (void)requestDeleteDataWithsessionId:(NSString *)sessionId
+                                dataId:(NSNumber *)dataId
+                                reason:(NSString *)reason
+                              userInfo:(id)userInfo;
+
+/**
+ *  验证 验证码是否有效
+ *
+ *  @param loginName 用户名
+ *  @param checkCode 验证码
+ *  @param userInfo  用户信息
+ */
+- (void)requestCheckCodeInvalidWithLoginName:(NSString *)loginName
+                                   checkCode:(NSString *)checkCode
+                                    userInfo:(id)userInfo;
+
+/**
+ *  根据mac地址获取设备颜色
+ *
+ *  @param mac      设备mac地址
+ *  @param userInfo 用户信息
+ */
+-(void)requestGetDevColorWithMac:(NSString *)mac
+                        userInfo:(id)userInfo;
+
+
+/**
+ *  上传jd数据～
+ *
+ *  @param data     jd数据对象
+ *  @param user     jd用户对象
+ *  @param userInfo 用户信息
+ */
+- (void)requestUploadJDDataWithData:(JDDataEntity *)data
+                               user:(JDUserInfoEntity *)user
+                           userInfo:(id)userInfo;
+
+/**
+ *  获取商品信息
+ */
+-(void)requestGetProductInfo;
+
+/**
+ *  获取订单信息
+ */
+-(void)requestGetOrderNum:(NSDictionary *)param;
+
+@end

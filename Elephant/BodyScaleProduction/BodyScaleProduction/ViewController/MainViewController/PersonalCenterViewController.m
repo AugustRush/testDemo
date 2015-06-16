@@ -1,0 +1,168 @@
+//
+//  PersonalCenterViewController.m
+//  BodyScaleProduction
+//
+//  Created by Cloud_Ding on 14-5-16.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "PersonalCenterViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "MyInfoViewController.h"
+#import "BaseNavigationController.h"
+#import "PraiseMeViewController.h"
+#import "RemindWeightViewController.h"
+#import "ModifyUserPasswordViewController.h"
+#import "AppDelegate.h"
+#import "BTModel.h"
+
+@interface PersonalCenterViewController () <UIAlertViewDelegate> {
+    NSArray *_titles;
+    int _tp;
+}
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@end
+
+@implementation PersonalCenterViewController
+
+#pragma mark - init
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+#pragma mark - lifeCycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UserInfoEntity *_user = [[InterfaceModel sharedInstance]getHostUser];
+    if ([@"3" isEqualToString:_user.UI_isLoc]) {
+        _tp = 3;
+        _titles = @[    @[@"个人资料"],
+                        @[@"赞我的人",@"提醒称重"],
+                        @[@"退出登录"] ];
+    }else{
+        _tp = 1;
+        _titles = [NSArray arrayWithObjects:@[@"个人资料"],
+                   @[@"赞我的人",@"提醒称重"],@[@"修改密码", @"退出登录"], nil];
+    }
+    // Do any additional setup after loading the view from its nib.
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    self.title = @"个人中心";
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    
+    int itemCount = _titles.count;
+    
+    
+    
+    return itemCount;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    
+    return [_titles[section] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyInfoTableViewCell *cell = nil;
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"MyInfoTableViewCell"
+                                             owner:self
+                                           options:nil] lastObject];
+    }
+    
+    [cell setArrowImageViewhidden:NO];
+    if (_tp == 3) {
+        if (indexPath.section == 2 && indexPath.row == 0) {
+            [cell setArrowImageViewhidden:YES];
+        }
+    }else{
+    
+        if (indexPath.section == 2 && indexPath.row == 1) {
+            [cell setArrowImageViewhidden:YES];
+        }
+    }
+    
+    
+    [cell setTitle:_titles[indexPath.section][indexPath.row]];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+           MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] initWithNibName:@"MyInfoViewController" bundle:nil parentVC:self];
+           [self.navigationController pushViewController:myInfoVC animated:YES];
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            PraiseMeViewController *praiseMeVC = [[PraiseMeViewController alloc] initWithNibName:@"PraiseMeViewController" bundle:nil];
+            [self.navigationController pushViewController:praiseMeVC animated:YES];
+        }else{
+            RemindWeightViewController *remindWeightVC = [[RemindWeightViewController alloc] initWithNibName:@"RemindWeightViewController" bundle:nil];
+            [self.navigationController pushViewController:remindWeightVC animated:YES];
+        }
+    }else{
+        
+        if (_tp == 1) {
+            if (indexPath.row == 0) {
+                ModifyUserPasswordViewController *modifyPasswordVC = [[ModifyUserPasswordViewController alloc] initWithNibName:@"ModifyUserPasswordViewController" bundle:nil];
+                [self.navigationController pushViewController:modifyPasswordVC animated:YES];
+            } else {
+                [ViewUtilFactory presentAlertViewWithTitle:@"退出"
+                                                   message:@"是否退出账户"
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                         otherButtonTitles:@"确定", nil];
+            }
+        }
+        else{
+            [ViewUtilFactory presentAlertViewWithTitle:@"退出"
+                                               message:@"是否退出账户"
+                                              delegate:self
+                                     cancelButtonTitle:@"取消"
+                                     otherButtonTitles:@"确定", nil];
+            
+        }
+        
+    }
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        
+    } else if (buttonIndex == 1) {
+        [[BTModel sharedInstance] selectUserInScale:nil isTesting:YES];
+        [[InterfaceModel sharedInstance] userLogoutWithCallBack:nil];
+        [GloubleProperty sharedInstance].currentUserEntity = nil;
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate loginAndRegisterViewAppear];
+        
+        [Flurry logEvent:USER_LOG_OUT_EVENT];
+    }
+}
+
+@end

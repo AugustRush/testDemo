@@ -1,0 +1,3339 @@
+<?xml version="1.0" standalone="yes"?>
+<RECORDS>
+<RECORD>
+<id>402881882ba8753a012ba8bf474d001c</id>
+<createDate>2010/10/14 11:18:49</createDate>
+<modifyDate>2010/10/14 11:18:49</modifyDate>
+<name>北京</name>
+<path>402881882ba8753a012ba8bf474d001c</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8bfacfd001d</id>
+<createDate>2010/10/14 11:19:15</createDate>
+<modifyDate>2010/10/14 11:19:15</modifyDate>
+<name>东城区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8bfacfd001d</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8bff6f6001e</id>
+<createDate>2010/10/14 11:19:34</createDate>
+<modifyDate>2010/10/14 11:19:34</modifyDate>
+<name>西城区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8bff6f6001e</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c02f9a001f</id>
+<createDate>2010/10/14 11:19:48</createDate>
+<modifyDate>2010/10/14 11:19:48</modifyDate>
+<name>崇文区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c02f9a001f</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c061970020</id>
+<createDate>2010/10/14 11:20:01</createDate>
+<modifyDate>2010/10/14 11:20:01</modifyDate>
+<name>宣武区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c061970020</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c088690021</id>
+<createDate>2010/10/14 11:20:11</createDate>
+<modifyDate>2010/10/14 11:20:11</modifyDate>
+<name>朝阳区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c088690021</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c0ade20022</id>
+<createDate>2010/10/14 11:20:21</createDate>
+<modifyDate>2010/10/14 11:20:21</modifyDate>
+<name>丰台区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c0ade20022</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c0d34c0023</id>
+<createDate>2010/10/14 11:20:30</createDate>
+<modifyDate>2010/10/14 11:20:30</modifyDate>
+<name>石景山区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c0d34c0023</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c0fb850024</id>
+<createDate>2010/10/14 11:20:41</createDate>
+<modifyDate>2010/10/14 11:20:41</modifyDate>
+<name>海淀区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c0fb850024</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c121f90025</id>
+<createDate>2010/10/14 11:20:50</createDate>
+<modifyDate>2010/10/14 11:20:50</modifyDate>
+<name>门头沟区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c121f90025</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c1463a0026</id>
+<createDate>2010/10/14 11:21:00</createDate>
+<modifyDate>2010/10/14 11:21:00</modifyDate>
+<name>房山区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c1463a0026</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c16f8c0027</id>
+<createDate>2010/10/14 11:21:10</createDate>
+<modifyDate>2010/10/14 11:21:10</modifyDate>
+<name>通州区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c16f8c0027</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c19cb70028</id>
+<createDate>2010/10/14 11:21:22</createDate>
+<modifyDate>2010/10/14 11:21:22</modifyDate>
+<name>顺义区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c19cb70028</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c1bf720029</id>
+<createDate>2010/10/14 11:21:31</createDate>
+<modifyDate>2010/10/14 11:21:31</modifyDate>
+<name>昌平区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c1bf720029</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c1dec1002a</id>
+<createDate>2010/10/14 11:21:39</createDate>
+<modifyDate>2010/10/14 11:21:39</modifyDate>
+<name>大兴区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c1dec1002a</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c200e0002b</id>
+<createDate>2010/10/14 11:21:48</createDate>
+<modifyDate>2010/10/14 11:21:48</modifyDate>
+<name>怀柔区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c200e0002b</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c2164c002c</id>
+<createDate>2010/10/14 11:21:53</createDate>
+<modifyDate>2010/10/14 11:21:53</modifyDate>
+<name>平谷区</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c2164c002c</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c27285002d</id>
+<createDate>2010/10/14 11:22:17</createDate>
+<modifyDate>2010/10/14 11:22:17</modifyDate>
+<name>密云县</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c27285002d</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c28be9002e</id>
+<createDate>2010/10/14 11:22:23</createDate>
+<modifyDate>2010/10/14 11:22:23</modifyDate>
+<name>延庆县</name>
+<path>402881882ba8753a012ba8bf474d001c,402881882ba8753a012ba8c28be9002e</path>
+<parent_id>402881882ba8753a012ba8bf474d001c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c389a2002f</id>
+<createDate>2010/10/14 11:23:28</createDate>
+<modifyDate>2010/10/14 11:23:28</modifyDate>
+<name>天津</name>
+<path>402881882ba8753a012ba8c389a2002f</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c3bcc80030</id>
+<createDate>2010/10/14 11:23:41</createDate>
+<modifyDate>2010/10/14 11:23:41</modifyDate>
+<name>和平区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c3bcc80030</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c3e4460031</id>
+<createDate>2010/10/14 11:23:51</createDate>
+<modifyDate>2010/10/14 11:23:51</modifyDate>
+<name>河东区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c3e4460031</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c409df0032</id>
+<createDate>2010/10/14 11:24:01</createDate>
+<modifyDate>2010/10/14 11:24:01</modifyDate>
+<name>河西区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c409df0032</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c42e5e0033</id>
+<createDate>2010/10/14 11:24:10</createDate>
+<modifyDate>2010/10/14 11:24:10</modifyDate>
+<name>南开区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c42e5e0033</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c454450034</id>
+<createDate>2010/10/14 11:24:20</createDate>
+<modifyDate>2010/10/14 11:24:20</modifyDate>
+<name>河北区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c454450034</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c479040035</id>
+<createDate>2010/10/14 11:24:29</createDate>
+<modifyDate>2010/10/14 11:24:29</modifyDate>
+<name>红桥区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c479040035</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c49db20036</id>
+<createDate>2010/10/14 11:24:39</createDate>
+<modifyDate>2010/10/14 11:24:39</modifyDate>
+<name>塘沽区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c49db20036</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c4c2610037</id>
+<createDate>2010/10/14 11:24:48</createDate>
+<modifyDate>2010/10/14 11:24:48</modifyDate>
+<name>汉沽区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c4c2610037</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c4e5790038</id>
+<createDate>2010/10/14 11:24:57</createDate>
+<modifyDate>2010/10/14 11:24:57</modifyDate>
+<name>大港区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c4e5790038</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c50c890039</id>
+<createDate>2010/10/14 11:25:07</createDate>
+<modifyDate>2010/10/14 11:25:07</modifyDate>
+<name>东丽区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c50c890039</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c53109003a</id>
+<createDate>2010/10/14 11:25:16</createDate>
+<modifyDate>2010/10/14 11:25:16</modifyDate>
+<name>西青区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c53109003a</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c55838003b</id>
+<createDate>2010/10/14 11:25:26</createDate>
+<modifyDate>2010/10/14 11:25:26</modifyDate>
+<name>津南区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c55838003b</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c57e00003c</id>
+<createDate>2010/10/14 11:25:36</createDate>
+<modifyDate>2010/10/14 11:25:36</modifyDate>
+<name>北辰区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c57e00003c</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c5a2de003d</id>
+<createDate>2010/10/14 11:25:46</createDate>
+<modifyDate>2010/10/14 11:25:46</modifyDate>
+<name>武清区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c5a2de003d</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c5c829003e</id>
+<createDate>2010/10/14 11:25:55</createDate>
+<modifyDate>2010/10/14 11:25:55</modifyDate>
+<name>宝坻区</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c5c829003e</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c5eac4003f</id>
+<createDate>2010/10/14 11:26:04</createDate>
+<modifyDate>2010/10/14 11:26:04</modifyDate>
+<name>宁河县</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c5eac4003f</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c60e980040</id>
+<createDate>2010/10/14 11:26:13</createDate>
+<modifyDate>2010/10/14 11:26:13</modifyDate>
+<name>静海县</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c60e980040</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c626270041</id>
+<createDate>2010/10/14 11:26:19</createDate>
+<modifyDate>2010/10/14 11:26:19</modifyDate>
+<name>蓟县</name>
+<path>402881882ba8753a012ba8c389a2002f,402881882ba8753a012ba8c626270041</path>
+<parent_id>402881882ba8753a012ba8c389a2002f</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c689d30042</id>
+<createDate>2010/10/14 11:26:45</createDate>
+<modifyDate>2010/10/14 11:26:45</modifyDate>
+<name>河北省</name>
+<path>402881882ba8753a012ba8c689d30042</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c6da830043</id>
+<createDate>2010/10/14 11:27:05</createDate>
+<modifyDate>2010/10/14 11:27:05</modifyDate>
+<name>石家庄市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c6da830043</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c7122d0044</id>
+<createDate>2010/10/14 11:27:20</createDate>
+<modifyDate>2010/10/14 11:27:20</modifyDate>
+<name>唐山市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c7122d0044</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c73d920045</id>
+<createDate>2010/10/14 11:27:31</createDate>
+<modifyDate>2010/10/14 11:27:31</modifyDate>
+<name>秦皇岛市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c73d920045</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c7656d0046</id>
+<createDate>2010/10/14 11:27:41</createDate>
+<modifyDate>2010/10/14 11:27:41</modifyDate>
+<name>邯郸市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c7656d0046</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c78fc90047</id>
+<createDate>2010/10/14 11:27:52</createDate>
+<modifyDate>2010/10/14 11:27:52</modifyDate>
+<name>邢台市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c78fc90047</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c7bb5d0048</id>
+<createDate>2010/10/14 11:28:03</createDate>
+<modifyDate>2010/10/14 11:28:03</modifyDate>
+<name>保定市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c7bb5d0048</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c7e50d0049</id>
+<createDate>2010/10/14 11:28:14</createDate>
+<modifyDate>2010/10/14 11:28:14</modifyDate>
+<name>张家口市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c7e50d0049</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c80c4c004a</id>
+<createDate>2010/10/14 11:28:24</createDate>
+<modifyDate>2010/10/14 11:28:24</modifyDate>
+<name>承德市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c80c4c004a</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c8404d004b</id>
+<createDate>2010/10/14 11:28:37</createDate>
+<modifyDate>2010/10/14 11:28:37</modifyDate>
+<name>沧州市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c8404d004b</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c898fc004c</id>
+<createDate>2010/10/14 11:29:00</createDate>
+<modifyDate>2010/10/14 11:29:00</modifyDate>
+<name>廊坊市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c898fc004c</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c8bc62004d</id>
+<createDate>2010/10/14 11:29:09</createDate>
+<modifyDate>2010/10/14 11:29:09</modifyDate>
+<name>衡水市</name>
+<path>402881882ba8753a012ba8c689d30042,402881882ba8753a012ba8c8bc62004d</path>
+<parent_id>402881882ba8753a012ba8c689d30042</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c8f0b1004e</id>
+<createDate>2010/10/14 11:29:22</createDate>
+<modifyDate>2010/10/14 11:29:22</modifyDate>
+<name>山西省</name>
+<path>402881882ba8753a012ba8c8f0b1004e</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c93924004f</id>
+<createDate>2010/10/14 11:29:41</createDate>
+<modifyDate>2010/10/14 11:29:41</modifyDate>
+<name>太原市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8c93924004f</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c963fd0050</id>
+<createDate>2010/10/14 11:29:52</createDate>
+<modifyDate>2010/10/14 11:29:52</modifyDate>
+<name>大同市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8c963fd0050</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c98d3f0051</id>
+<createDate>2010/10/14 11:30:02</createDate>
+<modifyDate>2010/10/14 11:30:02</modifyDate>
+<name>阳泉市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8c98d3f0051</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c9b72d0052</id>
+<createDate>2010/10/14 11:30:13</createDate>
+<modifyDate>2010/10/14 11:30:13</modifyDate>
+<name>长治市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8c9b72d0052</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8c9e15a0053</id>
+<createDate>2010/10/14 11:30:24</createDate>
+<modifyDate>2010/10/14 11:30:24</modifyDate>
+<name>晋城市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8c9e15a0053</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ca0e460054</id>
+<createDate>2010/10/14 11:30:35</createDate>
+<modifyDate>2010/10/14 11:30:35</modifyDate>
+<name>朔州市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8ca0e460054</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ca392f0055</id>
+<createDate>2010/10/14 11:30:46</createDate>
+<modifyDate>2010/10/14 11:30:46</modifyDate>
+<name>晋中市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8ca392f0055</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ca67240056</id>
+<createDate>2010/10/14 11:30:58</createDate>
+<modifyDate>2010/10/14 11:30:58</modifyDate>
+<name>运城市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8ca67240056</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ca91ed0057</id>
+<createDate>2010/10/14 11:31:09</createDate>
+<modifyDate>2010/10/14 11:31:09</modifyDate>
+<name>忻州市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8ca91ed0057</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cabae20058</id>
+<createDate>2010/10/14 11:31:19</createDate>
+<modifyDate>2010/10/14 11:31:19</modifyDate>
+<name>临汾市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8cabae20058</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cae26f0059</id>
+<createDate>2010/10/14 11:31:30</createDate>
+<modifyDate>2010/10/14 11:31:30</modifyDate>
+<name>吕梁市</name>
+<path>402881882ba8753a012ba8c8f0b1004e,402881882ba8753a012ba8cae26f0059</path>
+<parent_id>402881882ba8753a012ba8c8f0b1004e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cb1bbf005a</id>
+<createDate>2010/10/14 11:31:44</createDate>
+<modifyDate>2010/10/14 11:31:44</modifyDate>
+<name>内蒙古自治区</name>
+<path>402881882ba8753a012ba8cb1bbf005a</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cb58c8005b</id>
+<createDate>2010/10/14 11:32:00</createDate>
+<modifyDate>2010/10/14 11:32:00</modifyDate>
+<name>呼和浩特市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cb58c8005b</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cb84c9005c</id>
+<createDate>2010/10/14 11:32:11</createDate>
+<modifyDate>2010/10/14 11:32:11</modifyDate>
+<name>包头市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cb84c9005c</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cbb7a1005d</id>
+<createDate>2010/10/14 11:32:24</createDate>
+<modifyDate>2010/10/14 11:32:24</modifyDate>
+<name>乌海市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cbb7a1005d</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cbdf3e005e</id>
+<createDate>2010/10/14 11:32:34</createDate>
+<modifyDate>2010/10/14 11:32:34</modifyDate>
+<name>赤峰市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cbdf3e005e</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cc0ad2005f</id>
+<createDate>2010/10/14 11:32:45</createDate>
+<modifyDate>2010/10/14 11:32:45</modifyDate>
+<name>通辽市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cc0ad2005f</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cc3a1f0060</id>
+<createDate>2010/10/14 11:32:58</createDate>
+<modifyDate>2010/10/14 11:32:58</modifyDate>
+<name>鄂尔多斯市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cc3a1f0060</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cc62870061</id>
+<createDate>2010/10/14 11:33:08</createDate>
+<modifyDate>2010/10/14 11:33:08</modifyDate>
+<name>呼伦贝尔市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cc62870061</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cc90ea0062</id>
+<createDate>2010/10/14 11:33:20</createDate>
+<modifyDate>2010/10/14 11:33:20</modifyDate>
+<name>巴彦淖尔市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cc90ea0062</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ccb71f0063</id>
+<createDate>2010/10/14 11:33:30</createDate>
+<modifyDate>2010/10/14 11:33:30</modifyDate>
+<name>乌兰察布市</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8ccb71f0063</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cce2c30064</id>
+<createDate>2010/10/14 11:33:41</createDate>
+<modifyDate>2010/10/14 11:33:41</modifyDate>
+<name>兴安盟</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cce2c30064</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cd105b0065</id>
+<createDate>2010/10/14 11:33:52</createDate>
+<modifyDate>2010/10/14 11:33:52</modifyDate>
+<name>锡林郭勒盟</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cd105b0065</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cd35d50066</id>
+<createDate>2010/10/14 11:34:02</createDate>
+<modifyDate>2010/10/14 11:34:02</modifyDate>
+<name>阿拉善盟</name>
+<path>402881882ba8753a012ba8cb1bbf005a,402881882ba8753a012ba8cd35d50066</path>
+<parent_id>402881882ba8753a012ba8cb1bbf005a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cd6a230067</id>
+<createDate>2010/10/14 11:34:15</createDate>
+<modifyDate>2010/10/14 11:34:15</modifyDate>
+<name>辽宁省</name>
+<path>402881882ba8753a012ba8cd6a230067</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cde3890068</id>
+<createDate>2010/10/14 11:34:46</createDate>
+<modifyDate>2010/10/14 11:34:46</modifyDate>
+<name>沈阳市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cde3890068</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ce0ceb0069</id>
+<createDate>2010/10/14 11:34:57</createDate>
+<modifyDate>2010/10/14 11:34:57</modifyDate>
+<name>大连市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8ce0ceb0069</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ce32a3006a</id>
+<createDate>2010/10/14 11:35:07</createDate>
+<modifyDate>2010/10/14 11:35:07</modifyDate>
+<name>鞍山市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8ce32a3006a</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ce5b2a006b</id>
+<createDate>2010/10/14 11:35:17</createDate>
+<modifyDate>2010/10/14 11:35:17</modifyDate>
+<name>抚顺市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8ce5b2a006b</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ce7c10006c</id>
+<createDate>2010/10/14 11:35:25</createDate>
+<modifyDate>2010/10/14 11:35:25</modifyDate>
+<name>本溪市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8ce7c10006c</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cea18a006d</id>
+<createDate>2010/10/14 11:35:35</createDate>
+<modifyDate>2010/10/14 11:35:35</modifyDate>
+<name>丹东市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cea18a006d</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cec85c006e</id>
+<createDate>2010/10/14 11:35:45</createDate>
+<modifyDate>2010/10/14 11:35:45</modifyDate>
+<name>锦州市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cec85c006e</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cef5b5006f</id>
+<createDate>2010/10/14 11:35:57</createDate>
+<modifyDate>2010/10/14 11:35:57</modifyDate>
+<name>营口市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cef5b5006f</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cf1cc50070</id>
+<createDate>2010/10/14 11:36:07</createDate>
+<modifyDate>2010/10/14 11:36:07</modifyDate>
+<name>阜新市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cf1cc50070</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cf427d0071</id>
+<createDate>2010/10/14 11:36:16</createDate>
+<modifyDate>2010/10/14 11:36:16</modifyDate>
+<name>辽阳市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cf427d0071</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cf6ae50072</id>
+<createDate>2010/10/14 11:36:27</createDate>
+<modifyDate>2010/10/14 11:36:27</modifyDate>
+<name>盘锦市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cf6ae50072</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cf90dc0073</id>
+<createDate>2010/10/14 11:36:36</createDate>
+<modifyDate>2010/10/14 11:36:36</modifyDate>
+<name>铁岭市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cf90dc0073</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cfb6750074</id>
+<createDate>2010/10/14 11:36:46</createDate>
+<modifyDate>2010/10/14 11:36:46</modifyDate>
+<name>朝阳市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cfb6750074</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8cfdb710075</id>
+<createDate>2010/10/14 11:36:55</createDate>
+<modifyDate>2010/10/14 11:36:55</modifyDate>
+<name>葫芦岛市</name>
+<path>402881882ba8753a012ba8cd6a230067,402881882ba8753a012ba8cfdb710075</path>
+<parent_id>402881882ba8753a012ba8cd6a230067</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d010f90076</id>
+<createDate>2010/10/14 11:37:09</createDate>
+<modifyDate>2010/10/14 11:37:09</modifyDate>
+<name>吉林省</name>
+<path>402881882ba8753a012ba8d010f90076</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d03d870077</id>
+<createDate>2010/10/14 11:37:21</createDate>
+<modifyDate>2010/10/14 11:37:21</modifyDate>
+<name>长春市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d03d870077</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d065c00078</id>
+<createDate>2010/10/14 11:37:31</createDate>
+<modifyDate>2010/10/14 11:37:31</modifyDate>
+<name>吉林市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d065c00078</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d08acc0079</id>
+<createDate>2010/10/14 11:37:40</createDate>
+<modifyDate>2010/10/14 11:37:40</modifyDate>
+<name>四平市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d08acc0079</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d0b046007a</id>
+<createDate>2010/10/14 11:37:50</createDate>
+<modifyDate>2010/10/14 11:37:50</modifyDate>
+<name>辽源市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d0b046007a</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d0d7a4007b</id>
+<createDate>2010/10/14 11:38:00</createDate>
+<modifyDate>2010/10/14 11:38:00</modifyDate>
+<name>通化市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d0d7a4007b</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d0fe95007c</id>
+<createDate>2010/10/14 11:38:10</createDate>
+<modifyDate>2010/10/14 11:38:10</modifyDate>
+<name>白山市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d0fe95007c</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d120b3007d</id>
+<createDate>2010/10/14 11:38:19</createDate>
+<modifyDate>2010/10/14 11:38:19</modifyDate>
+<name>松原市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d120b3007d</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d14d8f007e</id>
+<createDate>2010/10/14 11:38:30</createDate>
+<modifyDate>2010/10/14 11:38:30</modifyDate>
+<name>白城市</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d14d8f007e</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d17a4d007f</id>
+<createDate>2010/10/14 11:38:42</createDate>
+<modifyDate>2010/10/14 11:38:42</modifyDate>
+<name>延边朝鲜族自治州</name>
+<path>402881882ba8753a012ba8d010f90076,402881882ba8753a012ba8d17a4d007f</path>
+<parent_id>402881882ba8753a012ba8d010f90076</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d1b0310080</id>
+<createDate>2010/10/14 11:38:55</createDate>
+<modifyDate>2010/10/14 11:38:55</modifyDate>
+<name>黑龙江省</name>
+<path>402881882ba8753a012ba8d1b0310080</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d1e4320081</id>
+<createDate>2010/10/14 11:39:09</createDate>
+<modifyDate>2010/10/14 11:39:09</modifyDate>
+<name>哈尔滨市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d1e4320081</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d212850082</id>
+<createDate>2010/10/14 11:39:21</createDate>
+<modifyDate>2010/10/14 11:39:21</modifyDate>
+<name>齐齐哈尔市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d212850082</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d239090083</id>
+<createDate>2010/10/14 11:39:30</createDate>
+<modifyDate>2010/10/14 11:39:30</modifyDate>
+<name>鸡西市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d239090083</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d264db0084</id>
+<createDate>2010/10/14 11:39:42</createDate>
+<modifyDate>2010/10/14 11:39:42</modifyDate>
+<name>鹤岗市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d264db0084</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d28a360085</id>
+<createDate>2010/10/14 11:39:51</createDate>
+<modifyDate>2010/10/14 11:39:51</modifyDate>
+<name>双鸭山市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d28a360085</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d2b2cd0086</id>
+<createDate>2010/10/14 11:40:02</createDate>
+<modifyDate>2010/10/14 11:40:02</modifyDate>
+<name>大庆市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d2b2cd0086</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d2daa80087</id>
+<createDate>2010/10/14 11:40:12</createDate>
+<modifyDate>2010/10/14 11:40:12</modifyDate>
+<name>伊春市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d2daa80087</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d300cd0088</id>
+<createDate>2010/10/14 11:40:22</createDate>
+<modifyDate>2010/10/14 11:40:22</modifyDate>
+<name>佳木斯市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d300cd0088</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d327be0089</id>
+<createDate>2010/10/14 11:40:32</createDate>
+<modifyDate>2010/10/14 11:40:32</modifyDate>
+<name>七台河市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d327be0089</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d34d47008a</id>
+<createDate>2010/10/14 11:40:41</createDate>
+<modifyDate>2010/10/14 11:40:41</modifyDate>
+<name>牡丹江市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d34d47008a</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d372c1008b</id>
+<createDate>2010/10/14 11:40:51</createDate>
+<modifyDate>2010/10/14 11:40:51</modifyDate>
+<name>黑河市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d372c1008b</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d398c8008c</id>
+<createDate>2010/10/14 11:41:01</createDate>
+<modifyDate>2010/10/14 11:41:01</modifyDate>
+<name>绥化市</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d398c8008c</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d3c97c008d</id>
+<createDate>2010/10/14 11:41:13</createDate>
+<modifyDate>2010/10/14 11:41:13</modifyDate>
+<name>大兴安岭地区</name>
+<path>402881882ba8753a012ba8d1b0310080,402881882ba8753a012ba8d3c97c008d</path>
+<parent_id>402881882ba8753a012ba8d1b0310080</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d3f4f1008e</id>
+<createDate>2010/10/14 11:41:24</createDate>
+<modifyDate>2010/10/14 11:41:24</modifyDate>
+<name>上海市</name>
+<path>402881882ba8753a012ba8d3f4f1008e</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d45968008f</id>
+<createDate>2010/10/14 11:41:50</createDate>
+<modifyDate>2010/10/14 11:41:50</modifyDate>
+<name>黄浦区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d45968008f</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d47e550090</id>
+<createDate>2010/10/14 11:41:59</createDate>
+<modifyDate>2010/10/14 11:41:59</modifyDate>
+<name>卢湾区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d47e550090</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d4a0f10091</id>
+<createDate>2010/10/14 11:42:08</createDate>
+<modifyDate>2010/10/14 11:42:08</modifyDate>
+<name>徐汇区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d4a0f10091</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d4c63b0092</id>
+<createDate>2010/10/14 11:42:18</createDate>
+<modifyDate>2010/10/14 11:42:18</modifyDate>
+<name>长宁区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d4c63b0092</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d4ee260093</id>
+<createDate>2010/10/14 11:42:28</createDate>
+<modifyDate>2010/10/14 11:42:28</modifyDate>
+<name>静安区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d4ee260093</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d50f5a0094</id>
+<createDate>2010/10/14 11:42:36</createDate>
+<modifyDate>2010/10/14 11:42:36</modifyDate>
+<name>普陀区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d50f5a0094</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d5366a0095</id>
+<createDate>2010/10/14 11:42:46</createDate>
+<modifyDate>2010/10/14 11:42:46</modifyDate>
+<name>闸北区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d5366a0095</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d55b190096</id>
+<createDate>2010/10/14 11:42:56</createDate>
+<modifyDate>2010/10/14 11:42:56</modifyDate>
+<name>虹口区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d55b190096</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d57b430097</id>
+<createDate>2010/10/14 11:43:04</createDate>
+<modifyDate>2010/10/14 11:43:04</modifyDate>
+<name>杨浦区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d57b430097</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d59fb30098</id>
+<createDate>2010/10/14 11:43:13</createDate>
+<modifyDate>2010/10/14 11:43:13</modifyDate>
+<name>闵行区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d59fb30098</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d5c54c0099</id>
+<createDate>2010/10/14 11:43:23</createDate>
+<modifyDate>2010/10/14 11:43:23</modifyDate>
+<name>宝山区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d5c54c0099</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d5ea2a009a</id>
+<createDate>2010/10/14 11:43:32</createDate>
+<modifyDate>2010/10/14 11:43:32</modifyDate>
+<name>嘉定区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d5ea2a009a</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d61a04009b</id>
+<createDate>2010/10/14 11:43:45</createDate>
+<modifyDate>2010/10/14 11:43:45</modifyDate>
+<name>浦东新区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d61a04009b</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d6420e009c</id>
+<createDate>2010/10/14 11:43:55</createDate>
+<modifyDate>2010/10/14 11:43:55</modifyDate>
+<name>金山区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d6420e009c</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d6bcdb009d</id>
+<createDate>2010/10/14 11:44:26</createDate>
+<modifyDate>2010/10/14 11:44:26</modifyDate>
+<name>松江区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d6bcdb009d</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d6e330009e</id>
+<createDate>2010/10/14 11:44:36</createDate>
+<modifyDate>2010/10/14 11:44:36</modifyDate>
+<name>青浦区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d6e330009e</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d70abd009f</id>
+<createDate>2010/10/14 11:44:46</createDate>
+<modifyDate>2010/10/14 11:44:46</modifyDate>
+<name>南汇区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d70abd009f</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d72b2600a0</id>
+<createDate>2010/10/14 11:44:55</createDate>
+<modifyDate>2010/10/14 11:44:55</modifyDate>
+<name>奉贤区</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d72b2600a0</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d745d200a1</id>
+<createDate>2010/10/14 11:45:01</createDate>
+<modifyDate>2010/10/14 11:45:01</modifyDate>
+<name>崇明县</name>
+<path>402881882ba8753a012ba8d3f4f1008e,402881882ba8753a012ba8d745d200a1</path>
+<parent_id>402881882ba8753a012ba8d3f4f1008e</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d780a800a2</id>
+<createDate>2010/10/14 11:45:16</createDate>
+<modifyDate>2010/10/14 11:45:16</modifyDate>
+<name>江苏省</name>
+<path>402881882ba8753a012ba8d780a800a2</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d82d2500a3</id>
+<createDate>2010/10/14 11:46:01</createDate>
+<modifyDate>2010/10/14 11:46:01</modifyDate>
+<name>南京市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d82d2500a3</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d8605a00a4</id>
+<createDate>2010/10/14 11:46:14</createDate>
+<modifyDate>2010/10/14 11:46:14</modifyDate>
+<name>无锡市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d8605a00a4</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d88b1300a5</id>
+<createDate>2010/10/14 11:46:25</createDate>
+<modifyDate>2010/10/14 11:46:25</modifyDate>
+<name>徐州市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d88b1300a5</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d8b1e500a6</id>
+<createDate>2010/10/14 11:46:35</createDate>
+<modifyDate>2010/10/14 11:46:35</modifyDate>
+<name>常州市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d8b1e500a6</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d8e08600a7</id>
+<createDate>2010/10/14 11:46:47</createDate>
+<modifyDate>2010/10/14 11:46:47</modifyDate>
+<name>苏州市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d8e08600a7</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d907b600a8</id>
+<createDate>2010/10/14 11:46:57</createDate>
+<modifyDate>2010/10/14 11:46:57</modifyDate>
+<name>南通市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d907b600a8</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d9317500a9</id>
+<createDate>2010/10/14 11:47:07</createDate>
+<modifyDate>2010/10/14 11:47:07</modifyDate>
+<name>连云港市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d9317500a9</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d956df00aa</id>
+<createDate>2010/10/14 11:47:17</createDate>
+<modifyDate>2010/10/14 11:47:17</modifyDate>
+<name>淮安市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d956df00aa</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d97d6300ab</id>
+<createDate>2010/10/14 11:47:27</createDate>
+<modifyDate>2010/10/14 11:47:27</modifyDate>
+<name>盐城市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d97d6300ab</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d9a2fc00ac</id>
+<createDate>2010/10/14 11:47:36</createDate>
+<modifyDate>2010/10/14 11:47:36</modifyDate>
+<name>扬州市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d9a2fc00ac</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d9ca4a00ad</id>
+<createDate>2010/10/14 11:47:46</createDate>
+<modifyDate>2010/10/14 11:47:46</modifyDate>
+<name>镇江市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d9ca4a00ad</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8d9eef900ae</id>
+<createDate>2010/10/14 11:47:56</createDate>
+<modifyDate>2010/10/14 11:47:56</modifyDate>
+<name>泰州市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8d9eef900ae</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8da172200af</id>
+<createDate>2010/10/14 11:48:06</createDate>
+<modifyDate>2010/10/14 11:48:06</modifyDate>
+<name>宿迁市</name>
+<path>402881882ba8753a012ba8d780a800a2,402881882ba8753a012ba8da172200af</path>
+<parent_id>402881882ba8753a012ba8d780a800a2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8da48e000b0</id>
+<createDate>2010/10/14 11:48:19</createDate>
+<modifyDate>2010/10/14 11:48:19</modifyDate>
+<name>浙江省</name>
+<path>402881882ba8753a012ba8da48e000b0</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8da7d2f00b1</id>
+<createDate>2010/10/14 11:48:32</createDate>
+<modifyDate>2010/10/14 11:48:32</modifyDate>
+<name>杭州市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8da7d2f00b1</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8daa35500b2</id>
+<createDate>2010/10/14 11:48:42</createDate>
+<modifyDate>2010/10/14 11:48:42</modifyDate>
+<name>宁波市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8daa35500b2</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dacb3000b3</id>
+<createDate>2010/10/14 11:48:52</createDate>
+<modifyDate>2010/10/14 11:48:52</modifyDate>
+<name>温州市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8dacb3000b3</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8daf15500b4</id>
+<createDate>2010/10/14 11:49:02</createDate>
+<modifyDate>2010/10/14 11:49:02</modifyDate>
+<name>嘉兴市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8daf15500b4</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8db14db00b5</id>
+<createDate>2010/10/14 11:49:11</createDate>
+<modifyDate>2010/10/14 11:49:11</modifyDate>
+<name>湖州市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8db14db00b5</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8db3e9b00b6</id>
+<createDate>2010/10/14 11:49:22</createDate>
+<modifyDate>2010/10/14 11:49:22</modifyDate>
+<name>绍兴市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8db3e9b00b6</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8db6a8d00b7</id>
+<createDate>2010/10/14 11:49:33</createDate>
+<modifyDate>2010/10/14 11:49:33</modifyDate>
+<name>金华市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8db6a8d00b7</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8db978800b8</id>
+<createDate>2010/10/14 11:49:44</createDate>
+<modifyDate>2010/10/14 11:49:44</modifyDate>
+<name>衢州市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8db978800b8</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dbcc7300b9</id>
+<createDate>2010/10/14 11:49:58</createDate>
+<modifyDate>2010/10/14 11:49:58</modifyDate>
+<name>舟山市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8dbcc7300b9</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dbf33500ba</id>
+<createDate>2010/10/14 11:50:08</createDate>
+<modifyDate>2010/10/14 11:50:08</modifyDate>
+<name>台州市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8dbf33500ba</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dc1c9700bb</id>
+<createDate>2010/10/14 11:50:19</createDate>
+<modifyDate>2010/10/14 11:50:19</modifyDate>
+<name>丽水市</name>
+<path>402881882ba8753a012ba8da48e000b0,402881882ba8753a012ba8dc1c9700bb</path>
+<parent_id>402881882ba8753a012ba8da48e000b0</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dc469500bc</id>
+<createDate>2010/10/14 11:50:29</createDate>
+<modifyDate>2010/10/14 11:50:29</modifyDate>
+<name>安徽省</name>
+<path>402881882ba8753a012ba8dc469500bc</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dc8c3900bd</id>
+<createDate>2010/10/14 11:50:47</createDate>
+<modifyDate>2010/10/14 11:50:47</modifyDate>
+<name>合肥市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dc8c3900bd</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dcb25f00be</id>
+<createDate>2010/10/14 11:50:57</createDate>
+<modifyDate>2010/10/14 11:50:57</modifyDate>
+<name>芜湖市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dcb25f00be</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dd667c00bf</id>
+<createDate>2010/10/14 11:51:43</createDate>
+<modifyDate>2010/10/14 11:51:43</modifyDate>
+<name>蚌埠市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dd667c00bf</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dd925e00c0</id>
+<createDate>2010/10/14 11:51:54</createDate>
+<modifyDate>2010/10/14 11:51:54</modifyDate>
+<name>淮南市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dd925e00c0</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ddb58600c1</id>
+<createDate>2010/10/14 11:52:03</createDate>
+<modifyDate>2010/10/14 11:52:03</modifyDate>
+<name>马鞍山市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8ddb58600c1</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ddd98900c2</id>
+<createDate>2010/10/14 11:52:12</createDate>
+<modifyDate>2010/10/14 11:52:12</modifyDate>
+<name>淮北市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8ddd98900c2</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8ddfa9e00c3</id>
+<createDate>2010/10/14 11:52:21</createDate>
+<modifyDate>2010/10/14 11:52:21</modifyDate>
+<name>铜陵市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8ddfa9e00c3</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8de1e8100c4</id>
+<createDate>2010/10/14 11:52:30</createDate>
+<modifyDate>2010/10/14 11:52:30</modifyDate>
+<name>安庆市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8de1e8100c4</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8de4dde00c5</id>
+<createDate>2010/10/14 11:52:42</createDate>
+<modifyDate>2010/10/14 11:52:42</modifyDate>
+<name>黄山市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8de4dde00c5</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8de730a00c6</id>
+<createDate>2010/10/14 11:52:52</createDate>
+<modifyDate>2010/10/14 11:52:52</modifyDate>
+<name>滁州市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8de730a00c6</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8de9ad500c7</id>
+<createDate>2010/10/14 11:53:02</createDate>
+<modifyDate>2010/10/14 11:53:02</modifyDate>
+<name>阜阳市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8de9ad500c7</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8df216b00c8</id>
+<createDate>2010/10/14 11:53:36</createDate>
+<modifyDate>2010/10/14 11:53:36</modifyDate>
+<name>宿州市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8df216b00c8</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8df585900c9</id>
+<createDate>2010/10/14 11:53:50</createDate>
+<modifyDate>2010/10/14 11:53:50</modifyDate>
+<name>巢湖市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8df585900c9</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8df7d5600ca</id>
+<createDate>2010/10/14 11:54:00</createDate>
+<modifyDate>2010/10/14 11:54:00</modifyDate>
+<name>六安市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8df7d5600ca</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dfa8cb00cb</id>
+<createDate>2010/10/14 11:54:11</createDate>
+<modifyDate>2010/10/14 11:54:11</modifyDate>
+<name>亳州市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dfa8cb00cb</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dfcf1f00cc</id>
+<createDate>2010/10/14 11:54:21</createDate>
+<modifyDate>2010/10/14 11:54:21</modifyDate>
+<name>池州市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dfcf1f00cc</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8dff4f700cd</id>
+<createDate>2010/10/14 11:54:31</createDate>
+<modifyDate>2010/10/14 11:54:31</modifyDate>
+<name>宣城市</name>
+<path>402881882ba8753a012ba8dc469500bc,402881882ba8753a012ba8dff4f700cd</path>
+<parent_id>402881882ba8753a012ba8dc469500bc</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e0243500ce</id>
+<createDate>2010/10/14 11:54:43</createDate>
+<modifyDate>2010/10/14 11:54:43</modifyDate>
+<name>福建省</name>
+<path>402881882ba8753a012ba8e0243500ce</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e1b06200cf</id>
+<createDate>2010/10/14 11:56:24</createDate>
+<modifyDate>2010/10/14 11:56:24</modifyDate>
+<name>福州市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e1b06200cf</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e1f17300d0</id>
+<createDate>2010/10/14 11:56:41</createDate>
+<modifyDate>2010/10/14 11:56:41</modifyDate>
+<name>厦门市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e1f17300d0</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e21c5b00d1</id>
+<createDate>2010/10/14 11:56:52</createDate>
+<modifyDate>2010/10/14 11:56:52</modifyDate>
+<name>莆田市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e21c5b00d1</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e2480f00d2</id>
+<createDate>2010/10/14 11:57:03</createDate>
+<modifyDate>2010/10/14 11:57:03</modifyDate>
+<name>三明市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e2480f00d2</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e26c9e00d3</id>
+<createDate>2010/10/14 11:57:12</createDate>
+<modifyDate>2010/10/14 11:57:12</modifyDate>
+<name>泉州市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e26c9e00d3</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e29b4f00d4</id>
+<createDate>2010/10/14 11:57:24</createDate>
+<modifyDate>2010/10/14 11:57:24</modifyDate>
+<name>漳州市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e29b4f00d4</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e2c9b200d5</id>
+<createDate>2010/10/14 11:57:36</createDate>
+<modifyDate>2010/10/14 11:57:36</modifyDate>
+<name>南平市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e2c9b200d5</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e2f48b00d6</id>
+<createDate>2010/10/14 11:57:47</createDate>
+<modifyDate>2010/10/14 11:57:47</modifyDate>
+<name>龙岩市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e2f48b00d6</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e31be900d7</id>
+<createDate>2010/10/14 11:57:57</createDate>
+<modifyDate>2010/10/14 11:57:57</modifyDate>
+<name>宁德市</name>
+<path>402881882ba8753a012ba8e0243500ce,402881882ba8753a012ba8e31be900d7</path>
+<parent_id>402881882ba8753a012ba8e0243500ce</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e362b600d8</id>
+<createDate>2010/10/14 11:58:15</createDate>
+<modifyDate>2010/10/14 11:58:15</modifyDate>
+<name>江西省</name>
+<path>402881882ba8753a012ba8e362b600d8</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e3b49f00d9</id>
+<createDate>2010/10/14 11:58:36</createDate>
+<modifyDate>2010/10/14 11:58:36</modifyDate>
+<name>南昌市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e3b49f00d9</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e433f000da</id>
+<createDate>2010/10/14 11:59:09</createDate>
+<modifyDate>2010/10/14 11:59:09</modifyDate>
+<name>景德镇市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e433f000da</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e45ca600db</id>
+<createDate>2010/10/14 11:59:19</createDate>
+<modifyDate>2010/10/14 11:59:19</modifyDate>
+<name>萍乡市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e45ca600db</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e4808a00dc</id>
+<createDate>2010/10/14 11:59:28</createDate>
+<modifyDate>2010/10/14 11:59:28</modifyDate>
+<name>九江市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e4808a00dc</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e4a74c00dd</id>
+<createDate>2010/10/14 11:59:38</createDate>
+<modifyDate>2010/10/14 11:59:38</modifyDate>
+<name>新余市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e4a74c00dd</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e4cdb000de</id>
+<createDate>2010/10/14 11:59:48</createDate>
+<modifyDate>2010/10/14 11:59:48</modifyDate>
+<name>鹰潭市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e4cdb000de</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e4ef4200df</id>
+<createDate>2010/10/14 11:59:57</createDate>
+<modifyDate>2010/10/14 11:59:57</modifyDate>
+<name>赣州市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e4ef4200df</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e53fb300e0</id>
+<createDate>2010/10/14 12:00:17</createDate>
+<modifyDate>2010/10/14 12:00:17</modifyDate>
+<name>吉安市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e53fb300e0</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e56d0d00e1</id>
+<createDate>2010/10/14 12:00:29</createDate>
+<modifyDate>2010/10/14 12:00:29</modifyDate>
+<name>宜春市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e56d0d00e1</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e5921900e2</id>
+<createDate>2010/10/14 12:00:38</createDate>
+<modifyDate>2010/10/14 12:00:38</modifyDate>
+<name>抚州市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e5921900e2</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e5c22200e3</id>
+<createDate>2010/10/14 12:00:51</createDate>
+<modifyDate>2010/10/14 12:00:51</modifyDate>
+<name>上饶市</name>
+<path>402881882ba8753a012ba8e362b600d8,402881882ba8753a012ba8e5c22200e3</path>
+<parent_id>402881882ba8753a012ba8e362b600d8</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba8e5f7d800e4</id>
+<createDate>2010/10/14 12:01:04</createDate>
+<modifyDate>2010/10/14 12:01:04</modifyDate>
+<name>山东省</name>
+<path>402881882ba8753a012ba8e5f7d800e4</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba928e9c800e5</id>
+<createDate>2010/10/14 13:14:12</createDate>
+<modifyDate>2010/10/14 13:14:12</modifyDate>
+<name>济南市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba928e9c800e5</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929137800e6</id>
+<createDate>2010/10/14 13:14:22</createDate>
+<modifyDate>2010/10/14 13:14:22</modifyDate>
+<name>青岛市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929137800e6</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929374c00e7</id>
+<createDate>2010/10/14 13:14:32</createDate>
+<modifyDate>2010/10/14 13:14:32</modifyDate>
+<name>淄博市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929374c00e7</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9295d4300e8</id>
+<createDate>2010/10/14 13:14:41</createDate>
+<modifyDate>2010/10/14 13:14:41</modifyDate>
+<name>枣庄市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba9295d4300e8</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929884b00e9</id>
+<createDate>2010/10/14 13:14:52</createDate>
+<modifyDate>2010/10/14 13:14:52</modifyDate>
+<name>东营市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929884b00e9</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929ac2e00ea</id>
+<createDate>2010/10/14 13:15:02</createDate>
+<modifyDate>2010/10/14 13:15:02</modifyDate>
+<name>烟台市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929ac2e00ea</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929cfe300eb</id>
+<createDate>2010/10/14 13:15:11</createDate>
+<modifyDate>2010/10/14 13:15:11</modifyDate>
+<name>潍坊市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929cfe300eb</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba929f68500ec</id>
+<createDate>2010/10/14 13:15:21</createDate>
+<modifyDate>2010/10/14 13:15:21</modifyDate>
+<name>济宁市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba929f68500ec</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92a1a4a00ed</id>
+<createDate>2010/10/14 13:15:30</createDate>
+<modifyDate>2010/10/14 13:15:30</modifyDate>
+<name>泰安市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92a1a4a00ed</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92a5f0300ee</id>
+<createDate>2010/10/14 13:15:47</createDate>
+<modifyDate>2010/10/14 13:15:47</modifyDate>
+<name>威海市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92a5f0300ee</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92a825a00ef</id>
+<createDate>2010/10/14 13:15:56</createDate>
+<modifyDate>2010/10/14 13:15:56</modifyDate>
+<name>日照市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92a825a00ef</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92aa99900f0</id>
+<createDate>2010/10/14 13:16:06</createDate>
+<modifyDate>2010/10/14 13:16:06</modifyDate>
+<name>莱芜市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92aa99900f0</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92acd4e00f1</id>
+<createDate>2010/10/14 13:16:16</createDate>
+<modifyDate>2010/10/14 13:16:16</modifyDate>
+<name>临沂市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92acd4e00f1</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92af27900f2</id>
+<createDate>2010/10/14 13:16:25</createDate>
+<modifyDate>2010/10/14 13:16:25</modifyDate>
+<name>德州市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92af27900f2</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92b154400f3</id>
+<createDate>2010/10/14 13:16:34</createDate>
+<modifyDate>2010/10/14 13:16:34</modifyDate>
+<name>聊城市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92b154400f3</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92b3a6000f4</id>
+<createDate>2010/10/14 13:16:44</createDate>
+<modifyDate>2010/10/14 13:16:44</modifyDate>
+<name>滨州市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92b3a6000f4</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92b688400f5</id>
+<createDate>2010/10/14 13:16:55</createDate>
+<modifyDate>2010/10/14 13:16:55</modifyDate>
+<name>荷泽市</name>
+<path>402881882ba8753a012ba8e5f7d800e4,402881882ba8753a012ba92b688400f5</path>
+<parent_id>402881882ba8753a012ba8e5f7d800e4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92ba9c300f6</id>
+<createDate>2010/10/14 13:17:12</createDate>
+<modifyDate>2010/10/14 13:17:12</modifyDate>
+<name>河南省</name>
+<path>402881882ba8753a012ba92ba9c300f6</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92bd8a300f7</id>
+<createDate>2010/10/14 13:17:24</createDate>
+<modifyDate>2010/10/14 13:17:24</modifyDate>
+<name>郑州市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92bd8a300f7</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92bfab200f8</id>
+<createDate>2010/10/14 13:17:33</createDate>
+<modifyDate>2010/10/14 13:17:33</modifyDate>
+<name>开封市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92bfab200f8</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92c1afc00f9</id>
+<createDate>2010/10/14 13:17:41</createDate>
+<modifyDate>2010/10/14 13:17:41</modifyDate>
+<name>洛阳市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92c1afc00f9</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92c42c700fa</id>
+<createDate>2010/10/14 13:17:51</createDate>
+<modifyDate>2010/10/14 13:17:51</modifyDate>
+<name>平顶山市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92c42c700fa</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92c66f900fb</id>
+<createDate>2010/10/14 13:18:00</createDate>
+<modifyDate>2010/10/14 13:18:00</modifyDate>
+<name>安阳市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92c66f900fb</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92c898400fc</id>
+<createDate>2010/10/14 13:18:09</createDate>
+<modifyDate>2010/10/14 13:18:09</modifyDate>
+<name>鹤壁市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92c898400fc</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92cac2f00fd</id>
+<createDate>2010/10/14 13:18:18</createDate>
+<modifyDate>2010/10/14 13:18:18</modifyDate>
+<name>新乡市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92cac2f00fd</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92ccce600fe</id>
+<createDate>2010/10/14 13:18:27</createDate>
+<modifyDate>2010/10/14 13:18:27</modifyDate>
+<name>焦作市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92ccce600fe</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92cef0500ff</id>
+<createDate>2010/10/14 13:18:35</createDate>
+<modifyDate>2010/10/14 13:18:35</modifyDate>
+<name>濮阳市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92cef0500ff</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92d13f20100</id>
+<createDate>2010/10/14 13:18:45</createDate>
+<modifyDate>2010/10/14 13:18:45</modifyDate>
+<name>许昌市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92d13f20100</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92d35360101</id>
+<createDate>2010/10/14 13:18:53</createDate>
+<modifyDate>2010/10/14 13:18:53</modifyDate>
+<name>漯河市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92d35360101</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92d57d10102</id>
+<createDate>2010/10/14 13:19:02</createDate>
+<modifyDate>2010/10/14 13:19:02</modifyDate>
+<name>三门峡市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92d57d10102</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92d7ba50103</id>
+<createDate>2010/10/14 13:19:11</createDate>
+<modifyDate>2010/10/14 13:19:11</modifyDate>
+<name>南阳市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92d7ba50103</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92da1ab0104</id>
+<createDate>2010/10/14 13:19:21</createDate>
+<modifyDate>2010/10/14 13:19:21</modifyDate>
+<name>商丘市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92da1ab0104</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92dc7b20105</id>
+<createDate>2010/10/14 13:19:31</createDate>
+<modifyDate>2010/10/14 13:19:31</modifyDate>
+<name>信阳市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92dc7b20105</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92de8780106</id>
+<createDate>2010/10/14 13:19:39</createDate>
+<modifyDate>2010/10/14 13:19:39</modifyDate>
+<name>周口市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92de8780106</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92e0bee0107</id>
+<createDate>2010/10/14 13:19:48</createDate>
+<modifyDate>2010/10/14 13:19:48</modifyDate>
+<name>驻马店市</name>
+<path>402881882ba8753a012ba92ba9c300f6,402881882ba8753a012ba92e0bee0107</path>
+<parent_id>402881882ba8753a012ba92ba9c300f6</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92e37a20108</id>
+<createDate>2010/10/14 13:19:59</createDate>
+<modifyDate>2010/10/14 13:19:59</modifyDate>
+<name>湖北省</name>
+<path>402881882ba8753a012ba92e37a20108</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92e68660109</id>
+<createDate>2010/10/14 13:20:12</createDate>
+<modifyDate>2010/10/14 13:20:12</modifyDate>
+<name>武汉市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92e68660109</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92e94d5010a</id>
+<createDate>2010/10/14 13:20:23</createDate>
+<modifyDate>2010/10/14 13:20:23</modifyDate>
+<name>黄石市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92e94d5010a</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92eb82c010b</id>
+<createDate>2010/10/14 13:20:32</createDate>
+<modifyDate>2010/10/14 13:20:32</modifyDate>
+<name>十堰市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92eb82c010b</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92edfe8010c</id>
+<createDate>2010/10/14 13:20:42</createDate>
+<modifyDate>2010/10/14 13:20:42</modifyDate>
+<name>宜昌市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92edfe8010c</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92f21a4010d</id>
+<createDate>2010/10/14 13:20:59</createDate>
+<modifyDate>2010/10/14 13:20:59</modifyDate>
+<name>襄樊市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92f21a4010d</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92f4ab8010e</id>
+<createDate>2010/10/14 13:21:10</createDate>
+<modifyDate>2010/10/14 13:21:10</modifyDate>
+<name>鄂州市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92f4ab8010e</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92f6ca7010f</id>
+<createDate>2010/10/14 13:21:19</createDate>
+<modifyDate>2010/10/14 13:21:19</modifyDate>
+<name>荆门市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92f6ca7010f</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92f8dfa0110</id>
+<createDate>2010/10/14 13:21:27</createDate>
+<modifyDate>2010/10/14 13:21:27</modifyDate>
+<name>孝感市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92f8dfa0110</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92fb0480111</id>
+<createDate>2010/10/14 13:21:36</createDate>
+<modifyDate>2010/10/14 13:21:36</modifyDate>
+<name>荆州市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92fb0480111</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92fd6bb0112</id>
+<createDate>2010/10/14 13:21:46</createDate>
+<modifyDate>2010/10/14 13:21:46</modifyDate>
+<name>黄冈市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92fd6bb0112</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba92ff9280113</id>
+<createDate>2010/10/14 13:21:54</createDate>
+<modifyDate>2010/10/14 13:21:55</modifyDate>
+<name>咸宁市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba92ff9280113</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9301be30114</id>
+<createDate>2010/10/14 13:22:03</createDate>
+<modifyDate>2010/10/14 13:22:03</modifyDate>
+<name>随州市</name>
+<path>402881882ba8753a012ba92e37a20108,402881882ba8753a012ba9301be30114</path>
+<parent_id>402881882ba8753a012ba92e37a20108</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba930d6690115</id>
+<createDate>2010/10/14 13:22:51</createDate>
+<modifyDate>2010/10/14 13:22:51</modifyDate>
+<name>湖南省</name>
+<path>402881882ba8753a012ba930d6690115</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93101120116</id>
+<createDate>2010/10/14 13:23:02</createDate>
+<modifyDate>2010/10/14 13:23:02</modifyDate>
+<name>长沙市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba93101120116</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93125f00117</id>
+<createDate>2010/10/14 13:23:11</createDate>
+<modifyDate>2010/10/14 13:23:11</modifyDate>
+<name>株洲市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba93125f00117</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93147a10118</id>
+<createDate>2010/10/14 13:23:20</createDate>
+<modifyDate>2010/10/14 13:23:20</modifyDate>
+<name>湘潭市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba93147a10118</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9316a7b0119</id>
+<createDate>2010/10/14 13:23:29</createDate>
+<modifyDate>2010/10/14 13:23:29</modifyDate>
+<name>衡阳市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba9316a7b0119</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9318e2f011a</id>
+<createDate>2010/10/14 13:23:38</createDate>
+<modifyDate>2010/10/14 13:23:38</modifyDate>
+<name>邵阳市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba9318e2f011a</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba931b5ad011b</id>
+<createDate>2010/10/14 13:23:48</createDate>
+<modifyDate>2010/10/14 13:23:48</modifyDate>
+<name>岳阳市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba931b5ad011b</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba931dac9011c</id>
+<createDate>2010/10/14 13:23:58</createDate>
+<modifyDate>2010/10/14 13:23:58</modifyDate>
+<name>常德市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba931dac9011c</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba931fe6e011d</id>
+<createDate>2010/10/14 13:24:07</createDate>
+<modifyDate>2010/10/14 13:24:07</modifyDate>
+<name>张家界市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba931fe6e011d</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93222ce011e</id>
+<createDate>2010/10/14 13:24:16</createDate>
+<modifyDate>2010/10/14 13:24:16</modifyDate>
+<name>益阳市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba93222ce011e</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba932fe59011f</id>
+<createDate>2010/10/14 13:25:12</createDate>
+<modifyDate>2010/10/14 13:25:12</modifyDate>
+<name>郴州市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba932fe59011f</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba933275d0120</id>
+<createDate>2010/10/14 13:25:23</createDate>
+<modifyDate>2010/10/14 13:25:23</modifyDate>
+<name>永州市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba933275d0120</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9334cd70121</id>
+<createDate>2010/10/14 13:25:33</createDate>
+<modifyDate>2010/10/14 13:25:33</modifyDate>
+<name>怀化市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba9334cd70121</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9337b880122</id>
+<createDate>2010/10/14 13:25:44</createDate>
+<modifyDate>2010/10/14 13:25:44</modifyDate>
+<name>娄底市</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba9337b880122</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93401620123</id>
+<createDate>2010/10/14 13:26:19</createDate>
+<modifyDate>2010/10/14 13:26:19</modifyDate>
+<name>湘西土家族苗族自治州</name>
+<path>402881882ba8753a012ba930d6690115,402881882ba8753a012ba93401620123</path>
+<parent_id>402881882ba8753a012ba930d6690115</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9342b210124</id>
+<createDate>2010/10/14 13:26:29</createDate>
+<modifyDate>2010/10/14 13:26:29</modifyDate>
+<name>广东省</name>
+<path>402881882ba8753a012ba9342b210124</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9345e950125</id>
+<createDate>2010/10/14 13:26:43</createDate>
+<modifyDate>2010/10/14 13:26:43</modifyDate>
+<name>广州市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9345e950125</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93483e00126</id>
+<createDate>2010/10/14 13:26:52</createDate>
+<modifyDate>2010/10/14 13:26:52</modifyDate>
+<name>韶关市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba93483e00126</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba934ac770127</id>
+<createDate>2010/10/14 13:27:03</createDate>
+<modifyDate>2010/10/14 13:27:03</modifyDate>
+<name>深圳市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba934ac770127</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba934d02b0128</id>
+<createDate>2010/10/14 13:27:12</createDate>
+<modifyDate>2010/10/14 13:27:12</modifyDate>
+<name>珠海市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba934d02b0128</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba934eeb00129</id>
+<createDate>2010/10/14 13:27:19</createDate>
+<modifyDate>2010/10/14 13:27:19</modifyDate>
+<name>汕头市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba934eeb00129</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9351207012a</id>
+<createDate>2010/10/14 13:27:29</createDate>
+<modifyDate>2010/10/14 13:27:29</modifyDate>
+<name>佛山市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9351207012a</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9353406012b</id>
+<createDate>2010/10/14 13:27:37</createDate>
+<modifyDate>2010/10/14 13:27:37</modifyDate>
+<name>江门市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9353406012b</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9355672012c</id>
+<createDate>2010/10/14 13:27:46</createDate>
+<modifyDate>2010/10/14 13:27:46</modifyDate>
+<name>湛江市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9355672012c</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9357843012d</id>
+<createDate>2010/10/14 13:27:55</createDate>
+<modifyDate>2010/10/14 13:27:55</modifyDate>
+<name>茂名市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9357843012d</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba935980f012e</id>
+<createDate>2010/10/14 13:28:03</createDate>
+<modifyDate>2010/10/14 13:28:03</modifyDate>
+<name>肇庆市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba935980f012e</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba935c26b012f</id>
+<createDate>2010/10/14 13:28:14</createDate>
+<modifyDate>2010/10/14 13:28:14</modifyDate>
+<name>惠州市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba935c26b012f</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba935e5e10130</id>
+<createDate>2010/10/14 13:28:23</createDate>
+<modifyDate>2010/10/14 13:28:23</modifyDate>
+<name>梅州市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba935e5e10130</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93609960131</id>
+<createDate>2010/10/14 13:28:32</createDate>
+<modifyDate>2010/10/14 13:28:32</modifyDate>
+<name>汕尾市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba93609960131</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93638c40132</id>
+<createDate>2010/10/14 13:28:44</createDate>
+<modifyDate>2010/10/14 13:28:44</modifyDate>
+<name>河源市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba93638c40132</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba936593c0133</id>
+<createDate>2010/10/14 13:28:52</createDate>
+<modifyDate>2010/10/14 13:28:52</modifyDate>
+<name>阳江市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba936593c0133</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9367d9d0134</id>
+<createDate>2010/10/14 13:29:02</createDate>
+<modifyDate>2010/10/14 13:29:02</modifyDate>
+<name>清远市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9367d9d0134</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9369b760135</id>
+<createDate>2010/10/14 13:29:09</createDate>
+<modifyDate>2010/10/14 13:29:09</modifyDate>
+<name>东莞市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba9369b760135</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba936c5350136</id>
+<createDate>2010/10/14 13:29:20</createDate>
+<modifyDate>2010/10/14 13:29:20</modifyDate>
+<name>中山市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba936c5350136</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba936eb0d0137</id>
+<createDate>2010/10/14 13:29:30</createDate>
+<modifyDate>2010/10/14 13:29:30</modifyDate>
+<name>潮州市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba936eb0d0137</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93716720138</id>
+<createDate>2010/10/14 13:29:41</createDate>
+<modifyDate>2010/10/14 13:29:41</modifyDate>
+<name>揭阳市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba93716720138</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93738ee0139</id>
+<createDate>2010/10/14 13:29:50</createDate>
+<modifyDate>2010/10/14 13:29:50</modifyDate>
+<name>云浮市</name>
+<path>402881882ba8753a012ba9342b210124,402881882ba8753a012ba93738ee0139</path>
+<parent_id>402881882ba8753a012ba9342b210124</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9376770013a</id>
+<createDate>2010/10/14 13:30:01</createDate>
+<modifyDate>2010/10/14 13:30:01</modifyDate>
+<name>广西壮族自治区</name>
+<path>402881882ba8753a012ba9376770013a</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9379c4c013b</id>
+<createDate>2010/10/14 13:30:15</createDate>
+<modifyDate>2010/10/14 13:30:15</modifyDate>
+<name>南宁市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba9379c4c013b</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba937bf06013c</id>
+<createDate>2010/10/14 13:30:24</createDate>
+<modifyDate>2010/10/14 13:30:24</modifyDate>
+<name>柳州市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba937bf06013c</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba937e192013d</id>
+<createDate>2010/10/14 13:30:33</createDate>
+<modifyDate>2010/10/14 13:30:33</modifyDate>
+<name>桂林市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba937e192013d</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9380789013e</id>
+<createDate>2010/10/14 13:30:42</createDate>
+<modifyDate>2010/10/14 13:30:42</modifyDate>
+<name>梧州市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba9380789013e</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93827f2013f</id>
+<createDate>2010/10/14 13:30:51</createDate>
+<modifyDate>2010/10/14 13:30:51</modifyDate>
+<name>北海市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93827f2013f</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93851150140</id>
+<createDate>2010/10/14 13:31:01</createDate>
+<modifyDate>2010/10/14 13:31:01</modifyDate>
+<name>防城港市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93851150140</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93872490141</id>
+<createDate>2010/10/14 13:31:10</createDate>
+<modifyDate>2010/10/14 13:31:10</modifyDate>
+<name>钦州市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93872490141</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93899780142</id>
+<createDate>2010/10/14 13:31:20</createDate>
+<modifyDate>2010/10/14 13:31:20</modifyDate>
+<name>贵港市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93899780142</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba938badb0143</id>
+<createDate>2010/10/14 13:31:28</createDate>
+<modifyDate>2010/10/14 13:31:28</modifyDate>
+<name>玉林市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba938badb0143</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba938db820144</id>
+<createDate>2010/10/14 13:31:37</createDate>
+<modifyDate>2010/10/14 13:31:37</modifyDate>
+<name>百色市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba938db820144</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba938fd530145</id>
+<createDate>2010/10/14 13:31:45</createDate>
+<modifyDate>2010/10/14 13:31:45</modifyDate>
+<name>贺州市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba938fd530145</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93921360146</id>
+<createDate>2010/10/14 13:31:55</createDate>
+<modifyDate>2010/10/14 13:31:55</modifyDate>
+<name>河池市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93921360146</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93943d10147</id>
+<createDate>2010/10/14 13:32:03</createDate>
+<modifyDate>2010/10/14 13:32:03</modifyDate>
+<name>来宾市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93943d10147</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93965c10148</id>
+<createDate>2010/10/14 13:32:12</createDate>
+<modifyDate>2010/10/14 13:32:12</modifyDate>
+<name>崇左市</name>
+<path>402881882ba8753a012ba9376770013a,402881882ba8753a012ba93965c10148</path>
+<parent_id>402881882ba8753a012ba9376770013a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba939ac010149</id>
+<createDate>2010/10/14 13:32:30</createDate>
+<modifyDate>2010/10/14 13:32:30</modifyDate>
+<name>海南省</name>
+<path>402881882ba8753a012ba939ac010149</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba939da07014a</id>
+<createDate>2010/10/14 13:32:42</createDate>
+<modifyDate>2010/10/14 13:32:42</modifyDate>
+<name>海口市</name>
+<path>402881882ba8753a012ba939ac010149,402881882ba8753a012ba939da07014a</path>
+<parent_id>402881882ba8753a012ba939ac010149</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba939f8ca014b</id>
+<createDate>2010/10/14 13:32:50</createDate>
+<modifyDate>2010/10/14 13:32:50</modifyDate>
+<name>三亚市</name>
+<path>402881882ba8753a012ba939ac010149,402881882ba8753a012ba939f8ca014b</path>
+<parent_id>402881882ba8753a012ba939ac010149</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93a6743014c</id>
+<createDate>2010/10/14 13:33:18</createDate>
+<modifyDate>2010/10/14 13:33:18</modifyDate>
+<name>重庆市</name>
+<path>402881882ba8753a012ba93a6743014c</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93b13fe014d</id>
+<createDate>2010/10/14 13:34:02</createDate>
+<modifyDate>2010/10/14 13:34:02</modifyDate>
+<name>万州区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93b13fe014d</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93b34d4014e</id>
+<createDate>2010/10/14 13:34:11</createDate>
+<modifyDate>2010/10/14 13:34:11</modifyDate>
+<name>涪陵区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93b34d4014e</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93b5898014f</id>
+<createDate>2010/10/14 13:34:20</createDate>
+<modifyDate>2010/10/14 13:34:20</modifyDate>
+<name>渝中区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93b5898014f</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93b7a970150</id>
+<createDate>2010/10/14 13:34:29</createDate>
+<modifyDate>2010/10/14 13:34:29</modifyDate>
+<name>大渡口区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93b7a970150</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93b9a930151</id>
+<createDate>2010/10/14 13:34:37</createDate>
+<modifyDate>2010/10/14 13:34:37</modifyDate>
+<name>江北区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93b9a930151</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93bbb980152</id>
+<createDate>2010/10/14 13:34:45</createDate>
+<modifyDate>2010/10/14 13:34:45</modifyDate>
+<name>沙坪坝区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93bbb980152</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93bdab90153</id>
+<createDate>2010/10/14 13:34:53</createDate>
+<modifyDate>2010/10/14 13:34:53</modifyDate>
+<name>九龙坡区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93bdab90153</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93bfd150154</id>
+<createDate>2010/10/14 13:35:02</createDate>
+<modifyDate>2010/10/14 13:35:02</modifyDate>
+<name>南岸区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93bfd150154</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93c1b4c0155</id>
+<createDate>2010/10/14 13:35:10</createDate>
+<modifyDate>2010/10/14 13:35:10</modifyDate>
+<name>北碚区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93c1b4c0155</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93c3c800156</id>
+<createDate>2010/10/14 13:35:18</createDate>
+<modifyDate>2010/10/14 13:35:18</modifyDate>
+<name>万盛区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93c3c800156</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93c5a970157</id>
+<createDate>2010/10/14 13:35:26</createDate>
+<modifyDate>2010/10/14 13:35:26</modifyDate>
+<name>双桥区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93c5a970157</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93c793b0158</id>
+<createDate>2010/10/14 13:35:34</createDate>
+<modifyDate>2010/10/14 13:35:34</modifyDate>
+<name>渝北区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93c793b0158</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93c93790159</id>
+<createDate>2010/10/14 13:35:40</createDate>
+<modifyDate>2010/10/14 13:35:40</modifyDate>
+<name>巴南区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93c93790159</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93cacaf015a</id>
+<createDate>2010/10/14 13:35:47</createDate>
+<modifyDate>2010/10/14 13:35:47</modifyDate>
+<name>黔江区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93cacaf015a</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93cbc7d015b</id>
+<createDate>2010/10/14 13:35:51</createDate>
+<modifyDate>2010/10/14 13:35:51</modifyDate>
+<name>长寿区</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93cbc7d015b</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93d1d3b015c</id>
+<createDate>2010/10/14 13:36:16</createDate>
+<modifyDate>2010/10/14 13:36:16</modifyDate>
+<name>江津市</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93d1d3b015c</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93d3a0a015d</id>
+<createDate>2010/10/14 13:36:23</createDate>
+<modifyDate>2010/10/14 13:36:23</modifyDate>
+<name>合川市</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93d3a0a015d</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93d53ad015e</id>
+<createDate>2010/10/14 13:36:30</createDate>
+<modifyDate>2010/10/14 13:36:30</modifyDate>
+<name>永川市</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93d53ad015e</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93d6689015f</id>
+<createDate>2010/10/14 13:36:34</createDate>
+<modifyDate>2010/10/14 13:36:34</modifyDate>
+<name>南川市</name>
+<path>402881882ba8753a012ba93a6743014c,402881882ba8753a012ba93d6689015f</path>
+<parent_id>402881882ba8753a012ba93a6743014c</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93d95780160</id>
+<createDate>2010/10/14 13:36:46</createDate>
+<modifyDate>2010/10/14 13:36:46</modifyDate>
+<name>四川省</name>
+<path>402881882ba8753a012ba93d95780160</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93dc8110161</id>
+<createDate>2010/10/14 13:36:59</createDate>
+<modifyDate>2010/10/14 13:36:59</modifyDate>
+<name>成都市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93dc8110161</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93df0d70162</id>
+<createDate>2010/10/14 13:37:10</createDate>
+<modifyDate>2010/10/14 13:37:10</modifyDate>
+<name>自贡市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93df0d70162</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93e12980163</id>
+<createDate>2010/10/14 13:37:19</createDate>
+<modifyDate>2010/10/14 13:37:19</modifyDate>
+<name>攀枝花市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93e12980163</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93e30ce0164</id>
+<createDate>2010/10/14 13:37:26</createDate>
+<modifyDate>2010/10/14 13:37:26</modifyDate>
+<name>泸州市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93e30ce0164</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93e54a20165</id>
+<createDate>2010/10/14 13:37:35</createDate>
+<modifyDate>2010/10/14 13:37:35</modifyDate>
+<name>德阳市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93e54a20165</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93e83820166</id>
+<createDate>2010/10/14 13:37:47</createDate>
+<modifyDate>2010/10/14 13:37:47</modifyDate>
+<name>绵阳市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93e83820166</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93ea6d90167</id>
+<createDate>2010/10/14 13:37:56</createDate>
+<modifyDate>2010/10/14 13:37:56</modifyDate>
+<name>广元市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93ea6d90167</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93ecaad0168</id>
+<createDate>2010/10/14 13:38:06</createDate>
+<modifyDate>2010/10/14 13:38:06</modifyDate>
+<name>遂宁市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93ecaad0168</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93eeab80169</id>
+<createDate>2010/10/14 13:38:14</createDate>
+<modifyDate>2010/10/14 13:38:14</modifyDate>
+<name>内江市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93eeab80169</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93f0c69016a</id>
+<createDate>2010/10/14 13:38:22</createDate>
+<modifyDate>2010/10/14 13:38:22</modifyDate>
+<name>乐山市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93f0c69016a</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93f2d6e016b</id>
+<createDate>2010/10/14 13:38:31</createDate>
+<modifyDate>2010/10/14 13:38:31</modifyDate>
+<name>南充市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93f2d6e016b</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93f551a016c</id>
+<createDate>2010/10/14 13:38:41</createDate>
+<modifyDate>2010/10/14 13:38:41</modifyDate>
+<name>眉山市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93f551a016c</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93f7cf5016d</id>
+<createDate>2010/10/14 13:38:51</createDate>
+<modifyDate>2010/10/14 13:38:51</modifyDate>
+<name>宜宾市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93f7cf5016d</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba93fec3a016e</id>
+<createDate>2010/10/14 13:39:20</createDate>
+<modifyDate>2010/10/14 13:39:20</modifyDate>
+<name>广安市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba93fec3a016e</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94017ed016f</id>
+<createDate>2010/10/14 13:39:31</createDate>
+<modifyDate>2010/10/14 13:39:31</modifyDate>
+<name>达州市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba94017ed016f</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94044e90170</id>
+<createDate>2010/10/14 13:39:42</createDate>
+<modifyDate>2010/10/14 13:39:42</modifyDate>
+<name>雅安市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba94044e90170</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94072810171</id>
+<createDate>2010/10/14 13:39:54</createDate>
+<modifyDate>2010/10/14 13:39:54</modifyDate>
+<name>巴中市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba94072810171</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94098d50172</id>
+<createDate>2010/10/14 13:40:04</createDate>
+<modifyDate>2010/10/14 13:40:04</modifyDate>
+<name>资阳市</name>
+<path>402881882ba8753a012ba93d95780160,402881882ba8753a012ba94098d50172</path>
+<parent_id>402881882ba8753a012ba93d95780160</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba940dad00173</id>
+<createDate>2010/10/14 13:40:21</createDate>
+<modifyDate>2010/10/14 13:40:21</modifyDate>
+<name>贵州省</name>
+<path>402881882ba8753a012ba940dad00173</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9410a9a0174</id>
+<createDate>2010/10/14 13:40:33</createDate>
+<modifyDate>2010/10/14 13:40:33</modifyDate>
+<name>贵阳市</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba9410a9a0174</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94135f00175</id>
+<createDate>2010/10/14 13:40:44</createDate>
+<modifyDate>2010/10/14 13:40:44</modifyDate>
+<name>六盘水市</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba94135f00175</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94157240176</id>
+<createDate>2010/10/14 13:40:53</createDate>
+<modifyDate>2010/10/14 13:40:53</modifyDate>
+<name>遵义市</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba94157240176</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9418ece0177</id>
+<createDate>2010/10/14 13:41:07</createDate>
+<modifyDate>2010/10/14 13:41:07</modifyDate>
+<name>安顺市</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba9418ece0177</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba941c0ea0178</id>
+<createDate>2010/10/14 13:41:20</createDate>
+<modifyDate>2010/10/14 13:41:20</modifyDate>
+<name>铜仁地区</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba941c0ea0178</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba942a5200179</id>
+<createDate>2010/10/14 13:42:18</createDate>
+<modifyDate>2010/10/14 13:42:18</modifyDate>
+<name>毕节地区</name>
+<path>402881882ba8753a012ba940dad00173,402881882ba8753a012ba942a5200179</path>
+<parent_id>402881882ba8753a012ba940dad00173</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba942d1dd017a</id>
+<createDate>2010/10/14 13:42:30</createDate>
+<modifyDate>2010/10/14 13:42:30</modifyDate>
+<name>云南省</name>
+<path>402881882ba8753a012ba942d1dd017a</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9430c46017b</id>
+<createDate>2010/10/14 13:42:45</createDate>
+<modifyDate>2010/10/14 13:42:45</modifyDate>
+<name>昆明市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba9430c46017b</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba943446d017c</id>
+<createDate>2010/10/14 13:42:59</createDate>
+<modifyDate>2010/10/14 13:42:59</modifyDate>
+<name>曲靖市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba943446d017c</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9435797017d</id>
+<createDate>2010/10/14 13:43:04</createDate>
+<modifyDate>2010/10/14 13:43:04</modifyDate>
+<name>玉溪市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba9435797017d</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9438109017e</id>
+<createDate>2010/10/14 13:43:14</createDate>
+<modifyDate>2010/10/14 13:43:14</modifyDate>
+<name>保山市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba9438109017e</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba943a0b6017f</id>
+<createDate>2010/10/14 13:43:23</createDate>
+<modifyDate>2010/10/14 13:43:23</modifyDate>
+<name>昭通市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba943a0b6017f</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba943c5070180</id>
+<createDate>2010/10/14 13:43:32</createDate>
+<modifyDate>2010/10/14 13:43:32</modifyDate>
+<name>丽江市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba943c5070180</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba943e39b0181</id>
+<createDate>2010/10/14 13:43:40</createDate>
+<modifyDate>2010/10/14 13:43:40</modifyDate>
+<name>思茅市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba943e39b0181</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94406360182</id>
+<createDate>2010/10/14 13:43:49</createDate>
+<modifyDate>2010/10/14 13:43:49</modifyDate>
+<name>临沧市</name>
+<path>402881882ba8753a012ba942d1dd017a,402881882ba8753a012ba94406360182</path>
+<parent_id>402881882ba8753a012ba942d1dd017a</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94474040183</id>
+<createDate>2010/10/14 13:44:17</createDate>
+<modifyDate>2010/10/14 13:44:17</modifyDate>
+<name>西藏自治区</name>
+<path>402881882ba8753a012ba94474040183</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9449a490184</id>
+<createDate>2010/10/14 13:44:26</createDate>
+<modifyDate>2010/10/14 13:44:26</modifyDate>
+<name>拉萨市</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba9449a490184</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba944b7180185</id>
+<createDate>2010/10/14 13:44:34</createDate>
+<modifyDate>2010/10/14 13:44:34</modifyDate>
+<name>昌都地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba944b7180185</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba944ea9b0186</id>
+<createDate>2010/10/14 13:44:47</createDate>
+<modifyDate>2010/10/14 13:44:47</modifyDate>
+<name>山南地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba944ea9b0186</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94510440187</id>
+<createDate>2010/10/14 13:44:57</createDate>
+<modifyDate>2010/10/14 13:44:57</modifyDate>
+<name>日喀则地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba94510440187</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94535210188</id>
+<createDate>2010/10/14 13:45:06</createDate>
+<modifyDate>2010/10/14 13:45:06</modifyDate>
+<name>那曲地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba94535210188</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94554130189</id>
+<createDate>2010/10/14 13:45:14</createDate>
+<modifyDate>2010/10/14 13:45:14</modifyDate>
+<name>阿里地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba94554130189</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba945741e018a</id>
+<createDate>2010/10/14 13:45:22</createDate>
+<modifyDate>2010/10/14 13:45:22</modifyDate>
+<name>林芝地区</name>
+<path>402881882ba8753a012ba94474040183,402881882ba8753a012ba945741e018a</path>
+<parent_id>402881882ba8753a012ba94474040183</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba945a63a018b</id>
+<createDate>2010/10/14 13:45:35</createDate>
+<modifyDate>2010/10/14 13:45:35</modifyDate>
+<name>陕西省</name>
+<path>402881882ba8753a012ba945a63a018b</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba945dc2f018c</id>
+<createDate>2010/10/14 13:45:49</createDate>
+<modifyDate>2010/10/14 13:45:49</modifyDate>
+<name>西安市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba945dc2f018c</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba945fb7f018d</id>
+<createDate>2010/10/14 13:45:57</createDate>
+<modifyDate>2010/10/14 13:45:57</modifyDate>
+<name>铜川市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba945fb7f018d</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9461a80018e</id>
+<createDate>2010/10/14 13:46:05</createDate>
+<modifyDate>2010/10/14 13:46:05</modifyDate>
+<name>宝鸡市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba9461a80018e</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9463674018f</id>
+<createDate>2010/10/14 13:46:12</createDate>
+<modifyDate>2010/10/14 13:46:12</modifyDate>
+<name>咸阳市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba9463674018f</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94653240190</id>
+<createDate>2010/10/14 13:46:19</createDate>
+<modifyDate>2010/10/14 13:46:19</modifyDate>
+<name>渭南市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba94653240190</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9466f760191</id>
+<createDate>2010/10/14 13:46:27</createDate>
+<modifyDate>2010/10/14 13:46:27</modifyDate>
+<name>延安市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba9466f760191</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9468dbc0192</id>
+<createDate>2010/10/14 13:46:34</createDate>
+<modifyDate>2010/10/14 13:46:34</modifyDate>
+<name>汉中市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba9468dbc0192</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba946a6f10193</id>
+<createDate>2010/10/14 13:46:41</createDate>
+<modifyDate>2010/10/14 13:46:41</modifyDate>
+<name>榆林市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba946a6f10193</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba946c48b0194</id>
+<createDate>2010/10/14 13:46:48</createDate>
+<modifyDate>2010/10/14 13:46:48</modifyDate>
+<name>安康市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba946c48b0194</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba946de8c0195</id>
+<createDate>2010/10/14 13:46:55</createDate>
+<modifyDate>2010/10/14 13:46:55</modifyDate>
+<name>商洛市</name>
+<path>402881882ba8753a012ba945a63a018b,402881882ba8753a012ba946de8c0195</path>
+<parent_id>402881882ba8753a012ba945a63a018b</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94704c10196</id>
+<createDate>2010/10/14 13:47:05</createDate>
+<modifyDate>2010/10/14 13:47:05</modifyDate>
+<name>甘肃省</name>
+<path>402881882ba8753a012ba94704c10196</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94731dc0197</id>
+<createDate>2010/10/14 13:47:16</createDate>
+<modifyDate>2010/10/14 13:47:16</modifyDate>
+<name>兰州市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba94731dc0197</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9475b2e0198</id>
+<createDate>2010/10/14 13:47:27</createDate>
+<modifyDate>2010/10/14 13:47:27</modifyDate>
+<name>嘉峪关市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba9475b2e0198</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94777fd0199</id>
+<createDate>2010/10/14 13:47:34</createDate>
+<modifyDate>2010/10/14 13:47:34</modifyDate>
+<name>金昌市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba94777fd0199</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba947b94c019a</id>
+<createDate>2010/10/14 13:47:51</createDate>
+<modifyDate>2010/10/14 13:47:51</modifyDate>
+<name>白银市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba947b94c019a</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba947deb6019b</id>
+<createDate>2010/10/14 13:48:01</createDate>
+<modifyDate>2010/10/14 13:48:01</modifyDate>
+<name>天水市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba947deb6019b</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba947fc8e019c</id>
+<createDate>2010/10/14 13:48:08</createDate>
+<modifyDate>2010/10/14 13:48:08</modifyDate>
+<name>武威市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba947fc8e019c</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9481825019d</id>
+<createDate>2010/10/14 13:48:15</createDate>
+<modifyDate>2010/10/14 13:48:15</modifyDate>
+<name>张掖市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba9481825019d</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9483726019e</id>
+<createDate>2010/10/14 13:48:23</createDate>
+<modifyDate>2010/10/14 13:48:23</modifyDate>
+<name>平凉市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba9483726019e</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94852ad019f</id>
+<createDate>2010/10/14 13:48:30</createDate>
+<modifyDate>2010/10/14 13:48:30</modifyDate>
+<name>酒泉市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba94852ad019f</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94872c801a0</id>
+<createDate>2010/10/14 13:48:38</createDate>
+<modifyDate>2010/10/14 13:48:38</modifyDate>
+<name>庆阳市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba94872c801a0</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9488fc601a1</id>
+<createDate>2010/10/14 13:48:46</createDate>
+<modifyDate>2010/10/14 13:48:46</modifyDate>
+<name>定西市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba9488fc601a1</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba948ba7f01a2</id>
+<createDate>2010/10/14 13:48:57</createDate>
+<modifyDate>2010/10/14 13:48:57</modifyDate>
+<name>陇南市</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba948ba7f01a2</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba948f8ff01a3</id>
+<createDate>2010/10/14 13:49:13</createDate>
+<modifyDate>2010/10/14 13:49:13</modifyDate>
+<name>临夏回族自治州</name>
+<path>402881882ba8753a012ba94704c10196,402881882ba8753a012ba948f8ff01a3</path>
+<parent_id>402881882ba8753a012ba94704c10196</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba949336801a4</id>
+<createDate>2010/10/14 13:49:28</createDate>
+<modifyDate>2010/10/14 13:49:28</modifyDate>
+<name>青海省</name>
+<path>402881882ba8753a012ba949336801a4</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba9495b0501a5</id>
+<createDate>2010/10/14 13:49:38</createDate>
+<modifyDate>2010/10/14 13:49:38</modifyDate>
+<name>西宁市</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba9495b0501a5</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94980ae01a6</id>
+<createDate>2010/10/14 13:49:48</createDate>
+<modifyDate>2010/10/14 13:49:48</modifyDate>
+<name>海东地区</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba94980ae01a6</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba949c59601a7</id>
+<createDate>2010/10/14 13:50:05</createDate>
+<modifyDate>2010/10/14 13:50:05</modifyDate>
+<name>海北藏族自治州</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba949c59601a7</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba949e5c101a8</id>
+<createDate>2010/10/14 13:50:13</createDate>
+<modifyDate>2010/10/14 13:50:13</modifyDate>
+<name>黄南藏族自治州</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba949e5c101a8</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94a097501a9</id>
+<createDate>2010/10/14 13:50:23</createDate>
+<modifyDate>2010/10/14 13:50:23</modifyDate>
+<name>海南藏族自治州</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba94a097501a9</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94a2df501aa</id>
+<createDate>2010/10/14 13:50:32</createDate>
+<modifyDate>2010/10/14 13:50:32</modifyDate>
+<name>果洛藏族自治州</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba94a2df501aa</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94a52b301ab</id>
+<createDate>2010/10/14 13:50:41</createDate>
+<modifyDate>2010/10/14 13:50:41</modifyDate>
+<name>玉树藏族自治州</name>
+<path>402881882ba8753a012ba949336801a4,402881882ba8753a012ba94a52b301ab</path>
+<parent_id>402881882ba8753a012ba949336801a4</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94a847201ac</id>
+<createDate>2010/10/14 13:50:54</createDate>
+<modifyDate>2010/10/14 13:50:54</modifyDate>
+<name>宁夏回族自治区</name>
+<path>402881882ba8753a012ba94a847201ac</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94aaf2b01ad</id>
+<createDate>2010/10/14 13:51:05</createDate>
+<modifyDate>2010/10/14 13:51:05</modifyDate>
+<name>银川市</name>
+<path>402881882ba8753a012ba94a847201ac,402881882ba8753a012ba94aaf2b01ad</path>
+<parent_id>402881882ba8753a012ba94a847201ac</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94ad22401ae</id>
+<createDate>2010/10/14 13:51:14</createDate>
+<modifyDate>2010/10/14 13:51:14</modifyDate>
+<name>石嘴山市</name>
+<path>402881882ba8753a012ba94a847201ac,402881882ba8753a012ba94ad22401ae</path>
+<parent_id>402881882ba8753a012ba94a847201ac</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94af62701af</id>
+<createDate>2010/10/14 13:51:23</createDate>
+<modifyDate>2010/10/14 13:51:23</modifyDate>
+<name>吴忠市</name>
+<path>402881882ba8753a012ba94a847201ac,402881882ba8753a012ba94af62701af</path>
+<parent_id>402881882ba8753a012ba94a847201ac</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94b13c101b0</id>
+<createDate>2010/10/14 13:51:31</createDate>
+<modifyDate>2010/10/14 13:51:31</modifyDate>
+<name>固原市</name>
+<path>402881882ba8753a012ba94a847201ac,402881882ba8753a012ba94b13c101b0</path>
+<parent_id>402881882ba8753a012ba94a847201ac</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94b2f4801b1</id>
+<createDate>2010/10/14 13:51:38</createDate>
+<modifyDate>2010/10/14 13:51:38</modifyDate>
+<name>中卫市</name>
+<path>402881882ba8753a012ba94a847201ac,402881882ba8753a012ba94b2f4801b1</path>
+<parent_id>402881882ba8753a012ba94a847201ac</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94b61c201b2</id>
+<createDate>2010/10/14 13:51:51</createDate>
+<modifyDate>2010/10/14 13:51:51</modifyDate>
+<name>新疆维吾尔自治区</name>
+<path>402881882ba8753a012ba94b61c201b2</path>
+<parent_id></parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94b8e5001b3</id>
+<createDate>2010/10/14 13:52:02</createDate>
+<modifyDate>2010/10/14 13:52:02</modifyDate>
+<name>乌鲁木齐市</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94b8e5001b3</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94bafb301b4</id>
+<createDate>2010/10/14 13:52:11</createDate>
+<modifyDate>2010/10/14 13:52:11</modifyDate>
+<name>克拉玛依市</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94bafb301b4</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94bced401b5</id>
+<createDate>2010/10/14 13:52:19</createDate>
+<modifyDate>2010/10/14 13:52:19</modifyDate>
+<name>吐鲁番地区</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94bced401b5</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94bf62201b6</id>
+<createDate>2010/10/14 13:52:29</createDate>
+<modifyDate>2010/10/14 13:52:29</modifyDate>
+<name>哈密地区</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94bf62201b6</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94c14b601b7</id>
+<createDate>2010/10/14 13:52:37</createDate>
+<modifyDate>2010/10/14 13:52:37</modifyDate>
+<name>昌吉回族自治州</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94c14b601b7</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94c3ffd01b8</id>
+<createDate>2010/10/14 13:52:48</createDate>
+<modifyDate>2010/10/14 13:52:48</modifyDate>
+<name>博尔塔拉蒙古自治州</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94c3ffd01b8</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94cfd4201b9</id>
+<createDate>2010/10/14 13:53:36</createDate>
+<modifyDate>2010/10/14 13:53:36</modifyDate>
+<name>喀什地区</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94cfd4201b9</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94d207901ba</id>
+<createDate>2010/10/14 13:53:45</createDate>
+<modifyDate>2010/10/14 13:53:45</modifyDate>
+<name>和田地区</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94d207901ba</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94d427801bb</id>
+<createDate>2010/10/14 13:53:54</createDate>
+<modifyDate>2010/10/14 13:53:54</modifyDate>
+<name>伊犁哈萨克自治州</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94d427801bb</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+<RECORD>
+<id>402881882ba8753a012ba94d76b701bc</id>
+<createDate>2010/10/14 13:54:07</createDate>
+<modifyDate>2010/10/14 13:54:07</modifyDate>
+<name>克孜勒苏柯尔克孜自治州</name>
+<path>402881882ba8753a012ba94b61c201b2,402881882ba8753a012ba94d76b701bc</path>
+<parent_id>402881882ba8753a012ba94b61c201b2</parent_id>
+</RECORD>
+</RECORDS>

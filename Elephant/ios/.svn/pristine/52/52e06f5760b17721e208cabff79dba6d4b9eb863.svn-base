@@ -1,0 +1,74 @@
+//
+//  ConstHeader.h
+//
+//
+//  Created by user on 13-8-9.
+//  Copyright (c) 2013年 user. All rights reserved.
+//
+
+#ifndef Body_ConstHeader_h
+#define Body_ConstHeader_h
+
+#define IS_IOS7 ([[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue] >= 7)
+#define IS_Iphone5 fabs((double)[[UIScreen mainScreen] bounds].size.height-(double)568 ) < DBL_EPSILON
+
+#define Screen_Width [[UIScreen mainScreen] applicationFrame].size.width
+#define Screen_Height [[UIScreen mainScreen] applicationFrame].size.height
+
+#define _X_(object) object.frame.origin.x 
+#define _Y_(object) object.frame.origin.y
+#define _Width_(object) object.frame.size.width
+#define _Height_(object) object.frame.size.height
+
+#define NavigationBar_Height 44
+#define TabBar_Height 46
+
+#define PI 3.14159265358979323 // 圆周率
+
+#define EarthR = 6371229; // 地球的半径
+
+#define UIColorRef(red1,green1,blue1) [UIColor colorWithRed:red1/255.0f green:green1/255.0f blue:blue1/255.0f alpha:1.0f]
+
+//G－C－D
+#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
+
+
+#define USER_DEFAULT [NSUserDefaults standardUserDefaults]
+#define Notification_DEFAULT [NSNotificationCenter defaultCenter]
+
+//nslog
+#define _po(o) NSLog(@"%@", (o))
+#define _pn(o) NSLog(@"%d", (o))
+#define _pf(o) NSLog(@"%f", (o))
+#define _ps(o) NSLog(@"CGSize: {%.0f, %.0f}", (o).width, (o).height)
+#define _pr(o) NSLog(@"NSRect: {{%.0f, %.0f}, {%.0f, %.0f}}", (o).origin.x, (o).origin.x, (o).size.width, (o).size.height)
+#define DOBJ(obj) NSLog(@"%s: %@", #obj, [(obj) description])
+
+#define MARK NSLog(@"\nMARK: %s, %d", __PRETTY_FUNCTION__, __LINE__)
+
+#ifdef __IPHONE_6_0
+# define LINE_BREAK_WORD_WRAP NSLineBreakByWordWrapping
+#else
+# define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
+#endif
+
+//deprecated in ios 6.0 or later
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
+#define UITextAlignmentCenter    NSTextAlignmentCenter
+#define UITextAlignmentLeft      NSTextAlignmentLeft
+#define UITextAlignmentRight     NSTextAlignmentRight
+#define UILineBreakModeTailTruncation     NSLineBreakByTruncatingTail
+#define UILineBreakModeMiddleTruncation   NSLineBreakByTruncatingMiddle
+
+#define UITextAttributeTextColor NSForegroundColorAttributeName
+#define UITextAttributeFont NSFontAttributeName
+#define UIStatusBarStyleBlackOpaque UIStatusBarStyleLightContent
+#endif
+
+
+#define BGColor UIColorRef(63, 196, 74)
+
+
+
+#endif

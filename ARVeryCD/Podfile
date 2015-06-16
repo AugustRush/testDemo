@@ -1,9 +1,11 @@
 platform :ios, '6.0'
 
 pod 'ReactiveCocoa'
-pod 'Realm'
 pod 'AFNetworking'
 pod 'TSMessages'
 pod 'Mantle'
 pod 'SDWebImage'
 pod 'FLEX'
+pod 'ARCoreData', :git => 'https://github.com/AugustRush/ARCoreData.git'
+pod 'ARSegmentPager', :git => 'https://github.com/AugustRush/ARSegmentPager.git'
+pod 'UICollectionView-ARDynamicHeightLayoutCell', :git => 'https://github.com/AugustRush/UICollectionView-ARDynamicHeightLayoutCell.git'

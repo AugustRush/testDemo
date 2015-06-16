@@ -1,0 +1,23 @@
+//
+//  BodyScale-Prefix.pch
+//
+
+#ifndef BodyScale_PrefixHeader_pch
+#define BodyScale_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Masonry.h>
+#import "AppDelegate.h"
+#import "BaseViewController.h"
+#import "NSObject+CommanHelp.h"
+#import "MBProgressHUD.h"
+#import "MesureModel.h"
+
+#import "Constant.h"
+#import "NeedInheritViewController.h"
+#import "GetStringWidthAndHeight.h"
+#import "ASIHTTPRequest.h"
+#import "UserInfoManager.h"
+
+#endif

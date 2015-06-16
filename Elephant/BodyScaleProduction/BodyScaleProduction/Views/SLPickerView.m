@@ -1,0 +1,413 @@
+//
+//  HorizontalPickerView.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-14.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "SLPickerView.h"
+
+@interface SLPickerViewItem : UIView
+
+@property (nonatomic, strong)NSString *title;
+
+@end
+    
+@implementation SLPickerViewItem {
+    UILabel             *_titleLabel;
+    SLPickerViewType    _type;
+}
+
+- (id)initWithFrame:(CGRect)frame type:(SLPickerViewType)type {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _type = type;
+        self.backgroundColor = [UIColor clearColor];
+        self.layer.masksToBounds = YES;
+        [self initView];
+    }
+    return self;
+}
+
+- (void)initView {
+    UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:30.0f];
+    label.textColor = [UIColor colorWithWhite:121 / 255.0f alpha:1];
+    label.backgroundColor = [UIColor clearColor];
+    [self addSubview:label];
+    _titleLabel = label;
+}
+
+- (void)setTitle:(NSString *)title {
+    _titleLabel.text = title;
+    _title = title;
+}
+
+- (void)setScale:(CGFloat)scale {
+    _titleLabel.transform = CGAffineTransformMakeScale(scale, scale);
+    _titleLabel.textColor = [UIColor colorWithWhite:121 / 255.0f alpha:scale];
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetRGBStrokeColor(context, 222 / 255.0f, 222 / 255.0f, 222 / 255.0f, 1);
+    CGContextSetAllowsAntialiasing(context, YES);
+    CGContextSetShouldAntialias(context, YES);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    
+    if (_type == SLPickerViewTypeHorizontal) {
+        CGFloat midX = self.frame.size.width / 2;
+        CGContextMoveToPoint(context, midX, 0);
+        CGContextAddLineToPoint(context, midX, 5);
+        CGContextStrokePath(context);
+        
+        CGContextMoveToPoint(context, midX, self.frame.size.height);
+        CGContextAddLineToPoint(context, midX, self.frame.size.height - 5);
+    } else {
+        CGFloat midY = self.frame.size.height / 2;
+        CGContextMoveToPoint(context, 0, midY);
+        CGContextAddLineToPoint(context, 5, midY);
+        CGContextStrokePath(context);
+        
+        CGContextMoveToPoint(context, self.frame.size.width, midY);
+        CGContextAddLineToPoint(context, self.frame.size.width - 5, midY);
+    }
+    CGContextStrokePath(context);
+}
+
+@end
+
+#define ARROW_SIDE_LENGTH   9
+#define MIN_OPACITY         0.33f
+
+#define ITEM_WIDTH          51.0f
+#define ITEM_HEIGHT         51.0f
+#define CONTENT_INSET_H       (self.frame.size.width - ITEM_WIDTH) / 2
+#define CONTENT_INSET_V       (self.frame.size.height - ITEM_HEIGHT) / 2
+
+@implementation SLPickerView {
+    @private
+    __weak id<SLPickerViewDelegate>        _pickerViewDelegate;
+    __weak id<SLPickerViewDataSource>      _dataSource;
+    
+    NSMutableArray      *_itemQueue;
+    NSMutableArray      *_itemDequeue;
+    NSInteger           _numberOfItems;
+    NSRange             range;
+    NSMutableArray      *_tempArray;
+    SLPickerViewType    _type;
+    UIScrollView        *_scrollView;
+}
+
+- (id)initWithFrame:(CGRect)frame
+           delegate:(id<SLPickerViewDelegate>)delegate
+         dataSource:(id<SLPickerViewDataSource>)dataSource
+               type:(SLPickerViewType)type {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _type = type;
+        _pickerViewDelegate = delegate;
+        _dataSource = dataSource;
+        _itemQueue = [NSMutableArray array];
+        _itemDequeue = [NSMutableArray array];
+        _tempArray = [NSMutableArray array];
+        self.backgroundColor = [UIColor whiteColor];
+        [self initView];
+    }
+    return self;
+}
+
+- (void)initView {
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    _scrollView.delegate = self;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:_scrollView];
+    
+    // 箭头 ===
+    NSString *imageName = @"triangle.png";
+    UIImage *image = [UIImage imageNamed:imageName];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithImage:image];
+    UIImageView *imageView2 = [[UIImageView alloc] initWithImage:image];
+    
+    if (_type == SLPickerViewTypeHorizontal) {
+        [imageView1 setFrame:CGRectMake(self.frame.size.width / 2 - image.size.width / 2,
+                                        0,
+                                        image.size.width,
+                                        image.size.height)];
+        
+        [imageView2 setFrame:CGRectMake(self.frame.size.width / 2 - image.size.width / 2,
+                                        self.frame.size.height - image.size.height,
+                                        image.size.width,
+                                        image.size.height)];
+        imageView2.transform = CGAffineTransformRotate(imageView2.transform, M_PI);
+    } else {
+        [imageView1 setFrame:CGRectMake(0,
+                                        self.frame.size.height / 2 - image.size.height / 2,
+                                        image.size.width,
+                                        image.size.height)];
+        imageView1.transform = CGAffineTransformRotate(imageView2.transform, M_PI);
+        imageView1.transform = CGAffineTransformRotate(imageView2.transform, M_PI_2 + M_PI);
+        
+        [imageView2 setFrame:CGRectMake(self.frame.size.width - image.size.width,
+                                        self.frame.size.height / 2 - image.size.height / 2,
+                                        image.size.width,
+                                        image.size.height)];
+        imageView2.transform = CGAffineTransformRotate(imageView2.transform, M_PI_2);
+    }
+    
+    [self addSubview:imageView1];
+    [self addSubview:imageView2];
+    // 箭头 END
+    
+    _numberOfItems = [_dataSource numberOfItemsInPickerView:self];
+
+    // 入队列
+    [self addItemToQueueOnRect:CGRectMake(_scrollView.contentOffset.x,
+                                          _scrollView.contentOffset.y,
+                                          _scrollView.frame.size.width,
+                                          _scrollView.frame.size.height)];
+    if (_type == SLPickerViewTypeHorizontal) {
+        _scrollView.contentSize = CGSizeMake(ITEM_WIDTH * (_numberOfItems - 1) + _scrollView.frame.size.width,
+                                             _scrollView.frame.size.height);
+    } else {
+        _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width,
+                                             ITEM_HEIGHT * (_numberOfItems - 1) + _scrollView.frame.size.height);
+    }
+    [self refreshFont];
+}
+
+- (void)drawRect:(CGRect)rect {
+    // 绘制边框
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetRGBStrokeColor(context, 199 / 255.0f, 199 / 255.0f, 199 / 255.0f, 1);
+    CGContextSetAllowsAntialiasing(context, YES);
+    CGContextSetShouldAntialias(context, YES);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    
+    CGContextMoveToPoint(context, 0, 0);
+    if (_type == SLPickerViewTypeVertical) {
+        CGContextAddLineToPoint(context, 0, self.bounds.size.height);
+        CGContextMoveToPoint(context, self.bounds.size.width, self.bounds.size.height);
+        CGContextAddLineToPoint(context, self.bounds.size.width, 0);
+        CGContextStrokePath(context);
+    } else {
+        CGContextAddLineToPoint(context, self.bounds.size.width, 0);
+        CGContextMoveToPoint(context, 0, self.bounds.size.height);
+        CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
+        CGContextStrokePath(context);
+    }
+}
+
+#pragma mark - Getter and Setter
+- (NSInteger)selectedIndex {
+    if (_type == SLPickerViewTypeHorizontal) {
+        return (_scrollView.contentOffset.x) / ITEM_WIDTH;
+    } else {
+        return (_scrollView.contentOffset.y) / ITEM_HEIGHT;
+    }
+}
+
+- (void)setCurrentIndex:(NSInteger)index {
+    if (_type == SLPickerViewTypeHorizontal) {
+        [_scrollView setContentOffset:CGPointMake(index * ITEM_WIDTH, 0) animated:NO];
+    } else {
+        [_scrollView setContentOffset:CGPointMake(0, index * ITEM_HEIGHT) animated:NO];
+    }
+}
+
+#pragma mark - Private Method
+- (void)adjustScrollViewPosition {
+    int index = 0;
+    if (_type == SLPickerViewTypeHorizontal) {
+        index = (_scrollView.contentOffset.x) / ITEM_WIDTH;
+        int remainder = (int)(_scrollView.contentOffset.x) % (int)ITEM_WIDTH;
+        if (remainder > 25) {
+            index ++;
+        }
+        [_scrollView setContentOffset:CGPointMake(ITEM_WIDTH * index, 0) animated:YES];
+    } else {
+        index = (_scrollView.contentOffset.y) / ITEM_HEIGHT;
+        int remainder = (int)(_scrollView.contentOffset.y) % (int)ITEM_HEIGHT;
+        if (remainder > 25) {
+            index ++;
+        }
+        [_scrollView setContentOffset:CGPointMake(0, ITEM_HEIGHT * index) animated:YES];
+    }
+    if ([_pickerViewDelegate respondsToSelector:@selector(pickerView:indexChaged:)]) {
+        [_pickerViewDelegate pickerView:self indexChaged:index];
+    }
+}
+
+- (void)refreshFont {
+    if (_type == SLPickerViewTypeHorizontal) {
+        for (SLPickerViewItem *item in _itemQueue) {
+            CGFloat
+            offsetX         = _scrollView.contentOffset.x,
+            positionX       = item.frame.origin.x + ITEM_WIDTH / 2 - offsetX,
+            itemInCenterX   = _scrollView.frame.size.width / 2;
+            
+            CGFloat scale = 0.0f;
+            if (positionX <= itemInCenterX) {
+                scale = positionX / itemInCenterX;
+            } else {
+                scale = (itemInCenterX * 2 - positionX) / itemInCenterX;
+            }
+            
+            [item setScale:(1 - MIN_OPACITY) * scale + MIN_OPACITY];
+        }
+    } else {
+        for (SLPickerViewItem *item in _itemQueue) {
+            CGFloat
+            offsetY         = _scrollView.contentOffset.y,
+            positionY       = item.frame.origin.y + ITEM_HEIGHT / 2 - offsetY,
+            itemInCenterY   = _scrollView.frame.size.height / 2;
+            
+            CGFloat scale = 0.0f;
+            if (positionY <= itemInCenterY) {
+                scale = positionY / itemInCenterY;
+            } else {
+                scale = (itemInCenterY * 2 - positionY) / itemInCenterY;
+            }
+            
+            [item setScale:(1 - MIN_OPACITY) * scale + MIN_OPACITY];
+        }
+    }
+}
+
+- (void)removeItemFromQueueOutOfRect:(CGRect)displayRect {
+    int count = (int)_itemQueue.count;
+    for (int index = count - 1; index >= 0; index --) {
+        UIView *view = _itemQueue[index];
+        CGRect intersectionRect = CGRectIntersection(view.frame, displayRect);
+        if (CGRectIsEmpty(intersectionRect)) {
+            [_itemQueue removeObject:view];
+            [_itemDequeue addObject:view];
+            view.hidden = YES;
+        }
+    }
+}
+
+- (void)addItemToQueueOnRect:(CGRect)displayRect {
+    if (_type == SLPickerViewTypeHorizontal) {
+        SLPickerViewItem *item = [_itemQueue firstObject];
+        NSInteger location = (item.frame.origin.x - CONTENT_INSET_H) / ITEM_WIDTH;
+        item = [_itemQueue lastObject];
+        NSInteger length = (item.frame.origin.x - CONTENT_INSET_H) / ITEM_WIDTH - location + 1;
+        NSRange cleanedRange = NSMakeRange(location, length);
+        
+        NSInteger maxIndex = (displayRect.origin.x + displayRect.size.width - CONTENT_INSET_H) / ITEM_WIDTH + 1;
+        NSInteger startIndex = (displayRect.origin.x - CONTENT_INSET_H) / ITEM_WIDTH;
+        startIndex = startIndex < 0 ? 0 : startIndex;
+        length = maxIndex - startIndex;
+        length = length + startIndex > _numberOfItems ? _numberOfItems - startIndex : length;
+        
+        NSRange intersectionRange = NSIntersectionRange(cleanedRange, NSMakeRange(startIndex, length));
+        
+        for (int index = 0; index < length; index ++) {
+            if (!NSLocationInRange(index + startIndex, intersectionRange)) {
+                NSInteger realIndex = index + startIndex;
+                CGRect frame = CGRectMake(CONTENT_INSET_H + realIndex * ITEM_WIDTH,
+                                          0,
+                                          ITEM_WIDTH,
+                                          _scrollView.frame.size.height);
+                SLPickerViewItem *newItem = [_itemDequeue firstObject];
+                if (newItem) {
+                    newItem.frame = frame;
+                    [_itemDequeue removeObject:newItem];
+                    newItem.hidden = NO;
+                } else {
+                    newItem = [[SLPickerViewItem alloc] initWithFrame:frame type:_type];
+                    [_scrollView addSubview:newItem];
+                }
+                
+                [_tempArray addObject:newItem];
+                newItem.title = [_pickerViewDelegate pickerView:self titleForItemsIndex:realIndex];
+            }
+        }
+        
+        if (_tempArray.count) {
+            if (range.location <= startIndex) { // 确定相比上次是左平移还是右平移
+                [_itemQueue addObjectsFromArray:_tempArray];
+            } else {
+                [_itemQueue insertObjects:_tempArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _tempArray.count)]];
+            }
+        }
+        range = NSMakeRange(startIndex, length);
+        [_tempArray removeAllObjects];
+    } else {
+        SLPickerViewItem *item = [_itemQueue firstObject];
+        NSInteger location = (item.frame.origin.y - CONTENT_INSET_V) / ITEM_HEIGHT;
+        item = [_itemQueue lastObject];
+        NSInteger length = (item.frame.origin.y - CONTENT_INSET_V) / ITEM_HEIGHT - location + 1;
+        NSRange cleanedRange = NSMakeRange(location, length);
+        
+        NSInteger maxIndex = (displayRect.origin.y + displayRect.size.height - CONTENT_INSET_V) / ITEM_HEIGHT + 1;
+        NSInteger startIndex = (displayRect.origin.y - CONTENT_INSET_V) / ITEM_HEIGHT;
+        startIndex = startIndex < 0 ? 0 : startIndex;
+        length = maxIndex - startIndex;
+        length = length + startIndex > _numberOfItems ? _numberOfItems - startIndex : length;
+        
+        NSRange intersectionRange = NSIntersectionRange(cleanedRange, NSMakeRange(startIndex, length));
+        
+        for (int index = 0; index < length; index ++) {
+            if (!NSLocationInRange(index + startIndex, intersectionRange)) {
+                NSInteger realIndex = index + startIndex;
+                CGRect frame = CGRectMake(0,
+                                          CONTENT_INSET_V + realIndex * ITEM_HEIGHT,
+                                          _scrollView.frame.size.width,
+                                          ITEM_HEIGHT);
+                SLPickerViewItem *newItem = [_itemDequeue firstObject];
+                if (newItem) {
+                    newItem.frame = frame;
+                    [_itemDequeue removeObject:newItem];
+                    newItem.hidden = NO;
+                } else {
+                    newItem = [[SLPickerViewItem alloc] initWithFrame:frame type:_type];
+                    [_scrollView addSubview:newItem];
+                }
+                
+                [_tempArray addObject:newItem];
+                newItem.title = [_pickerViewDelegate pickerView:self titleForItemsIndex:realIndex];
+            }
+        }
+        
+        if (_tempArray.count) {
+            if (range.location <= startIndex) { // 确定相比上次是上平移还是下平移
+                [_itemQueue addObjectsFromArray:_tempArray];
+            } else {
+                [_itemQueue insertObjects:_tempArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _tempArray.count)]];
+            }
+        }
+        range = NSMakeRange(startIndex, length);
+        [_tempArray removeAllObjects];
+    }
+}
+
+#pragma mark - ScrollView Delegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        [self adjustScrollViewPosition];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self adjustScrollViewPosition];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGRect displayRect = CGRectMake(_scrollView.contentOffset.x, _scrollView.contentOffset.y, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    // 出队列
+    [self removeItemFromQueueOutOfRect:displayRect];
+    // 入队列
+    [self addItemToQueueOnRect:displayRect];
+    [self refreshFont];
+}
+
+@end

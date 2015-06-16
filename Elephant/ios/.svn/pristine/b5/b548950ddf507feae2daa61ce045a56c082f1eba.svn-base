@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedbackViewController">
+            <connections>
+                <outlet property="bgView" destination="ToB-NH-Uc1" id="sQ2-Ty-O5O"/>
+                <outlet property="sendBt" destination="YLy-D1-il9" id="auh-pb-Zo1"/>
+                <outlet property="textField" destination="JSj-Oh-7qm" id="Kam-aQ-3Ta"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ToB-NH-Uc1">
+                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JSj-Oh-7qm">
+                            <rect key="frame" x="8" y="15" width="504" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="6JJ-4O-4ae"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLy-D1-il9">
+                            <rect key="frame" x="538" y="14" width="45" height="32"/>
+                            <state key="normal" title="发送" backgroundImage="send_icon.png">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="YNE-gm-gAo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="YLy-D1-il9" firstAttribute="leading" secondItem="JSj-Oh-7qm" secondAttribute="trailing" constant="26" id="1Dx-YB-pd5"/>
+                        <constraint firstAttribute="centerY" secondItem="YLy-D1-il9" secondAttribute="centerY" id="NHN-VV-SAV"/>
+                        <constraint firstAttribute="centerY" secondItem="JSj-Oh-7qm" secondAttribute="centerY" id="VHQ-3k-WhX"/>
+                        <constraint firstAttribute="trailing" secondItem="YLy-D1-il9" secondAttribute="trailing" constant="17" id="iR8-eU-oFv"/>
+                        <constraint firstItem="JSj-Oh-7qm" firstAttribute="leading" secondItem="ToB-NH-Uc1" secondAttribute="leading" constant="8" id="pxg-AT-L0e"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="ToB-NH-Uc1" secondAttribute="centerX" id="6F0-N5-EOJ"/>
+                <constraint firstItem="ToB-NH-Uc1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MGs-dI-lQp"/>
+                <constraint firstAttribute="bottom" secondItem="ToB-NH-Uc1" secondAttribute="bottom" id="Mxn-Q9-i8X"/>
+                <constraint firstAttribute="trailing" secondItem="ToB-NH-Uc1" secondAttribute="trailing" id="cLY-zC-bEZ"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="send_icon.png" width="45" height="32"/>
+    </resources>
+</document>

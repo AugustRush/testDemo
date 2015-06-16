@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n0R-76-e09">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="octicons.ttf">
+            <string>octicons</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Action Row Sample-->
+        <scene sceneID="sIq-g1-Pxa">
+            <objects>
+                <tableViewController id="mc7-A8-HF2" customClass="SampleViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="oZQ-6r-Iou">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" id="OAf-j5-sHU" customClass="CustomTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAf-j5-sHU" id="1Dt-6I-264">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-rx-xCn">
+                                            <rect key="frame" x="12" y="12" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="7g3-gm-T3y"/>
+                                                <constraint firstAttribute="width" constant="28" id="Hcl-6e-kO1"/>
+                                                <constraint firstAttribute="width" constant="24" id="afb-rD-yFf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="octicons" family="octicons" pointSize="24"/>
+                                            <color key="textColor" red="0.91891366243362427" green="0.56299149990081787" blue="0.18943393230438232" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Hcl-6e-kO1"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ya8-W6-rLn">
+                                            <rect key="frame" x="44" y="15" width="544" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="wmw-rx-xCn" firstAttribute="top" secondItem="1Dt-6I-264" secondAttribute="top" constant="12" id="05i-jF-ClR"/>
+                                        <constraint firstAttribute="bottom" secondItem="wmw-rx-xCn" secondAttribute="bottom" priority="749" constant="7" id="3Hx-zM-ScP"/>
+                                        <constraint firstItem="ya8-W6-rLn" firstAttribute="bottom" secondItem="wmw-rx-xCn" secondAttribute="bottom" id="Dit-Yc-ySq"/>
+                                        <constraint firstAttribute="trailing" secondItem="ya8-W6-rLn" secondAttribute="trailing" constant="12" id="FVH-Qe-ERD"/>
+                                        <constraint firstItem="wmw-rx-xCn" firstAttribute="leading" secondItem="1Dt-6I-264" secondAttribute="leading" constant="12" id="O57-hR-wod"/>
+                                        <constraint firstItem="ya8-W6-rLn" firstAttribute="leading" secondItem="wmw-rx-xCn" secondAttribute="trailing" constant="8" id="ikw-I5-gGF"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="customLabel" destination="ya8-W6-rLn" id="CSa-3R-BTh"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mc7-A8-HF2" id="Dq8-sF-DzM"/>
+                            <outlet property="delegate" destination="mc7-A8-HF2" id="U5y-EQ-ETx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Action Row Sample" id="oph-Tq-cd7">
+                        <barButtonItem key="rightBarButtonItem" title="Reorder" id="nhV-rf-ie1">
+                            <connections>
+                                <action selector="reorderButtonTapped:" destination="mc7-A8-HF2" id="k2t-FR-0n0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="reorderButton" destination="nhV-rf-ie1" id="Vc4-Ub-fds"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nah-xg-CXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="831" y="499"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qVG-gg-XCh">
+            <objects>
+                <navigationController id="n0R-76-e09" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q0f-D8-J5B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mc7-A8-HF2" kind="relationship" relationship="rootViewController" id="MVd-tg-S1l"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tFD-ah-a6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11" y="500"/>
+        </scene>
+    </scenes>
+</document>

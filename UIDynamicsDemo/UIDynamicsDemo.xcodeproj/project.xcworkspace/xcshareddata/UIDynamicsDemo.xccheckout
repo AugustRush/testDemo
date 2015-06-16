@@ -10,29 +10,29 @@
 	<string>UIDynamicsDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>47D2DFEE-89C1-4200-A004-C1947529DB5A</key>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
 		<string>https://github.com/AugustRush/testDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UIDynamicsDemo/UIDynamicsDemo.xcodeproj/project.xcworkspace</string>
+	<string>UIDynamicsDemo/UIDynamicsDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>47D2DFEE-89C1-4200-A004-C1947529DB5A</key>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/AugustRush/testDemo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>47D2DFEE-89C1-4200-A004-C1947529DB5A</string>
+	<string>E273DA43CE6844A58D5B83C044B5E750732D0F6B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>47D2DFEE-89C1-4200-A004-C1947529DB5A</string>
+			<string>E273DA43CE6844A58D5B83C044B5E750732D0F6B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>testDemo</string>
 		</dict>

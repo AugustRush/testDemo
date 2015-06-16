@@ -1,0 +1,69 @@
+//
+//  ButtonExten.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-16.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "ButtonExten.h"
+
+@implementation ButtonExten
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+- (void)setImage:(UIImage *)image WithText:(NSString *)text WithState:(UIControlState)state
+{
+    CGSize titleSize = [text sizeWithFont: [UIFont systemFontOfSize:12]];
+    [self.imageView setContentMode:UIViewContentModeCenter];
+    [self setImageEdgeInsets:UIEdgeInsetsMake(-15,
+                                              0.0,
+                                              0.0,
+                                              -titleSize.width)];
+    [self setImage:image forState:UIControlStateNormal];
+    
+    [self.titleLabel setContentMode:UIViewContentModeCenter];
+    [self.titleLabel setBackgroundColor:[UIColor clearColor]];
+    [self.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [self.titleLabel setTextColor:[UIColor redColor]];
+    CGSize size = self.titleLabel.frame.size;
+    size.width = titleSize.width;
+    CGSize imgSize = self.imageView.frame.size;
+    [self setTitleEdgeInsets:UIEdgeInsetsMake((imgSize.width+imgSize.height-12),
+                                              ((62-size.width)/2-imgSize.width),
+                                              0.0,
+                                              0)];
+    [self setTitle:text forState:UIControlStateNormal];
+
+}
+
+- (void)setImage:(UIImage *)image WithDownText:(NSString *)text
+{
+    CGSize titleSize = [text sizeWithFont: [UIFont systemFontOfSize:11]];
+    [self.imageView setContentMode:UIViewContentModeCenter];
+    [self setImageEdgeInsets:UIEdgeInsetsMake(-15,
+                                              0.0,
+                                              0.0,
+                                              -titleSize.width)];
+    [self setImage:image forState:UIControlStateNormal];
+    
+    [self.titleLabel setContentMode:UIViewContentModeCenter];
+    [self.titleLabel setBackgroundColor:[UIColor clearColor]];
+    [self.titleLabel setFont:[UIFont systemFontOfSize:11]];
+    [self.titleLabel setTextColor:[UIColor redColor]];
+    CGSize size = self.titleLabel.frame.size;
+    size.width = titleSize.width;
+    CGSize imgSize = self.imageView.frame.size;
+    [self setTitleEdgeInsets:UIEdgeInsetsMake((imgSize.height+11),
+                                              ((45-size.width)/2-imgSize.width),
+                                              0.0,
+                                              0)];
+    [self setTitle:text forState:UIControlStateNormal];
+}
+
+@end

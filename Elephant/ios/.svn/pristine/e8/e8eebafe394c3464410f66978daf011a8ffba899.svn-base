@@ -1,0 +1,242 @@
+//
+//  RegistSecondViewController.m
+//  BodyScale
+//
+//  Created by cxx on 14-11-26.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "RegistSecondViewController.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "BDKNotifyHUD.h"
+#import "LeftMenuViewController.h"
+#import "RegistThirdViewController.h"
+@interface RegistSecondViewController () <MBProgressHUDDelegate,UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *phoneLb;
+@property (weak, nonatomic) IBOutlet UITextField *vCodeLb;
+@property (weak, nonatomic) IBOutlet UIButton *reSend;
+@property (weak, nonatomic) IBOutlet UIButton *finishedBt;
+@property (weak, nonatomic) IBOutlet UIButton *ruleBt;
+@property (weak, nonatomic) IBOutlet UIButton *selectedBt;
+@property (strong,nonatomic) MBProgressHUD    *progressHUD;
+@property (strong, nonatomic) BDKNotifyHUD *notify;
+@end
+
+@implementation RegistSecondViewController
+@synthesize phoneNumStr;
+#pragma mark setproperty
+- (MBProgressHUD *)progressHUD
+{
+    if (!_progressHUD)
+    {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view bringSubviewToFront:self.progressHUD];
+       self.progressHUD.delegate = self;
+        [self.progressHUD show:YES];
+    }
+    return _progressHUD;
+}
+
+- (BDKNotifyHUD *)notify {
+    if (_notify != nil) return _notify;
+    _notify = [BDKNotifyHUD notifyHUDWithImage:nil text:@"验证码已经发出，请耐心接收。"];
+    _notify.center = CGPointMake(self.view.center.x, self.view.center.y - 20);
+    return _notify;
+}
+
+#pragma mark lifecircle
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+        
+    }
+    
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"短信验证";
+    self.view.backgroundColor = UIColorRef(233, 233, 233);
+    [self baseConfig];
+    [self addProgressHUD];
+    [self GetVerificationCode:self.phoneNumStr];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:YES];
+    
+    
+}
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+#pragma private method
+- (void)baseConfig
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame = CGRectMake(0.0, 0.0, 20, 20);
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    temporaryBarButtonItem.style = UIBarButtonItemStylePlain;
+    self.navigationItem.leftBarButtonItem = temporaryBarButtonItem;
+    
+    self.vCodeLb.keyboardType = UIKeyboardTypeNumberPad;
+    self.vCodeLb.delegate = self;
+    [self.vCodeLb addTarget:self action:@selector(textEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.vCodeLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@43);
+    }];
+    
+    [self.reSend setTitleColor:BGColor forState:UIControlStateNormal];
+    [self.ruleBt setTitleColor:BGColor forState:UIControlStateNormal];
+    
+    [self.selectedBt setBackgroundImage:[UIImage imageNamed:@"seleted_img"] forState:UIControlStateSelected];
+    [self.selectedBt setBackgroundImage:[UIImage imageNamed:@"unselected_img"] forState:UIControlStateNormal];
+    self.selectedBt.selected = YES;
+    
+    
+    self.phoneLb.text = self.phoneNumStr;
+}
+
+
+
+- (void)GetVerificationCode:(NSString *)phoneNumber
+{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        NSDictionary *parameters = @{@"mobile":phoneNumber};
+        NSString * urlStr = [NSString stringWithFormat:@"%@%@",POSTURL,@"sendCode"];
+    
+        [manager GET:urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self hidenProgress];
+            NSString *requestTmp = [NSString stringWithString:operation.responseString];
+            NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+            int errorCode = [[resultDic objectForKey:@"error_code"] intValue];
+            if (!errorCode)
+            {
+                NSDictionary * codeDic = [resultDic objectForKey:@"data"];
+                NSString * codeStr = [codeDic objectForKey:@"code"];
+                self.vCodeLb.text = codeStr;
+                //[[NSUserDefaults standardUserDefaults] setValue:codeStr forKey:VERIFICATIONCODE];
+            }
+            [self displayNotification];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self hidenProgress];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"网络错误" message:@"您的网络出问题了，请检查。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }];
+
+}
+
+
+- (void)displayNotification {
+    if (self.notify.isAnimating) return;
+    
+    [self.view addSubview:self.notify];
+    [self.notify presentWithDuration:1.0f speed:0.5f inView:self.view completion:^{
+        [self.notify removeFromSuperview];
+    }];
+}
+
+
+
+#pragma  mark action
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)resendAction:(id)sender
+{
+    [self addProgressHUD];
+    [self GetVerificationCode:self.phoneNumStr];
+}
+
+- (IBAction)finishAction:(id)sender
+{
+    RegistThirdViewController * registThVC = [[RegistThirdViewController alloc]initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:registThVC animated:YES];
+}
+
+- (IBAction)ruleAction:(id)sender
+{
+
+}
+
+- (IBAction)selectAction:(id)sender
+{
+    UIButton *bt = (UIButton *)sender;
+    if (bt.selected) {
+        bt.selected = NO;
+    }
+    else
+    {
+        bt.selected = YES;
+    }
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [self.progressHUD removeFromSuperview];
+}
+
+- (void)addProgressHUD
+{
+   [self.view addSubview:self.progressHUD];
+}
+
+- (void)hidenProgress
+{
+    [self.progressHUD removeFromSuperview];
+    self.progressHUD = nil;
+}
+
+#pragma mark UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+
+-(void)textEditingChanged:(UITextField *)textField
+{
+    
+    if ([textField.text length] > 6) {
+        textField.text = [textField.text substringToIndex:6];
+    }
+    
+}
+
+
+
+@end

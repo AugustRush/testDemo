@@ -1,0 +1,284 @@
+//
+//  MyInfoViewController.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-24.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "MyInfoViewController.h"
+#import "MyInfoTableViewCell.h"
+#import "UIViewController+MMDrawerController.h"
+#import "SKSTableView.h"
+#import "MyInfoModifyGenderCell.h"
+#import "ModifyUserNameViewController.h"
+#import "ModifyUserBaseInfoViewController.h"
+#import "ModifyUserPasswordViewController.h"
+#import "MyQRCodeViewController.h"
+#import "UIImageView+WebCache.h"
+#import "LeftSideViewController.h"
+#import "BTModel.h"
+
+@interface MyInfoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet SKSTableView *tableView;
+
+@property (nonatomic, strong) UIImagePickerController *imagePickerCtr;
+
+@end
+
+@implementation MyInfoViewController {
+    NSArray *_cellTitles;
+    LeftSideViewController *_leftVC;
+}
+
+- (void)dealloc {
+    NSLog(@"%@ dalloc",[self class]);
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    if (USER_INFO_WILL_UPDATE) {
+        [[InterfaceModel sharedInstance] updateUserInfoWithCallBack:nil];
+        [[BTModel sharedInstance] selectUserInScale:[[InterfaceModel sharedInstance] getHostUser] isTesting:NO];
+    }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil parentVC:(UIViewController *)pvc
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"个人资料";
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _cellTitles = @[@"用户头像", @"用户名", @"性别", @"年龄", @"身高", @"我的QR Code"];
+    
+    //self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (!self.imagePickerCtr) {
+        self.imagePickerCtr = [[UIImagePickerController alloc] init];
+        self.imagePickerCtr.delegate = self;
+        self.imagePickerCtr.allowsEditing = YES;
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize
+{
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width*scaleSize,image.size.height*scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height *scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+
+
+#pragma mark - Private Method
+- (void)takePhoto {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.imagePickerCtr.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:self.imagePickerCtr animated:YES
+                                     completion:^{
+                                         
+
+                                     }];
+    }
+}
+
+- (void)selectLocalPhoto {
+    self.imagePickerCtr.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imagePickerCtr animated:YES
+                             completion:^{
+
+                             }];
+
+}
+
+- (void)cancelPhoto {
+    
+}
+
+-(NSString *)getFilePathInTmpWithFileName:(NSString *)fileName
+{
+    NSString *temp = NSTemporaryDirectory();
+    NSString *fileP = [temp stringByAppendingPathComponent:fileName];
+    return fileP;
+}
+
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+
+    UIImage *originalImg = [info objectForKey:UIImagePickerControllerEditedImage];
+    CGFloat _rate = 150.0 / originalImg.size.width;
+    
+    UIImage *scaleImg = [self scaleImage:originalImg toScale:_rate];
+
+
+    [_imagePickerCtr dismissViewControllerAnimated:YES completion:NULL];
+    [self showHUDInView:self.view justWithText:@"头像正在上传中..."];
+
+    [[InterfaceModel sharedInstance] upLoadImage:scaleImg
+                                    WithCallBack:^(int code, id param, NSString *errorMsg) {
+                                        if (code != REQUEST_SUCCESS_CODE) {
+                                            [self disMissHUDWithText:@"上传失败" afterDelay:.5];
+                                        }else{
+                                           [self disMissHUDWithText:@"头像正在上传中..." afterDelay:.5];
+                                            self.headImg = scaleImg;
+                                            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                            LeftSideViewController *leftVC = (LeftSideViewController *)[(MMDrawerController *)[[UIApplication sharedApplication].delegate window].rootViewController leftDrawerViewController];
+                                            [leftVC refreshPhoto];
+
+
+                                        }}];
+
+}
+
+//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [self.imagePickerCtr dismissViewControllerAnimated:YES completion:NULL];
+//}
+
+
+#pragma mark - UITableView Delegate and DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _cellTitles.count;
+}
+
+- (NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(SKSIndexPath *)indexPath {
+    if (indexPath.indexPath.row == 2) {
+        return 2;
+    } else {
+        return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(SKSIndexPath *)indexPath {
+    MyInfoModifyGenderCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"MyInfoModifyGenderCell" owner:self options:nil] lastObject];
+    [cell setContent:[NSString stringWithFormat:@"%@", indexPath.subRow == 2 ? @"女" : @"男"]];
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MyInfoTableViewCell *cell = nil;
+    if (!cell) {
+        NSArray *cells = nil;
+        cells = [[NSBundle mainBundle] loadNibNamed:@"MyInfoTableViewCell" owner:self options:nil];
+        cell = [cells lastObject];
+        
+        NSString *content = nil;
+        switch (indexPath.row) {
+            case 0:
+                [cell setImageViewHidden:NO];
+                if (self.headImg) {
+                    cell.photoImageView.image = self.headImg;
+                } else {
+                    int sex = [[[GloubleProperty sharedInstance] currentUserEntity].UI_sex intValue];
+                    NSString *defaultImageName = @"default_photo_males.png";
+                    if (sex == 0) {
+                        defaultImageName = @"default_photo_females.png";
+                    }
+                    NSString *baseUrl = SERVICE_URL;
+                    NSString *urlString = [baseUrl stringByAppendingString:[[GloubleProperty sharedInstance] currentUserEntity].UI_photoPath];
+                    [cell.photoImageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:defaultImageName]];
+                }
+                break;
+            case 1:
+                content = [GloubleProperty sharedInstance].currentUserEntity.UI_nickname;
+                break;
+            case 2:
+                if ([GloubleProperty sharedInstance].currentUserEntity.UI_sex.length) {
+                    content = [[GloubleProperty sharedInstance].currentUserEntity.UI_sex intValue] ? @"男" : @"女";
+                }
+                [cell setArrowImageViewhidden:YES];
+                cell.isExpandable = YES;
+                break;
+            case 3:
+                content = [[GloubleProperty sharedInstance].currentUserEntity.UI_age stringByAppendingString:@"岁"];
+                break;
+            case 4:
+                if ([GloubleProperty sharedInstance].currentUserEntity.UI_height.length) {
+                    content = [[GloubleProperty sharedInstance].currentUserEntity.UI_height stringByAppendingString:@"cm"];
+                }
+                break;
+            case 5: {
+                
+            }
+                break;
+            default:
+                break;
+        }
+        [cell setContent:content];
+
+        [cell setTitle:_cellTitles[indexPath.row]];
+    }
+    return cell;
+}
+
+- (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(SKSIndexPath *)indexPath {
+    if (indexPath.indexPath.row == 2) {
+        if (indexPath.subRow == 1) {
+            // 男
+            [GloubleProperty sharedInstance].currentUserEntity.UI_sex = @"1";
+        } else {
+            // 女
+           [GloubleProperty sharedInstance].currentUserEntity.UI_sex = @"0";
+        }
+        LeftSideViewController *leftVC = (LeftSideViewController *)[(MMDrawerController *)[[UIApplication sharedApplication].delegate window].rootViewController leftDrawerViewController];
+        [leftVC refreshPhoto];
+        [GloubleProperty sharedInstance].currentUserInfoWillUpDate = YES;
+    }
+    [tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[MyInfoTableViewCell class]]) {
+        MyInfoTableViewCell *kCell = cell;
+        NSString *title = [kCell title];
+        if ([title isEqualToString:_cellTitles[0]]) {
+            [ViewUtilFactory presentTakePhotoAlertViewWithTarget:self takeAction:@selector(takePhoto) localAction:@selector(selectLocalPhoto)];            
+        } else if ([title isEqualToString:_cellTitles[1]]) {
+            ModifyUserNameViewController *modifyUserNameVC = [[ModifyUserNameViewController alloc] initWithNibName:@"ModifyUserNameViewController" bundle:nil];
+            [self.navigationController pushViewController:modifyUserNameVC animated:YES];
+        } else if ([title isEqualToString:_cellTitles[2]]) {
+            
+        } else if ([title isEqualToString:_cellTitles[3]]) {
+            ModifyUserBaseInfoViewController *modifyUserAgeVC = [[ModifyUserBaseInfoViewController alloc] initWithNibName:@"ModifyUserBaseInfoViewController" bundle:nil modifyType:ModifyTypeUserAge];
+            [self.navigationController pushViewController:modifyUserAgeVC animated:YES];
+        } else if ([title isEqualToString:_cellTitles[4]]) {
+            ModifyUserBaseInfoViewController *modifyUserHeightVC = [[ModifyUserBaseInfoViewController alloc] initWithNibName:@"ModifyUserBaseInfoViewController" bundle:nil modifyType:ModifyTypeUserHeight];
+            [self.navigationController pushViewController:modifyUserHeightVC animated:YES];
+        } else if ([title isEqualToString:_cellTitles[5]]) {
+            MyQRCodeViewController *myQRCodeVC = [[MyQRCodeViewController alloc] initWithNibName:@"MyQRCodeViewController" bundle:nil];
+            [self.navigationController pushViewController:myQRCodeVC animated:YES];
+        } else if ([title isEqualToString:_cellTitles[6]]) {
+//            ModifyUserPasswordViewController *modifyUserPasswordVC = [[ModifyUserPasswordViewController alloc] initWithNibName:@"ModifyUserPasswordViewController" bundle:nil];
+//            [self.navigationController pushViewController:modifyUserPasswordVC animated:YES];
+        }
+    }
+}
+
+@end

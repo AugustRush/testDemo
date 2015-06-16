@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A0EAD210-9346-42BD-9024-3B82EA7B16BB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BodyScaleProduction</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>b3cbfecf-5da2-f542-8081-207e4b965e88++6400</key>
+		<string>http://svn.ichronocloud.com/svn/ios/BodyScaleProduction</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BodyScaleProduction.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>b3cbfecf-5da2-f542-8081-207e4b965e88++6400</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>b3cbfecf-5da2-f542-8081-207e4b965e88++6400</key>
+		<string>http://svn.ichronocloud.com/svn/ios</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://svn.ichronocloud.com/svn/ios/BodyScaleProduction/BodyScaleProduction.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>b3cbfecf-5da2-f542-8081-207e4b965e88++6400</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>b3cbfecf-5da2-f542-8081-207e4b965e88++6400</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BodyScaleProduction</string>
+		</dict>
+	</array>
+</dict>
+</plist>

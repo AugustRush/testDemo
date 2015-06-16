@@ -1,0 +1,221 @@
+//
+//  RegistThirdViewController.m
+//  BodyScale
+//
+//  Created by zhangweiwei on 14/12/8.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+#define SAMEVIEWHEIGHT @50
+#import "RegistThirdViewController.h"
+#import "TextField+label.h"
+#import "FillInfoViewController.h"
+#import "AFNetworking.h"
+#import "BDKNotifyHUD.h"
+@interface RegistThirdViewController () <UITextFieldDelegate,MBProgressHUDDelegate>
+@property(strong,nonatomic) TextField_label * pwdFirst;
+@property(strong,nonatomic) TextField_label * pwdSecond;
+@property(strong,nonatomic) UIButton * completeRegister;
+@property (strong,nonatomic) MBProgressHUD    *progressHUD;
+@end
+
+@implementation RegistThirdViewController
+#pragma mark setproperty
+- (TextField_label *)pwdFirst
+{
+    if (!_pwdFirst)
+    {
+        _pwdFirst =  [[TextField_label alloc]initWithHolder:@"请输入6-16位密码" andLabelName:@"密码" textFieldDelegate:self];
+        
+        
+    }
+    return _pwdFirst;
+}
+
+- (TextField_label *)pwdSecond
+{
+    if (!_pwdSecond)
+    {
+        _pwdSecond =  [[TextField_label alloc]initWithHolder:@"请输入6-16位密码" andLabelName:@"确认" textFieldDelegate:self];
+    }
+    return _pwdSecond;
+}
+
+
+
+
+- (UIButton *)completeRegister
+{
+    if (!_completeRegister)
+    {
+        _completeRegister = [UIButton buttonWithType:UIButtonTypeCustom];
+        _completeRegister = [UIButton buttonWithType:UIButtonTypeCustom];
+        _completeRegister.layer.cornerRadius = 1.5f;
+        _completeRegister.backgroundColor = [UIColor clearColor];
+        [_completeRegister setTitle:@"完成注册" forState:UIControlStateNormal];
+        [_completeRegister addTarget:self action:@selector(finishRegister) forControlEvents:UIControlEventTouchUpInside];
+        [_completeRegister setBackgroundImage:[UIImage imageNamed:@"green_bt"] forState:UIControlStateNormal];
+        [_completeRegister setBackgroundImage:[UIImage imageNamed:@"green_bt"] forState:UIControlStateHighlighted];
+    }
+    return _completeRegister;
+}
+
+- (MBProgressHUD *)progressHUD
+{
+    if (!_progressHUD)
+    {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view bringSubviewToFront:self.progressHUD];
+        self.progressHUD.delegate = self;
+        [self.progressHUD show:YES];
+    }
+    return _progressHUD;
+}
+
+
+#pragma mark lifecircle
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+        self.view.backgroundColor = [getWordColor colorWithHexString:@"#dedede"];
+        self.title = @"设置密码";
+        
+    }
+    
+    return self;
+}
+
+
+- (void)loadView
+{
+    [super loadView];
+    
+    [self.view addSubview:self.pwdFirst];
+    [self.view addSubview:self.pwdSecond];
+    [self.view addSubview:self.completeRegister];
+    
+    [self.pwdFirst mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(self.view.mas_left);
+         maker.top.equalTo(@40);
+         maker.right.equalTo(self.view.mas_right);
+         maker.height.equalTo(SAMEVIEWHEIGHT);
+         
+     }];
+    [self.pwdSecond mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(self.view.mas_left);
+         maker.top.equalTo(self.pwdFirst.mas_bottom);
+         maker.right.equalTo(self.view.mas_right);
+         maker.height.equalTo(SAMEVIEWHEIGHT);
+     }];
+    
+    
+    [self.completeRegister mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(@30);
+         maker.top.equalTo(self.pwdSecond.mas_bottom).offset(40);
+         maker.right.equalTo(self.view.mas_right).offset(-30);
+         maker.height.equalTo(SAMEVIEWHEIGHT);
+     }];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark ACTION
+- (void)finishRegister
+{
+    
+    if ([CommanHelp isStringNULL:self.pwdFirst.textFeild.text] || [CommanHelp isStringNULL:self.pwdSecond.textFeild.text])
+    {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"请设置正确的密码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+     if (![self.pwdFirst.textFeild.text isEqualToString:self.pwdSecond.textFeild.text])
+     {
+         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"错误" message:@"两次密码设置不一致。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+         [alert show];
+         return;
+     }
+    [self addProgressHUD];
+    [self registerToServer];
+    
+  }
+
+#pragma mark HTTP Register
+- (void)registerToServer
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSDictionary *parameters = @{@"username":@"1999i29",@"email":[[NSUserDefaults standardUserDefaults] objectForKey:USERPHONENUMBER],@"password":[CommanHelp md5:self.pwdSecond.textFeild.text]};
+    
+    NSString * urlStr = [NSString stringWithFormat:@"%@%@",POSTURL,@"register"];
+    
+    [manager POST:urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self hidenProgress];
+        NSString *requestTmp = [NSString stringWithString:operation.responseString];
+        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+        int errorCode = [[resultDic objectForKey:@"error_code"] intValue];
+        if (!errorCode)
+        {
+            NSDictionary * codeDic = [resultDic objectForKey:@"data"];
+            NSString * codeStr = [codeDic objectForKey:@"private_code"];
+            NSString * userName = [codeDic objectForKey:@"username"];
+            NSString * uid = [codeDic objectForKey:@"user_id"];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:codeStr forKey:PRIVATECODE];
+            [[NSUserDefaults standardUserDefaults] setValue:userName forKey:USERACCOUNT];
+            [[NSUserDefaults standardUserDefaults] setValue:uid forKey:USERID];
+            [self.navigationController pushViewController:[[FillInfoViewController alloc] initWithNibName:@"FillInfoViewController" bundle:nil] animated:YES];
+            [self.navigationController pushViewController:[[FillInfoViewController alloc] initWithNibName:@"FillInfoViewController" bundle:nil] animated:YES];
+
+        }
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hidenProgress];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"网络错误" message:@"您的网络出问题了，请检查。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }];
+ 
+}
+
+
+#pragma mark private method
+- (void)addProgressHUD
+{
+    [self.view addSubview:self.progressHUD];
+}
+
+- (void)hidenProgress
+{
+    [self.progressHUD removeFromSuperview];
+    self.progressHUD = nil;
+}
+
+#pragma mark MBProgressHUDDelegate methods
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+    [self.progressHUD removeFromSuperview];
+}
+
+
+
+
+@end

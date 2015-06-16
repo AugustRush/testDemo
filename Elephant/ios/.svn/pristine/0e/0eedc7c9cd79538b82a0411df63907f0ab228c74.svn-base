@@ -1,0 +1,12 @@
+platform :ios, '7.0'
+
+pod 'RESideMenu'
+pod 'Masonry'
+pod 'AFNetworking'
+pod 'ReactiveCocoa'
+pod 'HKCircularProgressView'
+pod 'BButton'
+pod 'FrameAccessor', '~> 1.3.2'
+pod 'MKFoundationKit/NSArray', '~> 1.2.2'
+pod 'MBProgressHUD', '~> 0.8'
+pod 'FMDB'

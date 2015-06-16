@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		973E31A21B16EC5B00B998A8 /* TMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 973E319C1B16EC5B00B998A8 /* TMCache.m */; };
+		973E31A31B16EC5B00B998A8 /* TMDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 973E319F1B16EC5B00B998A8 /* TMDiskCache.m */; };
+		973E31A41B16EC5B00B998A8 /* TMMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 973E31A11B16EC5B00B998A8 /* TMMemoryCache.m */; };
 		974B67DD19F401590061DAC9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 974B67DC19F401590061DAC9 /* main.m */; };
 		974B67E019F401590061DAC9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 974B67DF19F401590061DAC9 /* AppDelegate.m */; };
 		974B67E319F401590061DAC9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 974B67E219F401590061DAC9 /* ViewController.m */; };
@@ -28,6 +31,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		973E319B1B16EC5B00B998A8 /* TMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMCache.h; sourceTree = "<group>"; };
+		973E319C1B16EC5B00B998A8 /* TMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMCache.m; sourceTree = "<group>"; };
+		973E319D1B16EC5B00B998A8 /* TMCacheBackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMCacheBackgroundTaskManager.h; sourceTree = "<group>"; };
+		973E319E1B16EC5B00B998A8 /* TMDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDiskCache.h; sourceTree = "<group>"; };
+		973E319F1B16EC5B00B998A8 /* TMDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDiskCache.m; sourceTree = "<group>"; };
+		973E31A01B16EC5B00B998A8 /* TMMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMMemoryCache.h; sourceTree = "<group>"; };
+		973E31A11B16EC5B00B998A8 /* TMMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMMemoryCache.m; sourceTree = "<group>"; };
 		974B67D719F401590061DAC9 /* SqliteManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SqliteManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		974B67DB19F401590061DAC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		974B67DC19F401590061DAC9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +73,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		973E319A1B16EC5B00B998A8 /* TMCache */ = {
+			isa = PBXGroup;
+			children = (
+				973E319B1B16EC5B00B998A8 /* TMCache.h */,
+				973E319C1B16EC5B00B998A8 /* TMCache.m */,
+				973E319D1B16EC5B00B998A8 /* TMCacheBackgroundTaskManager.h */,
+				973E319E1B16EC5B00B998A8 /* TMDiskCache.h */,
+				973E319F1B16EC5B00B998A8 /* TMDiskCache.m */,
+				973E31A01B16EC5B00B998A8 /* TMMemoryCache.h */,
+				973E31A11B16EC5B00B998A8 /* TMMemoryCache.m */,
+			);
+			path = TMCache;
+			sourceTree = "<group>";
+		};
 		974B67CE19F401590061DAC9 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +108,7 @@
 		974B67D919F401590061DAC9 /* SqliteManager */ = {
 			isa = PBXGroup;
 			children = (
+				973E319A1B16EC5B00B998A8 /* TMCache */,
 				974B680019F4019D0061DAC9 /* SqliteManager */,
 				974B67DE19F401590061DAC9 /* AppDelegate.h */,
 				974B67DF19F401590061DAC9 /* AppDelegate.m */,
@@ -232,8 +257,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				973E31A21B16EC5B00B998A8 /* TMCache.m in Sources */,
 				974B67E319F401590061DAC9 /* ViewController.m in Sources */,
+				973E31A31B16EC5B00B998A8 /* TMDiskCache.m in Sources */,
 				974B67E019F401590061DAC9 /* AppDelegate.m in Sources */,
+				973E31A41B16EC5B00B998A8 /* TMMemoryCache.m in Sources */,
 				974B67DD19F401590061DAC9 /* main.m in Sources */,
 				974B680319F4020B0061DAC9 /* SqliteUtils.m in Sources */,
 			);
@@ -426,6 +454,7 @@
 				974B67FC19F401590061DAC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		974B67FD19F401590061DAC9 /* Build configuration list for PBXNativeTarget "SqliteManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +463,7 @@
 				974B67FF19F401590061DAC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

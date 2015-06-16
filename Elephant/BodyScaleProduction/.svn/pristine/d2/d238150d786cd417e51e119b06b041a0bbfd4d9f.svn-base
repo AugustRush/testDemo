@@ -1,0 +1,114 @@
+//
+//  RegisterViewController.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-21.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "RegisterViewController.h"
+#import "RegisterInputPasswordViewController.h"
+#import "UserInfoEntity.h"
+
+@interface RegisterViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *userPhoneTextField;
+@property (weak, nonatomic) IBOutlet UILabel *tipsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+
+@end
+
+@implementation RegisterViewController {
+    UserInfoEntity *_userInfoEntity;
+    BOOL    _isForgetPassword;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil userInfoEntity:(UserInfoEntity *)userInfoEntity isForgetPassword:(BOOL)isForgetPassword
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _userInfoEntity = userInfoEntity;
+        _isForgetPassword = isForgetPassword;
+        if (!userInfoEntity) {
+            _userInfoEntity = [[UserInfoEntity alloc] init];
+        }
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self configXib];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)configXib {
+    if (_isForgetPassword) {
+        self.title = @"忘记密码";
+        self.photoImageView.image = [UIImage imageNamed:@"default_photo_females.png"];
+    } else {
+        self.title = @"注册";
+        NSString *imageName = nil;
+        if ([_userInfoEntity.UI_sex intValue] == 0) {
+            imageName = @"default_photo_females.png";
+        } else {
+            imageName = @"default_photo_males.png";
+        }
+        self.photoImageView.image = [UIImage imageNamed:imageName];
+    }
+}
+
+#pragma mark - Private Method
+- (void)getCheckCode {
+    [self showHUDInView:self.view justWithText:@"正在请求验证码..." disMissAfterDelay:15];
+    if (_isForgetPassword) {
+        [[InterfaceModel sharedInstance]
+         getCheckCodeWithLoginName:self.userPhoneTextField.text
+         validType:ValidCodeTypeReset
+         callBack:^(int code, NSString *errorMsg) {
+
+             [self disMissHUDWithText:@"正在请求验证码..." afterDelay:0];
+             if (code == REQUEST_SUCCESS_CODE) {
+                 _userInfoEntity.UI_loginName = self.userPhoneTextField.text;
+                 RegisterInputPasswordViewController *regiserInputPswVC = [[RegisterInputPasswordViewController alloc] initWithNibName:@"RegisterInputPasswordViewController" bundle:nil userInfoEntity:_userInfoEntity isForgetPassword:_isForgetPassword];
+                 [self.navigationController pushViewController:regiserInputPswVC animated:YES];
+             } else {
+                 self.tipsLabel.text = errorMsg;
+             }
+         }];
+    } else {
+        [[InterfaceModel sharedInstance] getCheckCodeWithLoginName:self.userPhoneTextField.text
+                                                         validType:ValidCodeTypeRegister
+                                                          callBack:^(int code, NSString *errorMsg) {
+                                                              [self disMissHUDWithText:@"正在请求验证码..." afterDelay:0];
+                                                              if (code == REQUEST_SUCCESS_CODE) {
+                                                                  _userInfoEntity.UI_loginName = self.userPhoneTextField.text;
+                                                                  RegisterInputPasswordViewController *regiserInputPswVC = [[RegisterInputPasswordViewController alloc] initWithNibName:@"RegisterInputPasswordViewController" bundle:nil userInfoEntity:_userInfoEntity isForgetPassword:_isForgetPassword];
+                                                                  [self.navigationController pushViewController:regiserInputPswVC animated:YES];
+                                                              } else {
+                                                                  self.tipsLabel.text = errorMsg;
+                                                              }
+                                                          }];
+    }
+}
+
+#pragma mark - Actions
+- (IBAction)getCheckCodeButtonAction:(id)sender {
+    [self getCheckCode];
+}
+
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self getCheckCode];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+@end

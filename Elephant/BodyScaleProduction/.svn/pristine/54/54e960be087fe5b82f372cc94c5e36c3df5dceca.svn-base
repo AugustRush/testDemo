@@ -1,0 +1,473 @@
+//
+//  DBAccessObject.h
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-3-19.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "DBHelper.h"
+#import "UserInfoEntity.h"
+#import "FriendInfoEntity.h"
+#import "UserDataEntity.h"
+#import "SuggestEntity.h"
+#import "NoticeEntity.h"
+#import "UserDeviceInfoEntity.h"
+#import "UserPraiseEntity.h"
+#import "JDUserInfoEntity.h"
+
+
+
+
+@interface DBAccessObject : NSObject
+{
+    DBHelper * _dbManager;
+}
+
+/**
+ * @brief 构造函数返回DBAccessObject对象
+ *
+ */
++(id)createDBAccessObject:(DBHelper *)dbm;
+
+
+-(void)over;
+
+
+
+
+
+
+#pragma mark -
+
+-(int)createCol:(NSString *)tableName
+        colName:(NSString *)colName;
+
+#pragma mark 京东用户表操作
+/**
+ * @brief 创建TBJDUserInfo表
+ *
+ */
+-(int)createTBJDUserInfo;
+
+/**
+ *  根据条件，查询jd用户
+ *
+ *  @param conditionStr 筛选条件
+ *
+ *  @return 0:失败，1:成功
+ */
+- (NSArray *)findJDUserInfoByConditionStr:(NSString *)conditionStr;
+
+/**
+ *  根据条件，更新jd用户
+ *
+ *  @param user         要更新信息
+ *  @param conditionStr conditionStr 筛选条件
+ *
+ *  @return 0:失败，1:成功
+ */
+-(int)updateJDUserInfoByUser:(NSDictionary *)user
+                conditionStr:(NSString *)conditionStr;
+
+/**
+ *  保存jd用户
+ *
+ *  @param user jd用户对象
+ *  @param uid  时云用户对象id
+ *
+ *  @return 0:失败，1:成功
+ */
+- (int)saveJDUserInfo:(JDUserInfoEntity *)user;
+
+#pragma mark 辅助
+/**
+ *  查询数据数量
+ *
+ *  @param tableName 表名字
+ *  @param condition 筛选条件
+ *
+ *  @return 数据条数
+ */
+- (NSNumber *)countOfRowInTable:(NSString *)tableName
+                   conditionStr:(NSString *)condition;
+
+
+
+
+
+
+#pragma mark UserData   个人测量数据表 操作块
+/**
+ * @brief 创建TBUserData表
+ *
+ * @return 0:失败，1:成功，2:已存在
+ */
+-(int)createTBUserData;
+
+/**
+ * @brief 保存一条UserData记录
+ *
+ * @param info 需要保存的数据对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveUserData:(UserDataEntity *)info;
+
+
+
+
+
+/**
+ * @brief   查询userdata是否存在
+ *
+ * @param   uid
+ * @return  UserData对象的tid
+ */
+- (int)userDataIsExistByUid:(NSString *)uid
+                  checkDate:(NSString *)cd;
+
+
+/**
+ *  根据筛选条件，查询用户数据
+ *
+ *  @param conditionStr 筛选条件
+ *
+ *  @return UserData列表
+ */
+- (NSArray *)findUserDataByConditionStr:(NSString *)conditionStr;
+
+/**
+ * @brief   根据 Uid 查询好友的UserData列表
+ *
+ * @param   uid用户userId minDateStr:起始日期 maxDateStr:结束日期
+ * @return  UserData列表
+ */
+- (NSArray *)findUserDataByUid:(NSString *)uid
+                    minDateStr:(NSString *)minDateStr
+                    maxDateStr:(NSString *)maxDateStr;
+
+/**
+ * @brief   根据 Uid 查询好友的UserData列表
+ *
+ * @param   uid用户userId
+ * @return  UserData列表
+ */
+- (NSArray *)findUserDataByUid:(NSString *)uid sort:(int)sort;
+
+/**
+ * @brief   根据 uid 查询最近的UserData列表
+ *
+ * @param   uid：用户id num:条数
+ * @return  UserData对象列表
+ */
+- (NSArray *)findUserDataByUid:(NSString *)uid num:(int)num;
+
+/**
+ * @brief   根据 dataId 查询好友的UserData列表
+ *
+ * @param   dataId:ID
+ * @return  UserData列表
+ */
+- (NSArray *)findUserDataByDataId:(NSString *)dataId;
+
+/**
+ * @brief   根据 Uid 查询UserData列表
+ *
+ * @param   uid用户userId dataId:数据id
+ * @return  UserData列表
+ */
+- (NSArray *)findUserDataByUid:(NSString *)uid
+                        dataId:(NSString *)dataId;
+
+/**
+ * @brief   根据 dataId 查询好友的UserData列表
+ *
+ * @param   checkDate:ID uid:用户id
+ * @return  UserData列表
+ */
+- (NSArray *)findUserDataByCheckDate:(NSString *)checkDate uid:(NSString *)uid;
+
+
+/**
+ * @brief 根据targetID删除UserData数据
+ *
+ * @param ConditionStr 筛选条件
+ * @return 0:失败，1:成功
+ */
+- (int)deleteUserDataByConditionStr:(NSString *)conditionStr;
+
+/**
+ * @brief 根据ID修改用户的信息
+ *
+ * @param user 需要修改的用户信息
+ * @return 0:失败，1:成功
+ */
+- (int)updateUserDataByID:(NSDictionary *)info;
+
+/**
+ * @brief 根据tid修改用户的信息
+ *
+ * @param info 需要修改的用户信息  tid 表格唯一id标示
+ * @return 0:失败，1:成功
+ */
+- (int)updateUserData:(NSDictionary *)info
+                  tid:(int)tid;
+
+
+
+#pragma mark -
+#pragma mark UserInfo  用户信息表 操作块
+/**
+ * @brief 创建TBUserInfo表
+ *
+ * @return 0:失败，1:成功
+ */
+-(int)createTBUserInfo;
+
+/**
+ * @brief  保存一条UserInfo记录
+ *
+ * @param  user 需要保存的数据对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveUserInfo:(UserInfoEntity *)user;
+
+
+/**
+ * @brief 保存UserRelation
+ *
+ * @param  关系信息数组 [0]:用户id，[1]好友id
+ * @return 0:失败，1:成功
+ */
+-(int)deleteUserByUid:(NSString *)uid;
+
+
+/**
+ * @brief  根据uid 更新 UserInfo记录
+ *
+ * @param  user 需要保存的数据对象
+ * @return 0:失败，1:成功
+ */
+-(int)updateUserInfoByUid:(NSDictionary *)user;
+
+/**
+ * @brief  根据uid条件查询UserInfo列表
+ *
+ * @return 用户列表
+ */
+- (NSArray *)findUserInfoByUid:(NSString *)uid;
+
+/**
+ * @brief  根据loc条件查询UserInfo列表
+ *
+ * @return 用户列表
+ */
+- (NSArray *)findUserInfoByIsLoc:(int)loc;
+
+
+
+
+
+
+
+#pragma mark -
+#pragma mark UserPraise  赞／激励／提醒称重人 操作块
+/**
+ *  创建TBPraiseUser表
+ *
+ *  @return 0:失败，1:成功
+ */
+- (int)createTBPraiseUser;
+
+/**
+ *  保存UserPraiseEntity对象
+ *
+ *  @param pUser UserPraiseEntity对象
+ *
+ *  @return 0:失败，1:成功
+ */
+- (int)savePraiseUser:(UserPraiseEntity *)pUser;
+
+/**
+ *  根据userId查询PraiseUser列表
+ *
+ *  @param userId 目标uid
+ *  @param type   类型
+ *
+ *  @return UserPraiseEntity列表
+ */
+- (NSArray *)findPraiseUserByUserId:(NSString *)userId
+                               type:(NSString *)type;
+
+/**
+ *  删除PraiseUser对象
+ *
+ *  @param uid  主用户id
+ *  @param type 类型
+ *
+ *  @return 0:失败，1:成功
+ */
+- (int)deletePraiseUserByUid:(NSString *)uid
+                        type:(NSString *)type;
+
+
+#pragma mark -
+#pragma mark FriendInfo  好友信息表 操作块
+/**
+ * @brief 创建TBFriendInfo表
+ *
+ * @return 0:失败，1:成功
+ */
+-(int)createTBFriendInfo;
+
+/**
+ *  根据conditionStr删除FriendInfo对象
+ *
+ *  @param conditionStr 条件语句
+ *
+ *  @return 0:失败，1:成功
+ */
+- (int)deleteFriendByConditionStr:(NSString *)conditionStr;
+
+
+/**
+ * @brief  保存FriendInfo
+ *
+ * @param  好友信息对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveFriendInfo:(FriendInfoEntity *)user;
+
+/**
+ * @brief  查询好友列表 
+ *
+ * @param  condition   筛选条件
+ * @return friendInfo列表
+ */
+- (NSArray *)findFriendInfoByCondition:(NSString *)condition;
+
+
+/**
+ *  更新 好友信息
+ *
+ *  @param fiEntity  更新内容
+ *  @param condition 筛选语句
+ *
+ *  @return 0:失败，1:成功
+ */
+-(int)updateFriend:(NSDictionary *)fiEntity
+         condition:(NSString *)condition;
+
+#pragma mark -
+#pragma mark Suggest  建议及回复表 操作块
+/**
+ * @brief 创建TBSuggest表
+ *
+ * @return 0:失败，1:成功
+ */
+-(int)createTBSuggest;
+
+/**
+ * @brief  保存TBSuggest
+ *
+ * @param  建议及回复信息对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveSuggest:(SuggestEntity *)suggest;
+
+/**
+ * @brief  根据uid删除TBSuggest对象
+ *
+ * @param  删除TBSuggest对象的uid
+ * @return 0:失败，1:成功
+ */
+- (int)deleteSuggestByUid:(NSString *)uid;
+
+/**
+ * @brief  创建TBFriendInfo表
+ *
+ * @param  uid 需要获取的uid
+ * @return 建议列表
+ */
+- (NSArray *)findSuggestByUids:(NSString *)uid;
+
+
+
+#pragma mark -
+#pragma mark Notice  时间提示信息 操作块
+/**
+ * @brief 创建TBNotice表
+ *
+ * @return 0:失败，1:成功
+ */
+-(int)createTBNotice;
+
+/**
+ * @brief  保存TBNotice
+ *
+ * @param  时间提示信息对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveTBNotice:(NoticeEntity *)notice;
+
+/**
+ * @brief  根据uid删除TBNotice对象
+ *
+ * @param  删除TBNotice对象的uid
+ * @return 0:失败，1:成功
+ */
+- (int)deleteNoticeByUid:(NSString *)uid;
+
+/**
+ * @brief  根据uid查询TBNotice列表
+ *
+ * @param  uid 需要获取的uid
+ * @return TBNotice列表
+ */
+- (NSArray *)findNoticeByUid:(NSString *)uid;
+
+/**
+ * @brief  根据条件u查询TBNotice列表
+ *
+ * @param  conditionStr  筛选字符串
+ * @return TBNotice列表
+ */
+- (NSArray *)findNoticeByConditionStr:(NSString *)conditionStr;
+
+#pragma mark -
+#pragma mark UserDeviceInfo  用户与设备信息
+/**
+ * @brief 创建TBUserDeviceInfo表
+ *
+ * @return 0:失败，1:成功
+ */
+-(int)createTBUserDeviceInfo;
+
+/**
+ * @brief  保存TBUserDeviceInfo
+ *
+ * @param  用户设备关系对象
+ * @return 0:失败，1:成功
+ */
+- (int)saveUserDeviceInfo:(UserDeviceInfoEntity *)udi;
+
+/**
+ * @brief  根据uid删除UserDeviceInfo对象
+ *
+ * @param  删除UserDeviceInfo对象的uid
+ * @return 0:失败，1:成功
+ */
+- (int)deleteUserDeviceInfoByUid:(NSString *)uid;
+
+/**
+ * @brief  根据uid查询TBUserDeviceInfo列表
+ *
+ * @param  uid 需要获取的uid
+ * @return TBUserDeviceInfo列表:元素类型UserDeviceInfoEntity
+ */
+- (NSArray *)findUserDeviceInfoByUid:(NSString *)uid;
+
+
+@end

@@ -1,0 +1,19 @@
+//
+//  UserInfoListDao.h
+//  DZB
+//
+//  Created by 两元鱼 on 15/2/5.
+//  Copyright (c) 2015年 FFLtd. All rights reserved.
+//
+
+#import "DAO.h"
+
+@interface UserInfoListDao : DAO
+
+- (void)insertUserInfoListToDB:(NSDictionary *)tDict;
+- (void)deleteAllUserInfoFromDB;
+- (void)updateUserInfoListToDB:(NSDictionary *)tDict;
+- (NSMutableArray *)getUserInfoListFromDBById:(NSDictionary *)tDict;
+- (void)deleteUserInfoListById:(NSDictionary *)tDict;
+
+@end

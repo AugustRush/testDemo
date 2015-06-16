@@ -1,0 +1,24 @@
+//
+//  MyInfoTableViewCell.h
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-24.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "SKSTableViewCell.h"
+
+@interface MyInfoTableViewCell : SKSTableViewCell
+
+- (void)setTitle:(NSString *)title;
+- (void)setContent:(NSString *)content;
+- (void)setArrowImageViewhidden:(BOOL)hidden;
+- (void)setImageViewHidden:(BOOL)imageHidden;
+
+- (NSString *)title;
+
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+
+@end

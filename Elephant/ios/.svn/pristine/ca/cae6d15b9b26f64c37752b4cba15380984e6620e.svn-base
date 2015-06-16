@@ -1,0 +1,20 @@
+//
+//  ShareViewController.h
+//  BodyScale
+//
+//  Created by cxx on 14-11-25.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <ShareSDK/ShareSDK.h>
+#import "HeaderButton.h"
+@interface ShareViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *shareBgView;
+@property (weak, nonatomic) IBOutlet HeaderButton *userHeadBt;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLb;
+@property (weak, nonatomic) IBOutlet UILabel *weightLb;
+@property (weak, nonatomic) IBOutlet UIImageView *fatImgView;
+@property (weak, nonatomic) IBOutlet UIView *shareBtsView;
+
+@end

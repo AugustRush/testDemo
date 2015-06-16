@@ -1,0 +1,54 @@
+//
+//  Helpers.h
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-3-19.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface Helpers : NSObject
+
+@property(nonatomic,strong)NSDateFormatter *h_dateFormatter;
+@property(nonatomic,strong)NSDateComponents *h_components;
+
++(BOOL)strIsEmty:(NSString *)str;
++(int)getsystemVersion;
++(NSString *)getPathByMain:(NSString *)name
+                      type:(NSString *)tp;
++ (NSString *)getPath:(NSString *)fileName;
+
++(BOOL)fileIsExit:(NSString *)path;
++(BOOL)deleteFile:(NSString *)path;
++(BOOL)dicIsExit:(NSString *)path;
++(BOOL)createFile:(NSString *)url
+             data:(NSData *)data;
++(BOOL)createDic:(NSString *)url;
+
++(NSString *)getNowStr;
++(int)getNowYear;
++(NSString *)getDateStr:(NSDate *)date;
++(NSDate *)getDateByString:(NSString *)str;
++(NSString *)getDateStrFromDate:(NSDate *)date bySeconds:(double)seconds;
++(NSDictionary *)getDateInfoForDate:(NSDate *)date;
++ (NSString *)convertToDateString:(NSDate *)date
+                       withFormat:(NSString *)dateFormat;
+
++(NSString *)URLEncodedString:(NSString *)str;
++(NSString *)URLDecodedString:(NSString *)str;
+
+
+
++(BOOL)strIsChecked:(NSString *)str
+           checkStr:(NSString *)checkStr;
++(BOOL)objIsNull:(id)obj;
++(NSString *)inputStr:(id)ipStr;
+
+
++(BOOL)strIsMobileOrEmail:(NSString *)targetStr;
+
+
+
+
+@end

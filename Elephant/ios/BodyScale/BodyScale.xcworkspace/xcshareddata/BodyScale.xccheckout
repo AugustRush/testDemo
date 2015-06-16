@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A62093AF-5ACD-4B1B-A99A-035A5CD69196</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BodyScale</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</key>
+		<string>svn://svn.cookst.com/bodyscale/ios</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BodyScale/BodyScale.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</key>
+		<string>svn://svn.cookst.com/bodyscale</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>svn://svn.cookst.com/bodyscale/ios/BodyScale/BodyScale.xcworkspace</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

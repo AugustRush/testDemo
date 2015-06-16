@@ -1,0 +1,812 @@
+//
+//  InterfaceModel.h
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-21.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+#import "UserInfomationModel.h"
+#import "UserInfoEntity.h"
+#import "UserDataEntity.h"
+#import "SuggestEntity.h"
+#import "NoticeEntity.h"
+#import "UserDeviceInfoEntity.h"
+#import "FriendInfoEntity.h"
+#import "UserPraiseEntity.h"
+#import "MSGFocusMeEntity.h"
+#import "PCEntity.h"
+#import "JDUserInfoEntity.h"
+#import "BuyRyFitInfo.h"
+
+#import "CalculateTool.h"
+
+
+#define kIMLoginDataOk          @"InterfaceModelLoginDataOk"
+#define kIMLoginDataFailure     @"InterfaceModelLoginDataFailure"
+#define kIMDataChanged          @"InterfaceModelDataChanged"
+#define kIMDataSubmitted        @"InterfaceModelDataSubmitted"
+
+#define kIMDateMinListKey    @"minNumList"
+#define kIMDateMaxListKey    @"maxNumList"
+#define kIMDateListKey       @"dataList"
+
+
+#define kRequestNoLogin         100004
+
+
+#pragma mark -
+#pragma mark - 枚举声明区域  st
+typedef NS_ENUM(int, ThirdSideLoginResult)
+{
+    ThirdSideLoginResult_refuse        = 0,    //登陆失败
+    ThirdSideLoginResult_agereeNoReg   = 1,    //等成功，未注册
+    ThirdSideLoginResult_agereeReg     = 2,    //等成功，未注册
+};
+
+typedef NS_ENUM(int, FocusType)
+{
+    FocusType_ageree        = 0,    //同意
+    FocusType_refuse        = 1,    //拒绝
+};
+
+typedef NS_ENUM(int, PraiseType)
+{
+    PraiseType_praise       = 1,    //赞
+    PraiseType_excitation   = 2,    //激励
+    PraiseType_remind       = 3     //称重提醒
+};
+
+typedef NS_ENUM(int, PraiseUserType)
+{
+    PraiseUserType_user       = 1,    //本机用户
+    PraiseUserType_friend     = 2,    //好友
+    
+};
+
+typedef NS_ENUM(int, FriendMRightType)
+{
+    FriendMRightType_rejective      = 0,    //无权限
+    FriendMRightType_lookOver       = 1,    //查看
+    FriendMRightType_edit           = 2     //编辑
+};
+
+typedef NS_ENUM(int, WebCallBackResult)
+{
+    WebCallBackResultFailure        = 0,    //失败
+    WebCallBackResultSuccess        = 1     //成功
+};
+
+typedef NS_ENUM(int, ValidCodeType) {
+    ValidCodeTypeRegister = 1,
+    ValidCodeTypeReset    = 2
+};
+
+typedef NS_ENUM(int, DeleteDataReason) {
+    DeleteDataReasonError   = 0,        //数据异常
+    DeleteDataReasonNotMy   = 1,        //不是我地
+    DeleteDataReasonJustDo  = 2         //就是要删除
+};
+
+
+typedef NS_ENUM(int, DevColor) {
+    DevColorFaile   = -1,   //获取失败
+    DevColorWhite   = 0,
+    DevColorBlack   = 1,
+    DevColorRed     = 2,
+    DevColorGreen   = 3,
+    DevColorYellow  = 4
+};
+
+//ThemeStyleClassic = 0,              // 经典
+//ThemeStyleRed,                      // 魅力红
+//ThemeStyleBlue,                     // 活力蓝
+//ThemeStylePurple,                   // 轻悦紫
+//ThemeStyleGreen,                    // 青春绿
+//ThemeStyleYellow,
+
+#pragma mark - 枚举声明区域  end
+
+typedef void(^LoginCallBack)(int code, id userInfo, NSString *errorMsg);
+typedef void(^GetCheckCodeCallBack)(int code, NSString *errorMsg);
+typedef void(^RegisterCallBack)(int code, id userInfo, NSString *errorMsg);
+typedef void(^GetUserDataCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^UpdateUserInfoCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^UpdateUserSettingCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^UpLoadImageCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^UpLoadImage_updateInfoCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^DownLoadImageCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^UserLogoutCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^SubmitUserDataCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^SubmitSuggestCallBack)(int code, id param, NSString *errorMsg);
+typedef void(^QuerySuggestCallBack)(int code, id param, NSString *errorMsg);
+
+typedef void(^WebCallBack)(int code, id successParam, id errorMsg);
+typedef void(^WebRequestCallBack)(WebCallBackResult result, id successParam, NSString *errorMsg);
+
+
+typedef void(^GetDevColorCallBack)(WebCallBackResult result, DevColor color, NSString *errorMsg);
+typedef void(^CheckLoginNameCallBack)(WebCallBackResult result, BOOL isUsed, NSString *errorMsg);
+
+
+
+
+typedef void(^LocalCallBack)(int code,id userInfo, id param);
+
+
+typedef void(^GetHistoryDataByPageCallback)(NSArray *dataList);
+
+
+
+typedef void(^WXPayWebRequestCallback)(BOOL resultFlag,id userInfo, NSString *errorMsg);
+
+
+
+/**
+ *  京东登录回调函数
+ *
+ *  @param result    操作结果
+ *  @param userInfo  如果登陆成功，key-@"sid",key-@"loginId",key-@"userId",key-@"age",key-@"sex"
+ *  @param errorMsg  操作成功为 nil
+ */
+typedef void(^JingDongLoginCallback)(ThirdSideLoginResult result,
+                                     UserInfoEntity *userInfo,
+                                     NSString *errorMsg);
+
+/**
+ *  京东登录获取用户信息回调函数
+ *
+ *  @param resultFlag 是否成功 yes：成功，no：失败
+ *  @param errorMsg   失败信息，成功则为nil
+ */
+typedef void(^JingDongGetUserInfoCallback)(BOOL resultFlag,
+                                           NSString *errorMsg);
+
+
+/**
+ *  获取当前建议回调
+ *
+ *  @param flag       请求是否成功
+ *  @param noticeStr  当请求成功时，建议文本；当失败时，nil
+ *  @param errorMsg   当请求成功时，nil；当失败时，失败信息
+ */
+typedef void(^QueryNowNoticeCallBack)(BOOL flag, NSString *noticeStr, NSString *errorMsg);
+
+
+
+@interface InterfaceModel : NSObject <HTTPBaseModelDelegate,CLLocationManagerDelegate>
+
++ (instancetype)sharedInstance;
+
+
+#pragma mark - web通讯
+
+
+-(BOOL)isOnLogIn;
+
+- (void)userLoginWithLoginName:(NSString *)loginName
+                      loginPwd:(NSString *)loginPwd
+                     isEncrypt:(BOOL)isEncrypt
+                       userLoc:(NSString *)userLoc
+                      callBack:(LoginCallBack)callBack;
+
+- (void)getCheckCodeWithLoginName:(NSString *)loginName
+                        validType:(ValidCodeType)validType
+                         callBack:(GetCheckCodeCallBack)callBack;
+
+
+/*  注册用户信息  */
+- (void)userRegisterWithUser:(UserInfoEntity *)user
+                   validCode:(NSString *)validCode
+                    callBack:(RegisterCallBack)callBack;
+
+
+/*  请求当前用户数据  */
+- (NSArray *)getUserDataWithCallBack:(GetUserDataCallBack)callBack;
+
+
+/**
+ *  从请求当前用户数据
+ *
+ *  @param callBack
+ */
+- (void)getUserDataWithCallBack2:(GetUserDataCallBack)callBack;
+
+
+/*  更新用户信息  */
+- (void)updateUserInfoWithCallBack:(UpdateUserInfoCallBack)callBack;
+/*  更新用户设置  */
+- (void)updateUserSettingWithCallBack:(UpdateUserSettingCallBack)callBack;
+/*  上传头像  */
+- (void)upLoadImage:(UIImage *)img WithCallBack:(UpLoadImageCallBack)callBack;
+
+/*  登出  */
+- (void)userLogoutWithCallBack:(UserLogoutCallBack)callBack;
+
+/*  提交测量数据  */
+- (void)submitUserData:(UserDataEntity *)data
+              deviceNo:(NSString *)devNo
+                  flag:(BOOL)isChecked
+          WithCallBack:(SubmitUserDataCallBack)callBack;
+
+
+
+/* 提交建议 */
+-(void)submitSuggest:(NSString *)content WithCallBack:(SubmitSuggestCallBack)callBack;
+
+/* 查询建议及回复 */
+-(void)querySuggestWithCallBack:(QuerySuggestCallBack)callBack;
+
+
+
+
+/* 查询时间提示信息 aaaaa*/
+-(void)queryNoticeWithCallBack:(WebCallBack)callBack;
+
+/* 修改密码  */
+-(void)changePasswordWithOld:(NSString *)oldPWD
+                         new:(NSString *)newPWD
+                    callBack:(WebCallBack)callBack;
+
+/* 重置密码  */
+-(void)resetPasswordWithLonginName:(NSString *)longinName
+                         validCode:(NSString *)validCode
+                            newPwd:(NSString *)newPwd
+                          callBack:(WebCallBack)callBack;
+
+
+/* 请求机器唯一码  */
+-(void)getSoleDeviceCodeWithCallBack:(WebCallBack)callBack;
+
+/* 绑定设备码  */
+-(void)submitBindWithDevCode:(NSString *)devCode
+                    location:(NSString *)location
+                    callBack:(WebCallBack)callBack;
+
+/* 解除绑定设备码  
+ * 若bindId 为nil ，则解除devCode下所有用户。
+ */
+-(void)cancelBindWithDevCode:(NSString *)devCode
+                      bindId:(NSString *)bindId
+                    callBack:(WebCallBack)callBack;
+
+/* 提交批量数据  */
+-(void)submitBatchDataWithDataList:(NSArray *)dataList
+                           devCode:(NSString *)devCode
+                          callBack:(WebCallBack)callBack;
+
+
+
+
+
+/**
+ *  提交赞 ，激励 ，提醒称重
+ *
+ *  @param tUid     目标用户uid
+ *  @param tp       1：赞 ，2：激励 3:提醒称重 枚举
+ *  @param callBack result操作结果, successParam 操作成功为nil, errorMsg操作失败信息字符串
+ */
+-(void)submitPraiseWithTargetUid:(NSString *)tUid
+                            type:(PraiseType)tp
+                        callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  查询 赞/激励/提醒 用户列表
+ *
+ *  @param uid     目标用户uid
+ *  @param tp       1：赞 ，2：激励 3:提醒称重 枚举
+ *  @param callBack result操作结果, successParam 操作成功为UserPraiseEntity列表, errorMsg操作失败信息字符串
+ */
+-(NSArray *)queryPraiseWithTargetUid:(NSString *)uid
+                                type:(PraiseType)tp
+                            callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  查询好友列表
+ *
+ *  @param uid      用户uid
+ *  @param callBack result操作结果, successParam 操作成功为FriendInfoEntity列表, errorMsg操作失败信息字符串
+ */
+-(NSArray *)queryFriendListWithUserId:(NSString *)uid
+                             CallBack:(WebRequestCallBack)callBack;
+
+
+
+/**
+ *  查询好友列表
+ *
+ *  @param uid      用户uid
+ *  @param callBack result操作结果, successParam 操作成功为FriendInfoEntity列表, errorMsg操作失败信息字符串
+ */
+-(void)queryARFriendListWithUserId:(NSString *)uid
+                          callBack:(WebRequestCallBack)callBack;
+
+
+
+/**
+ *  添加关注根据用户名
+ *
+ *  @param flName 用户登录名
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)addFriendWithFriendLonginName:(NSString *)flName
+                            callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  添加关注根据用户id
+ *
+ *  @param uid      用户id
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)addFriendWithFriendUid:(NSString *)uid
+                     callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  修改好友权限
+ *
+ *  @param fEntity 好友对象
+ *  @param mRight  对方权限 0:无权限;1:查看;2:编辑
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)modifyFriendRightWithFriend:(FriendInfoEntity *)fEntity
+                            mright:(FriendMRightType)mRight
+                          callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  删除好友
+ *
+ *  @param fEntity  好友对象
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)deleteFriendWithFriend:(FriendInfoEntity *)fEntity
+                     callBack:(WebRequestCallBack)callBack;
+
+
+/**
+ *  获取新消息
+ *
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)getMSGWithCallback:(WebRequestCallBack)callBack;
+
+
+/**
+ *  同意或拒绝 关注操作
+ *
+ *  @param fType    FocusType FocusType_ageree 同意，FocusType_refuse 拒绝
+ *  @param mid      关注人的mid
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)focusSetWithSetTp:(FocusType)fType
+                     mid:(NSString *)mid
+                callback:(WebRequestCallBack)callBack;
+
+/**
+ *  关注我的用户列表
+ *
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)getFocusMeListWithCallBack:(WebRequestCallBack)callBack;
+
+
+/**
+ *  将当前用户 未读消息设置为已读
+ *
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)setMsgReadedWithCallBack:(WebRequestCallBack)callBack;
+
+/**
+ *  删除关注消息
+ *
+ *  @param mid      消息对象MSGFocusMeEntity msgFm_mId 属性
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)delMsgWithMid:(NSString *)mid
+            callBack:(WebRequestCallBack)callBack;
+
+/**
+ *  获取当前建议
+ *
+ *  @param callBack   QueryNowNoticeCallBack
+ *  @param flag       请求是否成功
+ *  @param noticeStr  当请求成功时，建议文本；当失败时，nil
+ *  @param errorMsg   当请求成功时，nil；当失败时，失败信息
+ */
+-(void)queryNowNoticeWithCallBack:(QueryNowNoticeCallBack)callBack;
+
+/**
+ *  删除单条数据
+ *
+ *  @param data 数据对象
+ *  @param reason   理由
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)deleteDataWithData:(UserDataEntity *)data
+                   reason:(DeleteDataReason)reason
+                 callback:(WebRequestCallBack)callback;
+
+
+/**
+ *  验证 验证码是否有效
+ *
+ *  @param checkCode 验证码
+ *  @param loginName 用户名
+ *  @param callBack result操作结果, successParam 操作成功, errorMsg操作失败信息字符串
+ */
+-(void)checkCodeInvalidWithCheckCode:(NSString *)checkCode
+                           loginName:(NSString *)loginName
+                            callback:(WebRequestCallBack)callback;
+
+/**
+ *  根据设备mac地址获取设备颜色
+ *
+ *  @param mac      设备mac地址
+ *  @param callback callBack result操作结果, color 颜色枚举, errorMsg操作失败信息字符串
+ */
+-(void)getDevColorWithMac:(NSString *)mac
+                 callback:(GetDevColorCallBack)callback;
+
+/**
+ *  检测用户名是否被使用了
+ *
+ *  @param loginName       用户名
+ *  @param deleteUserByUid
+ *
+ *  @param callback callBack result操作结果, isUsed 是否被使用yes：被使用了；No未使用, errorMsg操作失败信息字符串
+ */
+-(void)checkLoginNameWithName:(NSString *)loginName
+                     callback:(CheckLoginNameCallBack)callback;
+
+
+#pragma mark - 本地数据
+
+/**
+ *  根据uid删除用户
+ *
+ *  @param uid 目标uid
+ */
+-(BOOL)deleteUserByUid:(NSString *)uid;
+
+/*  根据uid获得用户信息  */
+-(UserInfoEntity *)getUserByUid:(NSString *)uid;
+
+/*  用户最后一次测量数据  */
+-(UserDataEntity *)getLastDataByUser:(UserInfoEntity *)user;
+
+
+/* 查询建议及回复 从数据库 */
+-(NSArray *)getSuggestFromDB;
+
+
+
+
+
+
+
+
+/**
+ *  查询当前用户某日所有数据   2014.05.22
+ *
+ *  @param targetDate 某日日期对象
+ *
+ *  @return @{ kIMDateMaxListKey:[[NSMutableArray alloc]init],
+                  kIMDateListKey:[NSMutableArray arrayWithArray:@[
+                                        @20,@20,@20,
+                                        @20,@20,@20,
+                                        @20,@20,@20,
+                                        @200,@200
+ ]]  }
+ 
+ kIMDateMaxListKey元素顺序index
+ 0 ryFit          1 体重,           2 BMI,
+ 3 体脂率,         4 皮下脂肪,        5 骨骼重量,      
+ 6 肌肉比例,        7 水含量,         8 基础代谢,
+ 9 基础代谢(欧洲),  10 内脏脂肪,       11 身体年龄
+ */
+-(NSDictionary *)getUserDataByDay2:(NSDate *)targetDate;
+
+
+/**
+ *  查询周平均值   2014.05.22
+ *
+ *  @param targetDate 某日日期对象
+ *
+ *  @return @{  
+ kIMDateListKey:[[NSMutableArray alloc]init],
+ kIMDateMaxListKey:[NSMutableArray arrayWithArray:@[
+                                    @0,@0,@0,
+                                    @0,@0,@0,
+                                    @0,@0,@0,
+                                    @0,@0 ]],
+ kIMDateMinListKey:[NSMutableArray arrayWithArray:@[
+                                @0,@0,@0,
+                                @0,@0,@0,
+                                @0,@0,@0,
+                                @0,@0 ]]
+ }
+ kIMDateMaxListKey元素顺序index
+ 0 ryFit          1 体重,           2 BMI,
+ 3 体脂率,         4 皮下脂肪,        5 骨骼重量,
+ 6 肌肉比例,        7 水含量,         8 基础代谢,
+ 9 基础代谢(欧洲),  10 内脏脂肪,       11 身体年龄
+ */
+-(NSDictionary *)getUserDataByWeek2:(NSDate *)targetDate;
+
+
+/**
+ *  查询月平均值   2014.05.22
+ *
+ *  @param targetDate 某日日期对象
+ *
+ *  @return @{ 
+ kIMDateListKey:[[NSMutableArray alloc]init],
+ kIMDateMaxListKey:[NSMutableArray arrayWithArray:@[
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0 ]],
+ kIMDateMinListKey:[NSMutableArray arrayWithArray:@[
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0 ]]
+ }
+ kIMDateMaxListKey元素顺序index
+ 0 ryFit          1 体重,           2 BMI,
+ 3 体脂率,         4 皮下脂肪,        5 骨骼重量,
+ 6 肌肉比例,        7 水含量,         8 基础代谢,
+ 9 基础代谢(欧洲),  10 内脏脂肪,       11 身体年龄
+ */
+-(NSDictionary *)getUserDataByMonth2:(NSDate *)targetDate;
+
+
+/**
+ *  查询当前用户某年平均值   2014.05.22
+ *
+ *  @param targetDate 某日日期对象
+ *
+ *  @return @{ 
+ kIMDateListKey:[[NSMutableArray alloc]init],
+ kIMDateMaxListKey:[NSMutableArray arrayWithArray:@[
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0 ]],
+ kIMDateMinListKey:[NSMutableArray arrayWithArray:@[
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0,@0,
+        @0,@0 ]]
+ }
+ kIMDateMaxListKey元素顺序index
+ 0 ryFit          1 体重,           2 BMI,
+ 3 体脂率,         4 皮下脂肪,        5 骨骼重量,
+ 6 肌肉比例,        7 水含量,         8 基础代谢,
+ 9 基础代谢(欧洲),  10 内脏脂肪,       11 身体年龄
+ */
+-(NSDictionary *)getUserDataByYear2:(NSDate *)targetDate;
+
+
+
+/* 查询时间提示信息 从数据库存 */
+-(NSArray *)getNotice;
+
+/* 查询用户和设备信息 从数据库存 */
+-(NSArray *)getUserDeviceInfo;
+
+/*  获取本机用户列表  */
+- (NSArray *)getLocalUserList;
+
+/**
+ *  获取最后2条测量数据
+ *
+ *  @return UserDataEntity列表 按检测时间降序排列  长度最大为2，最小为0
+ */
+-(NSArray *)getLastTwoCheckData;
+
+/**
+ *  获取当前用户总数据量
+ *
+ *  @return 总数据量
+ */
+-(int)getTotalDataCount;
+
+/**
+ *  获取当前用户所有数据
+ *
+ *  @return 格式Arrary
+ [
+ {
+ "date" = "2014-04-27";
+ "list" =     (
+ "<UserDataEntity: 0x1ed4c360>",
+ "<UserDataEntity: 0x1ed57610>"
+ );
+ },
+ {
+ "date" = "2014-04-25";
+ "list" =     (
+ "<UserDataEntity: 0x1edcfdd0>",
+ "<UserDataEntity: 0x1edcfec0>",
+ "<UserDataEntity: 0x1edcd420>"
+ );
+ }
+ ]
+ */
+-(NSArray *)getCurrentUserTotalData;
+
+
+
+/**
+ *  获取当前用户所有数据
+ *
+ *  @return 格式Arrary
+ [
+ {
+ "date" = "2014-04-27";
+ "list" =     (
+ "<UserDataEntity: 0x1ed4c360>",
+ "<UserDataEntity: 0x1ed57610>"
+ );
+ },
+ {
+ "date" = "2014-04-25";
+ "list" =     (
+ "<UserDataEntity: 0x1edcfdd0>",
+ "<UserDataEntity: 0x1edcfec0>",
+ "<UserDataEntity: 0x1edcd420>"
+ );
+ }
+ ]
+ */
+-(void)getCurrentUserTotalDataByPageId:(int)pageId
+                                   callback:(GetHistoryDataByPageCallback)callback;
+
+
+#pragma mark - 购买相关请求
+-(void)getProductInfoWithCallback:(WebRequestCallBack)callback;
+-(void)getOrderWithCallback:(WebRequestCallBack)callback
+                      buyer:(BR_BuyerEntity *)buyer;
+
+
+
+/**
+ *  微信支付获取 AccessToken
+ *
+ *  @param url
+ *  @param callback
+ */
+-(void)getWXPayGetAccessTokenWihtUrl:(NSString *)url
+                            callback:(WXPayWebRequestCallback)callback;
+
+
+/**
+ *  微信支付获取 PrepayId
+ *
+ *  @param url
+ *  @param callback
+ */
+-(void)getWXPayGetPrepayIdWithUrl:(NSString *)url
+                           params:(NSDictionary *)params
+                         callback:(WXPayWebRequestCallback)callback;
+
+
+
+
+#pragma mark - 非网络，非数据库操作
+/* 获取经纬度 */
+-(void)getLng_lat;
+
+/*  uuid 存储  */
+-(NSString *)getUUID;
+-(void)saveUUID:(NSString *)uuid;
+
+/*  计算体征数据  */
+/*
+NSDictionary-keys:
+ @"weight",@"bmi",@"fat",@"skin",@"offal",
+ @"muscle",@"bmr",@"boneWeight",@"water",@"bodyage"
+ */
+/**
+ *  计算体征数据
+ *
+ *  @param userData 测量数据
+ *  @param height   用户身高
+ *  @param age      用户真实年龄
+ *  @param sex      用户性别
+ *  @param uid      用户uid
+ *
+ *  @return PCEntity对象元素数组 10项体征，10个元素
+ */
+-(NSDictionary *)calculatePhysicalCharacteristics:(UserDataEntity *)userData
+                                           height:(float)height
+                                              age:(int)age
+                                              sex:(int)sex
+                                              uid:(NSString *)uid;
+
+/**
+ *  计算合理体重体
+ *
+ *  @param height 身高
+ *  @param sex    性别
+ *
+ *  @return 合理体重
+ */
+-(float)calculateWeight:(float)height
+                    sex:(int)sex;
+
+
+/**
+ *  测量数据校验
+ *
+ *  @param ude 要校验的数据
+ */
+-(BOOL)checkData:(UserDataEntity *)ude;
+
+
+
+
+
+/**
+ *  获取当前用户对象
+ *
+ *  @return UserInfoEntity 对象
+ */
+-(UserInfoEntity *)getHostUser;
+
+
+/**
+ *  判断数据是否异常
+ *
+ *  @param data 需要检测数据
+ *
+ *  @return yes 正常，no 不正常
+ */
+-(BOOL)dataIsNormal:(UserDataEntity *)data;
+
+
+/**
+ *  查询当前登陆状态
+ *
+ *  @return yes：已登录     no：未登录
+ */
+-(BOOL)getLoginState;
+
+
+
+
+
+
+
+#pragma mark- 第三方登录
+
+-(void)jingDongLoginWithNavController:(UIViewController *)navController
+                             callback:(JingDongLoginCallback)callback;
+
+/**
+ *  第三方注册完毕后，善后登陆
+ *
+ *  @param user 用户信息对象
+ */
+-(void)thirdSideRegsiter:(UserInfoEntity *)user;
+
+/**
+ *  第三方授权完毕后，善后登陆
+ *
+ *  @param user 用户信息对象
+ */
+-(void)thirdSideLogin:(UserInfoEntity *)user
+             callback:(JingDongGetUserInfoCallback)callback;
+
+
+
+
+
+
+
+
+@end

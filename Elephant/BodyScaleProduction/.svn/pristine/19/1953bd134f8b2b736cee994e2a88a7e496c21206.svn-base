@@ -1,0 +1,534 @@
+//
+//  ThirdSideInfoInputViewController.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-5-28.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "ThirdSideInfoInputViewController.h"
+#import "InputUserInfoViewController.h"
+#import "HorizontalPickerView.h"
+#import <QuartzCore/QuartzCore.h>
+#import "LoginViewController.h"
+#import "ScaleTableViewCell.h"
+#import "ScaleUserDataEntity.h"
+#import "DataDetailViewController.h"
+#import "SLPickerView.h"
+#import "AppDelegate.h"
+
+#import "BTModel.h"
+#import "AQPickerView.h"
+#import "Helpers.h"
+
+typedef NS_ENUM(NSInteger, PageControlToPage) {
+    PageControlToPageNone,
+    PageControlToPageNext,
+    PageControlToPageLast
+};
+
+typedef NS_ENUM(NSInteger, SelectedUserSex) {
+    SelectedUserSexNone = -1,
+    SelectedUserSexFemales = 0,
+    SelectedUserSexMales = 1,
+};
+
+
+@interface ThirdSideInfoInputViewController ()<HorizontalPickerViewDataSource, HorizontalPickerViewDelegate, SLPickerViewDataSource, SLPickerViewDelegate,AQPickerViewDelegate>
+{
+    int _yNum;
+    int _mNum;
+    int _dNum;
+}
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+
+
+// PAGE 2
+@property (weak, nonatomic) IBOutlet UIImageView *selectGenderViewPhotoImageViewLeft;
+@property (weak, nonatomic) IBOutlet UIImageView *selectGenderViewPhotoImageViewRight;
+@property (weak, nonatomic) IBOutlet UIView *lastAndNextBottomBar;
+
+// PAGE 3
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *inputOtherInfoViewPhotoImageView;
+
+// PAGE 4
+@property (weak, nonatomic) IBOutlet UILabel *heightLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bodyImageView;
+
+
+// PAGE 6
+@property (weak, nonatomic) IBOutlet UIButton *lastStepButton;
+
+@end
+
+@implementation ThirdSideInfoInputViewController{
+    SelectedUserSex         _selectedUserSex;
+    NSInteger               _selectedUserAge;
+    NSInteger               _selectedUserHeight;
+    
+    
+    NSString                *_userName;
+    
+    NSInteger               _pageNumber;
+    //HorizontalPickerView    *_agePickerView;
+    SLPickerView            *_heightPickerView;
+    NSArray                 *_arrowImageViews;
+    
+    UserInfoEntity          *_userInfoEntity;
+
+    
+    BOOL                    _firstAppear;
+    
+    //HorizontalPickerView    *_agePickerView;
+    AQPickerView            *_agePickerView;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [GloubleProperty sharedInstance].registering = NO;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil
+               bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _selectedUserSex = SelectedUserSexNone;
+        _userInfoEntity  = [UserInfoEntity new];
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self configXib];
+    _firstAppear = YES;
+    
+    if (![[GloubleProperty sharedInstance] currentUserEntity]) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    
+    [GloubleProperty sharedInstance].registering = YES;
+    
+    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                          action:@selector(tapLeftPhotoAction:)];
+    [self.selectGenderViewPhotoImageViewLeft addGestureRecognizer:_tap];
+    
+    _tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                  action:@selector(tapRightPhotoAction:)];
+    [self.selectGenderViewPhotoImageViewRight addGestureRecognizer:_tap];
+    
+    
+    self.inputOtherInfoViewPhotoImageView.userInteractionEnabled = YES;
+    _tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                  action:@selector(tapAgeImgAction:)];
+    [self.inputOtherInfoViewPhotoImageView addGestureRecognizer:_tap];
+
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (_firstAppear) {
+        _firstAppear = NO;
+    } else if (_pageNumber == 3) {
+        [self.scrollView setContentOffset:CGPointMake(320 * 2, 0)];
+        _lastStepButton.alpha = 0;
+        _lastAndNextBottomBar.alpha = 1;
+        [[BTModel sharedInstance] breakConnectPeripheral];
+    }
+}
+
+- (void)configXib {
+    _pageNumber = 1;
+    CGFloat scale = (APPLICATION_HEIGHT - 20) / 568.0f;
+    
+    self.bodyImageView.frame = CGRectMake(self.bodyImageView.frame.origin.x,
+                                          self.bodyImageView.frame.origin.y,
+                                          self.bodyImageView.width * scale,
+                                          self.bodyImageView.height * scale);
+    
+    BOOL isIOS7_OR_LATER = [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f;
+    
+    
+    /*
+    _agePickerView = [[HorizontalPickerView alloc] initWithFrame:CGRectMake(0,
+                                                                            APPLICATION_HEIGHT - 2 * self.lastAndNextBottomBar.height - 44 - (isIOS7_OR_LATER ? 20 : 0),
+                                                                            SCREEN_WIDTH,
+                                                                            self.lastAndNextBottomBar.height)
+                                                        delegate:self
+                                                      dataSource:self];
+    _agePickerView.alpha = 0;
+    [_agePickerView setCurrentIndex:15];
+    [self.view addSubview:_agePickerView];
+    */
+    
+    
+     NSInteger initialYear   = 25;
+     NSInteger initialMonth  = 1;
+     NSInteger initialDay    = 1;
+     
+     
+     
+    _agePickerView = [[AQPickerView alloc] initWithFrame:CGRectMake(0,
+                                                                 APPLICATION_HEIGHT - 2 * self.lastAndNextBottomBar.height - 44 - (isIOS7_OR_LATER ? 20 : 0),
+                                                                 SCREEN_WIDTH,
+                                                                 self.lastAndNextBottomBar.height)
+     initialAge:initialYear
+     initialMonth:initialMonth
+     initialDay:initialDay];
+     _agePickerView.delegate = self;
+     [self.view addSubview:_agePickerView];
+    
+    
+    
+    
+    
+    
+    NSString *imageName = @"triangle.png";
+    UIImage *image = [UIImage imageNamed:imageName];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithImage:image];
+    [imageView1 setFrame:CGRectMake(_agePickerView.frame.size.width / 2 - image.size.width / 2,
+                                    _agePickerView.frame.origin.y,
+                                    image.size.width,
+                                    image.size.height)];
+    imageView1.alpha = 0;
+    [self.view addSubview:imageView1];
+    
+    UIImageView *imageView2 = [[UIImageView alloc] initWithImage:image];
+    imageView2.transform = CGAffineTransformRotate(imageView2.transform, M_PI);
+    [imageView2 setFrame:CGRectMake(_agePickerView.frame.size.width / 2 - image.size.width / 2,
+                                    _agePickerView.frame.origin.y + _agePickerView.frame.size.height - image.size.height,
+                                    image.size.width,
+                                    image.size.height)];
+    imageView2.alpha = 0;
+    [self.view addSubview:imageView2];
+    _arrowImageViews = @[imageView1, imageView2];
+    
+    _heightPickerView = [[SLPickerView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 3 - 69 - 30,
+                                                                       self.bodyImageView.top,
+                                                                       69,
+                                                                       self.bodyImageView.height - 15)
+                                                   delegate:self
+                                                 dataSource:self
+                                                       type:SLPickerViewTypeVertical];
+    _heightPickerView.alpha = 0;
+    
+    [self.scrollView addSubview:_heightPickerView];
+    
+    self.title = @"我的个人资料";
+}
+
+#pragma mark - Actions
+- (IBAction)lasetStepButtonAction:(id)sender {
+    [self pageControlToPage:PageControlToPageLast];
+}
+
+- (IBAction)nextStepButtonAction:(id)sender {
+    [self pageControlToPage:PageControlToPageNext];
+}
+
+
+
+- (IBAction)tapLeftPhotoAction:(id)sender {
+    [self setGenderSelectedUser:SelectedUserSexMales];
+    [self nextStepButtonAction:sender];
+}
+
+- (IBAction)tapRightPhotoAction:(id)sender {
+    [self setGenderSelectedUser:SelectedUserSexFemales];
+    [self nextStepButtonAction:sender];
+}
+
+
+- (IBAction)tapAgeImgAction:(id)sender {
+    if (!_agePickerView.didShow) {
+        [_agePickerView show];
+    }else{
+        [_agePickerView dismiss];
+    }
+}
+
+#pragma mark - Private Method
+- (void)pageControlToPage:(PageControlToPage)topage {
+
+    PageControlToPage control = topage;
+    switch (topage) {
+        case PageControlToPageLast:
+            if (_pageNumber == 1) {
+                control = PageControlToPageNone;
+            } else {
+                _pageNumber --;
+            }
+            break;
+        case PageControlToPageNext:
+            if (_pageNumber == 3) {
+
+                
+                
+                self.userInfo.UI_age    = self.ageLabel.text;
+                self.userInfo.UI_height = self.heightLabel.text;
+                self.userInfo.UI_sex    =
+                                ( _selectedUserSex == SelectedUserSexMales ? @"1" : @"0" );
+                self.userInfo.UI_birthday =
+                    [NSString stringWithFormat:@"%04d-%02d-%02d",_yNum,_mNum,_dNum];
+                
+                [[InterfaceModel sharedInstance]thirdSideRegsiter:self.userInfo];
+                
+                
+                
+                return;
+                
+            } else {
+                if (![self dataVerify]) {  // 数据判断
+                    return;
+                }
+                _pageNumber ++;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    
+
+    switch (_pageNumber) {
+        case 1:
+        {
+            if (control == PageControlToPageLast) {
+                [UIView animateWithDuration:0.6f animations:^{
+                    _agePickerView.alpha = 0;
+                    _lastAndNextBottomBar.alpha = 0;
+                    for (UIView *view in _arrowImageViews) {
+                        view.alpha = 0;
+                    }
+                }];
+            }
+        }
+            break;
+        case 2:
+        {
+            switch (control) {
+                case PageControlToPageNext:
+                {
+                    
+                    
+                    if (!_agePickerView.didShow) {
+                        [_agePickerView show];
+                    }
+                    
+                    [UIView animateWithDuration:0.6f animations:^{
+                        //_agePickerView.alpha = 1;
+                        _lastStepButton.alpha = 0;
+                        _lastAndNextBottomBar.alpha = 1;
+                        for (UIView *view in _arrowImageViews) {
+                            view.alpha = 1;
+                        }
+                    }];
+                }
+                    break;
+                case PageControlToPageLast:
+                {
+                    if (_agePickerView.didShow) {
+                        [_agePickerView dismiss];
+                    }
+                    [UIView animateWithDuration:0.6f animations:^{
+                        _heightPickerView.alpha = 0;
+                        //_agePickerView.alpha = 1;
+                        
+                        _lastStepButton.alpha = 0;
+                        _lastAndNextBottomBar.alpha = 1;
+                        
+                        
+                        for (UIView *view in _arrowImageViews) {
+                            view.alpha = 1;
+                        }
+                    }];
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 3:
+        {
+            switch (control) {
+                case PageControlToPageNext:
+                {
+                    if (_selectedUserSex == SelectedUserSexMales) {
+                        [_heightPickerView setCurrentIndex:45];
+                        self.heightLabel.text = @"175";
+                    } else {
+                        [_heightPickerView setCurrentIndex:55];
+                        self.heightLabel.text = @"165";
+                    }
+                    [UIView animateWithDuration:0.6f animations:^{
+                        _heightPickerView.alpha = 1;
+                        _agePickerView.alpha = 0;
+                        
+                        
+                        //_lastStepButton.alpha = 1;
+                        //_lastAndNextBottomBar.alpha = 0;
+                        
+                        for (UIView *view in _arrowImageViews) {
+                            view.alpha = 0;
+                        }
+                    }];
+                    
+                }
+                    break;
+                case PageControlToPageLast:
+                {
+                    /*
+                    [self setTitle:@"我的个人资料"];
+                    [UIView animateWithDuration:0.6f animations:^{
+                        _heightPickerView.alpha = 1;
+                    }];
+                     */
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case 4:
+        {
+            switch (control) {
+                case PageControlToPageNext:
+                {
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+    // 页面跳转
+    if (control != PageControlToPageNone) {
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * (_pageNumber - 1), 0) animated:YES];
+    }
+}
+
+- (BOOL)dataVerify {
+    switch (_pageNumber) {
+        case 1:
+            if (_selectedUserSex == SelectedUserSexNone) {
+                [ViewUtilFactory presentAlertViewWithTitle:@"请选择性别" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                return NO;
+            } else {
+                if (_selectedUserSex == SelectedUserSexMales) {
+                    self.inputOtherInfoViewPhotoImageView.image = [UIImage imageNamed:@"default_photo_males.png"];
+                    self.bodyImageView.image = [UIImage imageNamed:@"malesbodyimage.png"];
+                } else {
+                    self.inputOtherInfoViewPhotoImageView.image = [UIImage imageNamed:@"default_photo_females.png"];
+                    self.bodyImageView.image = [UIImage imageNamed:@"femalesbodyimage.png"];
+                }
+                _userInfoEntity.UI_sex = [NSString stringWithFormat:@"%d", (int)_selectedUserSex];
+            }
+            break;
+        case 2:
+            // 年龄 10 - 80
+            /*
+            _userInfoEntity.UI_age = [NSString stringWithFormat:@"%d", (int)_agePickerView.selectIndex + 10];
+            */
+            break;
+        case 3:
+            // 身高 100 - 220 cm
+            _userInfoEntity.UI_height = [NSString stringWithFormat:@"%d", 220 - (int)_heightPickerView.selectedIndex];
+            break;
+        default:
+            break;
+    }
+    return YES;
+}
+
+- (void)setGenderSelectedUser:(SelectedUserSex)selected {
+    _selectedUserSex = selected;
+}
+
+#pragma mark - PickerView Delegate
+- (void)savedWithYear:(NSInteger)year
+                month:(NSInteger)month
+                  day:(NSInteger)day
+{
+    
+    NSLog(@"y:%d,m:%d,d:%d",year,month,day);
+}
+
+
+- (NSInteger)numberOfItemsInPickerView:(id)pickerView {
+    if ([pickerView isKindOfClass:[HorizontalPickerView class]]) {
+        return 71;
+    } else {
+        return 121;
+    }
+}
+
+- (NSString *)pickerView:(id)pickerView titleForItemsIndex:(NSInteger)index {
+    if ([pickerView isKindOfClass:[HorizontalPickerView class]]) {
+        return [NSString stringWithFormat:@"%d", (int)index + 10];
+    } else {
+        return [NSString stringWithFormat:@"%d", 220 - (int)index];
+    }
+}
+
+- (void)pickerView:(HorizontalPickerView *)pickerView
+       indexChaged:(NSInteger)index
+{
+    if ([pickerView isKindOfClass:[HorizontalPickerView class]]) {
+        self.ageLabel.text = [NSString stringWithFormat:@"%d", (int)index + 10];
+    } else {
+        self.heightLabel.text = [NSString stringWithFormat:@"%d", 220 - (int)index];
+    }
+}
+
+
+
+- (void)pickerViewDidStopWithYear:(NSInteger)year
+                            month:(NSInteger)month
+                              day:(NSInteger)day
+{
+    
+    /*
+    NSString *_yStr = [NSString stringWithFormat:@"%04d-%02d-%02d 00:00:00",
+                       (int)year,(int)month,(int)day];[Helpers getDateByString:_yStr]
+     */
+    _yNum = year;
+    _mNum = month;
+    _dNum = day;
+    int cYear = [NSDate yearByDate:[NSDate date]];
+    
+    self.ageLabel.text = [NSString stringWithFormat:@"%d",(cYear - year)];
+    
+    // 获取年
+
+                        
+                        /*
+                        [NSString stringWithFormat:,
+                         year,month,day]];
+                         */
+    
+    //self.ageLabel.text =
+}
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+@end

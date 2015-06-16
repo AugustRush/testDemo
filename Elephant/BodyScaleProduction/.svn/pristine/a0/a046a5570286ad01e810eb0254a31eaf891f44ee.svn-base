@@ -1,0 +1,224 @@
+//
+//  BTInterfaceService.h
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-4-2.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+
+@class BTService;
+@class ScaleBllService;
+
+/*! 体脂秤实时重量返回通知 notification.object object 是一个ScaleRealTimeWeightEntity对象 （详情参见ScaleRealTimeWeightEntity.h）*/
+#define REALTIME_WEIGHT_RESPONSE    @"REALTIME_WEIGHT_RESPONSE"
+/*! 称重结束返回通知 notification.object object 是一个ScaleUserDataEntity对象 （详情参见ScaleUserDataEntity.h）*/
+#define REALTIME_USERDATA_RESPONSE  @"REALTIME_USERDATA_RESPONSE"
+
+#define BT_SERVICE_UPDATETIME_NOTIFICATION      @"BT_SERVICE_UPDATETIME_NOTIFICATION"
+
+/* 与设备断开连接通知 */
+#define BTSERVICE_NOTIFICATION_DISCONNECT       @"DISCONNECT"
+/* 连接设备成功通知 */
+#define BTSERVICE_NOTIFICATION_CONNECTED        @"CONNECTED"
+
+#define ERROR_VERSION 0xff
+
+typedef void(^BTResponseCompletion)(int code, id info, id originalData);
+typedef void(^DidDiscoverPeripheral)(CBPeripheral *peripheral, NSNumber *RSSI);
+
+typedef void(^GetOADBinTypeCompletion)(uint16_t version);
+typedef void(^WriteBinFilePackageCompletion)(float percentage);
+typedef void(^WriteBinFileCompletion)(BOOL success);
+
+@protocol BTInterfaceServiceDelegate <NSObject>
+
+
+
+@end
+
+@interface BTInterfaceService : NSObject
+
+@property (nonatomic, readonly)NSMutableArray   *userEntityList;    // 数据:秤中所有用户的对象数组
+@property (nonatomic, readonly)NSString         *deviceCode;
+@property (nonatomic, readonly)Byte             version;
+@property (nonatomic, readonly)CBPeripheral     *actPeripheral;
+
+#pragma mark - Control API (可以直接调用CoreBluetooth SDK，但是请不要混合使用)
+/*!
+ *  初始化设备，成功之后会发送通知 BTSERVICE_NOTIFICATION_POWERON
+ */
+- (void)setup;
+
+/*!
+ *  搜索设备
+ *
+ *  @param discovered 搜索到设备之后回调方法排除重复设备
+ */
+- (void)scanPeripheralsDidDiscoverPeripheral:(DidDiscoverPeripheral)discovered;
+
+/*!
+ *  停止搜索设备
+ */
+- (void)stopScanPeripherals;
+
+/*!
+ *  连接到设备
+ *
+ *  @param peripheral 设备CBPeripheral
+ */
+- (void)connectDevice:(CBPeripheral *)peripheral;
+
+/*!
+ *  与设备断开连接
+ */
+- (void)disconnect;
+
+#pragma mark - @protocol API (数据通信)
+/*!
+ *  查看用户是否存在
+ *
+ *  @param locationNo 用户位置编号（在秤中对应位置）
+ *  @param completion code 0 存在  1 不存在
+ */
+- (void)existUser:(int)locationNo completion:(BTResponseCompletion)completion;
+
+/*!
+ *  创建用户
+ *
+ *  @param locationNo 用户位置编号
+ *  @param height     用户身高
+ *  @param age        用户年龄
+ *  @param gender     用户性别 （0：女  1：男）
+ *  @param completion code 0 新建用户成功  1 用户已满，无法新建  2 此序号已存在  3 新建资料数据错误
+ */
+- (void)newUser:(int)locationNo height:(int)height age:(int)age gender:(int)gender completion:(BTResponseCompletion)completion;
+
+/*!
+ *  删除用户
+ *
+ *  @param locationNo 用户位置编号
+ *  @param completion code 0 删除成功  1 删除失败
+ */
+- (void)deleteUser:(int)locationNo completion:(BTResponseCompletion)completion;
+
+/*!
+ *  更新用户信息
+ *
+ *  @param locationNo 用户位置编号
+ *  @param height     用户身高
+ *  @param age        用户年龄
+ *  @param gender     用户性别 （0：女  1：男）
+ *  @param completion code 0 更新成功  1 用户序号不存在  2 用户数据错误
+ */
+- (void)updateUser:(int)locationNo height:(int)height age:(int)age gender:(int)gender completion:(BTResponseCompletion)completion;
+
+/*!
+ *  获取用户信息（身高、性别、年龄）
+ *
+ *  @param locationNo 用户位置编号
+ *  @param completion info ScaleUserEntity (用户对象，详情参看ScaleUserEntity.h)
+ */
+- (void)getUserInfo:(int)locationNo completion:(BTResponseCompletion)completion;
+
+/*!
+ *  获取所有用户信息 (身高、性别、年龄)
+ *
+ *  @param completion code 0 有用户  1 无用户    info 用户对象数组（ScaleUserEntity，详情参看ScaleUserEntity.h）
+ */
+- (void)getAllUserCompletion:(BTResponseCompletion)completion;
+
+/*!
+ *  设置要称量的用户
+ *
+ *  @param locationNo 用户位置编号               （如果设置编号为P1-P8后会自动读取秤中的用户身高、年龄、性别忽略下边三个参数）
+ *  @param height     用户身高                   （如果设置编号为P9后会读取该身高参数）
+ *  @param age        用户年龄                   （如果设置编号为P9后会读取该年龄参数）
+ *  @param gender     用户性别 （0：女  1：男）    （如果设置编号为P9后会读取该性别参数）
+ *  @param completion code 0 选择成功  1 选择失败
+ */
+- (void)selectUserScale:(int)locationNo height:(int)height age:(int)age gender:(int)gender completion:(BTResponseCompletion)completion;
+
+/*!
+ *  读取某用户的历史测量数据
+ *
+ *  @param locationNo 用户位置编号
+ *  @param completion code 0 该用户有数据  1 该用户无数据    info 用户测量数据数组（ScaleUserDataEntity，详情参看ScaleUserDataEntity.h）
+ */
+- (void)readScaleData:(int)locationNo completion:(BTResponseCompletion)completion;
+
+/*!
+ *  删除某用户的历史测量数据
+ *
+ *  @param locationNo 用户位置编号
+ *  @param completion code 0 删除成功  1 删除失败
+ */
+- (void)deleteScaleData:(int)locationNo completion:(BTResponseCompletion)completion;
+
+#pragma mark - Ext
+/**
+ *  读取BLE编号
+ *
+ *  @param completion info 编号字符串
+ */
+- (void)readId:(BTResponseCompletion)completion;
+
+/**
+ *  写入BLE编号
+ *
+ *  @param stringId   编号字符串
+ *  @param completion code 0 写入成功  1 写入失败
+ */
+- (void)writeId:(NSString *)stringId writeCompletion:(BTResponseCompletion)completion;
+
+/**
+ *  获取BLE MAC地址
+ *
+ *  @param completion info MAC地址字符串
+ */
+- (void)getMACAddressCompletion:(BTResponseCompletion)completion;
+
+/**
+ *  重置秤中所有用户以及数据
+ *
+ *  @param completion code 0 重置成功  1 重置失败
+ */
+- (void)resetScaleCompletion:(BTResponseCompletion)completion;
+
+/**
+ *  称重清零（只在秤屏幕亮的情况下才会生效）
+ *
+ *  @param completion code 0 清零成功  1 清零失败
+ */
+- (void)resetWeightCompletion:(BTResponseCompletion)completion;
+
+/**
+ *  写入命令流
+ *
+ *  @param data 命令流
+ */
+- (void)writeDataToActivePeripheral:(NSData *)data;
+
+#pragma mark - OAD
+
+/**
+ *  写入固件
+ *
+ *  @param data                   固件文件流
+ *  @param writePackageCompletion 发送包回调 返回发送进度
+ *  @param completion             发送完成回调 succes  YES 为发送成功 NO 为发送失败
+ */
+- (void)writeBinFileToActPeriperal:(NSData *)data
+                   writePercentage:(WriteBinFilePackageCompletion)writePackageCompletion
+                        completion:(WriteBinFileCompletion)completion;
+
+/**
+ *  检查当前设备固件类型
+ *
+ *  @param completion verion 固件类型
+ */
+- (void)checkCurrentBinTypeCompletion:(GetOADBinTypeCompletion)completion;
+
+@end

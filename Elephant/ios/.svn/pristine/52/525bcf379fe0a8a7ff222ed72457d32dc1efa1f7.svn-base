@@ -1,0 +1,414 @@
+//
+//  CenterViewController.m
+//  BodyScale
+//
+//  Created by August on 14-10-11.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "CenterViewController.h"
+#import "M13ProgressViewSegmentedRing.h"
+#import "ConstHeader.h"
+#import "CustomProgressView.h"
+#import "HealthIndexView.h"
+#define kCellReuseIdentifier @"indexCell"
+#define _tag_share 1000
+
+#define share_Height 140
+
+@interface CenterViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+   
+   NSMutableArray *array;
+   UIView         *shareView;
+   UIView         *hudBgView;//透明背景
+   UIView         *shareBgView;
+}
+@property (strong, nonatomic)  HealthIndexView *healthIndexView;
+@property (strong, nonatomic)  UITableView *tableView;
+@property (strong,nonatomic)   CustomProgressView * progressView;
+
+//@property (weak, nonatomic) IBOutlet M13ProgressViewSegmentedRing *progressView;
+@end
+
+@implementation CenterViewController
+#pragma mark set property
+- (UIView *)healthIndexView
+{
+    if (!_healthIndexView)
+    {
+        self.healthIndexView = [[HealthIndexView alloc] init];
+        
+    }
+    return _healthIndexView;
+}
+
+- (UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        self.tableView = [[UITableView alloc] init];
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        self.tableView.backgroundColor = [UIColor clearColor];
+    }
+    return _tableView;
+}
+
+- (CustomProgressView *)progressView
+{
+    if (!_progressView)
+    {
+        _progressView = [[CustomProgressView alloc] initWithConnected:[[NSUserDefaults standardUserDefaults] boolForKey:HASALREADYCONNECTED]];
+        [_progressView setBackgroundColor:[UIColor clearColor]];
+        
+    }
+    return _progressView;
+}
+
+#pragma mark - life cycle methods
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBarHidden = YES;
+    [self baseConfigs];
+}
+
+#pragma mark - private methods
+- (void)initBaseViewConnected
+{
+    CGFloat insetTop =Screen_Height*3/4-12;
+    if ([self.healthIndexView superview]) {
+        [self.healthIndexView removeFromSuperview];
+    }
+    if (self.tableView)
+    {
+        [self.tableView removeFromSuperview];
+    }
+    if ([self.progressView superview]) {
+        [self.progressView removeFromSuperview];
+    }
+    
+    [self.view addSubview:self.healthIndexView];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.progressView];
+    
+    [self.healthIndexView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.top.equalTo(@0);
+        make.height.equalTo(@(insetTop));
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.top.equalTo(@(insetTop));
+        make.height.equalTo(@(Screen_Height-insetTop));
+    }];
+    
+    [self.tableView registerClass:[CenterTableViewCell class] forCellReuseIdentifier:kCellReuseIdentifier];
+    [self performSelector:@selector(animation:) withObject:@"0" afterDelay:0.2];
+    
+    [self.healthIndexView.headBt addTarget:self action:@selector(selectHeadBt) forControlEvents:UIControlEventTouchUpInside];
+    [self.healthIndexView.shareBt addTarget:self action:@selector(selectshareBt) forControlEvents:UIControlEventTouchUpInside];
+    self.healthIndexView.bmiNumLb.text = @"18.9";
+    self.healthIndexView.ageLb.text = @"24";
+    self.healthIndexView.weightLabel.text =  @"您的体重已超标，请控制饮食，多运动";
+    
+    int leftX = 43;
+    int width = Screen_Width-leftX*2-10;
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@(leftX));
+        maker.top.equalTo(@80);
+        maker.height.equalTo(@(width));
+        maker.width.equalTo(@(width));
+        [self.progressView setShowPercentage:YES];
+    }];
+    
+}
+
+- (void)initBaseViewUnconnected
+{
+    CGFloat insetTop =Screen_Height*3/4-12;
+    if ([self.healthIndexView superview]) {
+        [self.healthIndexView removeFromSuperview];
+    }
+    if (self.tableView)
+    {
+        [self.tableView removeFromSuperview];
+    }
+    if ([self.progressView superview]) {
+        [self.progressView removeFromSuperview];
+    }
+    
+    [self.view addSubview:self.healthIndexView];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.progressView];
+    
+    [self.healthIndexView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.top.equalTo(@0);
+        make.height.equalTo(@(insetTop));
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.top.equalTo(@(insetTop));
+        make.height.equalTo(@(Screen_Height-insetTop));
+    }];
+    
+    [self.tableView registerClass:[CenterTableViewCell class] forCellReuseIdentifier:kCellReuseIdentifier];
+    [self performSelector:@selector(animation:) withObject:@"0" afterDelay:0.2];
+    
+    [self.healthIndexView.headBt addTarget:self action:@selector(selectHeadBt) forControlEvents:UIControlEventTouchUpInside];
+    [self.healthIndexView.shareBt addTarget:self action:@selector(selectshareBt) forControlEvents:UIControlEventTouchUpInside];
+    self.healthIndexView.weightLabel.text =  nil;
+    self.healthIndexView.bmiNumLb.text = @"00.0";
+    self.healthIndexView.ageLb.text = @"00";
+    int leftX = 43;
+    int width = Screen_Width-leftX*2-10;
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(@(leftX));
+        maker.top.equalTo(@80);
+        maker.height.equalTo(@(width));
+        maker.width.equalTo(@(width));
+        [self.progressView setShowPercentage:YES];
+    }];
+
+}
+
+- (void)initBaseView
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:HASALREADYCONNECTED])
+    {
+        [self initBaseViewConnected];
+    }
+    else
+    {
+        [self initBaseViewUnconnected];
+    }
+}
+
+- (void)initBaseData
+{
+    array = [[NSMutableArray alloc] init];
+    NSArray *array1=[NSArray arrayWithObjects:@"weight",@"fatPercentage",@"waterContent",@"bmr",@"skinfat",@"boneweight",@"muscle",@"AMR",@"infat",@"bodyage", nil];
+    NSArray *array2=[NSArray arrayWithObjects:@"体重",@"体脂率",@"水含量", @"BMR",@"皮下脂肪",@"骨骼重量",@"肌肉比例",@"AMR",@"内脏脂肪",@"身体年龄",nil];
+    for (int i =0; i < array1.count;i++ )
+    {
+        weightModel * model = [[weightModel alloc]init];
+        model.imagePath = [NSString stringWithFormat:@"%@",[array1 objectAtIndex:i]];
+        model.weightName = [NSString stringWithFormat:@"%@",[array2 objectAtIndex:i]];
+        [array addObject:model];
+    }
+    
+    
+    
+    [BodyScaleBTInterface selectUserMeasureWithLocation:9 height:self.fillData.height age:self.fillData.userAge sex:self.fillData.sex ackHandler:^(NSError *error)
+     {
+         NSLog(@"ack error is %@",error);
+     }
+    completionHandler:^(NSError *error, NSDictionary *response)
+     {
+         NSLog(@"select mesure error is %@, response is %@",error,response);
+         for (weightModel * model in array)
+         {
+             if ([model.imagePath isEqualToString:@"bmr"]) {
+                 model.weightValue = [NSString stringWithFormat:@"%@kg",[response objectForKey:@"BMR"]];
+             }
+             if ([model.imagePath isEqualToString:@"fatPercentage"])
+             {
+                 model.weightValue = [NSString stringWithFormat:@"%@%@",[response objectForKey:@"bodyFat"],@"%"];
+             }
+             if ([model.imagePath isEqualToString:@"waterContent"])
+             {
+                 model.weightValue = [NSString stringWithFormat:@"%@%@",[response objectForKey:@"water"],@"%"];
+             }
+             
+         }
+     }
+    extraDataHandler:^(NSError *error, NSDictionary *extraInfo)
+     {
+         for (weightModel * model in array)
+         {
+             NSLog(@"extra data is %@ error is %@",extraInfo,error);
+             if ([model.imagePath isEqualToString:@"bmr"]) {
+                 model.weightValue = [NSString stringWithFormat:@"%@kg",[extraInfo objectForKey:@"BMR"]];
+             }
+             if ([model.imagePath isEqualToString:@"skinfat"])
+             {
+                 model.weightValue = [NSString stringWithFormat:@"%@%@",[extraInfo objectForKey:@"skinfat"],@"%"];
+             }
+             if ([model.imagePath isEqualToString:@"boneweight"])
+             {
+                 model.weightValue = [NSString stringWithFormat:@"%@%@",[extraInfo objectForKey:@"bone"],@"%"];
+             }
+             if ([model.imagePath isEqualToString:@"muscle"])
+             {
+                 model.weightValue = [NSString stringWithFormat:@"%@%@",[extraInfo objectForKey:@"muscle"],@"%"];
+             }
+             
+             
+         }
+         [self.tableView reloadData];
+         
+         
+     }];
+
+}
+
+-(void)baseConfigs
+{
+    [self initBaseData];
+    [self initBaseView];
+    if (![CommanHelp isStringNULL:[[NSUserDefaults standardUserDefaults] objectForKey:USERNOTENAME]]) {
+        self.healthIndexView.userNameLb.text = [[NSUserDefaults standardUserDefaults] objectForKey:USERNOTENAME];
+    }
+    
+   
+}
+
+- (void)animation:(NSString*)percent
+{
+    CGFloat floatpercent = [percent floatValue];
+    [self.progressView setProgress:floatpercent animated:YES];
+}
+- (void)selectHeadBt
+{
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+- (void)selectshareBt
+{
+    if (!shareBgView) {
+        shareBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height)];
+        [shareBgView setBackgroundColor:[UIColor clearColor]];
+        UIView *blackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height)];
+        [blackView setBackgroundColor:[UIColor blackColor]];
+        [blackView setAlpha:0.5];
+        [shareBgView addSubview:blackView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeBlackView)];
+        [blackView addGestureRecognizer:tap];
+        
+        shareView = [self createShareView];
+        [shareBgView addSubview:shareView];
+    
+    }
+    
+    [shareView setFrame:CGRectMake(0, Screen_Height, Screen_Width, share_Height)];
+
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:shareBgView];
+    [UIView animateWithDuration:1.0 animations:^{
+        [shareView setFrame:CGRectMake(0, Screen_Height-share_Height+26, Screen_Width, share_Height)];
+    } ];
+}
+
+- (UIView *)createShareView
+{
+    UIView *sView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, share_Height)];
+    [sView setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView *greenView = [[UIView alloc] initWithFrame:CGRectMake(0,0, Screen_Width, 2)];
+    [greenView setBackgroundColor:BGColor];
+    [sView addSubview:greenView];
+    
+    UILabel *textLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, Screen_Width, 24)];
+    [textLb setTextColor:BGColor];
+    [textLb setFont:[UIFont boldSystemFontOfSize:14]];
+    [textLb setText:@"分享到社交网络"];
+    [textLb setTextAlignment:NSTextAlignmentCenter];
+    [sView addSubview:textLb];
+    
+    NSArray *sImgArray = @[@"weixin-Firend",@"FrendGroup",@"QQSpace",@"sina"];
+    NSArray *sTextArray = @[@"微信好友",@"朋友圈",@"QQ空间",@"新浪微博"];
+    for (int i =0; i<4; i++) {
+        ButtonExten *bt = [ButtonExten buttonWithType:UIButtonTypeCustom];
+        [bt setFrame:CGRectMake((Screen_Width-45*4-20*4)/2+75*i, 50, 45, 50)];
+        [bt setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",[sImgArray objectAtIndex:i]]] WithDownText:[NSString stringWithFormat:@"%@",[sTextArray objectAtIndex:i]]];
+        [bt addTarget:self action:@selector(shareSpace:) forControlEvents:UIControlEventTouchUpInside];
+        [sView addSubview:bt];
+        [bt setTitleColor:BGColor forState:UIControlStateNormal];
+        [bt setTag:_tag_share+i];
+        
+    }
+    return sView;
+}
+- (void)respondsToHudBgView
+{
+    [hudBgView removeFromSuperview];
+}
+
+- (void)removeBlackView
+{
+    [UIView animateWithDuration:1.0 animations:^{
+        [shareView setFrame:CGRectMake(0, Screen_Height, Screen_Width, share_Height)];
+    } completion:^(BOOL finished) {
+        [shareBgView removeFromSuperview];
+    }];
+    
+}
+
+- (void)shareSpace:(id)sender
+{
+    UIButton *bt = (UIButton*)sender;
+}
+#pragma mark - UITaleViewDataSource methods
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return array.count;
+}
+
+-(CenterTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CenterTableViewCell *cell  = nil;
+   
+        if (indexPath.row < [array count])
+        {
+           weightModel * temp = [array objectAtIndex:indexPath.row];
+            cell = [[CenterTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellReuseIdentifier model:temp];
+        }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CGFloat insetTop =Screen_Height*3/4-12;
+    if (!hudBgView) {
+        hudBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height)];
+        [hudBgView setBackgroundColor:[UIColor clearColor]];
+       HudView* hudView = [[HudView alloc] initWithFrame:CGRectMake(0, 0, (Screen_Width-32), 105) WithText:@"人体含水量的百分比，充分的水分能促进新陈代谢"];
+        [hudView setFrame:CGRectMake(16, insetTop, (Screen_Width-32), 105)];
+        [hudBgView addSubview:hudView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToHudBgView)];
+        [hudBgView addGestureRecognizer:tap];
+    }
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:hudBgView];
+  
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70;
+}
+
+#pragma mark - manage memory methods
+
+-(void)dealloc
+{
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+@end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCDLabel.h"
 
 @interface TableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet GCDLabel *GCDlabel;
 @end

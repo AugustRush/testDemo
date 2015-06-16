@@ -1,0 +1,142 @@
+//
+//  AliPayPlusModel.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-6-9.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "AliPayPlusModel.h"
+
+@interface AliPayPlusModel ()
+{
+    NSString *_orderNo;
+    NSString *_bodyStr;
+    NSString *_totalFee;
+}
+
+@end
+
+@implementation AliPayPlusModel
+
+
++ (instancetype)sharedInstance {
+    
+    static AliPayPlusModel *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        _sharedClient           = [[AliPayPlusModel alloc] init];
+        
+    });
+    
+    return _sharedClient;
+}
+
+
+-(void)pay:(NSDictionary *)dic
+{
+    /*
+	 *生成订单信息及签名
+	 *由于demo的局限性，采用了将私钥放在本地签名的方法，
+     商户可以根据自身情况选择签名方法
+     (为安全起见，在条件允许的前提下，我们推荐从商户服务器获取完整的订单信息)
+	 */
+    _orderNo = dic[@"orderNo"];
+    _totalFee = dic[@"total"];
+    _bodyStr = dic[@"body"];
+    
+    NSString *appScheme = @"aliyPay19841111";
+    NSString* orderInfo = [self getOrderInfo];
+    NSString* signedStr = [self doRsa:orderInfo];
+    
+    NSLog(@"signedStr:%@",signedStr);
+    
+    NSString *orderString = [NSString stringWithFormat:
+                             @"%@&sign=\"%@\"&sign_type=\"%@\"",
+                             orderInfo,
+                             signedStr,
+                             @"RSA"];
+	//NSLog(@"orderString:%@",orderString);
+    [AlixLibService payOrder:orderString
+                   AndScheme:appScheme
+                     seletor:@selector(paymentResult:)
+                      target:self];
+}
+-(void)paymentResult:(NSString *)resultd
+{
+    //结果处理
+    
+    AlixPayResult* result = [[AlixPayResult alloc] initWithString:resultd];
+    
+	if (result)
+    {
+		NSLog(@"paymentResult:%d",result.statusCode);
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = AlipayPubKey;//签约帐户后获取到的支付宝公钥
+			id<DataVerifier> verifier = CreateRSADataVerifier(key);
+            
+			if ([verifier verifyString:result.resultString
+                              withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+			}
+        }
+        else
+        {
+            //交易失败
+        }
+    }
+    else
+    {
+        //失败
+    }
+    
+}
+
+
+-(NSString*)getOrderInfo
+{
+    /*
+     description = "";
+     freezeStore = 45;
+     name = "\U4f53\U8d28\U5206\U6790\U4eea";
+     norm = "\U65f6\U5c1a\U767d";
+     price = 469;
+     productSn = 6926443800028;
+     store = 317;
+     */
+    
+    
+    AlixPayOrder *order         = [[AlixPayOrder alloc] init];
+    
+    order.partner               = PartnerID;
+    order.seller                = SellerID;
+    order.tradeNO               = _orderNo;                                 //订单ID（由商家自行制定）
+	order.productName           = @"时云医疗商品支付";                         //商品标题
+	order.productDescription    = _bodyStr ;                                //商品描述
+	order.amount                = _totalFee;                                //商品价格
+	order.notifyURL             = NotifyUrl;                                //回调URL
+	
+    NSLog(@"order.description:%@",order.description);
+    
+	return order.description;
+}
+
+-(NSString*)doRsa:(NSString*)orderInfo
+{
+    id<DataSigner> signer   = CreateRSADataSigner(PartnerPrivKey);
+    NSString *signedString  = [signer signString:orderInfo];
+    return signedString;
+}
+
+
+
+@end

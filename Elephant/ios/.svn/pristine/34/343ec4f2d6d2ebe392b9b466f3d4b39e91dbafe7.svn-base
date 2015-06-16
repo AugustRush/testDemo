@@ -1,0 +1,427 @@
+//
+//  TWRPickerSlider.m
+//  TWRPickerSlider
+//
+//  Created by Michelangelo Chasseur on 28/08/14.
+//  Copyright (c) 2014 Touchware. All rights reserved.
+//
+
+#import "TWRPickerSlider.h"
+#import "TWRPickerSliderHeaderView.h"
+#import "TWRPickerSliderFooterView.h"
+#define PICKER_CUSTOM_HEIGHT 250 //200
+#define PICKER_DATE_HEIGHT 340 //250
+
+@interface TWRPickerSlider () <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (assign, nonatomic) NSUInteger visibleHeight;
+
+
+@property (strong, nonatomic) UIPickerView *picker;
+@property (strong, nonatomic) UIDatePicker *datePicker;
+
+@property (strong, nonatomic) TWRPickerSliderHeaderView *header;
+@property (strong, nonatomic) TWRPickerSliderFooterView *footer;
+
+@property (assign, nonatomic) BOOL open;
+
+@property (strong, nonatomic) id<TWRPickerSliderDatasource> selectedObject;
+
+@property (strong, nonatomic) id<TWRPickerSliderDatasource> CmSelectedObject;
+
+@property (strong, nonatomic) NSDate *selectedDate;
+
+@property (assign, nonatomic) TWRPickerSliderType pickerType;
+
+@end
+
+@implementation TWRPickerSlider
+
+- (id)init {
+    self = [self initWithFrame:CGRectZero visibleHeight:PICKER_DEFAULT_VISIBLE_HEIGHT];
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [self initWithFrame:frame visibleHeight:PICKER_DEFAULT_VISIBLE_HEIGHT];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
+
+- (instancetype)initWithType:(TWRPickerSliderType)type {
+    self = [self init];
+    if (self) {
+        self.pickerType = type;
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame visibleHeight:(NSUInteger)visibleHeight {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.open = NO;
+        self.visibleHeight = visibleHeight;
+    }
+    return self;
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (!newSuperview) {
+        return;
+    }
+    newSuperview.userInteractionEnabled = YES;
+    self.backgroundColor = self.mainColor;
+    
+    // Header
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TWRPickerSliderHeaderView class])
+                                                      owner:self
+                                                    options:nil];
+    self.header = [nibViews objectAtIndex:0];
+    self.header.rightLabel.text = self.rightText;
+    self.header.rightLabel.textColor = [UIColor blackColor];
+    
+
+    NSArray *nibViews1 = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TWRPickerSliderFooterView class])
+                                                       owner:self
+                                                     options:nil];
+    self.footer = [nibViews1 objectAtIndex:0];
+    [self.footer.cancleBt setTitleColor:BGColor forState:UIControlStateNormal];
+    [self.footer.DoneBt setTitleColor:BGColor forState:UIControlStateNormal];
+
+     __block TWRPickerSlider *slider = self;
+    self.footer.cancelfootView=^(){
+        [slider cancelAction];
+    };
+    
+    self.footer.donefootView=^(){
+        [slider doneAction];
+    };
+    // Add a small delay to prevent adding to view before init has finished
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        switch (self.position) {
+                //*** BOTTOM ***//
+            case TWRPickerSliderPositionBottom: {
+                
+                // Picker
+                CGRect rect = CGRectMake(0, self.visibleHeight, CGRectGetWidth(newSuperview.frame), CGRectGetHeight(self.frame) - self.visibleHeight);
+                switch (self.type) {
+                    case TWRPickerSliderTypeCustomObjects: {
+                        self.frame = CGRectMake(CGRectGetMinX(newSuperview.frame), CGRectGetHeight(newSuperview.frame) , CGRectGetWidth(newSuperview.frame), PICKER_CUSTOM_HEIGHT+self.visibleHeight);
+                        [self configurePickerWithRect:rect];
+                        self.footer.frame = CGRectMake(CGRectGetMinX(newSuperview.frame),  PICKER_CUSTOM_HEIGHT-self.visibleHeight, CGRectGetWidth(newSuperview.frame), self.visibleHeight);
+                        [self addSubview:self.header];
+                        [self addSubview:self.footer];
+                        [self showAndHide:NO];
+                    }
+                        break;
+                        
+                    case TWRPickerSliderTypeDatePicker: {
+                        self.frame = CGRectMake(CGRectGetMinX(newSuperview.frame), CGRectGetHeight(newSuperview.frame) - self.visibleHeight, CGRectGetWidth(newSuperview.frame), PICKER_DATE_HEIGHT);
+                        [self configureDatePickerWithRect:rect];
+                        self.footer.frame = CGRectMake(CGRectGetMinX(newSuperview.frame),  PICKER_DATE_HEIGHT-self.visibleHeight*2, CGRectGetWidth(newSuperview.frame), self.visibleHeight);
+                        [self addSubview:self.header];
+                        [self addSubview:self.footer];
+                        [self showAndHide:NO];
+               
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+                break;
+                
+                //*** TOP ***//
+            case TWRPickerSliderPositionTop: {
+                
+                // Picker
+                CGRect rect = CGRectMake(0, 0, CGRectGetWidth(newSuperview.frame), CGRectGetHeight(self.frame) - self.visibleHeight);
+                switch (self.type) {
+                    case TWRPickerSliderTypeCustomObjects: {
+                        self.frame = CGRectMake(CGRectGetMinX(newSuperview.frame), 44 - PICKER_CUSTOM_HEIGHT, CGRectGetWidth(newSuperview.frame), PICKER_CUSTOM_HEIGHT);
+                        [self configurePickerWithRect:rect];
+                    }
+                        break;
+                        
+                    case TWRPickerSliderTypeDatePicker: {
+                        self.frame = CGRectMake(CGRectGetMinX(newSuperview.frame), 44 - PICKER_DATE_HEIGHT, CGRectGetWidth(newSuperview.frame), PICKER_DATE_HEIGHT);
+                        [self configureDatePickerWithRect:rect];
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
+                self.header.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 44, Screen_Width, self.visibleHeight);
+//                self.button.frame = CGRectMake(CGRectGetMinX(newSuperview.frame), CGRectGetHeight(self.frame) - 44, CGRectGetWidth(newSuperview.frame), self.visibleHeight);
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    });
+ 
+}
+
+- (void)configurePickerWithRect:(CGRect)rect {
+     // Picker View
+    self.picker = [[UIPickerView alloc] initWithFrame:rect];
+    [self.picker setBackgroundColor:[UIColor clearColor]];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    self.picker.tintColor = self.secondaryColor;
+    [self.picker selectRow:21 inComponent:0 animated:YES];
+    [self.picker selectRow:1 inComponent:1 animated:YES];
+    [self addSubview:self.picker];
+}
+
+- (void)configureDatePickerWithRect:(CGRect)rect {
+    // Date Picker
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:rect];
+    [self.datePicker setBackgroundColor:[UIColor clearColor]];
+    [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    NSLocale * locale = [[NSLocale alloc] initWithLocaleIdentifier:@"Chinese"];
+    [self.datePicker setLocale:locale];
+    [self.datePicker setMaximumDate:[NSDate date]];
+    [self addSubview:self.datePicker];
+}
+
+- (void)showAndHide:(BOOL)isSave
+{
+    switch (self.position) {
+        case TWRPickerSliderPositionBottom: {
+            if (!self.open) {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.frame) + self.visibleHeight);
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                }];
+            } else {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformIdentity;
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                    if (isSave) {
+                        [self sendDelegateMessage];
+                    }
+                    
+                      self.removeBlackView();
+                }];
+            }
+        }
+            break;
+        case TWRPickerSliderPositionTop: {
+            if (!self.open) {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.frame) - self.visibleHeight);
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                }];
+            } else {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformIdentity;
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                    [self sendDelegateMessage];
+                }];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+
+}
+- (void)buttonPressed:(id)sender {
+    switch (self.position) {
+        case TWRPickerSliderPositionBottom: {
+            if (!self.open) {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.frame) + self.visibleHeight);
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                }];
+            } else {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformIdentity;
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                    [self sendDelegateMessage];
+                }];
+            }
+        }
+            break;
+        case TWRPickerSliderPositionTop: {
+            if (!self.open) {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.frame) - self.visibleHeight);
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                }];
+            } else {
+                [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.transform = CGAffineTransformIdentity;
+                } completion:^void(BOOL finished) {
+                    self.open = !self.open;
+                    [self sendDelegateMessage];
+                }];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)sendDelegateMessage {
+    switch (self.type) {
+        case TWRPickerSliderTypeCustomObjects: {
+            if ([self.delegate respondsToSelector:@selector(objectSelected:WithCmSelectedObject:sender:)]) {
+                [self.delegate objectSelected:self.selectedObject WithCmSelectedObject:self.CmSelectedObject sender:self];
+            }
+        }
+            break;
+        case TWRPickerSliderTypeDatePicker: {
+            if ([self.delegate respondsToSelector:@selector(dateSelected:sender:)]) {
+                
+                [self.delegate dateSelected:self.selectedDate sender:self];
+                
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Picker View Datasource / Delegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    if (self.type == TWRPickerSliderTypeCustomObjects) {
+        return 2;
+    }
+    else
+        return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (self.type == TWRPickerSliderTypeCustomObjects) {
+        if (component == 0) {
+            return self.pickerObjects.count+1;
+        }
+        else
+            return self.cmObjects.count+1;
+    }
+    else
+        return self.pickerObjects.count + 1;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (row == 0) {
+        if (!self.secondaryColor) {
+            self.secondaryColor = [UIColor blackColor];
+        }
+        return [[NSAttributedString alloc] initWithString:@"" attributes:@{NSForegroundColorAttributeName:[self secondaryColor]}];
+    } else {
+        if (self.type == TWRPickerSliderTypeCustomObjects) {
+            if (component==0) {
+                id<TWRPickerSliderDatasource>object = [self.pickerObjects objectAtIndex:row - 1];
+                if ([[object class] conformsToProtocol:@protocol(TWRPickerSliderDatasource)]) {
+                    return [[NSAttributedString alloc] initWithString:[object twr_pickerTitle] attributes:@{NSForegroundColorAttributeName:[self secondaryColor]}];
+                } else {
+                    [[NSException exceptionWithName:@"TWRPickerSliderDataDelegateException" reason:@"Objects provided as the picker datasource should be conformant to TWRPickerSliderDataDelegate protocol!" userInfo:nil] raise];
+                }
+            }
+            else
+            {
+                id<TWRPickerSliderDatasource>object = [self.cmObjects objectAtIndex:row - 1];
+                if ([[object class] conformsToProtocol:@protocol(TWRPickerSliderDatasource)]) {
+                    return [[NSAttributedString alloc] initWithString:[object twr_pickerFloatTitle] attributes:@{NSForegroundColorAttributeName:[self secondaryColor]}];
+                } else {
+                    [[NSException exceptionWithName:@"TWRPickerSliderDataDelegateException" reason:@"Objects provided as the picker datasource should be conformant to TWRPickerSliderDataDelegate protocol!" userInfo:nil] raise];
+                }
+            }
+        }
+        else
+        {
+            id<TWRPickerSliderDatasource>object = [self.pickerObjects objectAtIndex:row - 1];
+            if ([[object class] conformsToProtocol:@protocol(TWRPickerSliderDatasource)]) {
+                return [[NSAttributedString alloc] initWithString:[object twr_pickerTitle] attributes:@{NSForegroundColorAttributeName:[self secondaryColor]}];
+            } else {
+                [[NSException exceptionWithName:@"TWRPickerSliderDataDelegateException" reason:@"Objects provided as the picker datasource should be conformant to TWRPickerSliderDataDelegate protocol!" userInfo:nil] raise];
+            }
+        }
+
+    }
+    
+    // fallback
+    return [[NSAttributedString alloc] initWithString:@"" attributes:@{NSForegroundColorAttributeName:[self secondaryColor]}];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (row == 0) {
+        return;
+    }
+    if (self.type == TWRPickerSliderTypeDatePicker) {
+        id<TWRPickerSliderDatasource>object = [self.pickerObjects objectAtIndex:row - 1];
+        self.selectedObject = object;
+        self.header.rightLabel.text = [object twr_pickerTitle];
+    }
+    else
+    {
+        
+        id<TWRPickerSliderDatasource>object ;
+       
+        if (component == 0) {
+              object= [self.pickerObjects objectAtIndex:row - 1] ;
+             self.selectedObject= object;
+        }
+        else
+        {
+            object= [self.cmObjects objectAtIndex:row - 1];
+            self.CmSelectedObject = object;
+
+        }
+     
+       
+    }
+  
+}
+
+#pragma mark - Date picker
+
+- (void)dateChanged:(UIDatePicker *)sender {
+    //    NSLog(@"date: %@", sender.date);
+    self.selectedDate = sender.date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    self.header.rightLabel.text = [dateFormatter stringFromDate:sender.date];
+}
+
+
+
+- (void)doneAction
+{
+    [self showAndHide:YES];
+}
+
+- (void)cancelAction
+{
+    [self showAndHide:NO];
+}
+
+@end
+
+// 版权属于原作者
+// http://code4app.com (cn) http://code4app.net (en)
+// 发布代码于最专业的源码分享网站: Code4App.com

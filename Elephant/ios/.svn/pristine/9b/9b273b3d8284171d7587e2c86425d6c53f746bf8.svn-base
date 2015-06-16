@@ -1,0 +1,17 @@
+//
+//  LoginViewController.h
+//  BodyScale
+//
+//  Created by cxx on 14-11-25.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <RESideMenu.h>
+#import "UserBaseInfoViewController.h"
+
+@interface LoginViewController : BaseViewController
+
+@property (strong, nonatomic) RESideMenu *sideMenuViewController;
+
+@end

@@ -1,0 +1,44 @@
+//
+//  PrefixHeader.pch
+//  BodyScale
+//
+//  Created by cxx on 14-11-11.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#ifndef BodyScale_PrefixHeader_pch
+#define BodyScale_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Masonry.h>
+#import "Define/ConstHeader.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
+#import "NSObject+CommanHelp.h"
+#import "MBProgressHUD.h"
+#import "getWordColor.h"
+#import "MesureModel.h"
+
+#define POSTURL @"http://bodyscale.cookst.com/api/server.php?ac="
+#define PRIVATECODE @"PRIVATECODE"
+#define USERNOTENAME @"USERNOTENAME"
+#define USERID @"USERID"
+#define USERAGE @"USERAGE"
+#define USERHEIGHT @"USERHEIGHT"
+#define USERMALE @"USERMALE"
+#define USERACCOUNT @"USERACCOUNT"
+#define USERPHONENUMBER @"USERPHONENUMBER"
+#define ISLOGINED   @"ISLOGINED"
+#define HASALREADYCONNECTED @"HASALREADYCONNECTED"
+
+#define FONT_SIZE(size)           [UIFont systemFontOfSize:size]
+#define BOLD_FONT_SIZE(size)      [UIFont boldSystemFontOfSize:size]
+#define HEADERIMAGE     @"headerimage"
+#define intToString(a) [NSString stringWithFormat:@"%d",a]
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define GetHeight(h)  (h) * kScreenWidth / 320
+#define GetWidth(w)   (w) * kScreenWidth / 320
+
+#endif

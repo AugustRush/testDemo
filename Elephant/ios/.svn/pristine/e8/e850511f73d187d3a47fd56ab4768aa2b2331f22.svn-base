@@ -1,0 +1,133 @@
+//
+//  ChangePasswordViewController.m
+//  BodyScale
+//
+//  Created by zhangweiwei on 14/12/5.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+#define SAMEVIEWHEIGHT @72
+#import "TextField+label.h"
+#import "ChangePasswordViewController.h"
+
+@interface ChangePasswordViewController () <UITextFieldDelegate>
+@property(strong,nonatomic) TextField_label * oldPwd;
+@property(strong,nonatomic) TextField_label * inewPwd;
+@property(strong,nonatomic) TextField_label * confirmPwd;
+@end
+
+@implementation ChangePasswordViewController
+#pragma mark setproperty
+- (TextField_label *)oldPwd
+{
+    if (!_oldPwd)
+    {
+        _oldPwd =  [[TextField_label alloc]initWithHolder:@"请输入原密码" andLabelName:@"原密码" textFieldDelegate:self];
+        
+        
+    }
+    return _oldPwd;
+}
+
+- (TextField_label *)inewPwd
+{
+    if (!_inewPwd)
+    {
+        _inewPwd =  [[TextField_label alloc]initWithHolder:@"请输入6-16位新密码" andLabelName:@"新密码" textFieldDelegate:self];
+       
+    }
+    return _inewPwd;
+}
+
+- (TextField_label *)confirmPwd
+{
+    if(!_confirmPwd)
+    {
+        _confirmPwd = [[TextField_label alloc]initWithHolder:@"请输入确认密码" andLabelName:@"确认密码" textFieldDelegate:self];
+    }
+    return _confirmPwd;
+}
+
+
+
+
+#pragma mark life circle
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil ishasTextFeild:YES];
+    if (self)
+    {
+        self.view.backgroundColor = [getWordColor colorWithHexString:@"#dedede"];
+        self.title = @"修改密码";
+        
+    }
+    
+    return self;
+}
+
+
+
+- (void)loadView
+{
+    [super loadView];
+   
+    [self.view addSubview:self.oldPwd];
+    [self.view addSubview:self.inewPwd];
+    [self.view addSubview:self.confirmPwd];
+    [self.oldPwd mas_makeConstraints:^(MASConstraintMaker *maker)
+    {
+        maker.left.equalTo(self.view.mas_left);
+        maker.top.equalTo(@40);
+        maker.right.equalTo(self.view.mas_right);
+        maker.height.equalTo(SAMEVIEWHEIGHT);
+        
+    }];
+    [self.inewPwd mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(self.view.mas_left);
+         maker.top.equalTo(self.oldPwd.mas_bottom);
+         maker.right.equalTo(self.view.mas_right);
+         maker.height.equalTo(SAMEVIEWHEIGHT);
+     }];
+    
+    [self.confirmPwd mas_makeConstraints:^(MASConstraintMaker *maker)
+     {
+         maker.left.equalTo(self.view.mas_left);
+         maker.top.equalTo(self.inewPwd.mas_bottom);
+         maker.right.equalTo(self.view.mas_right);
+         maker.height.equalTo(SAMEVIEWHEIGHT);
+     }];
+
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark private method
+- (void)initRightItem
+{
+    UIButton *right = [UIButton buttonWithType:UIButtonTypeCustom];
+    right.frame = CGRectMake(0.0, 0.0,62, 20);
+    [right setTitle:@"完成" forState:UIControlStateNormal];
+    [right setTitleColor:[UIColor whiteColor ] forState:UIControlStateNormal];
+    [right addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *temporaryBarButtonItem1 = [[UIBarButtonItem alloc] initWithCustomView:right];
+    temporaryBarButtonItem1.style = UIBarButtonItemStylePlain;
+    self.navigationItem.rightBarButtonItem = temporaryBarButtonItem1;
+}
+
+#pragma mark private ACTION
+- (void)rightAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+@end

@@ -1,0 +1,58 @@
+//
+//  MyInfoTableViewCell.m
+//  BodyScaleProduction
+//
+//  Created by Go Salo on 14-3-24.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "MyInfoTableViewCell.h"
+#import "MyInfoViewController.h"
+
+@interface MyInfoTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+//@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+
+@end
+
+@implementation MyInfoTableViewCell
+
+- (void)awakeFromNib
+{
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+#pragma mark - Setter
+- (void)setTitle:(NSString *)title {
+    self.titleLabel.text = title;
+}
+
+- (void)setContent:(NSString *)content {
+    self.contentLabel.text = content;
+}
+
+- (void)setArrowImageViewhidden:(BOOL)hidden {
+    self.arrowImageView.hidden = hidden;
+}
+
+- (void)setImageViewHidden:(BOOL)imageHidden {
+    self.photoImageView.hidden = imageHidden;
+}
+
+
+#pragma mark - Getter
+- (NSString *)title {
+    return _titleLabel.text;
+}
+
+@end

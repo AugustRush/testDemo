@@ -1,0 +1,113 @@
+//
+//  BR_ProductInfoCell.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-6-9.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "BR_ProductInfoCell.h"
+#import "BR_BuyerInfoCell.h"
+
+
+@interface BR_ProductInfoCell ()
+{
+    NSIndexPath             *_ip;
+    IBOutlet UIImageView    *_productImg;
+    IBOutlet UILabel        *_normLab;
+    IBOutlet UILabel        *_priceLab;
+    IBOutlet UILabel        *_countLab;
+    IBOutlet UIView         *_footLine;
+    
+    
+    
+}
+
+@end
+
+@implementation BR_ProductInfoCell
+
+- (void)awakeFromNib
+{
+    // Initialization code
+}
+
+-(void)updateCell:(id)info
+            index:(NSIndexPath *)ip
+{
+    _ip = ip;
+    BR_ProductEntity *_product = info;
+    if (_product) {
+        if (_product.pt_img) {
+            _productImg.image = [UIImage imageNamed:_product.pt_img];
+        }
+        else{
+            _productImg.image = nil;
+        }
+        
+        _normLab.text   = _product.pt_norm;
+        _priceLab.text  = _product.pt_price;
+        _countLab.text  = [NSString stringWithFormat:@"%d",_product.pt_countOfBuy];
+        
+    }
+}
+
+-(void)initCell
+{
+    _footLine.backgroundColor = [UIColor colorWithRed:220 / 255.0
+                                                green:220 / 255.0
+                                                 blue:220 / 255.0
+                                                alpha:1];
+    
+}
+
+
+- (IBAction)addClick:(id)sender {
+    if (_countLab.text) {
+        int _count      = [_countLab.text integerValue];
+        _count++;
+        _countLab.text  = [NSString stringWithFormat:@"%d",_count];
+    }
+    
+    
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"BRMain"
+                                                       object:nil
+                                                     userInfo:@{@"cell":@"pt",
+                                                                @"ip":_ip,
+                                                                @"tp":@"add"
+                                                                }];
+}
+
+
+- (IBAction)minusClicked:(id)sender {
+    if (_countLab.text) {
+        int _count      = [_countLab.text integerValue];
+        _count--;
+        if (_count >= 0) {
+            _countLab.text  = [NSString stringWithFormat:@"%d",_count];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"BRMain"
+                                                               object:nil
+                                                             userInfo:@{@"cell":@"pt",
+                                                                        @"ip":_ip,
+                                                                        @"tp":@"minus"
+                                                                        }];
+        }
+        
+    }
+    
+}
+
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+
+
+
+
+@end

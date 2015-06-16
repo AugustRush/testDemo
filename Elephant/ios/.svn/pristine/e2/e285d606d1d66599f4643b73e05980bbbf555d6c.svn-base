@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VisitorViewController">
+            <connections>
+                <outlet property="Regist" destination="tUh-ic-Hp0" id="ITP-x3-mG0"/>
+                <outlet property="bottomView" destination="ilf-5C-Kc7" id="TfI-LD-WEf"/>
+                <outlet property="iconImg" destination="eEr-OY-ziL" id="Lro-PF-3Nh"/>
+                <outlet property="login" destination="o8o-ys-iRp" id="W6k-ze-Dof"/>
+                <outlet property="view" destination="iN0-l3-epB" id="xGN-vX-MVH"/>
+                <outlet property="visitor" destination="VSI-6m-Qrz" id="GrS-IO-0w1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View">
+            <rect key="frame" x="0.0" y="0.0" width="618" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="visitorBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="EZ7-QO-I9d">
+                    <rect key="frame" x="0.0" y="0.0" width="618" height="660"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="欢迎使用“大象健康”" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vU5-EX-6c1">
+                    <rect key="frame" x="0.0" y="52" width="618" height="32"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="大象 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gku-DP-sS4">
+                    <rect key="frame" x="0.0" y="154" width="600" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSI-6m-Qrz">
+                    <rect key="frame" x="217" y="430" width="142" height="35"/>
+                    <state key="normal" image="visitor.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="visitorAcion:" destination="-1" eventType="touchUpInside" id="dXF-s4-fx2"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ilf-5C-Kc7">
+                    <rect key="frame" x="0.0" y="526" width="660" height="80"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUh-ic-Hp0">
+                            <rect key="frame" x="346" y="18" width="132" height="44"/>
+                            <state key="normal" title="注册" backgroundImage="bt_bg.png">
+                                <color key="titleColor" red="0.11283661959999999" green="1" blue="0.41226986160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="registAction:" destination="-1" eventType="touchUpInside" id="c0t-AC-wyL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8o-ys-iRp">
+                            <rect key="frame" x="135" y="18" width="132" height="44"/>
+                            <state key="normal" title="登录" backgroundImage="bt_bg.png">
+                                <color key="titleColor" red="0.11283661959999999" green="1" blue="0.41226986160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="5DV-B1-tAJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="o8o-ys-iRp" secondAttribute="centerY" id="hKm-r6-fU3"/>
+                        <constraint firstAttribute="centerY" secondItem="tUh-ic-Hp0" secondAttribute="centerY" id="hSC-BF-7RB"/>
+                        <constraint firstItem="tUh-ic-Hp0" firstAttribute="leading" secondItem="o8o-ys-iRp" secondAttribute="trailing" constant="20" id="yy0-X1-8M6"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="eEr-OY-ziL">
+                    <rect key="frame" x="180" y="219" width="216" height="161"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ilf-5C-Kc7" firstAttribute="top" secondItem="VSI-6m-Qrz" secondAttribute="bottom" constant="61" id="2Yj-ae-UP7"/>
+                <constraint firstItem="Gku-DP-sS4" firstAttribute="top" secondItem="vU5-EX-6c1" secondAttribute="bottom" constant="70" id="Bfp-BI-G7P"/>
+                <constraint firstAttribute="centerX" secondItem="VSI-6m-Qrz" secondAttribute="centerX" id="TyN-Ul-PFy"/>
+                <constraint firstAttribute="centerX" secondItem="ilf-5C-Kc7" secondAttribute="centerX" id="bWE-ju-osP"/>
+                <constraint firstAttribute="centerX" secondItem="eEr-OY-ziL" secondAttribute="centerX" id="jZf-J9-1oR"/>
+                <constraint firstItem="vU5-EX-6c1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52" id="mcW-Gl-Y1u"/>
+                <constraint firstAttribute="centerX" secondItem="Gku-DP-sS4" secondAttribute="centerX" id="oeA-QF-Cvb"/>
+                <constraint firstItem="eEr-OY-ziL" firstAttribute="top" secondItem="Gku-DP-sS4" secondAttribute="bottom" constant="20" id="xT7-eq-a1y"/>
+                <constraint firstAttribute="centerX" secondItem="vU5-EX-6c1" secondAttribute="centerX" id="ys5-9F-7b2"/>
+                <constraint firstAttribute="bottom" secondItem="ilf-5C-Kc7" secondAttribute="bottom" id="zO8-WG-gtj"/>
+            </constraints>
+            <point key="canvasLocation" x="131" y="180"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bt_bg.png" width="132" height="44"/>
+        <image name="icon_img.png" width="215" height="160"/>
+        <image name="visitor.png" width="142" height="35"/>
+        <image name="visitorBg.png" width="320" height="568"/>
+    </resources>
+</document>

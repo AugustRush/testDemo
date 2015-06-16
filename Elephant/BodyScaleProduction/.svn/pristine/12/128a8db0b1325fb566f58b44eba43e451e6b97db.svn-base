@@ -1,0 +1,873 @@
+//
+//  AQTrendingViewController.m
+//  BdoyScaleDemo
+//
+//  Created by Zhanghao on 5/14/14.
+//  Copyright (c) 2014 Zhanghao. All rights reserved.
+//
+
+#import "AQTrendingViewController.h"
+#import "PBFlatSegmentedControl.h"
+#import "AQTrendingGraph.h"
+#import "HistoryDataViewController.h"
+#import "UINavigationController+Flip.h"
+#import "NewShareViewViewController.h"
+#import "BaseNavigationController.h"
+
+@interface AQTrendingViewController ()  <AQTrendingGraphDataSource>
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttonLists;
+@property (weak, nonatomic) IBOutlet UIView *dateView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stepBackButton;
+@property (weak, nonatomic) IBOutlet UIButton *stepNextButton;
+@property (weak, nonatomic) IBOutlet PBFlatSegmentedControl *segment;
+@property (strong, nonatomic) AQTrendingGraph *trendingGraph;
+@property (assign, nonatomic) BOOL isNotify;
+
+@end
+
+@implementation AQTrendingViewController {
+    UIButton *selectedButton;
+    NSArray *buttons;
+    NSArray *xTitles;
+    
+    NSDate *selectedDay;
+    NSDate *selectedWeek;
+    NSDate *selectedMonth;
+    NSDate *selectedYear;
+    
+    AQOptionType initialType;
+    AQOptionType type;
+    AQDateType dateType;
+    
+    NSDictionary *pointsDictionary;
+    
+    BOOL firstAppear;
+}
+
+#pragma mark - View lifecycle
+
+- (id)initWithNibName:(NSString *)nibNameOrNil initialType:(AQOptionType)optionType dateType:(AQDateType)date initDate:(NSDate *)initDate {
+    self = [super initWithNibName:nibNameOrNil bundle:nil];
+    if (self) {
+        [self initData];
+        
+        initialType = optionType;
+        dateType = date;
+        
+        switch (date) {
+            case AQDateTypeDay:
+                selectedDay = initDate;
+                break;
+            case AQDateTypeWeek:
+                selectedWeek = initDate;
+                break;
+            case AQDateTypeMonth:
+                selectedMonth = initDate;
+                break;
+            case AQDateTypeYear:
+                selectedYear = initDate;
+                break;
+                
+            default:
+                break;
+        }
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self initTrendingGraphIfNeeded];
+}
+
+- (void)viewDidLayoutSubviews {
+    if (firstAppear) {
+        [self layoutSubviews];
+        [self setDefaultAction];
+        firstAppear = NO;
+    }
+    
+    [self.trendingGraph reloadData];
+}
+
+#pragma mark - Getter
+
+- (AQTrendingGraph *)trendingGraph {
+    if (!_trendingGraph) {
+        CGFloat systemPadding = 20;
+        CGFloat viewHeight = CGRectGetHeight(self.view.bounds);
+        CGFloat bottomPadding = 30;
+        CGFloat scrollViewHeight = 100;
+        
+        CGFloat originY = 104;
+        CGFloat height = 0;
+        
+        if (kIsiPhone5) {
+            originY = originY + systemPadding;
+            bottomPadding = 50;
+        }
+        
+        height = viewHeight - scrollViewHeight - bottomPadding - originY;
+        
+        _trendingGraph = [[AQTrendingGraph alloc] initWithFrame:CGRectMake(0, originY, 320, height)];
+        _trendingGraph.dataSource = self;
+    }
+    return _trendingGraph;
+}
+
+#pragma mark - Override Methods
+
+- (void)configureThemeAppearance {
+    [super configureThemeAppearance];
+    
+    if (self.isNotify) {
+        for (int i = 0; i < buttons.count; i++) {
+            UIButton *button = buttons[i];
+            NSString *selectedImageName = [NSString stringWithFormat:@"trending%02d_selected", i+1];
+            [button setImage:ThemeImage(selectedImageName) forState:UIControlStateSelected];
+            [button setTitleColor:[ThemeManager sharedManager].themeColor forState:UIControlStateSelected];
+        }
+    } else {
+        self.isNotify = YES;
+    }
+}
+
+#pragma mark - Private methods
+
+- (void)initData {
+    firstAppear = YES;
+    self.isNotify = NO;
+    selectedDay = selectedWeek = selectedMonth = selectedYear = [NSDate date];
+}
+
+- (void)initViews {
+    self.navigationItem.title = @"趋势图";
+    
+    // Bar button
+    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    barButton.frame = CGRectMake(0, 0, 26, 26);
+    [barButton setImage:[UIImage imageNamed:@"liebiao"] forState:UIControlStateNormal];
+    [barButton addTarget:self action:@selector(flipToHistory) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:barButton];
+    
+    // 时间文本
+    self.dateLabel.text = [self weekTitle];
+    
+    // 是否需要禁止往下查询按钮
+    if (![self shouldEnableStepNextButtonByType:dateType]) {
+        self.stepNextButton.enabled = NO;
+    }
+    
+    // IBOutletCollection不能保证所有子控件是有序的，需要手动排序
+    buttons = [[self.buttonLists copy] sortedArrayUsingComparator:^NSComparisonResult(UIButton *button1, UIButton *button2) {
+        if (button1.tag < button2.tag) {
+            return NSOrderedAscending;
+        } else if (button1.tag > button2.tag) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    BOOL isClassic = [ThemeManager sharedManager].style == ThemeStyleClassic;
+    for (int i = 0; i < buttons.count; i++) {
+        UIButton *button = buttons[i];
+        
+        NSString *normalName = nil;
+        if (isClassic) {
+            normalName = [NSString stringWithFormat:@"trending%02d_classic", i+1];
+        } else {
+            normalName = [NSString stringWithFormat:@"trending%02d", i+1];
+        }
+        [button setImage:[UIImage imageNamed:normalName] forState:UIControlStateNormal];
+        
+        NSString *selectedImageName = [NSString stringWithFormat:@"trending%02d_selected", i+1];
+        [button setImage:ThemeImage(selectedImageName) forState:UIControlStateSelected];
+        [button setTitleColor:[ThemeManager sharedManager].themeColor forState:UIControlStateSelected];
+    }
+}
+
+- (void)initTrendingGraphIfNeeded {
+    [self.view addSubview:self.trendingGraph];
+}
+
+- (void)setDefaultAction {
+    [self.segment setSelectedSegmentIndex:dateType];
+    [self segmentAction:self.segment];
+    
+    UIButton *currentButton = buttons[initialType];
+    [self buttonAction:currentButton];
+    
+    // 滑动到指定选项
+    [self.scrollView scrollRectToVisible:currentButton.frame animated:NO];
+}
+
+- (void)layoutSubviews {
+    // 针对3.5和4寸屏分别进行绝对布局，由于每个控件位置都需要调整，不适合使用相对布局
+    if (kIsiOS_7) {
+        CGFloat dateViewPadding_4 = 13;
+        CGFloat segmentPadding_3_5 = -10;
+        CGFloat dateViewPadding_3_5 = -5;
+        
+        if (kIsiPhone5) {
+            CGRect dateViewFrame = self.dateView.frame;
+            dateViewFrame.origin.y += dateViewPadding_4;
+            self.dateView.frame = dateViewFrame;
+        } else {
+            CGRect segFrame = self.segment.frame;
+            segFrame.origin.y += segmentPadding_3_5;
+            self.segment.frame = segFrame;
+            
+            CGRect dateViewFrame = self.dateView.frame;
+            dateViewFrame.origin.y += dateViewPadding_3_5;
+            self.dateView.frame = dateViewFrame;
+        }
+    } else {
+        if (kIsiPhone5) {
+            CGRect dateViewFrame = self.dateView.frame;
+            dateViewFrame.origin.y += 20;
+            self.dateView.frame = dateViewFrame;
+        }
+    }
+}
+
+- (NSString *)dayTitle {
+    NSInteger month = [NSDate monthByDate:selectedDay];
+    NSInteger day = [NSDate dayByDate:selectedDay];
+    return [NSString stringWithFormat:@"%02d月%02d日", month, day];
+}
+
+- (NSString *)weekTitle {
+    NSInteger weekday = [NSDate weekdayByDate:selectedWeek];
+    NSDate *startDate = [NSDate dateWithDays:weekday - 1 beforDate:selectedWeek];
+    NSDate *endDate = [NSDate dateWithDays:7 - weekday afterDate:selectedWeek];
+    NSInteger startMonth = [NSDate monthByDate:startDate];
+    NSInteger endMonth = [NSDate monthByDate:endDate];
+    NSInteger startDay = [NSDate dayByDate:startDate];
+    NSInteger endDay = [NSDate dayByDate:endDate];
+    return [NSString stringWithFormat:@"%02d月%02d日 - %02d月%02d日", startMonth, startDay, endMonth, endDay];
+}
+
+- (NSString *)monthTitle {
+    NSInteger month = [NSDate monthByDate:selectedMonth];
+    NSInteger endDay = [NSDate daysInMonthByDate:selectedMonth];
+    return [NSString stringWithFormat:@"%02d月01日 - %02d月%02d日", month, month, endDay];
+}
+
+- (NSString *)yearTitle {
+    NSInteger year = [NSDate yearByDate:selectedYear];
+    return [NSString stringWithFormat:@"%d年", year];
+}
+
+- (NSArray *)getXTitles {
+    NSArray *entities = pointsDictionary[kIMDateListKey];
+    if (entities.count > 0) {
+        NSMutableArray *daysArray = [NSMutableArray array];
+        for (int i = 0; i < entities.count; i++) {
+            UserDataEntity *entity = entities[i];
+            CGFloat value = 0;
+            switch (type) {
+                case AQOptionTypeRyFitIndex:
+                    if (entity.UD_ryFit) {
+                        value = entity.UD_ryFit.floatValue;
+                    }
+                    break;
+                case AQOptionTypeWeight:
+                    if (entity.UD_WEIGHT) {
+                        value = entity.UD_WEIGHT.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBMI:
+                    if (entity.UD_BMI) {
+                        value = entity.UD_BMI.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBodyFatRate:
+                    if (entity.UD_FAT) {
+                        value = entity.UD_FAT.floatValue;
+                    }
+                    break;
+                case AQOptionTypeSubcutaneous:
+                    if (entity.UD_SKINFAT) {
+                        value = entity.UD_SKINFAT.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBoneWeight:
+                    if (entity.UD_BONE) {
+                        value = entity.UD_BONE.floatValue;
+                    }
+                    break;
+                case AQOptionTypeMuscleRate:
+                    if (entity.UD_MUSCLE) {
+                        value = entity.UD_MUSCLE.floatValue;
+                    }
+                    break;
+                case AQOptionTypeWaterContent:
+                    if (entity.UD_WATER) {
+                        value = entity.UD_WATER.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBasalMetabolismAsian:
+                    if (entity.UD_METABOLISM) {
+                        value = entity.UD_METABOLISM.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBasalMetabolismEurope:
+                    if (entity.UD_eBMR) {
+                        value = entity.UD_eBMR.floatValue;
+                    }
+                    break;
+                case AQOptionTypeInternalOrgans:
+                    if (entity.UD_OFFALFAT) {
+                        value = entity.UD_OFFALFAT.floatValue;
+                    }
+                    break;
+                case AQOptionTypeBodyAge:
+                    if (entity.UD_BODYAGE) {
+                        value = entity.UD_BODYAGE.floatValue;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+            if ((value - 0 >= 0.001f)) {
+                NSString *checkDate = entity.UD_CHECKDATE;
+                if (checkDate.length > 16) {
+                    checkDate = [checkDate substringWithRange:NSMakeRange(11, 5)];
+                    [daysArray addObject:checkDate];
+                };
+            }
+        }
+        return daysArray;
+    }
+    return nil;
+}
+
+- (NSArray *)daysInMonthByDate:(NSDate *)date {
+    NSMutableArray *daysArray = [NSMutableArray array];
+    NSUInteger days = [NSDate daysInMonthByDate:date];
+    for (int i = 1; i <= days; i++) {
+        [daysArray addObject:[NSString stringWithFormat:@"%d日", i]];
+    }
+    return daysArray;
+}
+
+- (void)stepBackTime:(BOOL)isStepBack {
+    self.stepNextButton.enabled = YES;
+    
+    switch (self.segment.selectedSegmentIndex) {
+        case 0: {
+            NSDate *date = isStepBack ? [NSDate dateWithDays:1 beforDate:selectedDay] : [NSDate dateWithDays:1 afterDate:selectedDay];
+            selectedDay = date;
+            self.dateLabel.text = [self dayTitle];
+        }
+            break;
+        case 1: {
+            NSDate *date = isStepBack ? [NSDate dateWithDays:7 beforDate:selectedWeek] : [NSDate dateWithDays:7 afterDate:selectedWeek];
+            selectedWeek = date;
+            self.dateLabel.text = [self weekTitle];
+        }
+            break;
+        case 2: {
+            NSInteger days = [NSDate daysInMonthByDate:selectedMonth];
+            NSDate *date = isStepBack ? [NSDate dateWithDays:days beforDate:selectedMonth] : [NSDate dateWithDays:days afterDate:selectedMonth];
+            selectedMonth = date;
+            self.dateLabel.text = [self monthTitle];
+        }
+            break;
+        case 3: {
+            NSDate *date = isStepBack ? [NSDate dateWithDays:365 beforDate:selectedYear] : [NSDate dateWithDays:365 afterDate:selectedYear];
+            selectedYear = date;
+            self.dateLabel.text = [self yearTitle];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if (![self shouldEnableStepNextButtonByType:self.segment.selectedSegmentIndex]) {
+        self.stepNextButton.enabled = NO;
+    }
+    
+    [self.trendingGraph reloadData];
+}
+
+- (NSDictionary *)getPointsDicByEntities:(NSArray *)entities {
+    NSMutableDictionary *pointsDic = [NSMutableDictionary dictionary];
+    
+    for (UserDataEntity *entity in entities) {
+        CGFloat value = 0;
+        NSInteger key = 0;
+        
+        NSDate *date = nil;
+        if (entity.UD_CHECKDATE) {
+            date = [NSDate stringToDate:entity.UD_CHECKDATE];
+        }
+        
+        switch (self.segment.selectedSegmentIndex) {
+            case 1: {
+                NSInteger weekday = [NSDate weekdayByDate:date];
+                key = weekday - 1;
+            }
+                break;
+            case 2: {
+                NSInteger dayInMonth = [NSDate dayByDate:date];
+                key = dayInMonth - 1;
+            }
+                break;
+            case 3: {
+                NSInteger month = [NSDate monthByDate:date];
+                key = month - 1;
+            }
+                break;
+            default:
+                break;
+        }
+        
+        switch (type) {
+            case AQOptionTypeRyFitIndex:
+                if (entity.UD_ryFit) {
+                    value = entity.UD_ryFit.floatValue;
+                }
+                break;
+            case AQOptionTypeWeight:
+                if (entity.UD_WEIGHT) {
+                    value = entity.UD_WEIGHT.floatValue;
+                }
+                break;
+            case AQOptionTypeBMI:
+                if (entity.UD_BMI) {
+                    value = entity.UD_BMI.floatValue;
+                }
+                break;
+            case AQOptionTypeBodyFatRate:
+                if (entity.UD_FAT) {
+                    value = entity.UD_FAT.floatValue;
+                }
+                break;
+            case AQOptionTypeSubcutaneous:
+                if (entity.UD_SKINFAT) {
+                    value = entity.UD_SKINFAT.floatValue;
+                }
+                break;
+            case AQOptionTypeBoneWeight:
+                if (entity.UD_BONE) {
+                    value = entity.UD_BONE.floatValue;
+                }
+                break;
+            case AQOptionTypeMuscleRate:
+                if (entity.UD_MUSCLE) {
+                    value = entity.UD_MUSCLE.floatValue;
+                }
+                break;
+            case AQOptionTypeWaterContent:
+                if (entity.UD_WATER) {
+                    value = entity.UD_WATER.floatValue;
+                }
+                break;
+            case AQOptionTypeBasalMetabolismAsian:
+                if (entity.UD_METABOLISM) {
+                    value = entity.UD_METABOLISM.floatValue;
+                }
+                break;
+            case AQOptionTypeBasalMetabolismEurope:
+                if (entity.UD_eBMR) {
+                    value = entity.UD_eBMR.floatValue;
+                }
+                break;
+            case AQOptionTypeInternalOrgans:
+                if (entity.UD_OFFALFAT) {
+                    value = entity.UD_OFFALFAT.floatValue;
+                }
+                break;
+            case AQOptionTypeBodyAge:
+                if (entity.UD_BODYAGE) {
+                    value = entity.UD_BODYAGE.floatValue;
+                }
+                break;
+            default:
+                break;
+        }
+        
+        // 去零
+        if (value - 0 >= 0.001f) {
+            [pointsDic setObject:@(value) forKey:@(key)];
+        }
+    }
+    
+    return pointsDic;
+}
+
+- (NSDictionary *)getOneDayPointsDicByEntities:(NSArray *)entities {
+    NSMutableDictionary *pointsDic = [NSMutableDictionary dictionary];
+    
+    for (int i = 0; i < entities.count; i++) {
+        CGFloat value = 0;
+        
+        UserDataEntity *entity = entities[i];
+        
+        switch (type) {
+            case AQOptionTypeRyFitIndex:
+                if (entity.UD_ryFit) {
+                    value = entity.UD_ryFit.floatValue;
+                }
+                break;
+            case AQOptionTypeWeight:
+                if (entity.UD_WEIGHT) {
+                    value = entity.UD_WEIGHT.floatValue;
+                }
+                break;
+            case AQOptionTypeBMI:
+                if (entity.UD_BMI) {
+                    value = entity.UD_BMI.floatValue;
+                }
+                break;
+            case AQOptionTypeBodyFatRate:
+                if (entity.UD_FAT) {
+                    value = entity.UD_FAT.floatValue;
+                }
+                break;
+            case AQOptionTypeSubcutaneous:
+                if (entity.UD_SKINFAT) {
+                    value = entity.UD_SKINFAT.floatValue;
+                }
+                break;
+            case AQOptionTypeBoneWeight:
+                if (entity.UD_BONE) {
+                    value = entity.UD_BONE.floatValue;
+                }
+                break;
+            case AQOptionTypeMuscleRate:
+                if (entity.UD_MUSCLE) {
+                    value = entity.UD_MUSCLE.floatValue;
+                }
+                break;
+            case AQOptionTypeWaterContent:
+                if (entity.UD_WATER) {
+                    value = entity.UD_WATER.floatValue;
+                }
+                break;
+            case AQOptionTypeBasalMetabolismAsian:
+                if (entity.UD_METABOLISM) {
+                    value = entity.UD_METABOLISM.floatValue;
+                }
+                break;
+            case AQOptionTypeBasalMetabolismEurope:
+                if (entity.UD_eBMR) {
+                    value = entity.UD_eBMR.floatValue;
+                }
+                break;
+            case AQOptionTypeInternalOrgans:
+                if (entity.UD_OFFALFAT) {
+                    value = entity.UD_OFFALFAT.floatValue;
+                }
+                break;
+            case AQOptionTypeBodyAge:
+                if (entity.UD_BODYAGE) {
+                    value = entity.UD_BODYAGE.floatValue;
+                }
+                break;
+            default:
+                break;
+        }
+        
+        // 去零
+        if (value - 0 >= 0.001f) {
+            NSInteger key = pointsDic.allKeys.count - 1;
+            key++;
+            [pointsDic setObject:@(value) forKey:@(key)];
+        }
+    }
+    return pointsDic;
+}
+
+- (BOOL)shouldEnableStepNextButtonByType:(AQDateType)aDateType {
+    BOOL enable = YES;
+    NSDate *now = [NSDate date];
+    
+    switch (aDateType) {
+        case AQDateTypeDay: {
+            NSInteger year = [NSDate yearByDate:selectedDay];
+            NSInteger month = [NSDate monthByDate:selectedDay];
+            NSInteger day = [NSDate dayByDate:selectedDay];
+
+            NSInteger currentYear = [NSDate yearByDate:now];
+            NSInteger currentMonth = [NSDate monthByDate:now];
+            NSInteger currentDay = [NSDate dayByDate:now];
+
+            if (year >= currentYear && month >= currentMonth && day >= currentDay) {
+                enable = NO;
+            }
+        }
+            break;
+        case AQDateTypeWeek: {
+            NSInteger weekday = [NSDate weekdayByDate:selectedWeek];
+            NSDate *startDate = [NSDate dateWithDays:weekday - 1 beforDate:selectedWeek];
+            NSDate *endDate = [NSDate dateWithDays:7 - weekday afterDate:selectedWeek];
+            
+            NSInteger startYear = [NSDate yearByDate:startDate];
+            NSInteger startMonth = [NSDate monthByDate:startDate];
+            NSInteger startDay = [NSDate dayByDate:startDate];
+            
+            NSInteger endYear = [NSDate yearByDate:endDate];
+            NSInteger endMonth = [NSDate monthByDate:endDate];
+            NSInteger endDay = [NSDate dayByDate:endDate];
+            
+            NSInteger currentYear = [NSDate yearByDate:now];
+            NSInteger currentMonth = [NSDate monthByDate:now];
+            NSInteger currentDay = [NSDate dayByDate:now];
+            
+            if (currentYear >= startYear && currentYear <= endYear) {
+                if (currentMonth >= startMonth && currentMonth <= endMonth) {
+                    if (currentDay >= startDay && currentDay <= endDay) {
+                        enable = NO;
+                    }
+                }
+            }
+        }
+            break;
+        case AQDateTypeMonth: {
+            NSInteger year = [NSDate yearByDate:selectedMonth];
+            NSInteger currentYear = [NSDate yearByDate:now];
+
+            NSInteger month = [NSDate monthByDate:selectedMonth];
+            NSInteger currentMonth = [NSDate monthByDate:now];
+
+            if (year >= currentYear) {
+                if (month >= currentMonth) {
+                    enable = NO;
+                }
+            }
+        }
+            break;
+        case AQDateTypeYear: {
+            NSInteger year = [NSDate yearByDate:selectedYear];
+            NSInteger currentYear = [NSDate yearByDate:now];
+            if (year >= currentYear) {
+                enable = NO;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    return enable;
+}
+
+#pragma mark - Actions
+
+- (void)flipToHistory {
+    HistoryDataViewController *historyVC = [[HistoryDataViewController alloc] initWithNibName:@"HistoryDataViewController" bundle:nil];
+    [self.navigationController pushViewController:historyVC transition:UIViewAnimationTransitionFlipFromRight];
+}
+
+- (IBAction)segmentAction:(UISegmentedControl *)sender {
+    switch (sender.selectedSegmentIndex) {
+        case 0: {
+            self.dateLabel.text = [self dayTitle];
+            [Flurry logEvent:@"数据图表" withParameters:@{@"顶部seg":@"查看日数据"} timed:YES];
+        }
+            break;
+        case 1: {
+            self.dateLabel.text = [self weekTitle];
+            [Flurry logEvent:@"数据图表" withParameters:@{@"顶部seg":@"查看周数据"} timed:YES];
+        }
+            break;
+        case 2: {
+            self.dateLabel.text = [self monthTitle];
+            [Flurry logEvent:@"数据图表" withParameters:@{@"顶部seg":@"查看月数据"} timed:YES];
+        }
+            break;
+        case 3: {
+            self.dateLabel.text = [self yearTitle];
+            [Flurry logEvent:@"数据图表" withParameters:@{@"顶部seg":@"查看年数据"} timed:YES];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if (!firstAppear) {
+        self.stepNextButton.enabled = YES;
+        if (![self shouldEnableStepNextButtonByType:self.segment.selectedSegmentIndex]) {
+            self.stepNextButton.enabled = NO;
+        }
+        [self.trendingGraph reloadData];
+    }
+}
+
+- (IBAction)buttonAction:(UIButton *)sender {
+    sender.selected = YES;
+    type = sender.tag;
+    
+    if (selectedButton != sender) {
+        selectedButton.selected = NO;
+        selectedButton = sender;
+        
+        if (!firstAppear) {
+            [self.trendingGraph reloadData];
+        }
+    }
+}
+
+- (IBAction)stepBack:(UIButton *)sender {
+    [self stepBackTime:YES];
+    
+    [Flurry logEvent:@"数据图表" withParameters:@{@"顶部切换按钮":@"查看前一段数据"} timed:YES];
+}
+
+- (IBAction)stepNext:(UIButton *)sender {
+    [self stepBackTime:NO];
+    
+    [Flurry logEvent:@"数据图表" withParameters:@{@"顶部切换按钮":@"查看后一段数据"} timed:YES];
+}
+
+#pragma mark - Trending Graph Data
+
+- (NSDictionary *)getOneDayMeasureDataByEntities:(NSArray *)entities {
+    if (entities.count > 0) {
+        return [self getOneDayPointsDicByEntities:entities];
+    }
+    return @{};
+}
+
+- (NSDictionary *)getWeekMeasuerDataByEntities:(NSArray *)entities {
+    if (entities.count > 0) {
+        return [self getPointsDicByEntities:entities];
+    }
+    return @{};
+}
+
+- (NSDictionary *)getMonthMeasuerDataByEntities:(NSArray *)entities {
+    if (entities.count > 0) {
+        return [self getPointsDicByEntities:entities];
+    }
+    return @{};
+}
+
+- (NSDictionary *)getYearMeasuerDataByEntities:(NSArray *)entities {
+    if (entities.count > 0) {
+        return [self getPointsDicByEntities:entities];
+    }
+    return @{};
+}
+
+#pragma mark - AQTrendingDataSource
+
+- (NSArray *)xTitles {
+    NSArray *titles = nil;
+    switch (self.segment.selectedSegmentIndex) {
+        case 0: {
+            pointsDictionary = [[InterfaceModel sharedInstance] getUserDataByDay2:selectedDay];
+            titles = [self getXTitles];
+            xTitles = titles;
+        }
+            break;
+        case 1:
+            titles = @[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"];
+            break;
+        case 2: {
+            titles = [self daysInMonthByDate:selectedMonth];
+        }
+            break;
+        case 3: {
+            titles = @[@"一月", @"二月", @"三月", @"四月", @"五月", @"六月", @"七月", @"八月", @"九月", @"十月", @"十一月", @"十二月"];
+        }
+            break;
+        default:
+            break;
+    }
+    return titles;
+}
+
+- (NSDictionary *)pointsDictionary {
+    NSDictionary *pointsDic = @{};
+    switch (self.segment.selectedSegmentIndex) {
+        case 0: {
+            pointsDic = [self getOneDayPointsDicByEntities:pointsDictionary[kIMDateListKey]];
+        }
+            break;
+        case 1: {
+            pointsDictionary = [[InterfaceModel sharedInstance] getUserDataByWeek2:selectedWeek];
+            pointsDic = [self getWeekMeasuerDataByEntities:pointsDictionary[kIMDateListKey]];
+        }
+            break;
+        case 2: {
+            pointsDictionary = [[InterfaceModel sharedInstance] getUserDataByMonth2:selectedMonth];
+            pointsDic = [self getMonthMeasuerDataByEntities:pointsDictionary[kIMDateListKey]];
+        }
+            break;
+        case 3: {
+            pointsDictionary = [[InterfaceModel sharedInstance] getUserDataByYear2:selectedYear];
+            pointsDic = [self getYearMeasuerDataByEntities:pointsDictionary[kIMDateListKey]];
+        }
+            break;
+        default:
+            break;
+    }
+    return pointsDic;
+}
+
+- (CGFloat)maxY {
+    NSNumber *max = pointsDictionary[kIMDateMaxListKey][type];
+    CGFloat maxValue = max.floatValue;
+    return maxValue;
+}
+
+- (CGFloat)minY {
+    NSNumber *min = pointsDictionary[kIMDateMinListKey][type];
+    CGFloat minValue = min.floatValue;
+    return minValue;
+}
+
+- (NSInteger)maxIndex {
+    NSInteger max = 0;
+    switch (self.segment.selectedSegmentIndex) {
+        case 0: {
+            // 小于7个点，按七个点算，大于七个点压缩
+            max = 7;
+            if (xTitles.count > 7) {
+                max = xTitles.count;
+            }
+        }
+            break;
+        case 1: {
+            max = 7;
+        }
+            break;
+        case 2: {
+            NSInteger days = [NSDate daysInMonthByDate:selectedMonth];
+            max = days;
+        }
+            break;
+        case 3: {
+            max = 12;
+        }
+            break;
+        default:
+            break;
+    }
+    return max;
+}
+
+- (BOOL)needInteger {
+    if (type == AQOptionTypeBodyAge ||
+        type == AQOptionTypeBasalMetabolismAsian ||
+        type == AQOptionTypeBasalMetabolismEurope) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+@end

@@ -1,0 +1,369 @@
+//
+//  Helpers.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-3-19.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "Helpers.h"
+
+static NSDateFormatter *dateFormatter = nil;
+
+@implementation Helpers
+
++(BOOL)strIsEmty:(NSString *)str
+{
+    if (str == nil || str == NULL) {
+        return YES;
+    }
+    if ([str isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if (str.length == 0) {
+        return YES;
+    }
+    return NO;
+}
+
++(int)getsystemVersion
+{
+    return [[[UIDevice currentDevice] systemVersion] intValue];
+}
+
++(NSString *)getPathByMain:(NSString *)name
+                      type:(NSString *)tp
+{
+    return [[NSBundle mainBundle] pathForResource:name ofType:tp];
+}
+
++ (NSString *)getPath:(NSString *)fileName
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return  [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    
+    
+}
+
++(BOOL)fileIsExit:(NSString *)path
+{
+    NSFileManager *_fm = [NSFileManager defaultManager];
+    if (path) {
+        return [_fm fileExistsAtPath:path isDirectory:NO];
+    }else{
+        return NO;
+    }
+}
+
++(BOOL)deleteFile:(NSString *)path
+{
+    NSFileManager *_fm = [NSFileManager defaultManager];
+    
+    
+    
+    if (path) {
+        return [_fm removeItemAtPath:path error:nil];
+    }else{
+        return NO;
+    }
+}
+
++(BOOL)dicIsExit:(NSString *)path
+{
+    NSFileManager *_fm = [NSFileManager defaultManager];
+    if (path) {
+        BOOL _flag = YES;
+        
+        return [_fm fileExistsAtPath:path isDirectory:&_flag];
+    }else{
+        return NO;
+    }
+}
+
+
++(BOOL)createFile:(NSString *)url
+             data:(NSData *)data
+{
+    if (url && data) {
+        NSFileManager   *_fm = [NSFileManager defaultManager];
+        return [_fm createFileAtPath:url contents:data attributes:nil];
+    }else{
+        return NO;
+    }
+}
+
++(BOOL)createDic:(NSString *)url
+{
+    if (url) {
+        NSFileManager   *_fm = [NSFileManager defaultManager];
+        return [_fm createDirectoryAtPath:url
+              withIntermediateDirectories:YES
+                               attributes:nil
+                                    error:nil];
+    }else{
+        return NO;
+    }
+}
+
++(NSString *)getDateStrFromDate:(NSDate *)date
+                      bySeconds:(double)seconds
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSDayCalendarUnit |
+                                    NSMonthCalendarUnit |
+                                    NSYearCalendarUnit |
+                                    NSHourCalendarUnit |
+                                    NSMinuteCalendarUnit |
+                                    NSSecondCalendarUnit
+                                                                   fromDate:[NSDate dateWithTimeInterval:seconds sinceDate:date]];
+    
+    return [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",
+            (int)[components year],
+            (int)[components month],
+            (int)[components day],
+            (int)[components hour],
+            (int)[components minute],
+            (int)[components second]
+            ];
+}
+
+
++(NSDictionary *)getDateInfoForDate:(NSDate *)date
+{
+    
+    
+    if (date) {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                        NSDayCalendarUnit |
+                                        NSMonthCalendarUnit |
+                                        NSYearCalendarUnit |
+                                        NSHourCalendarUnit |
+                                        NSMinuteCalendarUnit |
+                                        NSSecondCalendarUnit |
+                                        NSWeekdayCalendarUnit
+                                                                       fromDate:date];
+        
+        return @{
+                 @"year":[NSString stringWithFormat:@"%04d",(int)[components year]],
+                 @"month":[NSString stringWithFormat:@"%02d",(int)[components month]],
+                 @"day":[NSString stringWithFormat:@"%02d",(int)[components day]],
+                 @"hour":[NSString stringWithFormat:@"%02d",(int)[components hour]],
+                 @"minute":[NSString stringWithFormat:@"%02d",(int)[components minute]],
+                 @"second":[NSString stringWithFormat:@"%02d",(int)[components second]],
+                 @"weekday":[NSString stringWithFormat:@"%d",(int)[components weekday]]
+                 };
+    }
+    else{
+        return nil;
+    }
+    
+    
+    
+}
+
++(NSString *)getNowStr
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSDayCalendarUnit |
+                                    NSMonthCalendarUnit |
+                                    NSYearCalendarUnit |
+                                    NSHourCalendarUnit |
+                                    NSMinuteCalendarUnit |
+                                    NSSecondCalendarUnit
+                                                                   fromDate:[NSDate date]];
+    
+    return [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",
+            (int)[components year],
+            (int)[components month],
+            (int)[components day],
+            (int)[components hour],
+            (int)[components minute],
+            (int)[components second]
+            ];
+}
+
++(int)getNowYear
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSYearCalendarUnit
+                                                                   fromDate:[NSDate date]];
+    
+    return (int)[components year];
+}
+
++(NSString *)getDateStr:(NSDate *)date
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSDayCalendarUnit |
+                                    NSMonthCalendarUnit |
+                                    NSYearCalendarUnit |
+                                    NSHourCalendarUnit |
+                                    NSMinuteCalendarUnit |
+                                    NSSecondCalendarUnit
+                                                                   fromDate:date ];
+    
+    return [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",
+            (int)[components year],
+            (int)[components month],
+            (int)[components day],
+            (int)[components hour],
+            (int)[components minute],
+            (int)[components second]
+            ];
+}
+
+
+
++(NSDate *)getDateByString:(NSString *)str
+{
+    if ( str == nil || [@"" isEqualToString:str]) {
+        str = @"1970-01-01 00:00:00";
+    }
+    
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+    }
+
+    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+
+    
+    return [dateFormatter dateFromString:str];
+}
+
+
+
++ (NSString *)convertToDateString:(NSDate *)date
+                       withFormat:(NSString *)dateFormat
+{
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+    }
+    
+    [dateFormatter setDateFormat:dateFormat];
+//    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT{8}"]];
+    
+    
+    return [dateFormatter stringFromDate:date];
+}
+
+
+
+
++(BOOL)strIsChecked:(NSString *)str
+           checkStr:(NSString *)checkStr
+{
+    
+    BOOL _flag = NO;
+    
+    if (str && ![str isEqual:[NSNull null]]) {
+        
+        //NSString *_checkStr = @"^[0-9]{3}$";
+        //@"^[0-9]+-*[0-9]+$";
+        NSRegularExpression *regex2 = [NSRegularExpression regularExpressionWithPattern:checkStr
+                                                                                options:0
+                                                                                  error:nil];
+        
+        if (regex2){//对象进行匹配
+            
+            NSTextCheckingResult *result2 = [regex2 firstMatchInString:str
+                                                               options:0
+                                                                 range:NSMakeRange(0, str.length)];
+            
+            if (result2)  {
+                
+                _flag = YES;
+
+            }
+        }
+    }
+    
+    return _flag;
+    
+}
+
+
++(NSString *)URLEncodedString:(NSString *)str
+{
+    NSString *result = (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                            (CFStringRef)str,
+                                                                                            NULL,
+                                                                                            CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                                            kCFStringEncodingUTF8);
+	return result;
+}
+
++(NSString *)URLDecodedString:(NSString *)str
+{
+	NSString *result = (__bridge_transfer NSString*)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+                                                                                                            (CFStringRef)str,
+                                                                                                            CFSTR(""),
+                                                                                                            kCFStringEncodingUTF8);
+    
+	return result;
+}
+
++(BOOL)objIsNull:(id)obj
+{
+    BOOL _flag = YES;
+    
+    if (obj && ![obj isEqual:[NSNull null]]) {
+        
+        _flag = NO;
+        
+    }
+    
+    return _flag;
+}
+
++(NSString *)inputStr:(id)ipStr
+{
+    NSString *_result = @"";
+    
+    if (ipStr == nil || ipStr == NULL) {
+        return _result = @"";
+    }
+    if ([ipStr isKindOfClass:[NSNull class]]) {
+        return _result = @"";
+    }
+    
+    if ([ipStr isKindOfClass:[NSString class]]) {
+        _result = ipStr;
+    }
+    
+    if ([ipStr isKindOfClass:[NSNumber class]]) {
+        _result = [(NSNumber *)ipStr stringValue];
+    }
+    
+    return _result;
+}
+
++(BOOL)strIsMobileOrEmail:(NSString *)targetStr
+{
+    BOOL _flag = NO;
+    //匹配6-15个由字母/数字组成的字符串的正则表达式：
+    NSString *_phoneNumRegex = @"1[0-9]{10}";
+    //匹配邮箱格式
+    NSString *_emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    
+    
+    NSPredicate *_pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", _phoneNumRegex];
+    
+    if ([_pred evaluateWithObject:targetStr]) {
+        
+        _flag = YES;
+    }
+    else{
+        _pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", _emailRegex];
+        
+        if ([_pred evaluateWithObject:targetStr]) {
+            _flag = YES;
+        }
+    }
+    
+    return _flag;
+}
+
+
+
+
+@end

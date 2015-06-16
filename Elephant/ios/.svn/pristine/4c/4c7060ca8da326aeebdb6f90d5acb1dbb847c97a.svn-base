@@ -1,0 +1,7 @@
+platform :ios, '7.0'
+
+pod 'RESideMenu'
+pod 'Masonry'
+pod 'AFNetworking'
+pod 'ReactiveCocoa'
+pod 'HKCircularProgressView', '~> 1.1.0'

@@ -1,0 +1,14 @@
+//
+//  AliPayController.h
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-6-11.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AliPayController : UIViewController
+
+@property(nonatomic,strong)NSDictionary *info;
+@end

@@ -1,0 +1,72 @@
+//
+//  BR_payResultController.m
+//  BodyScaleProduction
+//
+//  Created by 张诚亮 on 14-6-11.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "BR_payResultController.h"
+
+@interface BR_payResultController ()
+{
+    IBOutlet UIView *_sView;
+    IBOutlet UIView *_fView;
+    IBOutlet UIView *_footView;
+    IBOutlet UILabel *_tradeLab;
+}
+
+@end
+
+@implementation BR_payResultController
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    [self initUI];
+}
+
+-(void)initUI
+{
+    if (self.tp) {
+        _sView.hidden = NO;
+        _fView.hidden = YES;
+        self.title = @"支付成功";
+        _tradeLab.text = self.tradeNo;
+       
+    }
+    else{
+        _sView.hidden = YES;
+        _fView.hidden = NO;
+        self.title = @"支付失败";
+    }
+    
+    
+    CGRect _rect    = _footView.frame;
+    _rect.origin.y  = self.view.bounds.size.height - _rect.size.height;
+    _footView.frame = _rect;
+}
+- (IBAction)toICWeb:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.url]];
+}
+
+#pragma mark - sys
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

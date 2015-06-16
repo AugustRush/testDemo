@@ -1,0 +1,158 @@
+//
+//  LeftMenuViewController.m
+//  BodyScale
+//
+//  Created by August on 14-10-11.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import "LeftMenuViewController.h"
+#import "LeftTableViewCell.h"
+#import "FillInfoViewController.h"
+#define kMenuCellReuseIdentifier @"MenuCell"
+
+@interface LeftMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+//    HeaderButton *bottomView;
+}
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet HeaderButton *bottomView;
+@property (nonatomic, strong) NSMutableArray *menuNames;
+@property (nonatomic, strong) NSMutableArray *menuImgs;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet SettingButton *settingBt;
+@property (weak, nonatomic) IBOutlet UIView *SettingBg;
+
+@end
+
+@implementation LeftMenuViewController
+
+#pragma mark - life cycle methods
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self baseConfigs];
+}
+
+#pragma mark - private methods
+
+-(void)baseConfigs
+{
+    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,20,Screen_Width,Screen_Height)];
+    [bgImgView setImage:[UIImage imageNamed:@"leftBg"]];
+    [self.view addSubview:bgImgView];
+    [self.view sendSubviewToBack:bgImgView];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leftBg"]];
+    self.menuNames = [NSMutableArray arrayWithObjects:@"体测",@"数据统计",@"用户管理",@"访客模式", nil];
+    self.menuImgs = [NSMutableArray arrayWithObjects:@"body",@"data",@"userManager",@"userMode",nil];
+    
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"LeftTableViewCell" bundle:nil] forCellReuseIdentifier:kMenuCellReuseIdentifier];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(150, 0, 50, 0));
+    }];
+    self.tableView.backgroundColor =[UIColor clearColor];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    [self.tableView setTableFooterView:view];
+    [self.tableView setTableHeaderView:view];
+    
+    NSString * imgPath = [NSString stringWithFormat:@"%@/%@.%@",[CommanHelp getDocmentsDirectory],HEADERIMAGE,@"png"];
+    [self.bottomView setWithBigHeaderView:imgPath];
+    
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *maker){
+        maker.left.equalTo(self.tableView.mas_left).with.valueOffset(@6);
+        maker.top.equalTo(@60);
+        maker.height.equalTo(@72);
+        maker.width.equalTo(@72);
+    }];
+    
+    
+    [self.SettingBg setBackgroundColor:[UIColor clearColor]];
+    [self.settingBt setImage:[UIImage imageNamed:@"setting"] WithText:@"设置"];
+//    [self.SettingBg mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.tableView.mas_bottom);
+//        make.left.equalTo(@0);
+//    }];
+    
+   
+
+}
+- (IBAction)selectHeadBt:(id)sender
+{
+    [self.sideMenuViewController hideMenuViewController];
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[PersonaViewController alloc] initWithNibName:@"PersonaViewController" bundle:nil]] animated:YES];
+}
+
+- (IBAction)selectSetting:(id)sender
+{
+      [self.sideMenuViewController hideMenuViewController];
+     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil]] animated:YES];
+    
+}
+
+#pragma mark - UITableViewDataSource methods
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.menuNames.count;
+}
+
+-(LeftTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             kMenuCellReuseIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    [cell updateWithImg:[UIImage imageNamed:self.menuImgs[indexPath.row]] WithText:self.menuNames[indexPath.row]];
+    cell.separatorInset = UIEdgeInsetsMake(0, -10, 0, 10);
+    return cell;
+}
+
+
+#pragma mark - UITableViewDelegate methods
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+    switch (indexPath.row) {
+        case 0:
+      
+            [self.sideMenuViewController setContentViewController:[[CenterViewController alloc] initWithNibName:@"CenterViewController" bundle:nil] animated:YES];
+            
+            break;
+        case 1:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[DataManageViewController alloc] init]] animated:YES];
+           
+            break;
+        case 2:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[UserManagerViewController alloc] initWithNibName:@"UserManagerViewController" bundle:nil]] animated:YES];
+
+            break;
+        case 3:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[FillInfoViewController alloc] initWithNibName:@"FillInfoViewController" bundle:nil]] animated:YES];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - manage memory methods
+
+-(void)dealloc
+{
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+@end

@@ -1,0 +1,116 @@
+//
+//  PersonalCenterViewController.m
+//  BodyScaleProduction
+//
+//  Created by Cloud_Ding on 14-5-16.
+//  Copyright (c) 2014年 Go Salo. All rights reserved.
+//
+
+#import "PersonalCenterViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "MyInfoViewController.h"
+#import "BaseNavigationController.h"
+#import "PraiseMeViewController.h"
+#import "RemindWeightViewController.h"
+#import "ModifyUserPasswordViewController.h"
+
+@interface PersonalCenterViewController (){
+    NSArray *_titles;
+}
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@end
+
+@implementation PersonalCenterViewController
+
+#pragma mark - init
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+#pragma mark - lifeCycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    _titles = [NSArray arrayWithObjects:@[@"个人资料"],@[@"赞我的人",@"提醒称重"],@[@"修改密码"], nil];
+    // Do any additional setup after loading the view from its nib.
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    self.title = @"个人中心";
+    
+    
+
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    UserInfoEntity *_user = [[InterfaceModel sharedInstance]getHostUser];
+    
+    int itemCount = _titles.count;
+    if ([@"3" isEqualToString:_user.UI_isLoc]) {
+        itemCount--;
+    }
+    
+    
+    return itemCount;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_titles[section] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyInfoTableViewCell *cell = nil;
+    if (!cell) {
+        NSArray *cells = nil;
+        cells = [[NSBundle mainBundle] loadNibNamed:@"MyInfoTableViewCell" owner:self options:nil];
+        cell = [cells lastObject];}
+    cell.textLabel.text = _titles[indexPath.section][indexPath.row];
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+           MyInfoViewController *myInfoVC = [[MyInfoViewController alloc] initWithNibName:@"MyInfoViewController" bundle:nil parentVC:self];
+           [self.navigationController pushViewController:myInfoVC animated:YES];
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            PraiseMeViewController *praiseMeVC = [[PraiseMeViewController alloc] initWithNibName:@"PraiseMeViewController" bundle:nil];
+            [self.navigationController pushViewController:praiseMeVC animated:YES];
+        }else{
+            RemindWeightViewController *remindWeightVC = [[RemindWeightViewController alloc] initWithNibName:@"RemindWeightViewController" bundle:nil];
+            [self.navigationController pushViewController:remindWeightVC animated:YES];
+        }
+    }else{
+        ModifyUserPasswordViewController *modifyPasswordVC = [[ModifyUserPasswordViewController alloc] initWithNibName:@"ModifyUserPasswordViewController" bundle:nil];
+       [self.navigationController pushViewController:modifyPasswordVC animated:YES];
+    }
+}
+
+#pragma mark - manager memory methods
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

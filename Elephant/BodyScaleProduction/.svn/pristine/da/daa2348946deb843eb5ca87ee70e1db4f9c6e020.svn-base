@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6AEE02B5-E5E2-4C74-B569-48CDAF9DF892</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BodyScaleProduction</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CBACA03A-DF55-441C-A743-B69BB4F95FAB</key>
+		<string>http://192.168.5.73:18080/svn/ios/BodyScaleProduction</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BodyScaleProduction.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CBACA03A-DF55-441C-A743-B69BB4F95FAB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>CBACA03A-DF55-441C-A743-B69BB4F95FAB</key>
+		<string>http://192.168.5.73:18080/svn/ios</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://192.168.5.73:18080/svn/ios/BodyScaleProduction/BodyScaleProduction.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CBACA03A-DF55-441C-A743-B69BB4F95FAB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CBACA03A-DF55-441C-A743-B69BB4F95FAB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BodyScaleProduction</string>
+		</dict>
+	</array>
+</dict>
+</plist>

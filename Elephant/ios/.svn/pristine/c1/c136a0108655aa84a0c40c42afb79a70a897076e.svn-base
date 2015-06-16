@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
+            <connections>
+                <outlet property="fatImgView" destination="unQ-S5-SaF" id="mBA-V0-cjo"/>
+                <outlet property="shareBgView" destination="3mi-yx-AsE" id="mRA-Wp-ipo"/>
+                <outlet property="shareBtsView" destination="Cl1-3D-cUo" id="aIZ-VC-9tq"/>
+                <outlet property="userHeadBt" destination="3Ut-4a-AS3" id="qCe-zd-o9p"/>
+                <outlet property="userNameLb" destination="jND-It-bNJ" id="Keg-SS-a3H"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weightLb" destination="Njj-89-JF7" id="tdZ-mu-Gt3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_bg_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="3mi-yx-AsE">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ut-4a-AS3" customClass="HeaderButton">
+                    <rect key="frame" x="57" y="51" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="Ccb-3y-BaU"/>
+                        <constraint firstAttribute="height" constant="36" id="eUP-oJ-2ku"/>
+                    </constraints>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="share_title_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="vVa-pB-aGR">
+                    <rect key="frame" x="162" y="146" width="226" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="share_fat_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="unQ-S5-SaF">
+                    <rect key="frame" x="246" y="228" width="108" height="231"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="减重神马的，臣妾做不到啊～" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-Hd-Ta1">
+                    <rect key="frame" x="16" y="474" width="600" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.2578718612" green="0.5" blue="0.080147277170000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jND-It-bNJ">
+                    <rect key="frame" x="149" y="58" width="84" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cl1-3D-cUo">
+                    <rect key="frame" x="-8" y="508" width="616" height="90"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="本周小增：2.4kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njj-89-JF7">
+                    <rect key="frame" x="-13" y="153" width="600" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="3mi-yx-AsE" secondAttribute="trailing" id="2Zd-v1-Uaf"/>
+                <constraint firstAttribute="centerX" secondItem="Cl1-3D-cUo" secondAttribute="centerX" id="Dzx-xq-w7x"/>
+                <constraint firstAttribute="centerX" secondItem="0Eh-Hd-Ta1" secondAttribute="centerX" id="GWV-zh-dm1"/>
+                <constraint firstAttribute="centerX" secondItem="3mi-yx-AsE" secondAttribute="centerX" id="PLt-sa-EeK"/>
+                <constraint firstItem="Njj-89-JF7" firstAttribute="centerY" secondItem="unQ-S5-SaF" secondAttribute="centerY" constant="-160" id="T7M-7Y-5Bm"/>
+                <constraint firstAttribute="bottom" secondItem="Cl1-3D-cUo" secondAttribute="bottom" id="VHh-Cd-M85"/>
+                <constraint firstItem="3Ut-4a-AS3" firstAttribute="top" secondItem="jND-It-bNJ" secondAttribute="top" constant="-10" id="VSp-ew-Jse"/>
+                <constraint firstItem="0Eh-Hd-Ta1" firstAttribute="top" secondItem="unQ-S5-SaF" secondAttribute="bottom" constant="15" id="VpI-zq-nVu"/>
+                <constraint firstItem="Cl1-3D-cUo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Y0j-te-mY3"/>
+                <constraint firstItem="jND-It-bNJ" firstAttribute="leading" secondItem="3Ut-4a-AS3" secondAttribute="trailing" constant="5" id="YaI-uC-Vkh"/>
+                <constraint firstAttribute="centerX" secondItem="vVa-pB-aGR" secondAttribute="centerX" id="Z23-Ac-dM0"/>
+                <constraint firstItem="3Ut-4a-AS3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="eY4-gz-hPA"/>
+                <constraint firstAttribute="centerX" secondItem="Njj-89-JF7" secondAttribute="centerX" id="em4-xq-RfO"/>
+                <constraint firstItem="vVa-pB-aGR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="hUX-2i-ivg"/>
+                <constraint firstItem="vVa-pB-aGR" firstAttribute="centerY" secondItem="Njj-89-JF7" secondAttribute="centerY" constant="5" id="kC8-Hn-mmT"/>
+                <constraint firstAttribute="centerY" secondItem="3mi-yx-AsE" secondAttribute="centerY" id="ked-qb-S8o"/>
+                <constraint firstItem="3mi-yx-AsE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="lBZ-JB-vNB"/>
+                <constraint firstItem="0Eh-Hd-Ta1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="orA-nD-xfi"/>
+                <constraint firstItem="3Ut-4a-AS3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="qVZ-JS-zZI"/>
+                <constraint firstItem="3mi-yx-AsE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v1E-Qw-tbt"/>
+                <constraint firstAttribute="centerX" secondItem="unQ-S5-SaF" secondAttribute="centerX" constant="15" id="vEl-gB-KWR"/>
+            </constraints>
+            <point key="canvasLocation" x="145" y="176"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="share_bg_img.png" width="320" height="568"/>
+        <image name="share_fat_img.png" width="108" height="230"/>
+        <image name="share_title_bg.png" width="226" height="45"/>
+    </resources>
+</document>

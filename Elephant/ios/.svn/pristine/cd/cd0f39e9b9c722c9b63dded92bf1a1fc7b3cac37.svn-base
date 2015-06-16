@@ -1,0 +1,77 @@
+//
+//  BodyScaleBTInterface.h
+//  BlueToothDemo
+//
+//  Created by August on 14/12/4.
+//  Copyright (c) 2014年 August. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "BlueToothHelper.h"
+
+@interface BodyScaleBTInterface : NSObject
+
+/**
+ *  实时体重回调方法
+ *
+ *  @param handler 回调block
+ */
+
++(void)instanceWeightDataWithHandler:(void(^)(NSError *error, NSNumber *weight))handler;
+
+/**
+ *  测量接口
+ *
+ *  @param location     测量的坑位，目前只有 p9 ，传入9即可
+ *  @param height       身高
+ *  @param age          年龄
+ *  @param sex          性别 （0 为男 1 为女）
+ *  @param ackHandler   发送测量指令成功 ack 回调
+ *  @param handler      测试完成回调
+ *  @param extraHandler 额外数据回调
+ */
++(void)selectUserMeasureWithLocation:(NSInteger)location
+                              height:(NSInteger)height
+                                 age:(NSInteger)age
+                                 sex:(NSInteger)sex
+                          ackHandler:(void(^)(NSError *error))ackHandler
+                   completionHandler:(void(^)(NSError *error, NSDictionary *response))handler
+                    extraDataHandler:(void(^)(NSError *error, NSDictionary *extraInfo))extraHandler;
+
+/**
+ *  创建新的用户
+ *
+ *  @param height  身高 100 － 220cm
+ *  @param age     年龄 10 － 80 岁
+ *  @param sex     0为男  1为女
+ *  @param handler 创建完成回调 location为坑位 1-8 （正常坑位，成功） 10 （失败，用户参数有误）11 （失败，没有空闲位置）
+ */
++(void)createNewUserInBodyScaleWithBodyHeight:(NSUInteger)height
+                                          age:(NSUInteger)age
+                                          sex:(NSUInteger)sex
+                            completionHandler:(void(^)(NSError *error,NSInteger location))handler;
+
+/**
+ *  删除某个坑位用户
+ *
+ *  @param location 坑位号 1-8
+ *  @param handler  完成回调 statusCode为状态码 1 （成功） 3（失败，没有该用户）
+ */
++(void)deleteUserInBodyScaleWithLocation:(NSUInteger)location
+                         completeHandler:(void(^)(NSInteger statusCode))handler;
+
+/**
+ *  更新用户资料 ，用户编辑个人信息时使用
+ *
+ *  @param height  身高同上
+ *  @param age     年龄同上
+ *  @param sex     性别同上
+ *  @param handler 完成回调 statusCode 1 成功 3 （失败，参数有误） 4（失败，无此用户）
+ */
++(void)updateUserInfoInBodyScaleWithLocation:(NSUInteger)location
+                                      Height:(NSUInteger)height
+                                         age:(NSUInteger)age
+                                         sex:(NSUInteger)sex
+                             completeHandler:(void(^)(NSError *error,NSInteger statusCode))handler;
+
+@end
