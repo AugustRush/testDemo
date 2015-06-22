@@ -83,7 +83,7 @@ NSString *const text = @"实现的思路主要是给控件添加手势点击并�
             commentCell = [tableView dequeueReusableCellWithIdentifier:@"CommonCell"];
         }
     
-        commentCell.label.text = text;
+        commentCell.label.text = [NSString stringWithFormat:@"%@%@",text,indexPath];
         CGSize size = [commentCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     
         return size.height+1;}

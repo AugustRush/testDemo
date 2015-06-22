@@ -10,31 +10,31 @@
 	<string>ActionTableViewSample</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0BE45D435DE1F897A1158D2DF747029AABC45E2F</key>
-		<string>https://github.com/vanyas/ActionRowTest.git</string>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
+		<string>https://github.com/AugustRush/testDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ActionTableViewSample/ActionTableViewSample.xcodeproj</string>
+	<string>ActionRowTest-master/ActionTableViewSample/ActionTableViewSample.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0BE45D435DE1F897A1158D2DF747029AABC45E2F</key>
-		<string>../../..</string>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/vanyas/ActionRowTest.git</string>
+	<string>https://github.com/AugustRush/testDemo.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0BE45D435DE1F897A1158D2DF747029AABC45E2F</string>
+	<string>E273DA43CE6844A58D5B83C044B5E750732D0F6B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0BE45D435DE1F897A1158D2DF747029AABC45E2F</string>
+			<string>E273DA43CE6844A58D5B83C044B5E750732D0F6B</string>
 			<key>IDESourceControlWCCName</key>
-			<string>ActionRowTest</string>
+			<string>testDemo</string>
 		</dict>
 	</array>
 </dict>
