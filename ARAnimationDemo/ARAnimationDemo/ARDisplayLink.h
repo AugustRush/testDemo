@@ -15,6 +15,8 @@
 
 @property (nonatomic, copy) void(^writeBlock)(CGFloat value);
 
+@property (nonatomic, copy) void(^completion)(void);
+
 -(void)startRun;
 
 @end

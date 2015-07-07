@@ -22,17 +22,21 @@
     self = [super init];
     if (self) {
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkTriggered:)];
-        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+//        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
 }
 
 -(void)displayLinkTriggered:(id)sender
 {
+    self.times ++;
     if (self.times == 255) {
         [self.displayLink invalidate];
+        if (self.completion) {
+            self.completion();
+        }
     }
-    self.times ++;
+
     if (self.writeBlock) {
         self.writeBlock(self.times);
     }
