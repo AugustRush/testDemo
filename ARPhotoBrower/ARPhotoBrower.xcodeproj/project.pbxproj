@@ -14,8 +14,9 @@
 		976C8A5E1B44EFD900B05805 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 976C8A5D1B44EFD900B05805 /* Images.xcassets */; };
 		976C8A611B44EFD900B05805 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976C8A5F1B44EFD900B05805 /* LaunchScreen.xib */; };
 		976C8A6D1B44EFD900B05805 /* ARPhotoBrowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 976C8A6C1B44EFD900B05805 /* ARPhotoBrowerTests.m */; };
-		976C8A791B44F02F00B05805 /* ARPhotoBrower.m in Sources */ = {isa = PBXBuildFile; fileRef = 976C8A781B44F02F00B05805 /* ARPhotoBrower.m */; };
-		976C8A7C1B44F28900B05805 /* ARPhotoBrowerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 976C8A7B1B44F28900B05805 /* ARPhotoBrowerCell.m */; };
+		97FAFB8B1B52A673005F0591 /* ARPhotoBrower.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FAFB8A1B52A673005F0591 /* ARPhotoBrower.m */; };
+		97FAFB8F1B52A6C2005F0591 /* ARPhotoBrowerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FAFB8D1B52A6C2005F0591 /* ARPhotoBrowerPage.m */; };
+		97FAFB901B52A6C2005F0591 /* ARPhotoBrowerPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97FAFB8E1B52A6C2005F0591 /* ARPhotoBrowerPage.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +43,11 @@
 		976C8A661B44EFD900B05805 /* ARPhotoBrowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARPhotoBrowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		976C8A6B1B44EFD900B05805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		976C8A6C1B44EFD900B05805 /* ARPhotoBrowerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARPhotoBrowerTests.m; sourceTree = "<group>"; };
-		976C8A771B44F02F00B05805 /* ARPhotoBrower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPhotoBrower.h; sourceTree = "<group>"; };
-		976C8A781B44F02F00B05805 /* ARPhotoBrower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPhotoBrower.m; sourceTree = "<group>"; };
-		976C8A7A1B44F28900B05805 /* ARPhotoBrowerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPhotoBrowerCell.h; sourceTree = "<group>"; };
-		976C8A7B1B44F28900B05805 /* ARPhotoBrowerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPhotoBrowerCell.m; sourceTree = "<group>"; };
+		97FAFB891B52A673005F0591 /* ARPhotoBrower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPhotoBrower.h; sourceTree = "<group>"; };
+		97FAFB8A1B52A673005F0591 /* ARPhotoBrower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPhotoBrower.m; sourceTree = "<group>"; };
+		97FAFB8C1B52A6C2005F0591 /* ARPhotoBrowerPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPhotoBrowerPage.h; sourceTree = "<group>"; };
+		97FAFB8D1B52A6C2005F0591 /* ARPhotoBrowerPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPhotoBrowerPage.m; sourceTree = "<group>"; };
+		97FAFB8E1B52A6C2005F0591 /* ARPhotoBrowerPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ARPhotoBrowerPage.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +89,15 @@
 		976C8A4F1B44EFD900B05805 /* ARPhotoBrower */ = {
 			isa = PBXGroup;
 			children = (
-				976C8A761B44EFFD00B05805 /* Source */,
 				976C8A541B44EFD900B05805 /* AppDelegate.h */,
 				976C8A551B44EFD900B05805 /* AppDelegate.m */,
 				976C8A571B44EFD900B05805 /* ViewController.h */,
 				976C8A581B44EFD900B05805 /* ViewController.m */,
+				97FAFB891B52A673005F0591 /* ARPhotoBrower.h */,
+				97FAFB8A1B52A673005F0591 /* ARPhotoBrower.m */,
+				97FAFB8C1B52A6C2005F0591 /* ARPhotoBrowerPage.h */,
+				97FAFB8D1B52A6C2005F0591 /* ARPhotoBrowerPage.m */,
+				97FAFB8E1B52A6C2005F0591 /* ARPhotoBrowerPage.xib */,
 				976C8A5A1B44EFD900B05805 /* Main.storyboard */,
 				976C8A5D1B44EFD900B05805 /* Images.xcassets */,
 				976C8A5F1B44EFD900B05805 /* LaunchScreen.xib */,
@@ -125,17 +131,6 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
-		};
-		976C8A761B44EFFD00B05805 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				976C8A771B44F02F00B05805 /* ARPhotoBrower.h */,
-				976C8A781B44F02F00B05805 /* ARPhotoBrower.m */,
-				976C8A7A1B44F28900B05805 /* ARPhotoBrowerCell.h */,
-				976C8A7B1B44F28900B05805 /* ARPhotoBrowerCell.m */,
-			);
-			path = Source;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -218,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				976C8A5C1B44EFD900B05805 /* Main.storyboard in Resources */,
+				97FAFB901B52A6C2005F0591 /* ARPhotoBrowerPage.xib in Resources */,
 				976C8A611B44EFD900B05805 /* LaunchScreen.xib in Resources */,
 				976C8A5E1B44EFD900B05805 /* Images.xcassets in Resources */,
 			);
@@ -237,8 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				976C8A7C1B44F28900B05805 /* ARPhotoBrowerCell.m in Sources */,
-				976C8A791B44F02F00B05805 /* ARPhotoBrower.m in Sources */,
+				97FAFB8B1B52A673005F0591 /* ARPhotoBrower.m in Sources */,
+				97FAFB8F1B52A6C2005F0591 /* ARPhotoBrowerPage.m in Sources */,
 				976C8A591B44EFD900B05805 /* ViewController.m in Sources */,
 				976C8A561B44EFD900B05805 /* AppDelegate.m in Sources */,
 				976C8A531B44EFD900B05805 /* main.m in Sources */,
@@ -436,6 +432,7 @@
 				976C8A721B44EFD900B05805 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		976C8A731B44EFD900B05805 /* Build configuration list for PBXNativeTarget "ARPhotoBrowerTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +441,7 @@
 				976C8A751B44EFD900B05805 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

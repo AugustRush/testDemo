@@ -1,5 +1,4 @@
-#JHChainableAnimations
-Easy to read and write chainable Animations in Objective-C
+<img src="./img/logo.png" ></img>
 
 <table>
 <tr>
@@ -27,6 +26,12 @@ Easy to read and write chainable Animations in Objective-C
 </td>
 </tr>
 </table>
+
+![language](https://img.shields.io/badge/Language-Objective--C-8E44AD.svg)
+![Version](https://img.shields.io/badge/Pod-%20v1.1.1%20-96281B.svg)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)
+![Platform](https://img.shields.io/badge/platform-%20iOS%20-lightgrey.svg)
 
 ##Whats wrong with animations?
 
@@ -71,7 +76,7 @@ There are also a lot of really good animation libraries out there such as [RBBAn
 Either clone the repo and manually add the Files in [JHChainableAnimations](./JHChainableAnimations) or add the following to your Podfile
 
 ```
-pod 'JHChainableAnimations', '~> 1.0.2'
+pod 'JHChainableAnimations', '~> 1.3.0'
 ```
 Then just import the following header.
 
@@ -80,6 +85,10 @@ Then just import the following header.
 ```
 
 This is all a UIView category, so these chainables can be used on any UIView in a file where the header is imported.
+
+Notes on using JHChainableAnimations with **Swift** can be found [here](#swift).
+
+Notes on using JHChainableAnimations with **Auto Layout** can be found [here](#autolayout).
 
 ###Animating
 Chainable properties like **moveX(x)** must come between the view and the **animate(t)** function
@@ -150,7 +159,7 @@ view.moveXY(100, 50).wait(0.5).animate(1.0);
 // The same as view.moveXY(100, 50).delay(0.5).animate(1.0);
 ```
 ###Completion
-To run code after an animation finishese set the **animationCompletion** property of your UIView.
+To run code after an animation finishes set the **animationCompletion** property of your UIView or call the **animateWithCompletion(t, completion)** function.
 
 ```objective-c
 view.makeX(0).animateWithCompletion(1.0, JHAnimationCompletion(){
@@ -167,6 +176,25 @@ view.animationCompletion = JHAnimationCompletion(){
 view.makeX(0).animate(1.0);
 ```
 
+Is the same as:
+
+```objective-c
+view.makeX(0).animate(1.0).animationCompletion = JHAnimationCompletion(){
+	NSLog(@"Animation Done");
+};
+```
+
+###Bezier Paths
+You can also animate a view along a [UIBezierPath](https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/BezierPaths/BezierPaths.html). To get a bezier path starting from the views position, call the **bezierPathForAnimation** method. Then add points or curves or lines to it and use it in a chainable property.
+
+```objective-c
+UIBezierPath *path = [view bezierPathForAnimation];
+[path addLineToPoint:CGPointMake(25, 400)];
+[path addLineToPoint:CGPointMake(300, 500)];
+view.moveOnPath(path).animate(1.0);
+```
+Animation effects do not work on path movements.
+
 ###Semantics
 I included a chainable property called **seconds** that is there purely for show. It does however, make the code a little more readable (if you're into that sort of thing).
 
@@ -175,7 +203,47 @@ view.makeScale(2.0).thenAfter(0.5).seconds.moveX(20).animate(1.0);
 // view.makeScale(2.0).thenAfter(0.5).moveX(20).animate(1.0);
 ```
 
-##<a name="chainables"></a>ChainableProperties
+##<a name="autolayout"></a>Using with Auto Layout
+
+###Transforms
+
+Use the **transform** chainable properties. These are better for views constrained with Autolayout. You should not mix these with other chainable properties 
+
+```objective-c
+viewWithConstraints.transformX(50).transformScale(2).animate(1.0);
+```
+
+###Animating Constraints
+
+Typically frames and autolayout stuff shouldn't mix so use the **makeConstraint** and **moveConstraint** chainable properties with caution (i.e dont try and scale a view when it has a height and width constraint). **These properties should only be used with color, opacity, and corner radius chainable properties** because they dont affect the layers position and therfore won't affect constraints. 
+
+This was only added as a syntactically easy way to animate constraints. The code below will set the constant of **topConstraint** to 50 and then trigger an animated layout pass in the background. 
+
+```objective-c
+// You have a reference to some constraint for myView
+self.topConstraint = [NSLayoutConstraint ...];
+...
+self.myView.makeConstraint(self.topConstraint, 50).animate(1.0);
+```
+This does not support animation effects yet. 
+
+##<a name="swift"></a>Using with Swift
+
+Using JHChainableAnimations with [Swift](https://developer.apple.com/swift/) is a little different. Every chainable property must have ```()``` between the name and the parameters.
+
+```swift
+// swift code
+view.makeScale()(2.0).spring().animate()(1.0);
+// is the same as 
+// view.makeScale(2.0).spring.animate(1.0);
+// in Objective-C
+```
+[Masonry](https://github.com/SnapKit/Masonry), which uses a similar chainable syntax eventually made [SnapKit](https://github.com/SnapKit/SnapKit) to make get rid of this weirdness. That may be on the horizon. 
+
+[Draveness](https://github.com/Draveness) copied my code into swift and it looks pretty good. [DKChainableAnimationKit](https://github.com/Draveness/DKChainableAnimationKit)
+
+
+##<a name="chainables"></a>Chainable Properties
 
 <table>
 <tr>
@@ -463,6 +531,138 @@ view.rotate(360).animate(1.0);
 view.movePolar(30, 90).animate(1.0);
 </td>
 </tr>
+<tr>
+<td>
+- (JHChainableBezierPath) moveOnPath;
+</td>
+<td>
+(UIBezierPath *path)
+</td>
+<td>
+view.moveOnPath(path).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableBezierPath) moveAndRotateOnPath;
+</td>
+<td>
+(UIBezierPath *path)
+</td>
+<td>
+view.moveAndRotateOnPath(path).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableBezierPath) moveAndReverseRotateOnPath;
+</td>
+<td>
+(UIBezierPath *path)
+</td>
+<td>
+view.moveAndReverseRotateOnPath(path).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformX;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformX(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformX;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformX(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformY;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformY(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformZ;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformZ(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainablePoint) transformXY;
+</td>
+<td>
+(CGFloat x, CGFloat y)
+</td>
+<td>
+view.transformXY(50, 100).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformScale;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformScale(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformScaleX;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformScaleX(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (JHChainableFloat) transformScaleY;
+</td>
+<td>
+(CGFloat f)
+</td>
+<td>
+view.transformScaleY(50).animate(1.0);
+</td>
+</tr>
+<tr>
+<td>
+- (UIView *) transformIdentity;
+</td>
+<td>
+Nothing
+</td>
+<td>
+view.transformIdentity.animate(1.0);
+</td>
+</tr>
 </table>
 
 ##<a name="effects"></a>Animation Effects
@@ -483,6 +683,11 @@ Info on anchoring can be found [here](https://developer.apple.com/library/ios/do
 
 <img src="./img/JHChainableAnimationsAnchors.png" height="200px">
 
+
+##To Do
+I have gotten a ton of great suggestions of what to do next. If you think this is missing anything please let me know! The following is what I plan on working on in no particular order.
+
+* OSX port
 
 ##Contact Info && Contributing
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 jhurray. All rights reserved.
 //
 
-@import QuartzCore;
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "JHChainableBlocks.h"
 
@@ -16,6 +16,7 @@
 #pragma mark - Chainable Properties
 
 // Makers
+// Affects views position and bounds
 - (JHChainableRect) makeFrame;
 - (JHChainableRect) makeBounds;
 - (JHChainableSize) makeSize;
@@ -36,13 +37,40 @@
 - (JHChainablePoint) makeAnchor;
 
 // Movers
+// Affects views position and bounds
 - (JHChainableFloat) moveX;
 - (JHChainableFloat) moveY;
 - (JHChainablePoint) moveXY;
 - (JHChainableFloat) moveHeight;
 - (JHChainableFloat) moveWidth;
-- (JHChainableDegrees) rotate;
 - (JHChainablePolarCoordinate) movePolar;
+
+// Transforms
+// Affects views transform property NOT position and bounds
+// These should be used for AutoLayout
+// These should NOT be mixed with properties that affect position and bounds
+- (UIView *) transformIdentity;
+- (JHChainableDegrees) rotate;
+- (JHChainableFloat) transformX;
+- (JHChainableFloat) transformY;
+- (JHChainableFloat) transformZ;
+- (JHChainablePoint) transformXY;
+- (JHChainableFloat) transformScale; // x and y equal
+- (JHChainableFloat) transformScaleX;
+- (JHChainableFloat) transformScaleY;
+
+// AutoLayout
+// Affects constants of constraints
+- (JHChainableLayoutConstraint) makeConstraint;
+- (JHChainableLayoutConstraint) moveConstraint;
+
+// Bezier Paths
+// Animation effects dont apply
+- (JHChainableBezierPath) moveOnPath;
+- (JHChainableBezierPath) moveAndRotateOnPath;
+- (JHChainableBezierPath) moveAndReverseRotateOnPath;
+// A bezier path starting from the views layers position
+- (UIBezierPath *) bezierPathForAnimation; // Not a chainable property
 
 // Anchors
 - (UIView *) anchorDefault;

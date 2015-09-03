@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 jhurray. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 #ifndef JHAnimationKitExample_JHChainableBlocks_h
 #define JHAnimationKitExample_JHChainableBlocks_h
@@ -35,10 +35,16 @@ typedef UIView* (^JHChainableDegrees)(CGFloat angle);
 #define JHChainableDegrees(angle) ^UIView* (CGFloat angle)
 
 typedef UIView* (^JHChainablePolarCoordinate)(CGFloat radius, CGFloat angle);
-#define JHChainablePolarCoordinate(radius, angle) ^UIView* (CGFloat radius, CGFloat angle)
+#define JHChainablePolarCoordinate(radius,angle) ^UIView* (CGFloat radius, CGFloat angle)
 
 typedef UIView* (^JHChainableColor)(UIColor *color);
 #define JHChainableColor(color) ^UIView* (UIColor *color)
+
+typedef UIView* (^JHChainableLayoutConstraint)(NSLayoutConstraint *constraint, CGFloat f);
+#define JHChainableLayoutConstraint(constraint,f) ^UIView* (NSLayoutConstraint *constraint, CGFloat f)
+
+typedef UIView* (^JHChainableBezierPath)(UIBezierPath *path);
+#define JHChainableBezierPath(path) ^UIView* (UIBezierPath *path)
 
 typedef void    (^JHAnimationCompletion)();
 #define JHAnimationCompletion() ^void ()

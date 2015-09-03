@@ -23,6 +23,19 @@
     self.name = @"some";
     
     objc_msgSend(self,@selector(TEST));
+    
+//    self.copiedArray = [NSMutableArray array];
+//    self.strongArray = [NSMutableArray array];
+//    NSLog(@"copied array class is %@ strong array class is %@",[self.copiedArray class],[self.strongArray class]);
+//    [self.strongArray addObject:@"test"];
+//    [self.copiedArray addObject:@"test"];//exception
+//    NSLog(@"copied array class is %@ strong array class is %@",self.copiedArray,self.strongArray);
+
+    __weak NSString *string = @"what".lowercaseString;
+    __weak NSString *string2;
+    string2 = @"what".lowercaseString;
+    NSLog(@"string is %@, string2 is %@",string,string2);
+    
 }
 
 void aMethodForSetName(id self,SEL _cmd){

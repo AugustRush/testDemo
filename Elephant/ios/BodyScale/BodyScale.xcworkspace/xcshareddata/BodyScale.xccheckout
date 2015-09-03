@@ -12,6 +12,8 @@
 	<dict>
 		<key>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</key>
 		<string>svn://svn.cookst.com/bodyscale/ios</string>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
+		<string>https://github.com/AugustRush/testDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BodyScale/BodyScale.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</key>
 		<string>../..</string>
+		<key>E273DA43CE6844A58D5B83C044B5E750732D0F6B</key>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectRepositoryRootDictionary</key>
 	<dict>
@@ -33,6 +37,14 @@
 	<string>110cdfcf-18b5-408f-bc53-8f58b8adca5a++5326</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E273DA43CE6844A58D5B83C044B5E750732D0F6B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>

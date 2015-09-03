@@ -11,6 +11,8 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSMutableArray *copiedArray;
+@property (nonatomic, strong) NSMutableArray *strongArray;
 
 @end
 

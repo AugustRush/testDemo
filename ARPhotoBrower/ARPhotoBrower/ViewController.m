@@ -24,7 +24,7 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = self.view.bounds.size;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    ARPhotoBrower *brower = [[ARPhotoBrower alloc] initWithCollectionViewLayout:flowLayout];
+    ARPhotoBrower *brower = [[ARPhotoBrower alloc] init];
     
     [self presentViewController:brower animated:YES completion:nil];
 }

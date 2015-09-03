@@ -10,7 +10,7 @@
 
 @interface ARViewController ()<UICollisionBehaviorDelegate>
 
-@property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UIView *animationView;
 
 @end
 
@@ -22,23 +22,21 @@
 	
     UIView *dynamicView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
     dynamicView.backgroundColor = [UIColor purpleColor];
-    dynamicView.transform = CGAffineTransformRotate(dynamicView.transform, 45);
     [self.view addSubview:dynamicView];
     
-    UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[dynamicView]];
-    [animator addBehavior:gravity];
-    self.animator = animator;
-    
-//    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[dynamicView]];
-//    collision.translatesReferenceBoundsIntoBoundary = YES;
-//    [animator addBehavior:collision];
-//    collision.collisionDelegate = self;
-    
-    UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:dynamicView snapToPoint:CGPointMake(200, 300)];
-    [self.animator addBehavior:snap];
+    self.animationView = dynamicView;
     
 }
+
+- (IBAction)test:(id)sender {
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    animation.path = [UIBezierPath bezierPathWithRect:CGRectMake(100, 100, 200, 200)].CGPath;
+    animation.duration = 2;
+    animation.calculationMode = kCAAnimationCubic;
+    [self.animationView.layer addAnimation:animation forKey:@"test"];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

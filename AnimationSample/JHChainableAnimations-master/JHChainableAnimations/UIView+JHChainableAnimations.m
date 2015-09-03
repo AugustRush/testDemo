@@ -22,19 +22,18 @@ typedef void (^JHAnimationCalculationAction)(UIView *weakSelf);
 typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 
 // Arrays of animations to be grouped
-@property (strong, nonatomic) NSMutableArray *animations;
+@property (strong, nonatomic) NSMutableArray *JHAnimations;
 
 // Grouped animations
-@property (strong, nonatomic) NSMutableArray *animationGroups;
+@property (strong, nonatomic) NSMutableArray *JHAnimationGroups;
 
 // Code run at the beginning of an animation link to calculate values
-@property (strong, nonatomic) NSMutableArray *animationCalculationActions;
+@property (strong, nonatomic) NSMutableArray *JHAnimationCalculationActions;
 
 // Code run after animation is completed
-@property (strong, nonatomic) NSMutableArray *animationCompletionActions;
+@property (strong, nonatomic) NSMutableArray *JHAnimationCompletionActions;
 
 // Methods
--(void) setup;
 -(void) clear;
 -(CAAnimationGroup *) basicAnimationGroup;
 -(JHKeyframeAnimation *) basicAnimationForKeyPath:(NSString *) keypath;
@@ -46,10 +45,6 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(void) addAnimationCalculationAction:(JHAnimationCalculationAction)action;
 -(void) addAnimationCompletionAction:(JHAnimationCompletionAction)action;
 
-// Swizzled initializers
--(instancetype)swizzled_init;
--(instancetype)swizzled_initWithFrame:(CGRect)frame;
--(instancetype)swizzled_initWithCoder:(NSCoder *)aDecoder;
 
 @end
 
@@ -58,109 +53,76 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 
 // Setters and getters
 
--(void) setAnimations:(NSMutableArray *)animations {
-    objc_setAssociatedObject(self, @selector(animations), animations, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void) setJHAnimations:(NSMutableArray *)animations {
+    objc_setAssociatedObject(self, @selector(JHAnimations), animations, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void) setAnimationGroups:(NSMutableArray *)animationGroups {
-    objc_setAssociatedObject(self, @selector(animationGroups), animationGroups, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void) setJHAnimationGroups:(NSMutableArray *)animationGroups {
+    objc_setAssociatedObject(self, @selector(JHAnimationGroups), animationGroups, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void) setAnimationCalculationActions:(NSMutableArray *)animationCalculationActions {
-    objc_setAssociatedObject(self, @selector(animationCalculationActions), animationCalculationActions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void) setJHAnimationCalculationActions:(NSMutableArray *)animationCalculationActions {
+    objc_setAssociatedObject(self, @selector(JHAnimationCalculationActions), animationCalculationActions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void) setAnimationCompletionActions:(NSMutableArray *)animationCompletionActions {
-    objc_setAssociatedObject(self, @selector(animationCompletionActions), animationCompletionActions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void) setJHAnimationCompletionActions:(NSMutableArray *)animationCompletionActions {
+    objc_setAssociatedObject(self, @selector(JHAnimationCompletionActions), animationCompletionActions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 -(void) setAnimationCompletion:(JHAnimationCompletion)animationCompletion {
     objc_setAssociatedObject(self, @selector(animationCompletion), animationCompletion, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
--(NSMutableArray *) animations {
-    return objc_getAssociatedObject(self, @selector(animations));
+-(NSMutableArray *) JHAnimations {
+    NSMutableArray *animations = objc_getAssociatedObject(self, @selector(JHAnimations));
+	if (animations == nil) {
+		animations = [NSMutableArray arrayWithObject:[NSMutableArray array]];
+		[self setJHAnimations:animations];
+	}
+	return animations;
 }
 
--(NSMutableArray *) animationGroups {
-    return objc_getAssociatedObject(self, @selector(animationGroups));
+-(NSMutableArray *) JHAnimationGroups {
+    NSMutableArray *animationGroups = objc_getAssociatedObject(self, @selector(JHAnimationGroups));
+	if (animationGroups == nil) {
+		animationGroups = [NSMutableArray arrayWithObject:[self basicAnimationGroup]];
+		[self setJHAnimationGroups:animationGroups];
+	}
+	return animationGroups;
 }
 
--(NSMutableArray *) animationCalculationActions {
-    return objc_getAssociatedObject(self, @selector(animationCalculationActions));
+-(NSMutableArray *) JHAnimationCalculationActions {
+    NSMutableArray *animationCalculationActions = objc_getAssociatedObject(self, @selector(JHAnimationCalculationActions));
+	if (animationCalculationActions == nil) {
+		animationCalculationActions = [NSMutableArray arrayWithObject:[NSMutableArray array]];
+		[self setJHAnimationCalculationActions:animationCalculationActions];
+	}
+	return animationCalculationActions;
 }
 
--(NSMutableArray *) animationCompletionActions {
-    return objc_getAssociatedObject(self, @selector(animationCompletionActions));
+-(NSMutableArray *) JHAnimationCompletionActions {
+    NSMutableArray *animationCompletionActions = objc_getAssociatedObject(self, @selector(JHAnimationCompletionActions));
+	if (animationCompletionActions == nil) {
+		animationCompletionActions = [NSMutableArray arrayWithObject:[NSMutableArray array]];;
+		[self setJHAnimationCompletionActions:animationCompletionActions];
+	}
+	return animationCompletionActions;
 }
 
 -(JHAnimationCompletion) animationCompletion {
     return objc_getAssociatedObject(self, @selector(animationCompletion));
 }
 
-+ (void)load
-{
-    // The "+ load" method is called once, very early in the application life-cycle.
-    // It's called even before the "main" function is called. Beware: there's no
-    // autorelease pool at this point, so avoid Objective-C calls.
-    Method original, swizzle;
-    
-    // Get the "- (instancetype)init" method.
-    original = class_getInstanceMethod(self, @selector(init));
-    // Get the "- (instancetype)swizzled_init" method.
-    swizzle = class_getInstanceMethod(self, @selector(swizzled_init));
-    // Swap their implementations.
-    method_exchangeImplementations(original, swizzle);
-    // Frame
-    original = class_getInstanceMethod(self, @selector(initWithFrame:));
-    swizzle = class_getInstanceMethod(self, @selector(swizzled_initWithFrame:));
-    method_exchangeImplementations(original, swizzle);
-    // Coder
-    original = class_getInstanceMethod(self, @selector(initWithCoder:));
-    swizzle = class_getInstanceMethod(self, @selector(swizzled_initWithCoder:));
-    method_exchangeImplementations(original, swizzle);
-}
-
--(instancetype)swizzled_init {
-    UIView * result = [self swizzled_init];
-    if (result && [result respondsToSelector:@selector(setup)]) {
-        [self setup];
-    }
-    return result;
-}
-
--(instancetype)swizzled_initWithFrame:(CGRect)frame {
-    UIView * result = [self swizzled_initWithFrame:frame];
-    if (result && [result respondsToSelector:@selector(setup)]) {
-        [self setup];
-    }
-    return result;
-}
-
--(instancetype)swizzled_initWithCoder:(NSCoder *)aDecoder {
-    UIView * result = [self swizzled_initWithCoder:aDecoder];
-    if (result && [result respondsToSelector:@selector(setup)]) {
-        [self setup];
-    }
-    return result;
-}
-
--(void) setup {
-    self.animations = [NSMutableArray arrayWithObject:[NSMutableArray array]];
-    self.animationGroups = [NSMutableArray arrayWithObject:[self basicAnimationGroup]];
-    self.animationCompletionActions = [NSMutableArray arrayWithObject:[NSMutableArray array]];
-    self.animationCalculationActions = [NSMutableArray arrayWithObject:[NSMutableArray array]];
-}
 
 -(void) clear {
-    [self.animations removeAllObjects];
-    [self.animationGroups removeAllObjects];
-    [self.animationCompletionActions removeAllObjects];
-    [self.animationCalculationActions removeAllObjects];
-    [self.animations addObject:[NSMutableArray array]];
-    [self.animationCompletionActions addObject:[NSMutableArray array]];
-    [self.animationCalculationActions addObject:[NSMutableArray array]];
-    [self.animationGroups addObject:[self basicAnimationGroup]];
+    [self.JHAnimations removeAllObjects];
+    [self.JHAnimationGroups removeAllObjects];
+    [self.JHAnimationCompletionActions removeAllObjects];
+    [self.JHAnimationCalculationActions removeAllObjects];
+    [self.JHAnimations addObject:[NSMutableArray array]];
+    [self.JHAnimationCompletionActions addObject:[NSMutableArray array]];
+    [self.JHAnimationCalculationActions addObject:[NSMutableArray array]];
+    [self.JHAnimationGroups addObject:[self basicAnimationGroup]];
 }
 
 -(CAAnimationGroup *) basicAnimationGroup {
@@ -176,22 +138,22 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 }
 
 -(void) addAnimationFromCalculationBlock:(JHKeyframeAnimation *) animation {
-    NSMutableArray *animationCluster = [self.animations firstObject];
+    NSMutableArray *animationCluster = [self.JHAnimations firstObject];
     [animationCluster addObject:animation];
 }
 
 -(void) addAnimation:(JHKeyframeAnimation *) animation {
-    NSMutableArray *animationCluster = [self.animations lastObject];
+    NSMutableArray *animationCluster = [self.JHAnimations lastObject];
     [animationCluster addObject:animation];
 }
 
 -(void) addAnimationCalculationAction:(JHAnimationCalculationAction)action {
-    NSMutableArray *actions = [self.animationCalculationActions lastObject];
+    NSMutableArray *actions = [self.JHAnimationCalculationActions lastObject];
     [actions addObject:action];
 }
 
 -(void) addAnimationCompletionAction:(JHAnimationCompletionAction)action {
-    NSMutableArray *actions = [self.animationCompletionActions lastObject];
+    NSMutableArray *actions = [self.JHAnimationCompletionActions lastObject];
     [actions addObject:action];
 }
 
@@ -279,10 +241,8 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
             [weakSelf addAnimationFromCalculationBlock:positionAnimation];
         }];
         [self addAnimationCompletionAction:^(UIView *weakSelf) {
-            CGRect rect = weakSelf.frame;
-            rect.origin.x = x; rect.origin.y = y;
-            weakSelf.layer.frame = rect;
-            weakSelf.frame = rect;
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(x, y)];
+            weakSelf.layer.position = newPosition;
         }];
         
         return self;
@@ -312,7 +272,19 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableFloat)makeX {
     JHChainableFloat chainable = JHChainableFloat(f) {
         
-        return self.makeOrigin(f, self.layer.frame.origin.y);
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *positionAnimation = [weakSelf basicAnimationForKeyPath:@"position.x"];
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(f, weakSelf.layer.frame.origin.y)];
+            positionAnimation.fromValue = @(weakSelf.layer.position.x);
+            positionAnimation.toValue = @(newPosition.x);
+            [weakSelf addAnimationFromCalculationBlock:positionAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(f, weakSelf.layer.frame.origin.y)];
+            weakSelf.layer.position = newPosition;
+        }];
+        
+        return self;
     };
     return chainable;
 }
@@ -320,7 +292,17 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableFloat)makeY {
     JHChainableFloat chainable = JHChainableFloat(f) {
         
-        return self.makeOrigin(self.layer.frame.origin.x, f);
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *positionAnimation = [weakSelf basicAnimationForKeyPath:@"position.y"];
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(weakSelf.layer.frame.origin.x, f)];
+            positionAnimation.fromValue = @(weakSelf.layer.position.y);
+            positionAnimation.toValue = @(newPosition.y);
+            [weakSelf addAnimationFromCalculationBlock:positionAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(weakSelf.layer.frame.origin.x, f)];
+            weakSelf.layer.position = newPosition;
+        }];
         
         return self;
     };
@@ -330,7 +312,19 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableFloat)makeWidth {
     JHChainableFloat chainable = JHChainableFloat(f) {
         
-        return self.makeSize(f, self.layer.bounds.size.height);
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *sizeAnimation = [weakSelf basicAnimationForKeyPath:@"bounds.size"];
+            sizeAnimation.fromValue = [NSValue valueWithCGSize:weakSelf.layer.bounds.size];
+            sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(f, weakSelf.frame.size.height)];
+            [weakSelf addAnimationFromCalculationBlock:sizeAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGRect bounds = CGRectMake(0, 0, f, weakSelf.frame.size.height);
+            weakSelf.layer.bounds = bounds;
+            weakSelf.bounds = bounds;
+        }];
+        
+        return self;
     };
     return chainable;
 }
@@ -338,7 +332,19 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableFloat)makeHeight {
     JHChainableFloat chainable = JHChainableFloat(f) {
         
-        return self.makeSize(self.layer.bounds.size.width, f);
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *sizeAnimation = [weakSelf basicAnimationForKeyPath:@"bounds.size"];
+            sizeAnimation.fromValue = [NSValue valueWithCGSize:weakSelf.layer.bounds.size];
+            sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(weakSelf.frame.size.width, f)];
+            [weakSelf addAnimationFromCalculationBlock:sizeAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGRect bounds = CGRectMake(0, 0, weakSelf.frame.size.width, f);
+            weakSelf.layer.bounds = bounds;
+            weakSelf.bounds = bounds;
+        }];
+        
+        return self;
     };
     return chainable;
 }
@@ -385,7 +391,8 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
         
         [self addAnimationCalculationAction:^(UIView *weakSelf) {
             JHKeyframeAnimation *colorAnimation = [weakSelf basicAnimationForKeyPath:@"borderColor"];
-            colorAnimation.fromValue = weakSelf.backgroundColor;
+            UIColor *borderColor = (__bridge UIColor*)(weakSelf.layer.borderColor);
+            colorAnimation.fromValue = borderColor;
             colorAnimation.toValue = color;
             [weakSelf addAnimationFromCalculationBlock:colorAnimation];
         }];
@@ -500,7 +507,7 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 }
 
 -(void) makeAnchorFromX:(CGFloat) x Y:(CGFloat)y {
-    JHAnimationCompletionAction action = ^void(UIView *weakSelf){
+    JHAnimationCalculationAction action = ^void(UIView *weakSelf){
         CGPoint anchorPoint = CGPointMake(x, y);
         if (CGPointEqualToPoint(anchorPoint, weakSelf.layer.anchorPoint)) {
             return;
@@ -524,15 +531,8 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
         weakSelf.layer.position = position;
         weakSelf.layer.anchorPoint = anchorPoint;
     };
-    NSUInteger chainCount = self.animationCompletionActions.count;
-    if (chainCount == 1) {
-        __weak UIView *weakself = self;
-        action(weakself);
-    }
-    else {
-        NSMutableArray *lastActions = [self.animationCompletionActions objectAtIndex:chainCount-2];
-        [lastActions addObject:action];
-    }
+    NSMutableArray *lastCalculationActions = [self.JHAnimationCalculationActions lastObject];
+    [lastCalculationActions insertObject:action atIndex:0];
 }
 
 - (JHChainablePoint) makeAnchor {
@@ -549,10 +549,10 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
     JHChainableFloat chainable = JHChainableFloat(f) {
         
         [self addAnimationCalculationAction:^(UIView *weakSelf) {
-            JHKeyframeAnimation *translationAnimation = [weakSelf basicAnimationForKeyPath:@"transform.translation.x"];
-            translationAnimation.fromValue = @(0);
-            translationAnimation.toValue = @(f);
-            [weakSelf addAnimationFromCalculationBlock:translationAnimation];
+            JHKeyframeAnimation *positionAnimation = [weakSelf basicAnimationForKeyPath:@"position.x"];
+            positionAnimation.fromValue = @(weakSelf.layer.position.x);
+            positionAnimation.toValue = @(weakSelf.layer.position.x+f);
+            [weakSelf addAnimationFromCalculationBlock:positionAnimation];
         }];
         [self addAnimationCompletionAction:^(UIView *weakSelf) {
             CGPoint position = weakSelf.layer.position;
@@ -569,10 +569,10 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
     JHChainableFloat chainable = JHChainableFloat(f) {
         
         [self addAnimationCalculationAction:^(UIView *weakSelf) {
-            JHKeyframeAnimation *translationAnimation = [weakSelf basicAnimationForKeyPath:@"transform.translation.y"];
-            translationAnimation.fromValue = @(0);
-            translationAnimation.toValue = @(f);
-            [weakSelf addAnimationFromCalculationBlock:translationAnimation];
+            JHKeyframeAnimation *positionAnimation = [weakSelf basicAnimationForKeyPath:@"position.y"];
+            positionAnimation.fromValue = @(weakSelf.layer.position.y);
+            positionAnimation.toValue = @(weakSelf.layer.position.y+f);
+            [weakSelf addAnimationFromCalculationBlock:positionAnimation];
         }];
         [self addAnimationCompletionAction:^(UIView *weakSelf) {
             CGPoint position = weakSelf.layer.position;
@@ -588,23 +588,59 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainablePoint)moveXY {
     JHChainablePoint chainable = JHChainablePoint(x, y) {
         
-        return self.moveX(x).moveY(y);
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *positionAnimation = [weakSelf basicAnimationForKeyPath:@"position"];
+            CGPoint oldOrigin = weakSelf.layer.frame.origin;
+            CGPoint newPosition = [weakSelf newPositionFromNewOrigin:CGPointMake(oldOrigin.x+x, oldOrigin.y+y)];
+            positionAnimation.fromValue = [NSValue valueWithCGPoint:weakSelf.layer.position];
+            positionAnimation.toValue = [NSValue valueWithCGPoint:newPosition];
+            [weakSelf addAnimationFromCalculationBlock:positionAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint position = weakSelf.layer.position;
+            position.x +=x; position.y += y;
+            weakSelf.layer.position = position;
+        }];
+        
+        return self;
     };
     return chainable;
 }
 
 - (JHChainableFloat) moveHeight {
     JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *sizeAnimation = [weakSelf basicAnimationForKeyPath:@"bounds.size"];
+            sizeAnimation.fromValue = [NSValue valueWithCGSize:weakSelf.layer.bounds.size];
+            sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(weakSelf.bounds.size.width, MAX(weakSelf.bounds.size.height+f, 0))];
+            [weakSelf addAnimationFromCalculationBlock:sizeAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGRect bounds = CGRectMake(0, 0, weakSelf.bounds.size.width, MAX(weakSelf.bounds.size.height+f, 0));
+            weakSelf.layer.bounds = bounds;
+            weakSelf.bounds = bounds;
+        }];
         
-        return self.makeSize(self.bounds.size.width, MAX(self.bounds.size.height+f, 0));
+        return self;
     };
     return chainable;
 }
 
 - (JHChainableFloat) moveWidth {
     JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *sizeAnimation = [weakSelf basicAnimationForKeyPath:@"bounds.size"];
+            sizeAnimation.fromValue = [NSValue valueWithCGSize:weakSelf.layer.bounds.size];
+            sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(MAX(weakSelf.bounds.size.width+f, 0), weakSelf.bounds.size.height)];
+            [weakSelf addAnimationFromCalculationBlock:sizeAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGRect bounds = CGRectMake(0, 0, MAX(weakSelf.bounds.size.width+f, 0), weakSelf.bounds.size.height);
+            weakSelf.layer.bounds = bounds;
+            weakSelf.bounds = bounds;
+        }];
         
-        return self.makeSize(MAX(self.bounds.size.width+f, 0), self.bounds.size.height);
+        return self;
     };
     return chainable;
 }
@@ -637,6 +673,250 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
         CGFloat x = radius*cosf(degreesToRadians(angle));
         CGFloat y = -radius*sinf(degreesToRadians(angle));
         return self.moveXY(x, y);
+    };
+    return chainable;
+}
+
+// Transforms
+
+- (UIView *) transformIdentity {
+    [self addAnimationCalculationAction:^(UIView *weakSelf) {
+        JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+        CATransform3D transform = CATransform3DIdentity;
+        transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+        transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+        [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+    }];
+    [self addAnimationCompletionAction:^(UIView *weakSelf) {
+        CATransform3D transform = CATransform3DIdentity;
+        weakSelf.layer.transform = transform;
+    }];
+    return self;
+}
+
+- (JHChainableFloat) transformX {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, f, 0, 0);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, f, 0, 0);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableFloat) transformY {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, 0, f, 0);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, 0, f, 0);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableFloat) transformZ {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, 0, 0, f);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, 0, 0, f);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainablePoint) transformXY {
+    JHChainablePoint chainable = JHChainablePoint(x, y) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, x, y, 0);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DTranslate(transform, x, y, 0);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableFloat) transformScale {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, f, f, 1);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, f, f, 1);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableFloat) transformScaleX {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, f, 1, 1);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, f, 1, 1);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableFloat) transformScaleY {
+    JHChainableFloat chainable = JHChainableFloat(f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *transformAnimation = [weakSelf basicAnimationForKeyPath:@"transform"];
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, 1, f, 1);
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:weakSelf.layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+            [weakSelf addAnimationFromCalculationBlock:transformAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CATransform3D transform = weakSelf.layer.transform;
+            transform = CATransform3DScale(transform, 1, f, 1);
+            weakSelf.layer.transform = transform;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+// AutoLayout
+- (JHChainableLayoutConstraint) makeConstraint {
+    JHChainableLayoutConstraint chainable = JHChainableLayoutConstraint(constraint, f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            if ([weakSelf.constraints containsObject:constraint]) {
+                constraint.constant = f;
+                [weakSelf setNeedsUpdateConstraints];
+            }
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableLayoutConstraint) moveConstraint {
+    JHChainableLayoutConstraint chainable = JHChainableLayoutConstraint(constraint, f) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            if ([weakSelf.constraints containsObject:constraint]) {
+                constraint.constant += f;
+                [weakSelf setNeedsUpdateConstraints];
+            }
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+// Bezier Paths
+
+- (UIBezierPath *) bezierPathForAnimation {
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:self.layer.position];
+    return path;
+}
+
+- (JHChainableBezierPath) moveOnPath {
+    JHChainableBezierPath chainable = JHChainableBezierPath(path) {
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *pathAnimation = [weakSelf basicAnimationForKeyPath:@"position"];
+            pathAnimation.path = path.CGPath;
+            [weakSelf addAnimationFromCalculationBlock:pathAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint endPoint = path.currentPoint;
+            weakSelf.layer.position = endPoint;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableBezierPath) moveAndRotateOnPath {
+    JHChainableBezierPath chainable = JHChainableBezierPath(path) {
+        
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *pathAnimation = [weakSelf basicAnimationForKeyPath:@"position"];
+            pathAnimation.path = path.CGPath;
+            pathAnimation.rotationMode = kCAAnimationRotateAuto;
+            [weakSelf addAnimationFromCalculationBlock:pathAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint endPoint = path.currentPoint;
+            weakSelf.layer.position = endPoint;
+        }];
+        return self;
+    };
+    return chainable;
+}
+
+- (JHChainableBezierPath) moveAndReverseRotateOnPath {
+    JHChainableBezierPath chainable = JHChainableBezierPath(path) {
+        
+        [self addAnimationCalculationAction:^(UIView *weakSelf) {
+            JHKeyframeAnimation *pathAnimation = [weakSelf basicAnimationForKeyPath:@"position"];
+            pathAnimation.path = path.CGPath;
+            pathAnimation.rotationMode = kCAAnimationRotateAutoReverse;
+            [weakSelf addAnimationFromCalculationBlock:pathAnimation];
+        }];
+        [self addAnimationCompletionAction:^(UIView *weakSelf) {
+            CGPoint endPoint = path.currentPoint;
+            weakSelf.layer.position = endPoint;
+        }];
+        return self;
     };
     return chainable;
 }
@@ -696,14 +976,14 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 
 - (UIView *) anchorLeft {
     
-    [self makeAnchorFromX:1.0 Y:0.5];
+    [self makeAnchorFromX:0.0 Y:0.5];
     
     return self;
 }
 
 - (UIView *) anchorRight {
     
-    [self makeAnchorFromX:0.0 Y:0.5];
+    [self makeAnchorFromX:1.0 Y:0.5];
     
     return self;
 }
@@ -720,13 +1000,13 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
     
     JHChainableTimeInterval chainable = JHChainableTimeInterval(t) {
       
-        CAAnimationGroup *group = [self.animationGroups lastObject];
+        CAAnimationGroup *group = [self.JHAnimationGroups lastObject];
         group.duration = t;
         CAAnimationGroup *newGroup = [self basicAnimationGroup];
-        [self.animationGroups addObject:newGroup];
-        [self.animations addObject:[NSMutableArray array]];
-        [self.animationCompletionActions addObject:[NSMutableArray array]];
-        [self.animationCalculationActions addObject:[NSMutableArray array]];
+        [self.JHAnimationGroups addObject:newGroup];
+        [self.JHAnimations addObject:[NSMutableArray array]];
+        [self.JHAnimationCompletionActions addObject:[NSMutableArray array]];
+        [self.JHAnimationCalculationActions addObject:[NSMutableArray array]];
         
         return self;
     };
@@ -738,14 +1018,14 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 
 -(void) addAnimationKeyframeCalculation:(NSBKeyframeAnimationFunctionBlock) functionBlock {
     [self addAnimationCalculationAction:^(UIView *weakSelf) {
-        NSMutableArray *animationCluster = [weakSelf.animations firstObject];
+        NSMutableArray *animationCluster = [weakSelf.JHAnimations firstObject];
         JHKeyframeAnimation *animation = [animationCluster lastObject];
         animation.functionBlock = functionBlock;
     }];
 }
 
 - (UIView *) easeIn {
-    return self.easeInOutQuad;
+    return self.easeInQuad;
 }
 
 - (UIView *) easeOut {
@@ -981,10 +1261,10 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableTimeInterval)delay {
     JHChainableTimeInterval chainable = JHChainableTimeInterval(t) {
       
-        for (CAAnimation *aGroup in self.animationGroups) {
+        for (CAAnimation *aGroup in self.JHAnimationGroups) {
             t+=aGroup.duration;
         }
-        CAAnimationGroup *group = [self.animationGroups lastObject];
+        CAAnimationGroup *group = [self.JHAnimationGroups lastObject];
         group.beginTime = CACurrentMediaTime() + t;
         
         return self;
@@ -1003,6 +1283,7 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(void) animateChain {
     [self sanityCheck];
     [CATransaction begin];
+    [CATransaction setDisableActions:YES];
     [CATransaction setCompletionBlock:^{
         [self.layer removeAnimationForKey:@"AnimationChain"];
         [self chainLinkDidFinishAnimating];
@@ -1011,20 +1292,29 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
     [self animateChainLink];
     
     [CATransaction commit];
+    
+    [self executeCompletionActions];
+}
+
+-(void) executeCompletionActions {
+    CAAnimationGroup *group = [self.JHAnimationGroups firstObject];
+    NSTimeInterval delay = MAX(group.beginTime - CACurrentMediaTime(), 0.0);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSMutableArray *actionCluster = [self.JHAnimationCompletionActions firstObject];
+        for (JHAnimationCompletionAction action in actionCluster) {
+            __weak UIView *weakSelf = self;
+            action(weakSelf);
+        }
+    });
 }
 
 -(void) chainLinkDidFinishAnimating {
-    NSMutableArray *actionCluster = [self.animationCompletionActions firstObject];
-    for (JHAnimationCompletionAction action in actionCluster) {
-        __weak UIView *weakSelf = self;
-        action(weakSelf);
-    }
-    [self.animationCompletionActions removeObjectAtIndex:0];
-    [self.animationCalculationActions removeObjectAtIndex:0];
-    [self.animations removeObjectAtIndex:0];
-    [self.animationGroups removeObjectAtIndex:0];
+    [self.JHAnimationCompletionActions removeObjectAtIndex:0];
+    [self.JHAnimationCalculationActions removeObjectAtIndex:0];
+    [self.JHAnimations removeObjectAtIndex:0];
+    [self.JHAnimationGroups removeObjectAtIndex:0];
     [self sanityCheck];
-    if (self.animationGroups.count == 0) {
+    if (self.JHAnimationGroups.count == 0) {
         [self clear];
         if (self.animationCompletion) {
             JHAnimationCompletion completion = self.animationCompletion;
@@ -1038,25 +1328,35 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 }
 
 -(void) animateChainLink {
-    NSMutableArray *actionCluster = [self.animationCalculationActions firstObject];
+    [self makeAnchorFromX:0.5 Y:0.5];
+    NSMutableArray *actionCluster = [self.JHAnimationCalculationActions firstObject];
     for (JHAnimationCalculationAction action in actionCluster) {
         __weak UIView *weakSelf = self;
         action(weakSelf);
     }
-    CAAnimationGroup *group = [self.animationGroups firstObject];
-    NSMutableArray *animationCluster = [self.animations firstObject];
+    CAAnimationGroup *group = [self.JHAnimationGroups firstObject];
+    NSMutableArray *animationCluster = [self.JHAnimations firstObject];
     for (JHKeyframeAnimation *animation in animationCluster) {
         animation.duration = group.duration;
         [animation calculate];
     }
     group.animations = animationCluster;
     [self.layer addAnimation:group forKey:@"AnimationChain"];
+    
+    // For constraints
+    NSTimeInterval delay = MAX(group.beginTime - CACurrentMediaTime(), 0.0);
+    [self.class animateWithDuration:group.duration
+                              delay:delay
+                            options:0
+                         animations:^{
+        [self updateConstraints];
+    } completion:nil];
 }
 
 -(JHChainableAnimation)animate {
     JHChainableAnimation chainable = JHChainableAnimation(duration) {
         
-        CAAnimationGroup *group = [self.animationGroups lastObject];
+        CAAnimationGroup *group = [self.JHAnimationGroups lastObject];
         group.duration = duration;
         [self animateChain];
         
@@ -1068,7 +1368,7 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 -(JHChainableAnimationWithCompletion)animateWithCompletion {
     JHChainableAnimationWithCompletion chainable = JHChainableAnimationWithCompletion(duration, completion) {
         
-        CAAnimationGroup *group = [self.animationGroups lastObject];
+        CAAnimationGroup *group = [self.JHAnimationGroups lastObject];
         group.duration = duration;
         self.animationCompletion = completion;
         [self animateChain];
@@ -1079,9 +1379,9 @@ typedef void (^JHAnimationCompletionAction)(UIView *weakSelf);
 }
 
 -(void) sanityCheck {
-    NSAssert(self.animations.count == self.animationGroups.count, @"FATAL ERROR: ANIMATION GROUPS AND ANIMATIONS ARE OUT OF SYNC");
-    NSAssert(self.animationCalculationActions.count == self.animationCompletionActions.count, @"FATAL ERROR: ANIMATION CALCULATION OBJECTS AND ANIMATION COMPLETION OBJECTS ARE OUT OF SYNC");
-    NSAssert(self.animations.count == self.animationCompletionActions.count, @"FATAL ERROR: ANIMATIONS AND ANIMATION COMPLETION OBJECTS  ARE OUT OF SYNC");
+    NSAssert(self.JHAnimations.count == self.JHAnimationGroups.count, @"FATAL ERROR: ANIMATION GROUPS AND ANIMATIONS ARE OUT OF SYNC");
+    NSAssert(self.JHAnimationCalculationActions.count == self.JHAnimationCompletionActions.count, @"FATAL ERROR: ANIMATION CALCULATION OBJECTS AND ANIMATION COMPLETION OBJECTS ARE OUT OF SYNC");
+    NSAssert(self.JHAnimations.count == self.JHAnimationCompletionActions.count, @"FATAL ERROR: ANIMATIONS AND ANIMATION COMPLETION OBJECTS  ARE OUT OF SYNC");
 }
 
 @end

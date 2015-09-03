@@ -22,6 +22,8 @@
 		739A06B219826725001844E3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 739A06B019826725001844E3 /* InfoPlist.strings */; };
 		739A06B419826725001844E3 /* ARControlsDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 739A06B319826725001844E3 /* ARControlsDemoTests.m */; };
 		739A06C01982673B001844E3 /* ICSwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 739A06BF1982673B001844E3 /* ICSwitchControl.m */; };
+		9744C1EB1B7491DE00D3232B /* ARGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9744C1EA1B7491DE00D3232B /* ARGridView.m */; };
+		9744C1F11B74B92A00D3232B /* ARGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9744C1F01B74B92A00D3232B /* ARGridTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		739A06B319826725001844E3 /* ARControlsDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARControlsDemoTests.m; sourceTree = "<group>"; };
 		739A06BE1982673B001844E3 /* ICSwitchControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSwitchControl.h; sourceTree = "<group>"; };
 		739A06BF1982673B001844E3 /* ICSwitchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSwitchControl.m; sourceTree = "<group>"; };
+		9744C1E91B7491DE00D3232B /* ARGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGridView.h; sourceTree = "<group>"; };
+		9744C1EA1B7491DE00D3232B /* ARGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGridView.m; sourceTree = "<group>"; };
+		9744C1EF1B74B92A00D3232B /* ARGridTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGridTableViewCell.h; sourceTree = "<group>"; };
+		9744C1F01B74B92A00D3232B /* ARGridTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGridTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +125,10 @@
 				739A069719826725001844E3 /* ARAppDelegate.h */,
 				739A069819826725001844E3 /* ARAppDelegate.m */,
 				739A069A19826725001844E3 /* Main.storyboard */,
-				739A069E19826725001844E3 /* ARViewController.m */,
 				739A069D19826725001844E3 /* ARViewController.h */,
+				739A069E19826725001844E3 /* ARViewController.m */,
+				9744C1EF1B74B92A00D3232B /* ARGridTableViewCell.h */,
+				9744C1F01B74B92A00D3232B /* ARGridTableViewCell.m */,
 				739A06A019826725001844E3 /* Images.xcassets */,
 				739A068F19826725001844E3 /* Supporting Files */,
 			);
@@ -161,6 +169,8 @@
 			children = (
 				739A06BE1982673B001844E3 /* ICSwitchControl.h */,
 				739A06BF1982673B001844E3 /* ICSwitchControl.m */,
+				9744C1E91B7491DE00D3232B /* ARGridView.h */,
+				9744C1EA1B7491DE00D3232B /* ARGridView.m */,
 			);
 			path = my_Control;
 			sourceTree = "<group>";
@@ -263,8 +273,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9744C1F11B74B92A00D3232B /* ARGridTableViewCell.m in Sources */,
 				739A069519826725001844E3 /* main.m in Sources */,
 				739A069F19826725001844E3 /* ARViewController.m in Sources */,
+				9744C1EB1B7491DE00D3232B /* ARGridView.m in Sources */,
 				739A069919826725001844E3 /* ARAppDelegate.m in Sources */,
 				739A06C01982673B001844E3 /* ICSwitchControl.m in Sources */,
 			);

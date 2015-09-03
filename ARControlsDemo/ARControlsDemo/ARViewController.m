@@ -7,9 +7,11 @@
 //
 
 #import "ARViewController.h"
+#import "ARGridView.h"
+#import "ARGridTableViewCell.h"
 
-@interface ARViewController ()
-@property (weak, nonatomic) IBOutlet ICSwitchControl *switchControl;
+@interface ARViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -18,21 +20,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
-    //
-    [self.switchControl setBackgroundColor:[UIColor greenColor] forState:ICSwitchControlStateOn];
-    [self.switchControl setBackgroundColor:[UIColor redColor] forState:ICSwitchControlStateHightlight];
-    [self.switchControl setBackgroundColor:[UIColor blueColor] forState:ICSwitchControlStateOff];
-//    [self.switchControl setCompleteSelectedBlock:^(ICSwitchControl *sender) {
-//        sender.style = ICSwitchControlStyleDefault;
-//    }];
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - 
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 100;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ARGridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    [cell fill];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ARGridTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.gridView.numberOfItems = 13;
+    [cell.gridView reloadAllItems];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static ARGridTableViewCell *cell = nil;
+    static CGFloat height = 0;
+//    if (height > 0) {
+//        return height;
+//    }
+    if (cell == nil) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    }
+    
+    [cell fill];
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    height = size.height + 1;
+    return height;
 }
 
 @end
